@@ -67,4 +67,16 @@ Source: [Michael Bach, Kanizsa Illusion](https://michaelbach.de/ot/cog-Kanizsa/)
 
 ## Sources and reuse
 
+### Everyday companion: produce netting
+
+Gegenfurtner (2024), *Perceptual ripening of oranges*, reports greenish/unripe oranges with orange netting and a digitally added net. [Full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/), [DOI](https://doi.org/10.1177/20416695241258748). This supports the produce-netting connection; it does not validate our particular illustrated diamond mesh or establish retailer intent.
+
+Implemented companion: reuse one original locally bundled illustration twice, placing a separate deterministic orange SVG net on the left, clipped to fruit bodies. The right stays uncovered; hiding the net preserves both base images. The previous red, very fine mesh was revised after user feedback. Copy explains the deliberately greenish/unripe illustration and the risk of simple mixing with very fine mesh. Origin: original SVG authored for OpticEye by Codex; no source photographs are copied. No separate public asset license is chosen; the earlier automatic CC0 dedication was removed. See [Confetti section 10](specs/confetti.md#10-everyday-example-oranges-and-produce-netting) for construction, reset/accessibility, tests, and pending human mesh calibration.
+
+Further user feedback reports no noticeable effect with the four-pattern candidate. The next candidate lightens/flattens the shared illustration, increases line density, and adds independent Compact/Medium/Large viewing sizes (Compact default). These are project experiments, not study-derived optimal values or proof of matched brightness. Dense lines can mix colors; the original flat drawing also lacks physical interreflections. Preserve negative observations and do not claim perceptual success from engineering checks.
+
+The user subsequently reports that horizontal and vertical stripes have no effect and requests a simpler single-pattern example. Retain only the existing Fine mesh, remove alternative presets/selection, and preserve size comparison and overlay-only reveal. This simplifies the experience without changing its mesh geometry or claiming calibration.
+
+Historical comparison: after the user reported no illusion with the 40/7 mesh, four experimental presets shared the same base asset, including Fine mesh (28/4) and directional stripes. These alternatives have since been removed in favor of the single 16/3 Fine mesh. The 1.5 CSS pixel stroke floor does not prove assimilation or exclude mixing; no perceptual success is claimed.
+
 The linked material supports the perceptual descriptions; the product plan and rendering methods are our own proposals. Create original parametric drawings and paraphrased explanations with source credits. Research access does not grant permission to reuse an author's images, interactive code, or wording. Check each asset's license before importing it; no source media is bundled here.

@@ -1,0 +1,13 @@
+Asset: oranges.svg
+Origin: Original SVG illustration authored for OpticEye by Codex, 19 October 2026.
+No user photograph, research figure, or other third-party artwork was used.
+The SVG contains deliberately greenish, unripe oranges only; produce netting is a separate runtime SVG overlay.
+Revision, 19 October 2026: softer light yellow-green skin shading for comparison;
+both views continue to use this single illustration. Fruit outlines are unchanged.
+
+License status: No separate public license chosen.
+This is an original project asset. No public-domain dedication or separate public
+license grant is made here. The earlier automatic CC0 dedication has been removed;
+the project owner may choose a license later. The cited research has its own terms.
+Format: self-contained 600 x 400 SVG; hand-optimized paths and reusable shapes;
+no embedded raster images, external fonts, scripts, filters, or external references.

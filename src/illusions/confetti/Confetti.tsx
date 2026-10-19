@@ -1,6 +1,8 @@
 import { useId, useState } from 'react'
 import { CONFETTI, DEFAULT_VIEWING_WIDTH, DISK_FILL, normalizeSpacing, normalizeViewingWidth, SPACING, VIEWING_SIZES } from './confettiModel'
 import ConfettiStimulus from './ConfettiStimulus'
+import OrangesExample from './OrangesExample'
+import { DEFAULT_ORANGES_VIEWING_WIDTH } from './orangesModel'
 
 const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700'
 
@@ -10,6 +12,8 @@ export default function Confetti() {
   const [stripeSpacing, setStripeSpacing] = useState<number>(SPACING.default)
   const [viewingWidth, setViewingWidth] = useState(DEFAULT_VIEWING_WIDTH)
   const [explanationOpen, setExplanationOpen] = useState(false)
+  const [nettingHidden, setNettingHidden] = useState(false)
+  const [orangeViewingWidth, setOrangeViewingWidth] = useState<number>(DEFAULT_ORANGES_VIEWING_WIDTH)
   const [status, setStatus] = useState('')
 
   function toggleReveal() {
@@ -22,6 +26,8 @@ export default function Confetti() {
     setStripeSpacing(SPACING.default)
     setViewingWidth(DEFAULT_VIEWING_WIDTH)
     setExplanationOpen(false)
+    setNettingHidden(false)
+    setOrangeViewingWidth(DEFAULT_ORANGES_VIEWING_WIDTH)
     setStatus('Experiment reset.')
   }
 
@@ -102,6 +108,14 @@ export default function Confetti() {
           </div>
         </div>
       </section>
+      <OrangesExample
+        nettingHidden={nettingHidden}
+        viewingWidth={orangeViewingWidth}
+        onViewingWidthChange={setOrangeViewingWidth}
+        onToggleNetting={() => setNettingHidden(!nettingHidden)}
+        explanationTarget={`${id}-explanation-toggle`}
+        onShowExplanation={() => setExplanationOpen(true)}
+      />
     </article>
   )
 }

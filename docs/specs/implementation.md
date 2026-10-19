@@ -1,12 +1,12 @@
 # OpticEye implementation specification
 
-Status: implementation baseline, version 1.1. Updated 19 October 2026.
+Status: implementation baseline, version 1.7. Updated 19 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. It does not request implementation of the app by itself. Version 1 is the Confetti circle experience. Engineering observations and outstanding coverage are recorded in [the validation record](../confetti-validation.md). A gallery, accounts, backend, analytics, routing, downloads, and additional standalone illusions are outside its scope.
+This document defines project-wide rules. It does not request implementation of the app by itself. Version 1 is the Confetti experience, including an everyday example comparing deliberately greenish/unripe oranges with and without orange produce netting. Engineering observations and outstanding coverage are recorded in [the validation record](../confetti-validation.md). A gallery, accounts, backend, analytics, routing, downloads, and additional standalone illusions are outside its scope.
 
 `MUST` identifies an implementation requirement unless explicitly assigned to perceptual calibration. `SHOULD` identifies a preferred approach; document a concrete reason when deviating. Numeric stimulus values in an illusion spec are product choices until visually validated, unless explicitly attributed to research. Implementation completion and perceptual calibration are separate milestones defined in section 8.
 
@@ -28,9 +28,14 @@ Create these files as the implementation needs them; do not add empty abstractio
 | --- | --- |
 | `src/App.tsx` | Compose the current experience and page shell. |
 | `src/components/` | Controls or layout reused by multiple features. |
-| `src/illusions/confetti/Confetti.tsx` | Own stripe/size state, explanation, and Reset. |
+| `src/illusions/confetti/Confetti.tsx` | Own stripe/size state, explanation, independent orange visibility/size, and the Reset action shared by both demonstrations. |
 | `src/illusions/confetti/ConfettiStimulus.tsx` | Render a deterministic SVG from typed props. |
 | `src/illusions/confetti/confettiModel.ts` | Palette, defaults, metadata, and pure geometry generation; distinct basename avoids case-insensitive module resolution conflicts with `Confetti.tsx`. |
+| `src/illusions/confetti/OrangesExample.tsx` | Accessible paired comparison, Oranges image size selector, independent Hide netting toggle, and Confetti explanation link. |
+| `src/illusions/confetti/ProduceNetting.tsx` | Separate deterministic SVG overlay, never baked into the base asset. |
+| `src/illusions/confetti/orangesModel.ts` | Shared image source, provenance, source metadata, size presets/normalization, single mesh constants, stroke floor, fruit-clip geometry, and deterministic generation. |
+| `src/assets/oranges.svg` | One original, optimized illustration of loose oranges, reused by both views. |
+| `src/assets/oranges.LICENSE.txt` | Origin and license status: original project asset, no separate public license chosen; no third-party research image is used. |
 | `src/illusions/confetti/` tests | Meaningful geometry and interaction checks near the feature. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
@@ -43,6 +48,7 @@ Metadata MUST include a stable illusion ID, title, short instructions, explanati
 - A reveal MUST modify only the context identified in the feature spec. Target positions, dimensions, fills, and background MUST remain invariant unless that feature explicitly defines a separate comparison mode.
 - Render the stimulus on a fixed, opaque surface. Page themes MUST NOT alter its colors, opacity, contrast, or blending.
 - No decorative gradients, shadows, filters, hover styling, selection effects, or transitions may affect target pixels or context geometry.
+- The oranges example may contain fixed illustrative shading inside its single base asset. Both copies MUST use that exact asset and identical rendering settings. Only its explicit size selector may uniformly resize both views together; overlay toggles MUST NOT recolor, filter, crop, move, or rescale either image. Asset revisions affect both copies together, never one reveal state. This exception does not allow shading changes to the Confetti disks.
 - Layout MUST be deterministic across React renders, reset, viewport changes, and development Strict Mode. Avoid unseeded randomness and time-dependent geometry.
 - SVG definitions MUST use instance-unique IDs, for example with React `useId`, so multiple instances cannot share unintended patterns or clipping paths.
 - Preserve proportions when scaling. Document where mobile dimensions could weaken the effect; never silently substitute a different construction.
@@ -58,6 +64,7 @@ The user MUST be able to observe the initial effect before reading the answer. P
 - Every interaction MUST work with pointer, touch, and keyboard. No essential feature may depend on hover, dragging alone, or holding a button.
 - Reveal MUST be persistent until toggled again; experiment controls MUST retain their selected values through reveal toggles.
 - Reset MUST restore every feature setting and the initial reveal/disclosure state without reloading the page or moving focus away from the activated control.
+- The everyday example's Hide netting toggle operates independently from Show base colors. Shared Reset restores the default orange netting as well as the stripe experiment.
 - Changing a control MUST update the local stimulus without navigation or network access.
 - Invalid programmatic control values MUST fall back to defaults or be clamped to the feature's allowed range before geometry generation.
 - Do not persist settings between visits in version 1. Refresh restores defaults.

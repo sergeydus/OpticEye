@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <title>Greenish, unripe oranges — original OpticEye illustration</title>
+  <metadata>Original illustration authored for OpticEye by Codex, 2026-10-19. No separate public license chosen. No source photographs or netting.</metadata>
+  <defs>
+    <radialGradient id="skin" cx="32%" cy="24%" r="80%">
+      <stop stop-color="#DEDC91"/>
+      <stop offset=".55" stop-color="#D6D47A"/>
+      <stop offset="1" stop-color="#CDCD73"/>
+    </radialGradient>
+    <g id="orange">
+      <ellipse cy="64" rx="68" ry="17" fill="#beb39a" opacity=".4"/>
+      <path d="M-76-4C-76-47-44-77 0-77S77-46 77-3 45 76 1 77-76 42-76-4Z" fill="url(#skin)"/>
+      <path d="M-13-67Q0-83 14-67L5-60-7-60Z" fill="#757f42"/>
+      <path d="M0-66 4-81" stroke="#6c6340" stroke-width="5" stroke-linecap="round"/>
+      <path d="M5-73Q31-94 44-73 24-56 5-73Z" fill="#768549"/>
+      <g fill="#8d8d47" opacity=".12">
+        <circle cx="-43" cy="-26" r="2"/><circle cx="-28" cy="-39" r="1.5"/>
+        <circle cx="-6" cy="-33" r="2"/><circle cx="24" cy="-30" r="1.5"/>
+        <circle cx="42" cy="-5" r="2"/><circle cx="-49" cy="8" r="1.5"/>
+        <circle cx="-18" cy="8" r="2"/><circle cx="10" cy="-6" r="1.5"/>
+        <circle cx="-29" cy="36" r="1.5"/><circle cx="4" cy="33" r="2"/>
+        <circle cx="29" cy="42" r="1.5"/><circle cx="45" cy="24" r="2"/>
+      </g>
+    </g>
+  </defs>
+  <path fill="#f5f0e5" d="M0 0H600V400H0Z"/>
+  <use href="#orange" transform="translate(180 132) rotate(-18)"/>
+  <use href="#orange" transform="translate(320 125) rotate(12)"/>
+  <use href="#orange" transform="translate(460 145) rotate(25)"/>
+  <use href="#orange" transform="translate(130 265) rotate(-24)"/>
+  <use href="#orange" transform="translate(280 260) rotate(8)"/>
+  <use href="#orange" transform="translate(430 280) rotate(-6)"/>
+</svg>
