@@ -6,7 +6,7 @@ Status: implementation baseline, version 1.1. Updated 19 October 2026.
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. It does not request implementation of the app by itself. The current app is a scaffold. Version 1 requires a single Confetti experience; a gallery, accounts, backend, analytics, routing, downloads, and additional illusions are outside its scope.
+This document defines project-wide rules. It does not request implementation of the app by itself. Version 1 is the Confetti circle experience. Engineering observations and outstanding coverage are recorded in [the validation record](../confetti-validation.md). A gallery, accounts, backend, analytics, routing, downloads, and additional standalone illusions are outside its scope.
 
 `MUST` identifies an implementation requirement unless explicitly assigned to perceptual calibration. `SHOULD` identifies a preferred approach; document a concrete reason when deviating. Numeric stimulus values in an illusion spec are product choices until visually validated, unless explicitly attributed to research. Implementation completion and perceptual calibration are separate milestones defined in section 8.
 
@@ -28,9 +28,9 @@ Create these files as the implementation needs them; do not add empty abstractio
 | --- | --- |
 | `src/App.tsx` | Compose the current experience and page shell. |
 | `src/components/` | Controls or layout reused by multiple features. |
-| `src/illusions/confetti/Confetti.tsx` | Own Confetti state, controls, reveal, and reset. |
+| `src/illusions/confetti/Confetti.tsx` | Own stripe/size state, explanation, and Reset. |
 | `src/illusions/confetti/ConfettiStimulus.tsx` | Render a deterministic SVG from typed props. |
-| `src/illusions/confetti/confetti.ts` | Palette, defaults, metadata, and pure geometry generation. |
+| `src/illusions/confetti/confettiModel.ts` | Palette, defaults, metadata, and pure geometry generation; distinct basename avoids case-insensitive module resolution conflicts with `Confetti.tsx`. |
 | `src/illusions/confetti/` tests | Meaningful geometry and interaction checks near the feature. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
@@ -85,7 +85,7 @@ The static experience MUST have no timers, animation loops, polling, or backgrou
 An illusion may be marked **implemented** when the following engineering checks pass. Human perception is not a prerequisite for this milestone.
 
 1. `npm run lint` and `npm run build` pass.
-2. Add Vitest, jsdom, React Testing Library, `@testing-library/user-event`, and `@testing-library/jest-dom` as development dependencies when implementing the first feature. Use pure unit tests for geometry and jsdom component tests for reveal, controls, reset, and focus. Configure `npm run test` as a non-watching run and document it in the README. The scaffold does not install these tools yet.
+2. Use Vitest, jsdom, React Testing Library, `@testing-library/user-event`, and `@testing-library/jest-dom` as development dependencies. Use pure unit tests for geometry and jsdom component tests for reveal, controls, reset, and focus. `npm run test` is a non-watching run, documented in the README. These tools are installed with the Confetti feature.
 3. Meaningful tests verify target identity, geometry invariants, control boundaries, reveal preservation, and reset behavior. Avoid snapshot-only tests and assertions that merely repeat implementation constants.
 4. In an available Chromium browser, inspect initial, revealed, adjusted, and reset states at 320 and 1440 CSS pixel viewport widths, plus 200% zoom. Verify keyboard access, focus, labels, disclosure behavior, and accessible names/states. Record browser version, displayed stimulus dimensions, parameters, and device pixel ratio.
 5. Sources, attribution, instructions, and known limitations are present. Feature criteria assigned to implementation pass. Any required engineering check that cannot run MUST be reported as unverified; record the blocker without inventing a pass.

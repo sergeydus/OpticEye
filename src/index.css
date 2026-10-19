@@ -6,6 +6,16 @@
   }
 
   body {
-    min-width: 320px;
+    min-width: 0;
+  }
+}
+
+.forced-colors-note {
+  display: none;
+}
+
+@media (forced-colors: active) {
+  .forced-colors-note {
+    display: block;
   }
 }

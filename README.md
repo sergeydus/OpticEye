@@ -1,6 +1,6 @@
 # OpticEye
 
-A minimal React + TypeScript + Vite project for exploring optical illusions, styled with Tailwind CSS through its Vite plugin. The app currently contains only a placeholder screen; illusion implementations are future work.
+A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. The Confetti experience includes the circle experiment. Adjust stripe spacing and image size, reveal the targets, and explore the explanations and research. The current calibration candidate starts with finer stripes and a smaller image so users can compare viewing conditions without changing page zoom.
 
 ## Development
 
@@ -13,21 +13,25 @@ npm run dev
 
 ```sh
 npm run lint
+npm run test
 npm run build
 npm run preview
 ```
 
 `build` checks TypeScript and produces `dist/`. `preview` serves the production build locally.
 
-Oxlint includes the `jsx-a11y` plugin. The planned feature test stack is Vitest, jsdom, React Testing Library, user-event, and jest-dom; those dependencies and `npm run test` will be added with the first illusion. Engineering completion and human perceptual calibration are tracked separately in the implementation spec.
+Oxlint includes the `jsx-a11y` plugin. `npm run test` runs Vitest once with jsdom, React Testing Library, user-event, and jest-dom. The tests cover geometry, target identity, context alignment, reveal, reset/focus, keyboard activation, invalid parameters, and independent instances.
+
+See the [validation record](docs/confetti-validation.md) for browser checks and remaining human calibration and screen-reader coverage. Settings are local to the current page and reset on refresh. The stimulus uses a fixed palette; its apparent effect varies with observer and display.
 
 ## Project files
 
-- `src/App.tsx`: minimal app entry component.
+- `src/App.tsx`: page shell.
+- `src/illusions/confetti/`: experience, SVG renderer, pure geometry/metadata, and tests.
 - `src/index.css`: Tailwind import and global styles.
 - `AGENTS.md`: guidance for future contributors and coding agents.
 - [Illusion research](docs/illusion-research.md): sourced candidates, rendering approaches, and reveal ideas.
 - [Implementation specification](docs/specs/implementation.md): architecture, rendering rules, accessibility, and validation requirements.
 - [Confetti specification](docs/specs/confetti.md): first illusion's construction, state, controls, and acceptance criteria.
 
-Start with the Confetti illusion, then add the other static demonstrations described in the research. No backend, routing, or UI library is configured yet.
+No backend, routing, analytics, or UI library is configured. The experience uses no downloaded source artwork or runtime research requests. Additional illusions remain in the research backlog.

@@ -1,6 +1,6 @@
 # Browser-renderable optical illusions
 
-Researched 19 October 2026. This is an implementation backlog; no illusions are implemented in the starter. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
+Researched 19 October 2026. Confetti now has an implementation; see its [validation record](confetti-validation.md) for engineering checks and pending perceptual calibration. The other illusions remain a backlog. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
 
 ## Suggested starting set
 
