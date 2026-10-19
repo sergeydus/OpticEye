@@ -1,6 +1,6 @@
 # Confetti implementation validation
 
-19 October 2026. A denser calibration candidate is implemented after the user's observation on the original baseline. Further human perceptual calibration is pending. Manual screen-reader compatibility remains unverified, so C10 is only partially covered. This record does not claim every acceptance criterion has passed.
+19 October 2026. A denser calibration candidate is implemented after the user's observation on the original baseline. Engineering checks, including C10 keyboard/automated interface checks, pass. Further human perceptual calibration is pending. At the user's direction, manual screen-reader testing is outside scope; this supersedes the coverage-gap notes in historical entries below. No full assistive-technology compatibility is claimed.
 
 ## Automated checks
 
@@ -48,7 +48,7 @@ Screenshots of the default and revealed mobile/desktop layouts and the actual 20
 
 - Human observations from two viewers at narrow and wide sizes are pending. One qualitative observation exists for the previous baseline; the revised candidate has not yet received human feedback. Screenshots do not establish perceived color assimilation.
 - Compare the new default, Compact/finer settings, and the old baseline at Large/8. Very fine settings may blend; coarser settings may show obvious bands. No setting is guaranteed to work for every observer.
-- Actual screen-reader speech/navigation has not been tested. Automated accessible-name/description/state checks and keyboard operation pass; they do not establish assistive-technology compatibility.
+- Manual screen-reader testing is outside the agreed scope and is not outstanding work. Existing keyboard and automated label/description/state checks pass.
 - Firefox, WebKit, additional intermediate widths, and a full forced-colors session are not yet inspected. Device pixel ratio 2 at normal zoom is now checked as recorded above. The forced-colors explanatory note is implemented, and system color settings are not overridden.
 
 ## Current oranges: single Fine mesh

@@ -1,12 +1,14 @@
 # OpticEye implementation specification
 
-Status: implementation baseline, version 1.7. Updated 19 October 2026.
+Status: implementation baseline, version 1.8. Updated 19 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
 This document defines project-wide rules. It does not request implementation of the app by itself. Version 1 is the Confetti experience, including an everyday example comparing deliberately greenish/unripe oranges with and without orange produce netting. Engineering observations and outstanding coverage are recorded in [the validation record](../confetti-validation.md). A gallery, accounts, backend, analytics, routing, downloads, and additional standalone illusions are outside its scope.
+
+At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
 `MUST` identifies an implementation requirement unless explicitly assigned to perceptual calibration. `SHOULD` identifies a preferred approach; document a concrete reason when deviating. Numeric stimulus values in an illusion spec are product choices until visually validated, unless explicitly attributed to research. Implementation completion and perceptual calibration are separate milestones defined in section 8.
 
@@ -97,7 +99,7 @@ An illusion may be marked **implemented** when the following engineering checks 
 4. In an available Chromium browser, inspect initial, revealed, adjusted, and reset states at 320 and 1440 CSS pixel viewport widths, plus 200% zoom. Verify keyboard access, focus, labels, disclosure behavior, and accessible names/states. Record browser version, displayed stimulus dimensions, parameters, and device pixel ratio.
 5. Sources, attribution, instructions, and known limitations are present. Feature criteria assigned to implementation pass. Any required engineering check that cannot run MUST be reported as unverified; record the blocker without inventing a pass.
 
-Automated accessibility assertions and linting cannot establish complete assistive-technology compatibility. Report which manual accessibility checks were actually performed.
+Automated accessible-name/state assertions, keyboard checks, and linting cover the agreed interface requirements. They do not establish full assistive-technology compatibility; no such compatibility claim is required or made. Manual screen-reader testing must not be tracked as pending completion work.
 
 ### 8.2 Calibrated
 
@@ -106,7 +108,6 @@ An implemented illusion may separately be marked **calibrated** after human view
 - Before marking calibration complete, record observations from at least two human viewers of the default stimulus at both narrow and wide display sizes. Record differing or weak responses; do not require every viewer to perceive the effect.
 - Record browser, viewport, displayed stimulus size, device pixel ratio, parameter values, and viewing observations. If the effect is weak, tune documented geometry while preserving target identity and reveal invariants, then repeat affected checks.
 - SHOULD extend visual checks to 390 and 768 CSS pixel widths, Firefox, WebKit where available, and device pixel ratios 1 and 2. This is an additional coverage target, not a required Cartesian product of engines, widths, and densities. Record missing coverage.
-- SHOULD inspect the completed interaction with a screen reader and document the result or remaining coverage gap.
 
 Screenshots establish construction and layout. Human observations establish whether the stimulus produces the intended perceptual effect under those conditions. Neither guarantees universal perception.
 

@@ -25,6 +25,7 @@ Build a browser-based optical illusion playground. Users should be able to obser
 ## Interaction and accessibility
 
 - Use semantic elements, labeled controls, visible keyboard focus, and keyboard-accessible reveal/reset actions.
+- This is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside the requested scope; do not list them as release blockers or pending project work. Retain existing semantic labels, keyboard support, and accessibility linting.
 - Give visual demonstrations a short text description and explain what to compare.
 - Keep animations opt-in, provide pause/reset, and respect `prefers-reduced-motion`. Avoid flashing stimuli.
 - Keep page text readable independently of intentional low-contrast elements inside a stimulus. Effects vary by viewer and display.

@@ -22,7 +22,7 @@ npm run preview
 
 Oxlint includes the `jsx-a11y` plugin. `npm run test` runs Vitest once with jsdom, React Testing Library, user-event, and jest-dom. The tests cover geometry, target identity, context alignment, reveal, reset/focus, keyboard activation, invalid parameters, and independent instances.
 
-See the [validation record](docs/confetti-validation.md) for browser checks and remaining human calibration and screen-reader coverage. Settings are local to the current page and reset on refresh. The stimulus uses a fixed palette; its apparent effect varies with observer and display.
+See the [validation record](docs/confetti-validation.md) for browser checks and remaining human perceptual calibration. This is a visual-first experience; manual screen-reader testing is outside scope. Keyboard controls, labels, focus indicators, and accessibility linting are retained. Settings are local to the current page and reset on refresh. The stimulus uses a fixed palette; its apparent effect varies with observer and display.
 
 ## Project files
 

@@ -1,6 +1,6 @@
 # Confetti illusion specification
 
-Status: single Fine mesh overlay implemented after specifying removal of the pattern controls. User reports no effect from horizontal/vertical options. Engineering checks pass; calibration and manual screen-reader coverage remain pending. Version 1.12, 19 October 2026. See [validation](../confetti-validation.md).
+Status: single Fine mesh overlay implemented after specifying removal of the pattern controls. User reports no effect from horizontal/vertical options. Engineering checks pass; perceptual calibration remains pending. Manual screen-reader testing is outside the user's requested scope. Version 1.13, 19 October 2026. See [validation](../confetti-validation.md).
 
 Depends on [implementation.md](implementation.md). Stable feature ID: `confetti`.
 
@@ -142,7 +142,7 @@ The drawing is one accessible image; disks and stripe elements are not interacti
 | C07 | Changing spacing while revealed leaves the disks unchanged and takes effect when stripes return. |
 | C08 | Reset after reveal, spacing and size adjustments, and opening the explanation restores all defaults and preserves keyboard focus on Reset. |
 | C09 | Two rendered instances have unique SVG definition IDs and operate independently. |
-| C10 | Toggle state/action, slider label/value, proof text, disclosure, and status are accessible through keyboard and screen-reader inspection. |
+| C10 | Keyboard checks and automated DOM assertions verify toggle state/action, slider label/value, proof text, disclosure, and status. Manual screen-reader inspection is outside scope. |
 | C11 | Default, reveal, spacing extremes, and reset fit the required engineering smoke-test sizes and zoom in the implementation spec; proof text causes no stimulus resizing. Document any additional browser/size coverage. |
 | C12 | Calibration only: human observations confirm a discernible default effect at narrow and wide sizes, using the two-viewer process. Record differing or weak responses honestly. Pending C12 does not block implementation completion. |
 | C13 | Attribution and working source links appear in the explanation. No source images or third-party runtime requests are used. |
@@ -169,11 +169,11 @@ Implementation completion requires C01–C11, C13–C22, and C24–C27, includin
 | Milestone | Current status |
 | --- | --- |
 | Reference construction review | Figure 10 inspected; contiguous background stripes confirmed. |
-| Implementation and engineering checks | Denser baseline and viewing-size controls implemented; see current checks in [validation](../confetti-validation.md). C10 manual screen-reader coverage remains unverified. |
+| Implementation and engineering checks | Denser baseline and viewing-size controls implemented; C10 keyboard/automated interface checks pass. See current checks in [validation](../confetti-validation.md). |
 | Human perceptual calibration | One qualitative observation on the previous baseline; new candidate awaiting human feedback and the complete viewing comparison. |
 | Everyday oranges example | One orange, fruit-clipped Fine mesh overlay and independent size control implemented. All 36 tests, lint/build, and Chromium 320/1440 checks pass. One original local asset; no separate public license chosen. Human calibration remains pending. |
 
-The validation record contains browser/viewport/device-pixel-ratio observations and remaining limitations. Geometry remains radius 34 and thickness ratio 1; spacing is now 2–8/default 3 and display size defaults to Medium. Reference review and screenshots are not perceptual validation of this stimulus. Report “implemented; perceptual calibration pending,” with manual screen-reader coverage also explicitly unverified.
+The validation record contains browser/viewport/device-pixel-ratio observations and remaining limitations. Geometry remains radius 34 and thickness ratio 1; spacing is now 2–8/default 3 and display size defaults to Medium. Reference review and screenshots are not perceptual validation of this stimulus. Report “implemented; perceptual calibration pending.” Manual screen-reader testing is outside scope and must not be reported as outstanding project work.
 
 ## 10. Everyday example: oranges and produce netting
 
