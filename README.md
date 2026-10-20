@@ -20,6 +20,25 @@ npm run preview
 
 `build` checks TypeScript and produces `dist/`. `preview` serves the production build locally.
 
+## GitHub Pages
+
+Live URL (after Pages is enabled and the workflow deploys): [https://sergeydus.github.io/OpticEye/](https://sergeydus.github.io/OpticEye/).
+
+The Vite config uses `/OpticEye/` only when `command === 'build'`; `npm run dev` continues at `/`. The brand link uses `import.meta.env.BASE_URL`, and imported assets receive the correct build path. Vitest keeps its separate configuration.
+
+To check the production version locally:
+
+```sh
+npm run build
+npm run preview
+```
+
+Open [http://localhost:4173/OpticEye/](http://localhost:4173/OpticEye/). The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Check styles, the oranges image, and the brand link at that subpath.
+
+In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner handles this setting, repository visibility, and pushing. The workflow does not automatically enable Pages.
+
+`.github/workflows/deploy.yml` runs on pushes to `main` or manually from Actions. It installs Node from `.nvmrc`, runs `npm ci`, lint, tests, and build, uploads `dist/`, then deploys through the official Pages actions. A failed validation/build prevents deployment. The deployment environment is `github-pages`.
+
 Oxlint includes the `jsx-a11y` plugin. `npm run test` runs Vitest once with jsdom, React Testing Library, user-event, and jest-dom. The tests cover geometry, target identity, context alignment, reveal, reset/focus, keyboard activation, invalid parameters, and independent instances.
 
 See the [validation record](docs/confetti-validation.md) for browser checks and remaining human perceptual calibration. This is a visual-first experience; manual screen-reader testing is outside scope. Keyboard controls, labels, focus indicators, and accessibility linting are retained. Settings are local to the current page and reset on refresh. The stimulus uses a fixed palette; its apparent effect varies with observer and display.

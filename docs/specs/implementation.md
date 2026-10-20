@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: implementation baseline, version 1.8. Updated 19 October 2026.
+Status: implementation baseline, version 1.9. Updated 19 October 2026.
 
 ## 1. Purpose and scope
 
@@ -41,6 +41,10 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `src/illusions/confetti/` tests | Meaningful geometry and interaction checks near the feature. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
+| `vite.config.ts` | React/Tailwind plugins and build-only `/OpticEye/` asset base; development stays at `/`. |
+| `vitest.config.ts` | Independent jsdom test configuration, unaffected by the deployment base. |
+| `.github/workflows/deploy.yml` | Validate/build/upload `dist/`, then deploy with official GitHub Pages actions. |
+| `src/assets/optic-eye.svg` | Original small eye favicon matching the header geometry, referenced by `index.html` and processed by Vite. |
 
 Metadata MUST include a stable illusion ID, title, short instructions, explanation, attribution, and source URLs. Keep content separate from geometry and interaction logic. Do not introduce a generic renderer or plugin registry until another implemented illusion needs one.
 
@@ -114,3 +118,19 @@ Screenshots establish construction and layout. Human observations establish whet
 ## 9. Maintaining the contract
 
 Read this document alongside root `AGENTS.md`. Apply the feature spec to feature-specific choices and this document to shared behavior. Update both affected specs when a design decision changes a shared rule; do not silently resolve a contradiction in code. An explicit user instruction takes precedence and should be reflected in the resulting documentation.
+
+## 10. Deployment
+
+Target URL: [OpticEye on GitHub Pages](https://sergeydus.github.io/OpticEye/). This section specifies deployment preparation; actual hosted deployment is verified only after the owner enables Pages and pushes the workflow.
+
+- `vite.config.ts` MUST export a config function and set `base: command === 'build' ? '/OpticEye/' : '/'`. Keep React/Tailwind plugins and the separate Vitest config working. Development stays at `http://localhost:5173/`.
+- The brand link MUST use `import.meta.env.BASE_URL`. Use imported asset URLs or base-aware paths for app assets/navigation, with no hardcoded origin-root application links. Vite processes the `/src/main.tsx` entry in `index.html` and rewrites built assets under `/OpticEye/`; fragment/source links remain unchanged.
+- Declare the original local eye SVG as the favicon in `index.html` using a relative source path processed by Vite. This prevents an implicit origin-root `/favicon.ico` request and its 404; retain correct icon loading in development and production.
+- `npm run preview` MUST serve the built app at `http://localhost:4173/OpticEye/`. Because Vite preview loads configuration with command `serve`, set the preview script to `vite preview --base /OpticEye/`; the config's build-only condition remains intact. This preview override must not affect `npm run dev` or tests.
+- Workflow triggers: pushes to `main` and manual `workflow_dispatch`. Permissions: `contents: read`, `pages: write`, `id-token: write`. Concurrency group `pages`, `cancel-in-progress: false`.
+- Build job on `ubuntu-latest`: checkout; setup Node using `.nvmrc` and npm cache; `npm ci`; lint; test; build; configure Pages; upload Pages artifact from `dist`. Keep automatic Pages enablement disabled.
+- Deploy job on `ubuntu-latest` needs `build`, uses environment `github-pages`, and sets its environment URL to `${{ steps.deployment.outputs.page_url }}` from the `deployment` step running `actions/deploy-pages`.
+- Use current official action majors, verified 19 October 2026: [checkout v7](https://github.com/actions/checkout/releases/tag/v7.0.1), [setup-node v7](https://github.com/actions/setup-node/releases/tag/v7.1.0), [configure-pages v6](https://github.com/actions/configure-pages/releases/tag/v6.0.0), [upload-pages-artifact v5](https://github.com/actions/upload-pages-artifact/releases/tag/v5.0.0), [deploy-pages v5](https://github.com/actions/deploy-pages/releases/tag/v5.0.1).
+- The owner sets repository Settings → Pages → Build and deployment → Source to **GitHub Actions** and handles pushing and repository visibility. Preparing these files does not authorize changing those settings or pushing.
+
+Local acceptance: lint, tests, and production build pass; start `npm run preview` and open `/OpticEye/` in Chromium. Confirm styled content, both oranges images decoded from the identical source, brand navigation staying in `/OpticEye/`, and no failed requests/404 responses. Also check development at `/`. Record actual local results separately from an unrun hosted workflow.

@@ -10,6 +10,16 @@
 - Geometry checks cover target bounds/nonoverlap, balanced assignments, shared fills/radii, contiguous stripes through the last surface edge, and invalid/fractional spacing normalization.
 - Component checks cover default state, clipping references, foreground/background phase agreement, context-only reveal, spacing and image-size preservation, reset/focus, keyboard activation, Strict Mode, and instance isolation.
 
+## GitHub Pages preparation: local verification
+
+19 October 2026. The implementation Deployment section and README were updated before code. Production builds use `/OpticEye/` only when Vite's config command is `build`; development remains `/`. The brand link derives from `import.meta.env.BASE_URL`. The preview script explicitly passes `--base /OpticEye/` because preview resolves command `serve`. Vitest's independent configuration is unchanged; all 36 tests, lint, and the production build pass.
+
+Chrome 155.0.8059.82 opened `http://localhost:4173/OpticEye/` at 320 and 1440 CSS pixel widths, DPR 1. The HTML, CSS, JavaScript and declared SVG favicon returned 200 (cached assets also returned 304 after brand navigation). Computed page styling loaded. Both oranges images decoded to 600 × 400 from the identical locally bundled SVG, which Vite inlines into the JavaScript as a data URL; a separate oranges network request is therefore unnecessary. Hide netting preserved every image attribute, and Reset restored the overlay. Brand activation returned to `/OpticEye/`; no failed requests, 404s, console/page errors or horizontal overflow were observed. Screenshots at both widths were visually inspected.
+
+The initial preview check found an automatic origin-root `/favicon.ico` 404. An original SVG favicon matching the existing header geometry is now explicitly referenced through Vite, so its production URL is under `/OpticEye/assets/`. Repeated checks passed with that icon loaded successfully. The only remaining origin-root source reference is Vite's `/src/main.tsx` HTML entry, which is correctly rewritten in the built HTML. No hardcoded origin-root application navigation remains. A separate development browser check opened `http://localhost:5173/` successfully and confirmed the brand still links to `/`.
+
+The workflow was inspected for the requested triggers, permissions, concurrency, Node/npm setup, validation order, `dist` artifact, dependent deploy job and environment URL. Official action majors were checked against their release pages, linked in the Deployment specification. The hosted workflow has not run. Pages enablement/source, repository visibility and pushing remain with the owner; no remote settings or branches were changed.
+
 ## Current calibration candidate and checks
 
 The user reported that the original effect became visible only after zooming out substantially. The exact screen size, zoom percentage, browser, and viewing distance were not supplied. This is one qualitative viewing observation and motivates iteration; it does not complete the two-viewer comparison.
