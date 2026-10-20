@@ -1,6 +1,6 @@
 # Munker implementation validation
 
-Updated 20 October 2026. **Implemented; calibrated at desktop only.** M11 is complete for desktop viewing with two viewers; phone viewing is not yet observed. Screenshots remain engineering evidence, separate from these human reports.
+Updated 20 October 2026. **Implemented and calibrated.** M11 is complete: both viewers confirm the intended effect on desktop and mobile. Screenshots remain engineering evidence, separate from these human reports.
 
 ## Engineering completion: M01–M10
 
@@ -29,17 +29,17 @@ At the original checkpoint, each environment additionally verified:
 
 Screenshots were captured for visible/revealed Medium and full experiment layouts. Wide viewport DPR 1, 320px viewport DPR 1.25 and uncovered wide views were visually inspected. The two plain revealed bars have the same green appearance in the rendering; no human calibration claim follows from this.
 
-## Calibration: M11 complete for desktop only
+## Calibration: M11 complete for desktop and mobile
 
-On 20 October 2026, the user reports that two viewers (the user and one other person) see the intended Munker effect before reveal at default settings and normal page zoom. The correction specifies desktop viewing; the user's extra checks covered all image-size settings.
+On 20 October 2026, the user reports that two viewers (the user and one other person) see the intended Munker effect before reveal at default settings and normal page zoom. Initial clarification specified desktop, with the user's extra checks covering all image-size settings. The subsequent mobile result was explicitly confirmed as **“Both viewers—all three”** demos, including Munker.
 
 | Viewer | Device class | Settings covered | Observation |
 | --- | --- | --- | --- |
-| 1 — user | Desktop | Defaults plus Compact/Medium/Large | The intended difference between the bars is visible before reveal. |
-| 2 — other viewer, reported by user | Desktop | Defaults; additional image-size settings not specified | The intended difference between the bars is visible before reveal. |
+| 1 — user | Desktop and mobile | Desktop defaults plus Compact/Medium/Large; mobile follow-up confirmed, extra mobile settings not specified | The intended difference between the bars is visible before reveal on both device classes. |
+| 2 — other viewer, reported by user | Desktop and mobile | Desktop defaults and mobile follow-up; additional image-size settings not specified | The intended difference between the bars is visible before reveal on both device classes. |
 
-Defaults are stripe width 6 and Medium (360 CSS px maximum). No exact rendered image size or viewport was supplied. Browser/version, DPR, display dimensions and viewing distance are unknown for this report; the Chrome versions in the engineering section must not be assigned to the viewers. No specific perceived hues, measurements or isolated perceptual mechanism were reported.
+Defaults are stripe width 6 and Medium (360 CSS px maximum). The mobile follow-up did not separately restate parameter values or zoom, or add exact rendered size/viewport measurements. Browser/version, DPR, display dimensions and viewing distance remain unknown; the Chrome versions in the engineering section must not be assigned to the viewers. No specific perceived hues, measurements or isolated perceptual mechanism were reported.
 
-**Phone viewing is not yet observed for either viewer.** Compact/Medium/Large settings on desktop do not establish phone calibration. Thus M11 is complete only for desktop, and full desktop/phone calibration is still incomplete. Preserve target identity and record weak/absent observations if further viewing differs; this limited result does not guarantee the effect for everyone.
+**Both desktop and mobile portions of M11 are complete.** The explicit mobile confirmation supplies the evidence; Compact/Medium/Large settings on desktop alone would not establish phone calibration. Preserve target identity and record weak/absent observations if further viewing differs; this result does not guarantee the effect for everyone.
 
 Firefox/WebKit and forced-colors rendering have not been manually checked. Manual screen-reader testing is outside the agreed scope. Munker (`c9e9adc`) and the page split (`c707f4d`) were pushed and deployed in [run 39439023910](https://github.com/sergeydus/OpticEye/actions/runs/39439023910); live loads/refreshes and navigation passed at 320/1440 with no 404s. These engineering viewport checks are not human phone observations. The local server remains stopped.

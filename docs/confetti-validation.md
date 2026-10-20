@@ -1,19 +1,19 @@
 # Confetti implementation validation
 
-Updated 20 October 2026. **Implemented; calibrated at desktop only.** C12 (circles) and C23 (default illustrated oranges) are complete for desktop viewing with two viewers. **Phone viewing is not yet observed.** Desktop image-size choices do not establish phone calibration.
+Updated 20 October 2026. **Implemented and calibrated.** C12 (circles) and C23 (default illustrated oranges) are complete: both viewers confirm the intended effects on desktop and mobile. Desktop image-size choices and actual mobile observations are recorded separately.
 
 ## Human observations
 
-The user reports that both viewers (the user and one other person) see the intended effects before reveal at default settings and normal page zoom. The follow-up corrects the device class to desktop; the user's additional tests covered all image-size settings.
+The user reports that both viewers (the user and one other person) see the intended effects before reveal at default settings and normal page zoom. The first device clarification was desktop, with the user also checking every image-size setting. A subsequent mobile report was explicitly confirmed as **“Both viewers—all three”** demos (circles, oranges and Munker), completing the mobile portion.
 
 | Viewer | Device class | Settings covered | Report |
 | --- | --- | --- | --- |
-| 1 — user | Desktop | Defaults plus Compact/Medium/Large | Confetti circles and the oranges example show the intended effects before reveal. |
-| 2 — other viewer, reported by user | Desktop | Defaults; additional image-size settings not specified | Confetti circles and the oranges example show the intended effects before reveal. |
+| 1 — user | Desktop and mobile | Desktop defaults plus Compact/Medium/Large; mobile follow-up confirmed, extra mobile settings not specified | Confetti circles and the oranges example show the intended effects before reveal on both device classes. |
+| 2 — other viewer, reported by user | Desktop and mobile | Desktop defaults and mobile follow-up; additional image-size settings not specified | Confetti circles and the oranges example show the intended effects before reveal on both device classes. |
 
-Default settings identify circles at spacing 3, Medium (360 CSS px maximum), and oranges at Illustration, Medium (450 CSS px maximum), net visible. These are control settings/maximum widths, not measurements of the viewers' rendered images. Browser/version, exact viewport, actual rendered size, DPR, display dimensions and viewing distance were not supplied for this report. No browser is inferred from the earlier engineering runs or viewer 1's older sessions.
+Default settings identify circles at spacing 3, Medium (360 CSS px maximum), and oranges at Illustration, Medium (450 CSS px maximum), net visible. These are control settings/maximum widths, not measurements of the viewers' rendered images. The mobile follow-up did not separately restate parameter values or zoom; it confirms mobile viewing in this calibration sequence without adding further conditions. Browser/version, exact viewport, actual rendered size, DPR, display dimensions and viewing distance remain unspecified. No browser is inferred from engineering runs or older sessions.
 
-The latest report does not specify perceived hues or isolate a mechanism. Viewer 1's earlier orange observation was green to yellowish, rather than the study's orange. The new two-viewer result covers the default illustration; it does not establish two-viewer calibration for the optional AI image. Phone observations remain pending for both viewers and both demonstrations. Calibration is limited to the reported desktop conditions, not universal perception.
+The reports do not specify new perceived hues or isolate a mechanism. Viewer 1's earlier orange observation was green to yellowish, rather than the study's orange. The two-viewer result covers the default illustration; it does not establish two-viewer calibration for the optional AI image. No desktop/mobile viewer remains outstanding for C12/C23. Calibration is limited to the reported conditions, not universal perception.
 
 ## Current engineering state
 
