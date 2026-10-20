@@ -1,12 +1,12 @@
 # Kanizsa triangle specification
 
-Status: **implemented; perceptual calibration pending for the strengthened revision**. Version 2.1, 20 October 2026. The owner found the initial three-disk figure weak. Default radius 92, optional outline context and continuous rotation supersede version 1; K01–K09 now pass for this revision; engineering checks do not establish calibration. Stable ID/folder: `kanizsa`. See [implementation rules](implementation.md) and [validation](../kanizsa-validation.md).
+Status: **implemented; unlisted by owner decision (effect judged too weak); calibration not pursued**. Version 2.2, 21 October 2026. Default radius 92, optional outline context and continuous rotation remain unchanged. K01–K09 are engineering criteria; no calibration pass is claimed. Stable ID/folder: `kanizsa`. See [implementation rules](implementation.md) and [validation](../kanizsa-validation.md).
 
 ## 1. Scope
 
 Suggest an upright white triangle with aligned 60° cutout disks and optional classic inverted-triangle corner context. The upright triangle is never drawn, filled, outlined, masked or given a hit area. Only one opaque white surface, three black sector paths and, when enabled, three separate unfilled black V polylines are permitted.
 
-Use the existing standalone /OpticEye/kanizsa/ page (development /kanizsa/), shared shell, metadata list and image-size control. Add no dependency, router, animation, blur, blend, photograph, copied artwork or automatic movement. The owner has authorized this local revision; do not push.
+Use the existing standalone /OpticEye/kanizsa/ page (development /kanizsa/), shared shell, metadata list and image-size control. Add no dependency, router, animation, blur, blend, photograph, copied artwork or automatic movement. The owner has authorized keeping and publishing this page on main, unlisted as specified below.
 
 ## 2. Research basis and attribution
 
@@ -16,11 +16,11 @@ Sources checked 20 October 2026:
 - [Kojo, Liinasuo and Rovamo (1993), Spatial and temporal properties of illusory figures](https://pubmed.ncbi.nlm.nih.gov/8506632/), *Vision Research* 33(7), 897–901, DOI 10.1016/0042-6989(93)90072-5. The abstract describes a three-sector-disk Kanizsa triangle without physically drawn sides. Its experiments concern sequential presentation; this project does not reproduce them or infer a static optimum from their timing results.
 - [Shipley and Kellman (1992), Strength of visual interpolation depends on the ratio of physically specified to total edge length](https://link.springer.com/article/10.3758/BF03206762), *Perception & Psychophysics* 52, 97–106, DOI 10.3758/BF03206762. Their abstract relates boundary clarity to supported versus total edge length in tested displays. This motivates exploring relative disk size; it does not guarantee our defaults or a monotonic effect for all viewers.
 
-The two research abstracts/bibliographic records were read, not their full texts. Link all three sources in the explanation. Use original wording and geometry; no research image, SVG or source code is copied. All numeric values and the 90° comparison below are OpticEye design choices awaiting human calibration. Describe completion/grouping as perceptual phenomena; do not assert a single proven brain mechanism, brightness change in the pixels or universal perception. Neural feedback results linked by Bach are not needed for this first-version explanation.
+The two research abstracts/bibliographic records were read, not their full texts. Link all three sources in the explanation. Use original wording and geometry; no research image, SVG or source code is copied. All numeric values and the 90° comparison below are OpticEye uncalibrated design choices. Describe completion/grouping as perceptual phenomena; do not assert a single proven brain mechanism, brightness change in the pixels or universal perception. Neural feedback results linked by Bach are not needed for this first-version explanation.
 
 ## 3. Files and page integration
 
-Keep kanizsa/index.html and main.tsx, currentPage="kanizsa", one h1 “Kanizsa triangle”, and the existing six-document build/base-aware nav. Keep current static title/description and metadata synchronized; no page structure or workflow change is required. Existing demos/calibration remain intact.
+Keep kanizsa/index.html and main.tsx, currentPage="kanizsa", one h1 “Kanizsa triangle”, and the existing six-document build. Set its metadata listed flag to false; other entries default to true. Home shows four listed cards and every header shows Home plus the four listed illusions (five links total). Kanizsa is absent from both surfaces and its own header has no aria-current marker. All build inputs and page IDs still include Kanizsa, so its direct URL, refresh and controls keep working. Add `<meta name="robots" content="noindex">` to its HTML. Keep the current static title/description, construction, defaults and all experiment behavior unchanged; no workflow change is required. Existing demos/calibration remain intact.
 
 | File | Responsibility |
 | --- | --- |
@@ -122,14 +122,14 @@ Measure actual dimensions and DPR. Curves/diagonals can rasterize differently at
 | K03 | Inverted vertices are equilateral with side368; each V follows two sides and is trimmed by circle/upright half-plane exclusions. Shared stroke/fill-none explicit. Test centerlines, miter bounds and whole-stroke upright exclusion, both outline states and all radii. Outline geometry is independent of rotation. |
 | K04 | Rotation changes only persistent disk d attributes. Outline toggle changes only its layer. Surface/envelopes/frame and disk nodes remain stable; Align changes rotation only. Radius intentionally changes disk size and outline arm lengths. |
 | K05 | Native rotation/radius/size/outline controls, Align, disclosure and Reset work independently with keyboard and pointer. Reset restores 92/0/on/540/closed with focus. Accessible labels/help/actual descriptions/references and instance isolation pass. No obsolete toggle behavior/dead code. |
-| K06 | Standalone page, six nav destinations/current marker, five Home cards, metadata/one h1/base paths work. Existing tests/calibration remain intact. |
+| K06 | Unlisted standalone page remains directly reachable and functional, including refresh. Four listed Home cards and Home plus four nav links on every page; no Kanizsa discovery link or aria-current marker on its page. Static noindex, title/description, one h1 and base paths work. Existing tests/calibration remain intact. |
 | K07 | Lint, meaningful tests and TypeScript/Vite build pass; six real HTML outputs, no dependency/router/workflow changes. |
 | K08 | Chromium at 320/1440, DPR1/1.25/2 and actual 200% zoom: direct load/refresh/nav/assets, rotations0/45/90, radii32/92/96, outline on/off, each image size, keyboard controls/Align/Reset/disclosure, stable bounds, no overflow/errors/404s. Record exact coverage; full Cartesian browser matrix not required. Also check dev /kanizsa/. |
 | K09 | Actual white-pixel checks at centroid, side midpoints and protected interior samples outside disks, across rotation/radius/outline states. Include black disk and outline-stroke samples as positive controls. Record actual engineering outcomes separately from perception in validation notes. |
-| K10 | Calibration only: two viewers on desktop/mobile compare new defaults and changed context, recording triangle/contour perception and weak/absent responses. Do not transfer calibration from the earlier weak construction. Unknown browser/DPR/distance remains unknown; desktop image sizes are not mobile observations. |
+| K10 | Calibration not pursued by owner decision: the effect was judged too weak, and the page is unlisted. No two-viewer calibration pass is claimed. Unknown browser/DPR/distance remains unknown. |
 
-K01–K09 define implemented; K10 is separate calibrated status. Screenshots/pixels establish construction only. No human pass is claimed for this revision until reported.
+K01–K09 define implemented. K10 is not pursued and must not be tracked as pending work or marked calibrated. Screenshots/pixels establish construction only.
 
 ## 9. Approval/history
 
-Initial spec checkpoint 99a95a2 and implementation dbb7a82 used radius 64 and a binary 90° toggle, with no outline. The owner reports that version weak (device/browser/settings not supplied). On 20 October 2026 the owner requested radius 92, outline on by default, rotation 0–90° step 5 and Align. Update this spec before code, verify and commit as “Strengthen Kanizsa figure”. Do not push: the owner will view it first.
+Initial spec checkpoint 99a95a2 and implementation dbb7a82 used radius 64 and a binary 90° toggle, with no outline. The owner reported that version weak (device/browser/settings not supplied). On 20 October 2026 the owner requested radius 92, outline on by default, rotation 0–90° step 5 and Align, implemented in 9f4d340. On 21 October the owner judged the effect too weak and requested keeping it on main but removing it from Home/navigation, adding noindex, and stopping calibration. This spec and implementation.md were updated before the listing changes. The owner authorizes committing and pushing this unlisted version.

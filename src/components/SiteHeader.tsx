@@ -1,9 +1,9 @@
-import { ILLUSIONS, pageHref, type PageId } from '../illusions'
+import { LISTED_ILLUSIONS, pageHref, type PageId } from '../illusions'
 
 type Props = { currentPage: PageId; base?: string }
 
 export default function SiteHeader({ currentPage, base = import.meta.env.BASE_URL }: Props) {
-  const pages = [{ id: 'home', name: 'Home' }, ...ILLUSIONS] as const
+  const pages = [{ id: 'home', name: 'Home' }, ...LISTED_ILLUSIONS] as const
   return (
     <header className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 border-b border-slate-300/70 px-4 py-5 sm:px-8">
       <a href={pageHref('home', base)} className="flex min-h-11 items-center gap-2.5 rounded-sm text-xl font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">

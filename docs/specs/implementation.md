@@ -1,12 +1,12 @@
 # OpticEye implementation specification
 
-Status: implementation baseline for separate static illusion pages, including calibrated Müller-Lyer, with the approved Kanizsa extension; version 1.29. Updated 20 October 2026.
+Status: implementation baseline for separate static illusion pages, including calibrated Müller-Lyer and an unlisted Kanizsa page; version 1.30. Updated 21 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. The implemented scope is a Home page listing the illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), and [Café Wall](cafe-wall.md). A fourth illusion, [Müller-Lyer](muller-lyer.md), is implemented and calibrated on desktop and mobile; the owner has authorized deployment. A fifth illusion, [Kanizsa triangle](kanizsa.md), is implemented locally with perceptual calibration pending; keep it unpushed for owner viewing. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
+This document defines project-wide rules. The implemented scope is a Home page listing four illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), [Café Wall](cafe-wall.md), and calibrated [Müller-Lyer](muller-lyer.md). A fifth illusion, [Kanizsa triangle](kanizsa.md), is implemented; unlisted by owner decision (effect judged too weak); calibration not pursued. It remains built and reachable directly, with owner authorization to publish it on main. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -32,7 +32,7 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `confetti/index.html`, `confetti/main.tsx` | Confetti document and entry, composing its experience with the shared shell. |
 | `munker/index.html`, `munker/main.tsx` | Munker document and entry, composing its experience with the shared shell. |
 | `cafe-wall/index.html`, `cafe-wall/main.tsx` | Café Wall document and entry, composing its experience with the shared shell. |
-| `src/illusions.ts` | Small typed metadata list (ID/folder, navigation name, title, one-line description); drives cards, navigation and HTML build inputs. |
+| `src/illusions.ts` | Small typed metadata list (ID/folder, navigation name, title, description, listed flag); listed entries drive cards/navigation, all entries drive HTML build inputs. |
 | `src/mountPage.tsx` | Shared React StrictMode mounting and Tailwind CSS import. |
 | `src/components/SiteLayout.tsx`, `SiteHeader.tsx`, `SiteFooter.tsx` | Shared page shell and base-aware Home/illusion navigation, with current-page state supplied by each entry. |
 | `src/components/ViewingSizeControl.tsx` | Labeled native size select used by the experiments; callers own choices, normalization and state. |
@@ -104,10 +104,17 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 - Build `index.html` → `/OpticEye/`, `confetti/index.html` → `/OpticEye/confetti/`, `munker/index.html` → `/OpticEye/munker/`, `cafe-wall/index.html` → `/OpticEye/cafe-wall/`, `muller-lyer/index.html` → `/OpticEye/muller-lyer/`, and `kanizsa/index.html` → `/OpticEye/kanizsa/`. Use Vite build.rollupOptions.input for all six, deriving illusion inputs from src/illusions.ts. Vite 8 exposes this as a compatibility alias; no router or fallback 404.html is required.
 - Every document has its own static title and meta description. Home uses “OpticEye — Optical illusions”; illusion documents use “Confetti illusion | OpticEye”, “Munker illusion | OpticEye”, “Café Wall illusion | OpticEye”, “Müller-Lyer illusion | OpticEye” and “Kanizsa triangle | OpticEye”. Each rendered page has exactly one h1; illusion subordinate headings use h2. Remove the shell's in-page section navigation and extra page heading from illusion pages.
-- Shared header navigation is labeled “Main navigation” and links Home/Confetti/Munker/Café Wall/Müller-Lyer/Kanizsa with import.meta.env.BASE_URL. Mark exactly the current link aria-current="page". The brand links Home. Use ordinary document links; preserve feature-local explanation fragments.
+- Shared header navigation is labeled “Main navigation” and links Home/Confetti/Munker/Café Wall/Müller-Lyer with import.meta.env.BASE_URL: five links in total on every page. Mark the current listed link aria-current="page"; an unlisted page has no current marker. The brand links Home. Use ordinary document links; preserve feature-local explanation fragments.
 - Each HTML entry mounts only its own page. Navigation/refresh loads a document with local defaults; no shared state, custom cross-page persistence or global Reset. Native browser Back/Forward and its document-cache behavior need no interception. Confetti Reset still covers its circles/oranges; Reset Munker remains local.
-- Adding an illusion requires a new top-level folder with index.html and main.tsx, its original feature code, and one metadata-list entry. Do not add a component registry, dynamic renderer, router or plugin system. Build inputs, home cards and nav pick up the list entry automatically.
+- Adding an illusion requires a new top-level folder with index.html and main.tsx, its original feature code, and one metadata-list entry. Do not add a component registry, dynamic renderer, router or plugin system. Build inputs always include the entry; Home cards and nav include it only when listed.
 - Extract the actual shared shell and size select into src/components/. Preserve geometry, palettes, labels, defaults and controls while changing composition. Commit the verified restructure separately from the Munker checkpoint; do not push in this task.
+
+### Listing and direct pages
+
+- Metadata entries have a `listed` flag, defaulting to true; only explicit false removes an entry from Home and header navigation. The four public illusions are listed; Kanizsa is false. Use one shared filtered list for both discovery surfaces.
+- Build inputs and valid page IDs MUST continue to use every entry, including unlisted ones. All six HTML documents remain in dist; direct loads, refreshes and experiment behavior remain intact. Unlisting changes discovery, not access control.
+- Kanizsa's HTML MUST contain `<meta name="robots" content="noindex">`. Its header is the same five-link listed navigation as other pages, with no aria-current marker. Keep its title, description, geometry, defaults, controls and state unchanged.
+- Verify four Home cards, Home plus four nav links on all six pages, base-aware links, no current marker on Kanizsa, working direct access and the retained `dist/kanizsa/index.html` output.
 
 ### Approved Café Wall extension
 
@@ -127,10 +134,10 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 ### Approved Kanizsa extension
 
-- [kanizsa.md](kanizsa.md) is approved as a sixth HTML document: Home plus five illusions. Commit the specification before feature code; do not push until owner viewing and authorization.
-- Add `kanizsa/index.html` and `main.tsx`, plus one metadata entry for `/OpticEye/kanizsa/` (dev `/kanizsa/`). Existing metadata-driven inputs/cards/nav should include it automatically; verify six wrapping nav links and exactly one current marker at 320px/200% zoom.
+- [kanizsa.md](kanizsa.md) is implemented as a sixth HTML document: Home plus five illusions. On 21 October the owner judged the effect too weak and authorized publishing it unlisted on main; calibration is not pursued.
+- Keep `kanizsa/index.html`, `main.tsx` and its metadata entry for `/OpticEye/kanizsa/` (dev `/kanizsa/`). Set listed false, retain the build input, add noindex, and follow the listing rules above. No Kanizsa card/link or current marker appears in the shared discovery UI.
 - Reuse the shared shell/mounting/size select. Keep three cutout-disk paths and all feature state local, with an optional three-V inverted outline layer, but no drawn upright triangle, router, registry, shared experiment state, dependencies or workflow changes.
-- The rotation range turns openings 0–90° without moving circle centers; Align sets rotation to 0. Radius, outline visibility and viewing size are independent controls. The v2 canvas is 720×512 to fit the outlined bottom corner without moving the disks. Retain all existing demos/calibration. Extend meaningful tests and page/browser/build checks to six documents only during implementation. The radius-92/outline revision passes K01–K09; actual results are in docs/kanizsa-validation.md. K10 remains pending human viewing. The implementation is local and unpushed.
+- The rotation range turns openings 0–90° without moving circle centers; Align sets rotation to 0. Radius, outline visibility and viewing size are independent controls. The v2 canvas is 720×512 to fit the outlined bottom corner without moving the disks. Retain all existing demos/calibration and Kanizsa's implemented behavior. K01–K09 engineering results are in docs/kanizsa-validation.md; K10 is not pursued by owner decision, not a calibration pass.
 
 ### Shared interaction requirements
 
@@ -174,7 +181,7 @@ Automated accessible-name/state assertions, keyboard checks, and linting cover t
 
 ### 8.2 Calibrated
 
-An implemented illusion may separately be marked **calibrated** after human viewing confirms that its intended effect is discernible under recorded conditions. Until then, report “implemented; perceptual calibration pending.” An agent MUST finish available engineering work and report the pending milestone without waiting indefinitely for human viewers or claiming that screenshots prove perception.
+An implemented illusion may separately be marked **calibrated** after human viewing confirms that its intended effect is discernible under recorded conditions. Until then, report “implemented; perceptual calibration pending,” unless the owner explicitly stops calibration. For Kanizsa, record “calibration not pursued” and the unlisting decision instead. An agent MUST finish available engineering work without waiting indefinitely for human viewers or claiming that screenshots prove perception.
 
 - Before marking calibration complete, record observations from at least two human viewers of the default stimulus at both narrow and wide display sizes. Record differing or weak responses; do not require every viewer to perceive the effect.
 - When two viewers confirm only desktop or only phone viewing, report **implemented; calibrated at desktop only** or **implemented; calibrated at phone only** and mark only that portion of the feature criterion complete. Leave the other device class explicitly unobserved. Compact/Medium/Large image settings on a desktop are viewing-scale checks, not phone observations. Unknown browser, viewport, DPR and distance remain unknown; do not infer them from engineering checks or another viewing session.

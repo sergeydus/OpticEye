@@ -2,7 +2,11 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current extension: Kanizsa adds a sixth real document and a fifth Home card. Lint, 94 tests across 12 files and the six-page build pass. All six links and refreshes were checked at 320/1440 with no errors/overflow; see [Kanizsa validation](kanizsa-validation.md) for the strengthened radius-92/outline revision, continuous rotation, DPR/zoom matrix, protected white-pixel checks and pending human calibration. Both orange sources decoded. Kanizsa remains local and unpushed. Earlier [Müller-Lyer](muller-lyer-validation.md) and [Café Wall](cafe-wall-validation.md) records retain their calibration; the original three-page checkpoint below is historical and remains applicable to unchanged features.
+Current structure (21 October 2026): six real documents, four listed Home cards, and five header links (Home plus four listed illusions). Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. Its direct URL and build output remain, with static noindex and no current nav marker on that page. See [Kanizsa validation](kanizsa-validation.md) for construction results and the listing checks. Earlier [Müller-Lyer](muller-lyer-validation.md) and [Café Wall](cafe-wall-validation.md) records retain their calibration; the original three-page checkpoint below is historical and remains applicable to unchanged features.
+
+## Unlisting checkpoint: 21 October 2026
+
+Lint, **95 tests across 12 files**, and build pass. All six dist HTML files remain, including Kanizsa. Chrome **155.0.8059.85** checked all six production-preview URLs directly and after refresh at **320×1000 and 1440×1000 CSS px, DPR 1**: 200 responses, styles/images, one h1, four Home cards, five base-aware nav links on every page, no Kanizsa discovery link, one current marker on listed pages and none on Kanizsa. Kanizsa has static noindex and its original defaults, keyboard rotation, outline, Align and Reset work. Listed navigation clicks stay under /OpticEye/. No overflow, console/page errors, failed requests or 404s. Build inputs still use all metadata entries; only Home/nav use the shared listed subset. No feature geometry, dependencies or workflow changed. See the Kanizsa record for report/screenshot locations.
 
 ## Three-page checkpoint: build and tests
 

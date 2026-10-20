@@ -1,6 +1,6 @@
 # OpticEye
 
-A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. Home lists the experiments; each illusion has its own static page. Confetti compares identical circles under three stripe colors and includes an oranges/netting example. Munker compares identical green bars under two stripe contexts. Café Wall explores apparent tilt in parallel mortar bands between staggered tile rows. Müller-Lyer compares fixed, equal-length shafts with opposing arrow fins. Kanizsa uses three cutout disks to suggest a triangle without drawing one. Change the context or viewing size, then reveal the unchanged targets. Each experiment owns its state and Reset; Confetti Reset also restores its oranges example.
+A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. Home lists the four public experiments; each illusion has its own static page. Confetti compares identical circles under three stripe colors and includes an oranges/netting example. Munker compares identical green bars under two stripe contexts. Café Wall explores apparent tilt in parallel mortar bands between staggered tile rows. Müller-Lyer compares fixed, equal-length shafts with opposing arrow fins. Kanizsa uses three cutout disks to suggest a triangle without drawing one. Change the context or viewing size, then reveal the unchanged targets. Each experiment owns its state and Reset; Confetti Reset also restores its oranges example.
 
 ## Development
 
@@ -40,9 +40,9 @@ Check all six addresses, including a refresh and navigation between them:
 - [Munker](http://localhost:4173/OpticEye/munker/)
 - [Café Wall](http://localhost:4173/OpticEye/cafe-wall/)
 - [Müller-Lyer](http://localhost:4173/OpticEye/muller-lyer/)
-- [Kanizsa](http://localhost:4173/OpticEye/kanizsa/)
+- [Kanizsa (unlisted, direct URL only)](http://localhost:4173/OpticEye/kanizsa/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header/footer navigation marks the current page. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The existing four illusions are deployed and calibrated. Kanizsa remains local for owner viewing; the existing Pages workflow can publish all six documents when authorized.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the four listed illusions and marks the current listed page. The unlisted Kanizsa page has no current marker and includes a static noindex robots directive. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The existing four illusions are deployed and calibrated. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. All six documents are still built and deployed.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner handles this setting, repository visibility, and pushing. The workflow does not automatically enable Pages.
 
@@ -56,7 +56,7 @@ Café Wall is implemented with row offset 0–100% (default 50), mortar width 1�
 
 Müller-Lyer is implemented and calibrated on desktop and mobile with fin angle 15–90° (default 35), fin arm length 24–96 drawing units (default 64), and image sizes 240/540/720px (default Medium/540). Hide fins removes four miter-joined polylines while preserving both shaft elements. [Müller-Lyer validation](docs/muller-lyer-validation.md) records passing engineering checks and both viewers seeing the lower line as longer before reveal and the two as equal afterward, at defaults and normal zoom.
 
-Kanizsa is implemented locally with three 60° cutout disks, a Cutout rotation range 0–90° (step 5), Align cutouts, radius 32–96 (default 92), and optional inverted outline corners on by default. The 720×512 drawing fits those corners without moving the disks. No upright triangle is drawn; protected central gaps remain white. Reset restores rotation 0, radius 92, outline on and Medium/540. Human calibration of this stronger revision remains pending. See [Kanizsa validation](docs/kanizsa-validation.md) for actual engineering results.
+Kanizsa is implemented with three 60° cutout disks, a Cutout rotation range 0–90° (step 5), Align cutouts, radius 32–96 (default 92), and optional inverted outline corners on by default. The 720×512 drawing fits those corners without moving the disks. No upright triangle is drawn; protected central gaps remain white. Reset restores rotation 0, radius 92, outline on and Medium/540. It is unlisted by owner decision (effect judged too weak); calibration is not pursued. See [Kanizsa validation](docs/kanizsa-validation.md) for actual engineering results.
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 
@@ -64,7 +64,7 @@ The [page validation record](docs/pages-validation.md) covers direct loads, refr
 
 Create `<id>/index.html` with its own title/meta description and a relative module script for `<id>/main.tsx`. Follow either existing entry: compose the feature inside `SiteLayout` with `currentPage` set to its ID, then call `mountPage`. Keep feature geometry/state under `src/illusions/<id>/` and write its spec first.
 
-Add one item (folder ID, navigation name, title and description) to `src/illusions.ts`. That list supplies the home cards, header navigation and Vite HTML inputs automatically; no manual build-config or component-registry entry is needed. Verify the new page directly under both the development and production bases.
+Add one item (folder ID, navigation name, title, description and listed flag) to `src/illusions.ts`. Listing defaults to true; explicit false hides the Home card and header link while retaining the page ID and Vite HTML input. That list supplies discovery and build inputs automatically; no manual build-config or component-registry entry is needed. Verify the new page directly under both the development and production bases.
 
 ## Project files
 
