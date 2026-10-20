@@ -1,6 +1,6 @@
 # Confetti illusion specification
 
-Status: single Fine mesh overlay implemented after specifying removal of the pattern controls. User reports no effect from horizontal/vertical options. Engineering checks pass; perceptual calibration remains pending. Manual screen-reader testing is outside the user's requested scope. Version 1.13, 19 October 2026. See [validation](../confetti-validation.md).
+Status: prototype-inspired square-grid oranges rework implemented after specifying it first. A controlled local A/B identifies the base image as the main rendering difference; the mid-tone green redraw and Medium/450 default were specified before code and are implemented with passing engineering checks. Oranges viewing status: 1 of 2 viewers: effect visible (green to yellowish). Calibration is incomplete. Pages preparation is committed separately; the user has authorized committing this rework. Version 1.16, 20 October 2026. See [validation](../confetti-validation.md).
 
 Depends on [implementation.md](implementation.md). Stable feature ID: `confetti`.
 
@@ -50,7 +50,8 @@ Proposed explanatory copy: “The colored stripes can change how the circles loo
 | `viewingWidth` | allowed maximum display width in CSS pixels | `360` (Medium) |
 | `explanationOpen` | boolean | `false` |
 | `nettingHidden` | boolean | `false` (orange overlay visible on left) |
-| `orangeViewingWidth` | allowed per-image maximum width in CSS pixels | `240` (Compact) |
+| `orangeViewingWidth` | allowed image maximum width in CSS pixels | `450` (Medium) |
+| `orangeImageId` | illustration or available local photo | `illustration` |
 
 The renderer receives visibility and normalized spacing as props and renders no controls. `confettiModel.ts` holds the shared palette, default settings, and pure geometry helpers; its distinct basename avoids conflicts with `Confetti.tsx` on case-insensitive filesystems. Treat palette and disk layout as immutable configuration. The proof swatch MUST use the same disk-fill constant as the renderer.
 
@@ -148,21 +149,23 @@ The drawing is one accessible image; disks and stripe elements are not interacti
 | C13 | Attribution and working source links appear in the explanation. No source images or third-party runtime requests are used. |
 | C14 | Project lint, TypeScript/build, and meaningful geometry/interaction tests pass. |
 | C15 | Image size scales only the whole stimulus and keeps the same source geometry and colors. Reveal preserves the selected size; reset restores Medium. Compact/Medium/Large fit the available screen width. |
-| C16 | The everyday section shows two side-by-side copies of the same locally bundled oranges SVG, sharing the exact image source and rendering attributes. Origin/license are recorded; no mesh is present in the asset. |
-| C17 | Orange netting is a separate SVG on the left only, generated deterministically from named constants and clipped to the fruit bodies using instance-unique IDs. Right has no overlay. No image recoloring, cropping, filtering, or physical-lighting simulation is used. |
-| C18 | Hide netting removes only the overlay. Both images retain the same source, all attributes, document position, and displayed dimensions through repeated toggles. The proof row states both copies use the identical image file. |
-| C19 | The toggle is labeled, keyboard-operable, and exposes its pressed state. Both comparison views have names/descriptions, and the state announcement is accessible without seeing orange. |
-| C20 | Netting visibility/size and the stripe reveal are independent. Shared Reset restores visible Fine mesh, Compact oranges, the stripe defaults, and the closed explanation while retaining focus on Reset. |
-| C21 | Copy identifies the fruit as deliberately greenish/unripe and invites comparison of whether the net makes it look riper/more orange. It labels the original illustration, links to the Confetti explanation and Gegenfurtner (2024), notes viewer/display variation, and distinguishes very fine mesh blending. No actual ripening, retailer-intent, or guaranteed-perception claim is made. |
-| C22 | Unit/component tests verify identical image source, image-attribute invariance, deterministic mesh geometry, keyboard toggle, and integrated reset. Lint/build/tests pass. Chromium at 320 and 1440 CSS pixels verifies both views fit, overlay toggling preserves image bounds, and the local base asset loads. Record results in the validation document. |
-| C23 | Mesh density/line width remain provisional until human comparison at narrow/wide sizes. Any claimed calibration includes mesh as well as stripes; screenshots alone cannot establish either effect. |
-| C24 | At 320/1440 CSS pixel viewports and every orange size, orange strokes are at least 1.5 CSS pixels and clear openings at least 1 CSS pixel. The denser candidate deliberately replaces the earlier 3-pixel opening floor. Tests confirm fruit-clip paths/transforms match the asset, no background pattern is painted, and overlays use unique clip IDs. These floors do not prove assimilation or eliminate mixing. |
-| C25 | One fixed Fine mesh overlay; no Pattern selector, preset registry, pattern state, or unused directional geometry. Hide/show preserves the chosen image size and every image attribute/document-space bound. |
-| C26 | Unit/component checks cover deterministic mesh geometry, unique clips, hide/reset behavior, and shared image identity. Chromium checks all sizes at 320/1440, including CSS stroke floor and preserved image bounds. Record absent/weak perception without claiming calibration. |
+| C16 | The everyday section has one locally bundled image, defaulting to the original illustration. Net visibility states use the identical source and intrinsic attributes; origin/license are documented and no net is baked in. |
+| C17 | A separate full-image square grid uses 6 CSS pixel cells, 1 CSS pixel lines, rgba(245, 90, 0, 0.95), and mix-blend-mode overlay on strands only. The parent isolates blending; the image and Confetti layers use normal blending. No fruit clips, stroke floor, blur, or fade remain. |
+| C18 | Hide netting removes only the overlay; src, all image attributes, document position and displayed dimensions stay invariant. The proof row says both states use the same image file. |
+| C19 | Named figure, stable image description, keyboard-operable Hide netting with pressed state, polite status and visible focus remain. |
+| C20 | Image size/source and net visibility remain independent of the stripe experiment. Shared Reset restores visible square grid, Medium/450 oranges, illustration source, circle defaults and closed explanation, preserving Reset focus. |
+| C21 | Copy identifies the illustrated unripe fruit, explains strand blending as an approximation of a lit net, says skin between strands is untouched, links the study/Confetti explanation, and notes display/size/viewer variation and mixing. No universal effect, exact physical simulation or retailer-intent claim. |
+| C22 | Tests cover source/attribute invariance through keyboard toggles, overlay-only blend mode, fixed CSS geometry, normalization, optional photo fallback and Reset. Lint/tests/build pass. |
+| C23 | Perceptual calibration remains separate. The stronger result reported for the prototype is not proof that the illustration reproduces it. Record weak/absent responses honestly. |
+| C24 | Grid cell 6 CSS px and line 1 CSS px are invariant at all image sizes. Coverage is 1-(5/6)^2 = 11/36, about 30.6%, before alpha/rasterization; full-frame grid, including background. Fractional DPR may cause antialiasing or moire and must be recorded. |
+| C25 | No pattern selector or obsolete diagonal generation, clips, minimum stroke logic, or unused geometry tests. Keep only the one square-grid technique. |
+| C26 | Production preview /OpticEye/ checked in Chromium at 320/1440 CSS widths and DPR 1, 2, and 1.25 or 1.5, all image sizes. Verify stable image bounds on reveal, fixed grid computed styles, no image filter/blend/transition, loaded local image and no network errors/overflow. |
+| C27 | Size choices Compact 240, Medium 450 (default), Large 720 CSS pixel maximum widths; fit available width. Hide/show retains size; invalid sizes and Reset fall back to Medium/450. |
+| C28 | Optional src/assets/oranges-photo.jpg is discovered locally at build time. Illustration always remains the default; Source select appears only if photo exists. Explicit source selection may change src; reveal cannot. Document origin/license before bundling any user photo. No prototype/stock/downloaded photo or remote fallback. |
 
 Automated tests use Vitest, jsdom, React Testing Library, user-event, and jest-dom as specified in the implementation contract. Cover structural and behavioral claims C01–C09. Test controls by accessible roles and assert target geometry before and after reveal. Visual and accessibility checks cover what DOM assertions cannot establish; a screenshot comparison cannot prove the perceptual effect.
 
-Implementation completion requires C01–C11, C13–C22, and C24–C27, including manual engineering checks. C12 and C23 belong to the separate calibration milestone. Broader browser/density coverage is a documented target rather than a mandatory exhaustive matrix.
+Implementation completion requires C01–C11, C13–C22, and C24–C28, including manual engineering checks. C12 and C23 belong to the separate calibration milestone. Broader browser/density coverage is a documented target rather than a mandatory exhaustive matrix.
 
 ## 9. Completion record
 
@@ -170,107 +173,45 @@ Implementation completion requires C01–C11, C13–C22, and C24–C27, includin
 | --- | --- |
 | Reference construction review | Figure 10 inspected; contiguous background stripes confirmed. |
 | Implementation and engineering checks | Denser baseline and viewing-size controls implemented; C10 keyboard/automated interface checks pass. See current checks in [validation](../confetti-validation.md). |
-| Human perceptual calibration | One qualitative observation on the previous baseline; new candidate awaiting human feedback and the complete viewing comparison. |
-| Everyday oranges example | One orange, fruit-clipped Fine mesh overlay and independent size control implemented. All 36 tests, lint/build, and Chromium 320/1440 checks pass. One original local asset; no separate public license chosen. Human calibration remains pending. |
+| Human perceptual calibration | Oranges: 1 of 2 viewers: effect visible, green to yellowish at the default 450px setting. Second viewer and full narrow/wide comparison pending. Circle calibration remains open. |
+| Everyday oranges example | Single-image square grid with isolated strand blending implemented; lint, 36 tests, build and Chromium 320/1440 at DPR 1/1.25/2 pass. Oranges: 1 of 2 viewers: effect visible; calibration incomplete. |
 
 The validation record contains browser/viewport/device-pixel-ratio observations and remaining limitations. Geometry remains radius 34 and thickness ratio 1; spacing is now 2–8/default 3 and display size defaults to Medium. Reference review and screenshots are not perceptual validation of this stimulus. Report “implemented; perceptual calibration pending.” Manual screen-reader testing is outside scope and must not be reported as outstanding project work.
 
 ## 10. Everyday example: oranges and produce netting
 
-### 10.1 Evidence and framing
+### 10.1 Basis, prototype, and scope
 
-Gegenfurtner (2024), *Perceptual ripening of oranges*, describes greenish/unripe oranges viewed through orange netting and an artificial net comparison. [Primary source](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/), [DOI](https://doi.org/10.1177/20416695241258748). Use orange rather than red to match that color family. Our illustrated diamond mesh remains an illustrative construction, not a replication of the study's photographs, lighting, or measured efficacy. Do not assert retailer intent as fact.
+Use D:/projects/test.html as a technique reference only. Its photo has unknown licensing and must not ship. The user authorized a temporary ignored local copy for diagnostic A/B only; remove that copy after comparing and rebuild without it. Keep the square-grid technique, without blur or transition in the shipped version. Gegenfurtner (2024), *Perceptual ripening of oranges*, describes netting/color assimilation and net-fruit interreflections ([paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/), [DOI](https://doi.org/10.1177/20416695241258748)). A real wrapped net is lit with the fruit; overlay blending makes strand color depend on backdrop shading. This is an illustrative approximation of a lit net, not a validated light-transport model, measured assimilation, or the study's exact digital method. Confetti retains strict no-blending construction.
 
-### 10.2 Base image, origin, and license
+### 10.2 Single image and optional photo
 
-No user photo path was provided, so select the original SVG option. Author `src/assets/oranges.svg` specifically for OpticEye: loose, moderately yellow/green oranges on a neutral fixed background, without packaging or net lines. Use a 600 × 400 viewBox and explicit intrinsic dimensions, with bounded simple paths/shapes and fixed shading. No external fonts, scripts, raster embeds, filters, or external references. Hand-optimize for a target of at most 8 KiB; the vector scales without a larger raster download.
+Redraw the original 600 x 400 oranges.svg with 37 smaller fruit in five staggered rows (7/8/7/8/7), mild deterministic pore texture and soft shading. Use saturated mid-tone greens with highlight #9CB850, middle #789B37 and shadow #4B6C29 on a muted dark crate background. Keep the vector under 8 KiB with no photo pixels, external assets, filters or baked net. Record the original-vector revision and palette/scale rationale in its origin note; no separate public license is chosen. One image is shown in one frame; remove the uncovered companion copy. Default source is always Illustration. Both visibility states use the exact same source; proof text: “Both states use the same image file.”
 
-Record “Original SVG illustration authored for OpticEye by Codex, 19 October 2026; no research images or user photos used” in `src/assets/oranges.LICENSE.txt`. License status is “Original project asset; no separate public license chosen.” Remove the earlier automatic CC0 dedication; do not make a public-domain dedication on the user's behalf. This status is separate from the cited paper's license. Import this one file into a shared source constant. Both `<img>` instances MUST use that same source and intrinsic size. Image settings are fixed; no alternate image, image-wide color operation, or overlay baked into the asset is permitted. The asset's color geometry remains unchanged in this revision; only its provenance metadata may be corrected.
+Support an optional owner-supplied src/assets/oranges-photo.jpg through eager local import.meta.glob URL discovery, with no runtime requests to an image host. Add src/assets/oranges-photo.ORIGIN.md recording that no photo is bundled and instructing the owner to record creator, provenance/date, permission/license and any resizing before supplying that path. Do not create a placeholder JPEG or ship the prototype photo, and do not infer its license. The optional photo path is not ignored by Git: reserve it for the owner's photo, committed with provenance/permission. The temporary unknown-license diagnostic has been removed; diagnostic use is not distribution permission. If a local photo exists, offer a native Image source select (Illustration / Your photo); otherwise hide it. Use a generic photograph description/origin and preserve its natural aspect ratio without cropping. Missing/invalid photo selection falls back to Illustration. Parent Confetti owns source choice so shared Reset restores the illustration. Explicit source changes are separate from reveal invariance.
 
-### 10.3 Mesh construction
+### 10.3 Grid and blending construction
 
-Declare `NET_COLOR = '#F27A18'`, `NET_MESH_SPACING = 40`, `NET_LINE_WIDTH = 7`, and `NET_VIEWBOX = { width: 600, height: 400 }`. Values are proposed drawing units requiring calibration, not RGB measurements from the study; no color selector is included in v1.
+Named constants: NET_CELL_SIZE_CSS_PX = 6, NET_LINE_WIDTH_CSS_PX = 1, NET_COLOR = 'rgba(245, 90, 0, 0.95)', NET_BLEND_MODE = 'overlay'. Render a noninteractive absolute CSS grid layer with two hard-stop linear gradients (horizontal and vertical), background-size 6px 6px, origin 0 0, and transparent cell interiors. Full image coverage; no fruit-outline clipping. Use the color's alpha only on strands; no whole-layer opacity, animation, fade, blur, scaling transforms, or filters. A relative isolated frame confines blending to the image backdrop. Keep the image/frame blend normal; mix-blend-mode belongs only to the grid layer. This is the documented oranges-only exception to the rendering rule.
 
-Generate two diagonal line families from `y = 0` to `y = 400` using offsets `-400 + i * 40` for integer `i` from 0 through `ceil(1000 / 40)`. For each offset `b`, the ascending family joins `(b, 0)` to `(b + 400, 400)`; the descending family joins `(b + 400, 0)` to `(b, 400)`. Identical inputs produce identical geometry in a bounded 52-line array; no randomness, animation, opacity blending, or phase changes.
+Each 6 x 6 CSS pixel cell has a 5 x 5 transparent interior. Geometric strand coverage is 11/36 (30.6%), constant across selected sizes; it is not the old ~55% Compact diagonal coverage. Alpha and antialiasing affect actual raster pixels. In exact transparent interiors, output image pixels are unchanged; strand pixels deliberately blend. No 1.5px stroke floor or diagonal SVG helper remains. At DPR 1/1.25/2, a 1px strand nominally occupies 1/1.25/2 device pixels; fractional scaling may cause moire. Do not hide this with blur.
 
-Render as a separate, noninteractive SVG over only the left image, with the named orange stroke, line width 7, fill none, opacity 1, and pointer events disabled. Use the same 3:2 geometry as the base image. Clip the line group to the union of six fruit body paths: exactly the base asset's `orange` body path and each of its six placement transforms. Store these in named constants and test them against the bundled SVG so the clip cannot drift. Leaves, stems, shadows, and the neutral background remain outside the net. Clip IDs MUST be unique per overlay instance. No overlay gradients, shadows, filters, or image modifications are allowed. The SVG is decorative to assistive technology; describe the composite view through its figure caption and image description.
+### 10.4 Layout, controls, and copy
 
-At image width `W`, stroke width is `7W/600`; perpendicular line-center spacing is `40W/(600*sqrt(2))`. Clear cell width between neighboring parallel strokes is that spacing minus the stroke width. At the required widths:
+One named figure after the Confetti explanation; one image frame capped by the selected Compact 240 / Medium 450 (default) / Large 720 CSS width, fitting the available page width. At 320 viewport widths are 240/288/288; at 1440, 240/450/720. Keep the 3:2 ratio for the default illustration; optional photo uses its native aspect ratio. Caption outside the frame reserves space for net status. No second reference copy, gap constant, or pattern selector.
 
-| Viewport | Image width | Stroke | Perpendicular spacing | Clear opening |
-| --- | --- | --- | --- | --- |
-| 320 CSS px | 138 CSS px | 1.61 CSS px | 6.51 CSS px | 4.90 CSS px |
-| 1440 CSS px | 354 CSS px | 4.13 CSS px | 16.69 CSS px | 12.56 CSS px |
+Hide netting is the same stable native button, aria-pressed true when hidden. Remove the overlay immediately without modifying any image attribute, document bounds, selected source/size, circle settings or disclosure. Re-show restores the same grid. Status: “Orange netting shown.” / “Netting hidden. Same image, uncovered.” Shared Reset restores visible overlay, Medium/450 and Illustration plus all circle defaults. Keyboard labels/focus remain; no manual screen-reader requirement.
 
-The earlier 12/2 mesh had a subpixel stroke on phones. The new 40/7 choice reduces that confound, but coarser visible strokes alone do not establish assimilation. Antialiasing and physical color mixing are not eliminated, and very small displays/zoom settings can still reduce line sizes.
+Copy invites toggling and comparing the skin between strands, explains that strands are blended with the fruit's lighting like a lit net (an approximation), that the skin between strands is untouched, and that effect varies with display, size and viewer. Changing image size offers a viewing-scale comparison, not a physically exact distance simulation: CSS grid spacing stays fixed while the image scales. Warn that fine patterns can mix colors. Retain the study link and Back to the Confetti explanation.
 
-### 10.4 Layout and behavior
+### 10.5 Verification
 
-- Add a section titled “At the produce aisle” after the Confetti explanation. Keep a two-column comparison at both required widths, with a 12-pixel gap and at most 720 CSS pixels total width. At 320 pixels with page gutters, each image is 138 × 92 CSS pixels. Both images MUST have the same aspect ratio and display size; captions sit outside the image frames.
-- Left starts with the orange mesh and caption “Orange netting”; right is always uncovered with caption “No netting.” When hidden, the left caption becomes “Netting hidden.” Use one base image and a stable, separately positioned overlay so toggling cannot reflow either image.
-- The native button label remains “Hide netting”; `aria-pressed` is true when hidden. Repeated activation alternates the overlay. State feedback must distinguish “Orange netting shown” and “Netting hidden.” The proof row always says “Both copies use the identical image file.” It must not resize either frame.
-- Parent Confetti state owns `nettingHidden`; pass visibility and callbacks into the example. Its toggle MUST NOT affect stripes, image-size choice, or the explanation. Shared Reset sets it to false. Do not introduce an extra reset button or duplicate source of truth.
-- Give both images a stable descriptive alternative and contextual `aria-describedby` references; use named figures/captions. Image attributes must not change on net toggles. Dynamic context belongs in the caption/status, not the `<img>` attributes.
-- Provide a link to the existing Confetti explanation button's stable ID. Activating it opens that explanation and navigates to it; it works by keyboard without routing or runtime requests.
+C16–C28 define required tests and production preview checks. Exercise all image sizes, keyboard reveal, hidden-size changes and Reset at both viewports and DPR 1/2/1.25. Compare complete image attributes and document-space rectangles before/after reveal. Inspect full-image blend isolation and computed 6px/1px geometry. Capture visible/hidden screenshots and sample transparent cell interiors for unchanged pixels; fractional-DPR antialiasing is expected near strand boundaries. Record raster observations separately from human assimilation. Keep validation history concise; Git retains earlier construction rounds. The first viewing result is recorded in validation; the user has authorized committing the rework, without pushing.
 
-Proposed copy: “These oranges are deliberately illustrated as greenish and unripe, like the fruit in the study. Does the orange netting make them look riper or more orange? Compare the uncovered view, then hide the net. This illustrates color assimilation; very fine meshes can instead produce simple color mixing. The effect varies with display and viewer.” Include the paper citation and an in-page Confetti explanation link, and retain the original-illustration label. Do not state that the viewer necessarily perceives a change.
+### 10.6 Controlled image diagnostic and selected candidate
 
-### 10.5 Validation and calibration
+Before changing the drawing, the local prototype photo was temporarily copied to the ignored optional path, without a commit or upload. A/B cases in the app: illustration at 240px; photo at 240px; photo at 450px; photo at 450px plus diagnostic image-only blur(0.4px). Compare the last with test.html at the same dimensions and grid. Remove the copy and rebuild final output without any JPEG. No diagnostic blur is retained in code.
 
-Tests assert both image sources match, snapshot the complete image attributes before/after overlay toggles, compare repeated mesh generation, verify line color/width and bounds, and exercise shared Reset after both demos are changed. Chromium checks at 320/1440 additionally compare document-space image rectangles, intrinsic loading dimensions, and horizontal overflow. Inspect visible/hidden states and record browser/DPR, displayed size, and mesh values in `docs/confetti-validation.md`. Local asset loading is allowed; no remote image/font/script requests are allowed.
+The matched 450px/blur app and prototype had identical interior screenshot pixels, excluding 4px at frame edges. The photo at 450px without blur differed from the blurred rendering by less than 0.6 RGB levels/channel on average: blur mostly softened fine detail. Replacing the pale drawing changed sampled strand hue substantially (about 47 degrees to 38 degrees in this sample), while 240-to-450 scaling barely changed that hue. These HSV/screenshot observations establish a rendering cause, not perceived assimilation. The drawing's pale base makes strands more yellow; the photo's darker green regions yield more orange strands. The photo contains green fruit on the left and already-yellow fruit on the right, so only green-side samples informed this comparison.
 
-The 40-unit spacing and 7-unit line width are provisional after the user's report that the earlier example was difficult to perceive. Record weak/mixed-color results honestly and tune named constants deliberately; do not change the oranges image between states to manufacture an effect. Mesh calibration has the same human-viewing requirement as stripe calibration.
-
-### 10.6 Controlled overlay variations (supersedes the single-pattern default)
-
-Historical candidate: section 10.7 supersedes the numeric presets, base shading, and maximum pair width below and in 10.2–10.4. Reveal and clipping invariants remain required.
-
-The user reported no discernible illusion with the corrected orange mesh. Add an experimental Pattern selector while keeping the exact base image, orange color, fruit-only clip, and uncovered reference. The study includes an artificial Munker-style net; our directional stripe options are inspired comparisons, not exact reproductions or proven stronger stimuli. Do not claim that a minimum line width removes ordinary color mixing.
-
-| ID | Label | Geometry | Spacing | Nominal line width | Line count |
-| --- | --- | --- | --- | --- | --- |
-| `mesh` | Diamond mesh | Existing two diagonal families | 40 | 7 | 52 |
-| `fine-mesh` | Fine mesh (default) | Same families, denser/thinner | 28 | 4 | 74 |
-| `horizontal` | Horizontal stripes | Lines from x=0 to 600 at y=24i, i=0..floor(400/24) | 24 | 7 | 17 |
-| `vertical` | Vertical stripes | Lines from y=0 to 400 at x=24i, i=0..floor(600/24) | 24 | 7 | 26 |
-
-All spacings and nominal widths are drawing units in the unchanged 600 × 400 coordinate system. Use explicit typed preset constants and deterministic geometry. The existing 40/7 helper remains the Diamond mesh construction. Invalid pattern IDs normalize to `fine-mesh` before lookup.
-
-Use a named `NET_MIN_STROKE_CSS_PX = 1.5` floor. For image width W and preset nominal line width L, rendered stroke is `max(1.5, L*W/600)` CSS pixels. Implement with an inline-size CSS container on the left image frame, container-relative stroke width, and `vector-effect="non-scaling-stroke"` on each line. The image itself remains unchanged; no resize observer, state-dependent image size, filters, or animation is needed. Verify actual computed stroke values in Chromium; nominal SVG attributes alone are insufficient.
-
-| Pattern | Stroke at 138 / 354 CSS px image widths | Clear opening at 138 / 354 CSS px |
-| --- | --- | --- |
-| Diamond mesh | 1.61 / 4.13 px | 4.90 / 12.56 px |
-| Fine mesh | 1.50 / 2.36 px | 3.05 / 9.32 px |
-| Horizontal or vertical | 1.61 / 4.13 px | 3.91 / 10.03 px |
-
-A labeled native select below the image pair offers the four presets. Captions reserve enough room for wrapped pattern names, so switching does not shift the images. The visible left caption names the selected orange pattern; the hidden caption remains Netting hidden. Hide netting keeps its label and pressed-state semantics for all patterns. Parent Confetti owns both `orangePattern` and visibility; Reset restores Fine mesh and visible overlay. Selection while hidden must not reveal the overlay or reset other settings.
-
-Explain that users can compare each pattern with the uncovered image and examine skin between strands. An absent effect is a valid observation; no preset is labeled best, working, or calibrated. The unchanged illustration may remain an ineffective demonstration for a given viewer. Update the validation record with actual engineering checks and leave perceptual calibration open.
-
-### 10.7 Denser patterns, lighter fruit, and size comparison
-
-The user still reports no noticeable shift and requests more lines/smaller gaps. Revise these experimental parameters together; this is a candidate, not an attribution of efficacy or brightness matching to the study. Preserve orange `#F27A18`, fruit outlines, source identity, and overlay-only reveal.
-
-- Revise the single bundled SVG's skin stops to light yellow-green `#DEDC91`, `#D6D47A` (middle), and `#CDCD73`. Reduce pore opacity to .12. Both copies always load this same revised asset; no alternate pre/post image or runtime recoloring.
-- Diamond mesh: spacing 24, nominal width 7, 86 generated lines. Fine mesh (default): spacing 16, nominal width 3, 128 lines. Horizontal/Vertical stripes: spacing 12, nominal width 4, respectively 34/51 lines. Keep deterministic geometry and the 1.5 CSS pixel stroke floor. Update the named Diamond mesh spacing constant to 24.
-- Add a labeled native **Oranges image size** select: Compact 240 (default), Medium 360, Large 720 CSS pixel maximum width **per image**. The pair's maximum width is twice the selected value plus its fixed 12-pixel gap, capped by available page width. Both images scale together in their existing two columns. Invalid values fall back to Compact. Parent owns this independent state; size selection never changes pattern/visibility or Confetti controls. Size changes while hidden are allowed, and re-show preserves size. Shared Reset restores Compact and visible Fine mesh.
-- At 320 viewport all sizes fit to 138 × 92 per image. At 1440 viewport Compact is 240 × 160, Medium 360 × 240, and Large fits to 538 × 358.67 within the 1088-pixel page content. Explicit size changes may resize the pair; toggles and pattern changes at a selected size must preserve every image attribute and document-space rectangle.
-
-Rendered stroke remains `max(1.5, L*W/600)`; clear opening is `s*W/(600*sqrt(2)) - stroke` for mesh, `s*W/600 - stroke` for straight stripes.
-
-| Pattern | Stroke at W=138 / W=240 | Clear opening at W=138 / W=240 |
-| --- | --- | --- |
-| Diamond mesh | 1.61 / 2.80 CSS px | 2.29 / 3.99 CSS px |
-| Fine mesh | 1.50 / 1.50 CSS px | 1.10 / 3.03 CSS px |
-| Horizontal/Vertical | 1.50 / 1.60 CSS px | 1.26 / 3.20 CSS px |
-
-Copy invites users to try sizes at usual page zoom and inspect skin between strands up close. Warn that dense patterns may become plain color mixing; distinct strands and the stroke floor do not exclude it. A flat illustration cannot reproduce physical light bouncing between fruit and netting. Do not promise a stronger effect. Record each parameter revision and the user's negative observation in validation.
-
-Acceptance C27: tests cover all size choices and invalid fallback, unchanged image attributes, independent circle settings, size preservation through hide/show, and Reset to Compact. Chromium at 320/1440 checks all sizes, actual stroke widths/openings, image bounds on toggles, image loading and overflow. Inspect representative screenshots. Human calibration remains pending.
-
-### 10.8 Single mesh overlay (current contract)
-
-The user requests no multiple patterns and reports that horizontal and vertical stripes have no effect. Remove the Pattern selector and all alternative pattern generation, registry, props, state, fallback, and Reset handling. Sections 10.3 and 10.6–10.7 retain the iteration history; this section supersedes their multiple-pattern requirements and numeric mesh constants.
-
-Keep the existing Fine mesh exactly: named `NET_MESH_SPACING = 16`, `NET_LINE_WIDTH = 3`, `NET_COLOR = '#F27A18'`, 128 deterministic diagonal lines, and the existing 1.5 CSS pixel stroke floor. `createNetLines()` directly generates this one mesh. `ProduceNetting` needs no pattern prop. Keep caption “Orange fine mesh” and corresponding status. Copy should invite size comparison without referring to selecting patterns. The base illustration, size picker, clipping, hide/show, proof row, and Reset defaults are unchanged. Preserving this overlay does not establish perceptual success.
+Use Medium/450 as the next default because it matches the reference display scale and retains more photo-like detail in the larger crowd of fruit; it is a candidate, not a human-proven best size. Keep Compact and Large available. Keep the grid/color/blend unchanged, and keep transparent interiors untouched by the overlay (allowing previously recorded raster rounding). Confirm the new asset is self-contained and has more/smaller green fruit; tests cover the new size defaults/fallback and Reset. Record current Chromium results at 320/1440 (including fractional DPR) and record the viewing result before the authorized commit.

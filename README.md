@@ -1,6 +1,6 @@
 # OpticEye
 
-A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. The Confetti experience includes the circle experiment and an everyday illustration of deliberately greenish/unripe oranges with and without orange produce netting. Adjust stripe spacing and image size, reveal the targets, and explore the explanations and research. The current calibration candidate starts with finer stripes and a smaller image so users can compare viewing conditions without changing page zoom.
+A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. The Confetti experience includes the circle experiment and an everyday illustration of deliberately greenish/unripe oranges with removable orange produce netting. Adjust stripe spacing and image size, reveal the targets, and explore the explanations and research. The current calibration candidate starts with finer stripes and a smaller image so users can compare viewing conditions without changing page zoom.
 
 ## Development
 
@@ -47,7 +47,8 @@ See the [validation record](docs/confetti-validation.md) for browser checks and 
 
 - `src/App.tsx`: page shell.
 - `src/illusions/confetti/`: experience, SVG renderer, pure geometry/metadata, and tests.
-- `src/assets/oranges.svg` and `oranges.LICENSE.txt`: one original locally bundled light yellow-green illustration reused in both views, with origin and license status recorded (no separate public license chosen). A single orange Fine mesh overlay is clipped to fruit bodies. Oranges image size independently resizes both views. Reset restores visible netting and Compact oranges. Perceptual calibration remains open.
+- `src/assets/oranges.svg` and `oranges.LICENSE.txt`: original textured illustration of 37 smaller, mid-tone green fruit (no separate public license chosen), shown in one frame. The square net retains 1 CSS pixel strands in 6 CSS pixel cells, blending only strands with the image. Hide netting leaves the same image underneath. Reset restores Medium (450px maximum), Illustration and visible netting. Perceptual calibration remains open.
+- Optional `src/assets/oranges-photo.jpg`: reserved for your own optimized photo, which can be committed with its origin/permission record in `src/assets/oranges-photo.ORIGIN.md`. Restart development or rebuild; an Image source selector then offers Your photo, while Illustration remains the default. No photo is currently supplied and no prototype/downloaded image is bundled. The temporary diagnostic photo was removed.
 - `src/index.css`: Tailwind import and global styles.
 - `AGENTS.md`: guidance for future contributors and coding agents.
 - [Illusion research](docs/illusion-research.md): sourced candidates, rendering approaches, and reveal ideas.

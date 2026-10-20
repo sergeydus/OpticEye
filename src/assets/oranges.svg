@@ -1,33 +1,66 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
-  <title>Greenish, unripe oranges — original OpticEye illustration</title>
-  <metadata>Original illustration authored for OpticEye by Codex, 2026-10-19. No separate public license chosen. No source photographs or netting.</metadata>
+  <title>Unripe green oranges — original OpticEye illustration</title>
+  <metadata>Original vector illustration authored for OpticEye by Codex; revised 2026-10-20. No separate public license chosen. No photograph pixels or netting embedded.</metadata>
   <defs>
-    <radialGradient id="skin" cx="32%" cy="24%" r="80%">
-      <stop stop-color="#DEDC91"/>
-      <stop offset=".55" stop-color="#D6D47A"/>
-      <stop offset="1" stop-color="#CDCD73"/>
+    <radialGradient id="skin" cx="34%" cy="28%" r="76%">
+      <stop stop-color="#9CB850"/>
+      <stop offset=".55" stop-color="#789B37"/>
+      <stop offset="1" stop-color="#4B6C29"/>
     </radialGradient>
+    <pattern id="pores" width="11" height="13" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="3" r=".7" fill="#294D22" opacity=".23"/>
+      <circle cx="8" cy="2" r=".45" fill="#DAE39C" opacity=".24"/>
+      <circle cx="6" cy="8" r=".8" fill="#35591E" opacity=".18"/>
+      <circle cx="1" cy="11" r=".5" fill="#E0E8B3" opacity=".2"/>
+      <circle cx="10" cy="12" r=".55" fill="#35591E" opacity=".15"/>
+    </pattern>
+    <path id="body" d="M-39-2C-40-26-23-40 0-40S41-24 40 0 23 40 0 40-40 23-39-2Z"/>
     <g id="orange">
-      <ellipse cy="64" rx="68" ry="17" fill="#beb39a" opacity=".4"/>
-      <path d="M-76-4C-76-47-44-77 0-77S77-46 77-3 45 76 1 77-76 42-76-4Z" fill="url(#skin)"/>
-      <path d="M-13-67Q0-83 14-67L5-60-7-60Z" fill="#757f42"/>
-      <path d="M0-66 4-81" stroke="#6c6340" stroke-width="5" stroke-linecap="round"/>
-      <path d="M5-73Q31-94 44-73 24-56 5-73Z" fill="#768549"/>
-      <g fill="#8d8d47" opacity=".12">
-        <circle cx="-43" cy="-26" r="2"/><circle cx="-28" cy="-39" r="1.5"/>
-        <circle cx="-6" cy="-33" r="2"/><circle cx="24" cy="-30" r="1.5"/>
-        <circle cx="42" cy="-5" r="2"/><circle cx="-49" cy="8" r="1.5"/>
-        <circle cx="-18" cy="8" r="2"/><circle cx="10" cy="-6" r="1.5"/>
-        <circle cx="-29" cy="36" r="1.5"/><circle cx="4" cy="33" r="2"/>
-        <circle cx="29" cy="42" r="1.5"/><circle cx="45" cy="24" r="2"/>
-      </g>
+      <ellipse cx="4" cy="7" rx="42" ry="40" fill="#13291D" opacity=".55"/>
+      <use href="#body" fill="url(#skin)"/>
+      <use href="#body" fill="url(#pores)"/>
+      <path d="M-24-12Q-14-30 3-27-12-22-24-12Z" fill="#DBDD8C" opacity=".13"/>
+      <path d="M-6-33 0-36 5-32 2-28-3-29Z" fill="#48632C"/>
+      <path d="M0-32 2-39" stroke="#6F693F" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M2-35Q11-44 17-36 10-29 2-35Z" fill="#3C632D"/>
     </g>
   </defs>
-  <path fill="#f5f0e5" d="M0 0H600V400H0Z"/>
-  <use href="#orange" transform="translate(180 132) rotate(-18)"/>
-  <use href="#orange" transform="translate(320 125) rotate(12)"/>
-  <use href="#orange" transform="translate(460 145) rotate(25)"/>
-  <use href="#orange" transform="translate(130 265) rotate(-24)"/>
-  <use href="#orange" transform="translate(280 260) rotate(8)"/>
-  <use href="#orange" transform="translate(430 280) rotate(-6)"/>
+  <path fill="#35483A" d="M0 0H600V400H0Z"/>
+  <use href="#orange" transform="translate(45 36) rotate(-14)"/>
+  <use href="#orange" transform="translate(130 36) rotate(21)"/>
+  <use href="#orange" transform="translate(215 36) rotate(-32)"/>
+  <use href="#orange" transform="translate(300 36) rotate(8)"/>
+  <use href="#orange" transform="translate(385 36) rotate(35)"/>
+  <use href="#orange" transform="translate(470 36) rotate(-9)"/>
+  <use href="#orange" transform="translate(555 36) rotate(17)"/>
+  <use href="#orange" transform="translate(3 117) rotate(12)"/>
+  <use href="#orange" transform="translate(88 117) rotate(-25)"/>
+  <use href="#orange" transform="translate(173 117) rotate(31)"/>
+  <use href="#orange" transform="translate(258 117) rotate(-8)"/>
+  <use href="#orange" transform="translate(343 117) rotate(24)"/>
+  <use href="#orange" transform="translate(428 117) rotate(-35)"/>
+  <use href="#orange" transform="translate(513 117) rotate(5)"/>
+  <use href="#orange" transform="translate(598 117) rotate(-18)"/>
+  <use href="#orange" transform="translate(45 198) rotate(27)"/>
+  <use href="#orange" transform="translate(130 198) rotate(-11)"/>
+  <use href="#orange" transform="translate(215 198) rotate(38)"/>
+  <use href="#orange" transform="translate(300 198) rotate(-23)"/>
+  <use href="#orange" transform="translate(385 198) rotate(9)"/>
+  <use href="#orange" transform="translate(470 198) rotate(-31)"/>
+  <use href="#orange" transform="translate(555 198) rotate(16)"/>
+  <use href="#orange" transform="translate(3 279) rotate(-21)"/>
+  <use href="#orange" transform="translate(88 279) rotate(34)"/>
+  <use href="#orange" transform="translate(173 279) rotate(-7)"/>
+  <use href="#orange" transform="translate(258 279) rotate(19)"/>
+  <use href="#orange" transform="translate(343 279) rotate(-36)"/>
+  <use href="#orange" transform="translate(428 279) rotate(4)"/>
+  <use href="#orange" transform="translate(513 279) rotate(-15)"/>
+  <use href="#orange" transform="translate(598 279) rotate(28)"/>
+  <use href="#orange" transform="translate(45 360) rotate(13)"/>
+  <use href="#orange" transform="translate(130 360) rotate(-28)"/>
+  <use href="#orange" transform="translate(215 360) rotate(7)"/>
+  <use href="#orange" transform="translate(300 360) rotate(32)"/>
+  <use href="#orange" transform="translate(385 360) rotate(-17)"/>
+  <use href="#orange" transform="translate(470 360) rotate(22)"/>
+  <use href="#orange" transform="translate(555 360) rotate(-5)"/>
 </svg>

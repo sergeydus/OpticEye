@@ -4,189 +4,168 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import Confetti from './Confetti'
-import ProduceNetting from './ProduceNetting'
-import { createNetLines, FRUIT_BODY_PATH, FRUIT_TRANSFORMS, NET_COLOR, NET_LINE_WIDTH, NET_MESH_SPACING, NET_MIN_STROKE_CSS_PX, normalizeOrangesViewingWidth, ORANGES_IMAGE } from './orangesModel'
+import { getOrangesImage, NET_BLEND_MODE, NET_CELL_SIZE_CSS_PX, NET_COLOR, NET_LINE_WIDTH_CSS_PX, normalizeOrangesViewingWidth, ORANGES_IMAGE, ORANGES_PHOTO_URL } from './orangesModel'
 
-function images() {
-  return within(screen.getByRole('region', { name: 'At the produce aisle' })).getAllByRole('img')
+function section() {
+  return screen.getByRole('region', { name: 'At the produce aisle' })
 }
-
+function image() {
+  return within(section()).getByRole('img')
+}
 function attributes(element: Element) {
   return Object.fromEntries(Array.from(element.attributes, (attribute) => [attribute.name, attribute.value]))
 }
 
-describe('Produce-netting construction', () => {
-  it('generates the same bounded, evenly spaced diamond mesh on repeated calls', () => {
-    const lines = createNetLines()
-    expect(lines).toEqual(createNetLines())
-    expect(lines).toHaveLength(128)
-    expect(new Set(lines.map((line) => line.id)).size).toBe(lines.length)
-    for (const line of lines) {
-      expect(line.y1).toBe(0)
-      expect(line.y2).toBe(400)
-      expect(Math.abs(line.x2 - line.x1)).toBe(400)
-      expect([line.x1, line.x2].every(Number.isFinite)).toBe(true)
-      expect(Math.min(line.x1, line.x2)).toBeGreaterThanOrEqual(-400)
-      expect(Math.max(line.x1, line.x2)).toBeLessThanOrEqual(1024)
-    }
-    const ascending = lines.filter((line) => line.x2 > line.x1)
-    for (let index = 1; index < ascending.length; index++) {
-      expect(ascending[index].x1 - ascending[index - 1].x1).toBe(16)
-    }
-  })
-
-  it('bundles a small original SVG without embedded netting, scripts, filters, or external assets', () => {
+describe('Oranges source and grid construction', () => {
+  it('bundles the original self-contained illustration with provenance and no baked net', () => {
     expect(new Blob([orangesSource]).size).toBeLessThanOrEqual(8192)
-    const document = new DOMParser().parseFromString(orangesSource, 'image/svg+xml')
-    expect(document.querySelector('parsererror')).toBeNull()
-    expect(document.documentElement.getAttribute('viewBox')).toBe('0 0 600 400')
-    expect(document.querySelector('image, script, filter, line')).toBeNull()
-    expect(document.querySelector(`[stroke="${NET_COLOR}"]`)).toBeNull()
-    for (const reference of document.querySelectorAll('[href]')) {
-      expect(reference.getAttribute('href')).toMatch(/^#/)
-    }
-    expect(licenseSource).toContain('License status: No separate public license chosen.')
-    expect(licenseSource).not.toContain('SPDX-License-Identifier: CC0-1.0')
-    expect(licenseSource).toContain('Original SVG illustration authored for OpticEye')
-  })
-
-  it('keeps visible strokes and open cells at the supported display sizes', () => {
-    for (const width of [138, 240, 360, 538, 720]) {
-      const scale = width / 600
-      const strokeWidth = Math.max(NET_MIN_STROKE_CSS_PX, NET_LINE_WIDTH * scale)
-      const clearOpening = NET_MESH_SPACING * scale / Math.sqrt(2) - strokeWidth
-      expect(strokeWidth).toBeGreaterThanOrEqual(1.5)
-      expect(clearOpening).toBeGreaterThanOrEqual(1)
-    }
-  })
-
-  it('accepts only supported orange viewing sizes and falls back to Compact', () => {
-    for (const width of [240, 360, 720]) expect(normalizeOrangesViewingWidth(width)).toBe(width)
-    for (const width of [0, -1, 500, Infinity, NaN]) expect(normalizeOrangesViewingWidth(width)).toBe(240)
-  })
-
-  it('clips every instance to the exact fruit bodies and transforms of the shared illustration', () => {
     const source = new DOMParser().parseFromString(orangesSource, 'image/svg+xml')
-    expect(source.querySelector('#orange > path')!.getAttribute('d')).toBe(FRUIT_BODY_PATH)
-    expect(Array.from(source.querySelectorAll('use'), (node) => node.getAttribute('transform'))).toEqual([...FRUIT_TRANSFORMS])
-    const { container } = render(<><ProduceNetting /><ProduceNetting /></>)
-    const clips = Array.from(container.querySelectorAll('clipPath'))
-    expect(clips).toHaveLength(2)
-    expect(clips[0].id).not.toBe(clips[1].id)
-    for (const overlay of container.querySelectorAll('[data-layer="produce-netting"]')) {
-      const clip = overlay.querySelector('clipPath')!
-      expect(overlay.querySelector('g')).toHaveAttribute('clip-path', `url(#${clip.id})`)
-      const paths = Array.from(clip.querySelectorAll('path'))
-      expect(paths).toHaveLength(6)
-      expect(paths.map((path) => path.getAttribute('transform'))).toEqual([...FRUIT_TRANSFORMS])
-      expect(paths.every((path) => path.getAttribute('d') === FRUIT_BODY_PATH)).toBe(true)
-    }
+    expect(source.querySelector('parsererror, image, script, filter, line')).toBeNull()
+    expect(source.documentElement.getAttribute('viewBox')).toBe('0 0 600 400')
+    expect(source.querySelectorAll('use[href="#orange"]').length).toBeGreaterThanOrEqual(30)
+    expect(source.querySelector('pattern circle')).not.toBeNull()
+    const middle = source.querySelector('#skin stop[offset=".55"]')!.getAttribute('stop-color')!
+    const [red, green, blue] = [1, 3, 5].map((offset) => parseInt(middle.slice(offset, offset + 2), 16))
+    expect(green).toBeGreaterThan(red)
+    expect(green).toBeGreaterThan(blue)
+    expect(Math.max(red, green, blue)).toBeLessThan(180)
+    for (const reference of source.querySelectorAll('[href]')) expect(reference.getAttribute('href')).toMatch(/^#/)
+    expect(licenseSource).toContain('Original SVG illustration authored for OpticEye')
+    expect(licenseSource).toContain('License status: No separate public license chosen.')
+  })
+
+  it('normalizes viewing sizes and falls back to Medium at the reference width', () => {
+    for (const width of [240, 450, 720]) expect(normalizeOrangesViewingWidth(width)).toBe(width)
+    for (const width of [0, -1, 360, 500, Infinity, NaN]) expect(normalizeOrangesViewingWidth(width)).toBe(450)
+  })
+
+  it('keeps illustration as default and safely resolves an optional local photo', () => {
+    expect(getOrangesImage('illustration').src).toBe(ORANGES_IMAGE)
+    expect(getOrangesImage('photo', '').id).toBe('illustration')
+    expect(getOrangesImage('invalid', '/owner-photo.jpg').id).toBe('illustration')
+    expect(getOrangesImage('photo', '/owner-photo.jpg')).toMatchObject({ id: 'photo', src: '/owner-photo.jpg', width: undefined, height: undefined })
+  })
+
+  it('uses one full-image square grid with fixed CSS cells and blending only on its strands', () => {
+    const { container } = render(<Confetti />)
+    const grid = section().querySelector('[data-layer="produce-netting"]') as HTMLElement
+    expect(NET_CELL_SIZE_CSS_PX).toBe(6)
+    expect(NET_LINE_WIDTH_CSS_PX).toBe(1)
+    expect(NET_COLOR).toBe('rgba(245, 90, 0, 0.95)')
+    expect(NET_BLEND_MODE).toBe('overlay')
+    expect(grid).toHaveStyle({ backgroundSize: '6px 6px', mixBlendMode: 'overlay' })
+    expect(grid.style.backgroundPosition).toBe('0px 0px')
+    expect(grid.style.backgroundImage).toContain('1px')
+    expect(grid.style.backgroundImage).toContain('transparent 1px')
+    expect(grid.style.backgroundImage).toContain('90deg')
+    expect(grid).toHaveAttribute('aria-hidden', 'true')
+    expect(grid).toHaveClass('absolute', 'inset-0', 'pointer-events-none')
+    expect(grid.querySelector('svg, clipPath, line')).toBeNull()
+    expect(section().querySelector('[data-orange-frame]')).toHaveClass('isolate')
+    expect(container.querySelectorAll('[style*="mix-blend-mode"]')).toHaveLength(1)
+    expect(image().style.filter).toBe('')
+    expect(image().style.mixBlendMode).toBe('')
+    expect(grid.style.filter).toBe('')
+    expect(grid.style.transition).toBe('')
   })
 })
 
-describe('Everyday oranges comparison', () => {
-  it('uses the identical local image in both named views and puts the separate mesh on the left only', () => {
+describe('Single-image oranges comparison', () => {
+  it('starts with the illustration, one named figure and the same-image proof', () => {
     render(<Confetti />)
-    const [leftImage, rightImage] = images()
-    expect(leftImage).toHaveAttribute('src', ORANGES_IMAGE)
-    expect(rightImage).toHaveAttribute('src', leftImage.getAttribute('src'))
-    expect(leftImage).toHaveAttribute('width', '600')
-    expect(rightImage).toHaveAttribute('height', '400')
-    expect(leftImage).toHaveAccessibleDescription('Orange fine mesh')
-    expect(rightImage).toHaveAccessibleDescription('No netting')
-    const left = screen.getByRole('figure', { name: 'Greenish oranges with removable orange netting' })
-    const right = screen.getByRole('figure', { name: 'Greenish oranges without netting' })
-    const overlay = left.querySelector('[data-layer="produce-netting"]')!
-    expect(overlay).toHaveAttribute('stroke', '#F27A18')
-    expect(overlay).toHaveAttribute('stroke-width', '3')
-    expect(overlay.getAttribute('style')).toContain('max(1.5px,')
-    expect(overlay).toHaveAttribute('aria-hidden', 'true')
-    expect(overlay.querySelectorAll('line')).toHaveLength(128)
-    expect(Array.from(overlay.querySelectorAll('line')).every((line) => line.getAttribute('vector-effect') === 'non-scaling-stroke')).toBe(true)
-    expect(right.querySelector('svg')).toBeNull()
-    expect(screen.getByText('Both copies use the identical image file.')).toBeVisible()
+    expect(within(section()).getAllByRole('img')).toHaveLength(1)
+    expect(screen.getByRole('figure', { name: 'Oranges with removable orange netting' })).toBeVisible()
+    expect(image()).toHaveAttribute('src', ORANGES_IMAGE)
+    expect(image()).toHaveAttribute('width', '600')
+    expect(image()).toHaveAttribute('height', '400')
+    expect(image()).toHaveAccessibleDescription('Orange netting')
+    expect(screen.getByText('Both states use the same image file.')).toBeVisible()
     expect(screen.queryByRole('combobox', { name: 'Pattern' })).toBeNull()
+    expect(Boolean(screen.queryByRole('combobox', { name: 'Image source' }))).toBe(Boolean(ORANGES_PHOTO_URL))
   })
 
-  it('removes only the overlay with keyboard input and preserves every image attribute through repeated toggles', async () => {
+  it('removes only the grid by keyboard without changing or replacing the image', async () => {
     const user = userEvent.setup()
     const { container } = render(<Confetti />)
-    const before = images().map(attributes)
+    const original = image()
+    const before = attributes(original)
     const toggle = screen.getByRole('button', { name: 'Hide netting' })
     toggle.focus()
     await user.keyboard(' ')
     expect(toggle).toHaveFocus()
     expect(toggle).toHaveAttribute('aria-pressed', 'true')
-    expect(container.querySelector('[data-layer="produce-netting"]')).toBeNull()
-    expect(images().map(attributes)).toEqual(before)
-    expect(images()[0]).toHaveAccessibleDescription('Netting hidden')
+    expect(section().querySelector('[data-layer="produce-netting"]')).toBeNull()
+    expect(image()).toBe(original)
+    expect(attributes(image())).toEqual(before)
+    expect(image()).toHaveAccessibleDescription('Netting hidden')
     expect(container.querySelector('[data-layer="background-stripes"]')).toBeInTheDocument()
     for (let index = 0; index < 3; index++) {
       await user.click(toggle)
-      expect(images().map(attributes)).toEqual(before)
+      expect(image()).toBe(original)
+      expect(attributes(image())).toEqual(before)
     }
     expect(toggle).toHaveAttribute('aria-pressed', 'false')
-    expect(container.querySelector('[data-layer="produce-netting"]')).toBeInTheDocument()
+    expect(section().querySelector('[data-layer="produce-netting"]')).toBeInTheDocument()
   })
 
-  it('keeps both reveals independent and restores both demos through the shared Reset', async () => {
+  it('resets both independent demos and retains focus', async () => {
     const user = userEvent.setup()
     const { container } = render(<Confetti />)
-    const hideNetting = screen.getByRole('button', { name: 'Hide netting' })
-    const revealColors = screen.getByRole('button', { name: 'Show base colors' })
-    await user.click(revealColors)
-    expect(container.querySelector('[data-layer="produce-netting"]')).toBeInTheDocument()
-    await user.click(hideNetting)
+    const reveal = screen.getByRole('button', { name: 'Show base colors' })
+    const hide = screen.getByRole('button', { name: 'Hide netting' })
+    await user.click(reveal)
+    expect(section().querySelector('[data-layer="produce-netting"]')).toBeInTheDocument()
+    await user.click(hide)
     fireEvent.change(screen.getByRole('slider'), { target: { value: '8' } })
     await user.selectOptions(screen.getByRole('combobox', { name: 'Image size' }), '240')
     await user.selectOptions(screen.getByRole('combobox', { name: 'Oranges image size' }), '720')
     await user.click(screen.getByRole('button', { name: 'Why it happens' }))
-    expect(revealColors).toHaveAttribute('aria-pressed', 'true')
     const reset = screen.getByRole('button', { name: 'Reset' })
     await user.click(reset)
     expect(reset).toHaveFocus()
-    expect(hideNetting).toHaveAttribute('aria-pressed', 'false')
-    expect(revealColors).toHaveAttribute('aria-pressed', 'false')
-    expect(container.querySelector('[data-layer="produce-netting"]')).toBeInTheDocument()
+    expect(hide).toHaveAttribute('aria-pressed', 'false')
+    expect(reveal).toHaveAttribute('aria-pressed', 'false')
     expect(container.querySelector('[data-layer="background-stripes"]')).toBeInTheDocument()
+    expect(section().querySelector('[data-layer="produce-netting"]')).toBeInTheDocument()
     expect(screen.getByRole('slider')).toHaveValue('3')
     expect(screen.getByRole('combobox', { name: 'Image size' })).toHaveValue('360')
-    expect(screen.getByRole('combobox', { name: 'Oranges image size' })).toHaveValue('240')
+    expect(screen.getByRole('combobox', { name: 'Oranges image size' })).toHaveValue('450')
+    expect(image()).toHaveAttribute('src', ORANGES_IMAGE)
     expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'false')
   })
 
-  it('opens the existing explanation through its in-page link and includes source/license information', async () => {
+  it('keeps the chosen size while hidden and restores the same fixed grid on re-show', async () => {
+    const user = userEvent.setup()
+    render(<Confetti />)
+    const before = attributes(image())
+    const size = screen.getByRole('combobox', { name: 'Oranges image size' })
+    const toggle = screen.getByRole('button', { name: 'Hide netting' })
+    await user.click(toggle)
+    for (const width of [720, 450, 240]) {
+      await user.selectOptions(size, String(width))
+      expect(section().querySelector('[data-orange-viewing-frame]')).toHaveStyle({ maxWidth: width + 'px' })
+      expect(section().querySelector('[data-layer="produce-netting"]')).toBeNull()
+      expect(attributes(image())).toEqual(before)
+      expect(screen.getByRole('combobox', { name: 'Image size' })).toHaveValue('360')
+      await user.click(toggle)
+      expect(section().querySelector('[data-layer="produce-netting"]')).toHaveStyle({ backgroundSize: '6px 6px', mixBlendMode: 'overlay' })
+      expect(attributes(image())).toEqual(before)
+      expect(size).toHaveValue(String(width))
+      await user.click(toggle)
+    }
+  })
+
+  it('explains the strand blend honestly and opens the existing Confetti explanation', async () => {
     const user = userEvent.setup()
     render(<Confetti />)
     const explanation = screen.getByRole('button', { name: 'Why it happens' })
     const link = screen.getByRole('link', { name: 'Back to the Confetti explanation' })
-    expect(link).toHaveAttribute('href', `#${explanation.id}`)
+    expect(link).toHaveAttribute('href', '#' + explanation.id)
     await user.click(link)
     expect(explanation).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getByRole('link', { name: /Study: Perceptual/ })).toHaveAttribute('href', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/')
-    expect(screen.queryByRole('link', { name: /CC0/ })).toBeNull()
-    expect(screen.getByText(/deliberately illustrated as greenish and unripe/)).toBeVisible()
-    expect(screen.getByText(/varies with display and viewer/)).toBeVisible()
-  })
-
-  it('sizes both views together while retaining hidden state, image attributes, and circle settings', async () => {
-    const user = userEvent.setup()
-    const { container } = render(<Confetti />)
-    const before = images().map(attributes)
-    const selector = screen.getByRole('combobox', { name: 'Oranges image size' })
-    const toggle = screen.getByRole('button', { name: 'Hide netting' })
-    await user.click(toggle)
-    for (const width of [720, 360, 240]) {
-      await user.selectOptions(selector, String(width))
-      expect(container.querySelector('[data-orange-comparison]')).toHaveStyle({ maxWidth: `${2 * width + 12}px` })
-      expect(container.querySelector('[data-layer="produce-netting"]')).toBeNull()
-      expect(images().map(attributes)).toEqual(before)
-      expect(screen.getByRole('combobox', { name: 'Image size' })).toHaveValue('360')
-      await user.click(toggle)
-      expect(container.querySelector('[data-layer="produce-netting"]')!.querySelectorAll('line')).toHaveLength(128)
-      expect(selector).toHaveValue(String(width))
-      expect(images().map(attributes)).toEqual(before)
-      await user.click(toggle)
-    }
+    expect(screen.getByText(/skin between the strands is untouched/)).toBeVisible()
+    expect(screen.getByText(/visual approximation, not a physical simulation/)).toBeVisible()
+    expect(screen.getByText(/varies with display, size and viewer/)).toBeVisible()
   })
 })
