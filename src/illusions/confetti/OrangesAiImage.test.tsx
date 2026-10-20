@@ -1,20 +1,10 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { expect, it, vi } from 'vitest'
+import { expect, it } from 'vitest'
 import Confetti from './Confetti'
-import { ORANGES_IMAGE } from './orangesModel'
+import { ORANGES_AI_URL, ORANGES_IMAGE } from './orangesModel'
 
-// Stand in for a locally imported owner asset; no photo is bundled or downloaded.
-vi.mock('./orangesModel', async (importOriginal) => {
-  const original = await importOriginal<typeof import('./orangesModel')>()
-  return {
-    ...original,
-    ORANGES_PHOTO_URL: '/fixture-owner-photo.jpg',
-    getOrangesImage: (value: string) => original.getOrangesImage(value, '/fixture-owner-photo.jpg'),
-  }
-})
-
-it('offers an available owner photo explicitly, preserves it through reveal, and resets to Illustration', async () => {
+it('offers one AI source, labels it honestly, preserves its image/caption through reveal, and resets to Illustration', async () => {
   const user = userEvent.setup()
   render(<Confetti />)
   const section = screen.getByRole('region', { name: 'At the produce aisle' })
@@ -22,13 +12,17 @@ it('offers an available owner photo explicitly, preserves it through reveal, and
   const image = within(section).getByRole('img')
   expect(source).toHaveValue('illustration')
   expect(image).toHaveAttribute('src', ORANGES_IMAGE)
-  await user.selectOptions(source, 'photo')
-  expect(image).toHaveAttribute('src', '/fixture-owner-photo.jpg')
-  expect(image).not.toHaveAttribute('width')
-  expect(image).not.toHaveAttribute('height')
+  expect(within(source).getAllByRole('option').map((option) => option.textContent)).toEqual(['Illustration', 'AI-generated image'])
+  await user.selectOptions(source, 'ai')
+  expect(image).toHaveAttribute('src', ORANGES_AI_URL)
+  expect(image).toHaveAttribute('width', '1024')
+  expect(image).toHaveAttribute('height', '687')
+  expect(image).toHaveAccessibleName(/AI-generated image/)
+  expect(screen.getByText('AI-generated image; the net is drawn on top.')).toBeVisible()
   const before = image.outerHTML
   await user.click(screen.getByRole('button', { name: 'Hide netting' }))
   expect(image.outerHTML).toBe(before)
+  expect(screen.getByText('AI-generated image; the net is drawn on top.')).toBeVisible()
   await user.click(screen.getByRole('button', { name: 'Hide netting' }))
   expect(image.outerHTML).toBe(before)
   await user.click(screen.getByRole('button', { name: 'Reset' }))

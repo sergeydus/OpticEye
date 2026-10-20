@@ -6,13 +6,13 @@ export const NET_CELL_SIZE_CSS_PX = 6
 export const NET_LINE_WIDTH_CSS_PX = 1
 export const NET_BLEND_MODE = 'overlay' as const
 export const DEFAULT_ORANGES_IMAGE_ID = 'illustration' as const
-export type OrangeImageId = 'illustration' | 'photo'
-const optionalPhotos = import.meta.glob<string>('../../assets/oranges-photo.jpg', {
+export type OrangeImageId = 'illustration' | 'ai'
+const optionalAiImages = import.meta.glob<string>('../../assets/oranges-ai.webp', {
   eager: true,
   query: '?url',
   import: 'default',
 })
-export const ORANGES_PHOTO_URL = optionalPhotos['../../assets/oranges-photo.jpg']
+export const ORANGES_AI_URL = optionalAiImages['../../assets/oranges-ai.webp']
 export const ORANGES_VIEWING_SIZES = [
   { label: 'Compact', width: 240 },
   { label: 'Medium', width: 450 },
@@ -24,15 +24,15 @@ export function normalizeOrangesViewingWidth(value: number) {
   return ORANGES_VIEWING_SIZES.find((size) => size.width === value)?.width ?? DEFAULT_ORANGES_VIEWING_WIDTH
 }
 
-export function getOrangesImage(value: string, photoUrl = ORANGES_PHOTO_URL) {
-  if (value === 'photo' && photoUrl) {
+export function getOrangesImage(value: string, aiUrl = ORANGES_AI_URL) {
+  if (value === 'ai' && aiUrl) {
     return {
-      id: 'photo' as const,
-      src: photoUrl,
-      description: 'User-supplied photograph of loose oranges',
-      origin: 'User-supplied photograph.',
-      width: undefined,
-      height: undefined,
+      id: 'ai' as const,
+      src: aiUrl,
+      description: 'AI-generated image of unripe green citrus in a wooden crate',
+      origin: 'AI-generated with the Gemini app, 20 October 2026.',
+      width: 1024,
+      height: 687,
     }
   }
   return {

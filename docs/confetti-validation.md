@@ -5,12 +5,34 @@ Updated 20 October 2026. Engineering implementation and perceptual calibration a
 ## Current automated checks
 
 - Lint: Oxlint with jsx-a11y passes.
-- Tests: 36 pass across circle geometry/interaction, single-image square grid, optional-photo handling and shared Reset.
+- Tests: 37 pass across circle geometry/interaction, fixed square grid, AI source/caption handling, native WebP dimensions/metadata/size, reveal and shared Reset.
 - Build: TypeScript and Vite pass; production output uses /OpticEye/.
 - Circle tests retain shared target colors/geometry, stripe occlusion/phase, context-only reveal, parameter boundaries, sizes, Reset/focus and instance isolation.
-- Oranges tests cover one default image, unchanged image node/src/all attributes across keyboard toggles, 6px cells/1px strands, overlay-only blending, no obsolete clips/pattern selector, independent size/reveal choices, source fallback and Reset. An additional isolated component test mocks an available local photo URL, verifies explicit photo selection, invariant reveal and Reset to Illustration. No actual JPEG or prototype photo is bundled.
+- Oranges tests cover one default image, unchanged image node/src/all attributes across keyboard toggles, 6px cells/1px strands, overlay-only blending, no obsolete clips/pattern selector, independent size/reveal choices, source fallback and Reset. AI interaction tests use the actual local WebP import, verify exactly two source options, persistent AI caption in both net states, invariant src/all image attributes, and Reset to Illustration. No JPEG or prototype photo is bundled.
 
-## Controlled local A/B before the redraw
+## Selected AI image and completed local A/B
+
+The spec was updated before importing or changing code. The user supplied a Gemini-app image generated on 2026-10-20, exact positive/negative prompts and Google terms. The renamed src/assets/oranges-ai.ORIGIN.md records those verbatim, the supplied terms URLs (effective 2026-07-30 for the main terms), processing and hashes. No license asserted; AI-generated content may not be eligible for copyright. No other license is asserted. All AI choices visibly state “AI-generated image; the net is drawn on top.” in both net states; none is described as a photograph.
+
+- Original AI (local comparison only, removed): 1024 x 687, 180,588 bytes. Removed the sRGB ICC metadata chunk and flag without changing the compressed VP8 payload or decoded RGB pixels. The supplied source outside the repo is untouched.
+- Selected AI, now canonical oranges-ai.webp: 1024 x 687, 181,068 bytes. With explicit owner confirmation, globally decoded sRGB to linear RGB, multiplied by 1.25 (about +0.322 EV), clamped to [0,1], encoded back to sRGB, then WebP quality 90/method 6 with no ICC/EXIF/XMP metadata. No resizing/regeneration/cropping or runtime filter. Lossy re-encoding can introduce small detail/color differences beyond exposure. Full hash is in the ORIGIN note.
+- Illustration: unchanged original vector, 600 x 400. The owner explicitly selected it as the default on load and Reset. The processed AI image remains the other source option; no original AI/comparison branch remains.
+
+At 450 CSS pixels, each source was captured with and without the exact same net. Native-resolution canvas rasters were used for a reproducible median-skin calculation: discard the outer 5% on each edge; retain pixels with HSV hue 60-155 degrees, saturation >= .30 and value .20-.95; take the channel-wise RGB median. Apply the CSS overlay formula to that RGB in sRGB, then composite with strand alpha .95. Crossings have alpha .9975 and differ slightly. This mask is an approximation, not manual fruit segmentation or a perceptual measurement.
+
+| Source | Median skin RGB | Computed single-strand RGB | Strand hex |
+| --- | --- | --- | --- |
+| Illustration | 113, 148, 54 | 212, 118, 3 | #D47603 |
+| AI original | 68, 101, 37 | 128, 73, 2 | #804902 |
+| AI +25% exposure | 74, 110, 40 | 139, 79, 2 | #8B4F02 |
+
+The AI medians yield darker brown/orange strands than the illustration. +25% linear exposure lifts that result modestly; it does not turn the median strand into a bright orange. Local highlights render brighter strands than these medians. These computed colors are rendering diagnostics, separate from the viewer's preference.
+
+After removing the rejected variant, Chrome 155.0.8059.85 checked /OpticEye/ locally at 320/1440 CSS widths, DPR 1 and 1.25, both retained sources and all three sizes (24 combinations). Both assets decoded at native size; grid remained 6px/1px and overlay-only blending; image filter none, transition 0s, normal image blending. Space hide/show preserved every image attribute and document-space rectangle. AI caption stayed visible, hidden source changes stayed hidden, Reset restored Illustration/450/visible net with focus. Exactly two source choices remained. Brand stayed /OpticEye/; no failed requests, console/page errors, 4xx/5xx or horizontal overflow. Final AI 450px phone and desktop section screenshots were visually inspected. Lint, all 37 tests and production build pass. The retained WebP is below 250,000 bytes and metadata checks pass.
+
+**Viewer 1, 20 October 2026:** in the local 450px A/B, the original AI image showed a slightly stronger effect, but the viewer chose +25% for overall image quality with the effect still visible. Illustration was chosen as the default; the processed AI image is optional. This is the same viewer as the illustration observation below: **1 of 2 viewers: effect visible**, not two independent viewers. No extra display conditions or particular AI hue shift were reported. Calibration remains incomplete. The owner authorized committing the selected implementation after checks, without pushing; the AI image has not been deployed.
+
+## Controlled local A/B before the redraw (historical)
 
 The user authorized a local-only diagnostic copy of D:/projects/114457c6-a50a-45ef-b5a2-ccf09ad76596.jpeg. Its license is unknown; no distribution right is inferred. The optional src/assets/oranges-photo.jpg path was added to .gitignore before copying. SHA-256 was F6D4F74A96831B1738001E073C2BAA614C00D3F50F538A8F73F76E5C8AFAC201. The copy was then loaded through the existing photo selector in a local production preview. No commit/upload occurred.
 
@@ -25,7 +47,7 @@ Chrome 155.0.8059.85 at 1440 CSS width, DPR 1 compared one change at a time:
 
 Green-skin samples gave median base HSV value about 214 for the old drawing versus 179-180 for the photo's green side. At strand crossings, sampled median hue was about 47.4 degrees for the old illustration, 37.7 at photo/240 and 38.1 at photo/450 (38.0 with blur). The photo also has already-yellow fruit on its right, so only its green left portion was sampled. These are rendering diagnostics, not measurements of perceived assimilation or a human choice of best size. They support base-image brightness/palette as the main difference, scale as a secondary match, and no need to ship blur.
 
-The temporary copied JPEG was verified against the recorded hash and removed after diagnostics. A fresh production build contains no JPEG or original-photo name/hash URL. The original outside the repo is unchanged. After diagnostics, the ignore rule was removed at the owner's request: this path is reserved for an owner-supplied photo that can be committed with its origin/license record. No photo is currently present.
+The temporary copied JPEG was verified against the recorded hash and removed after diagnostics. A fresh production build contains no JPEG or original-photo name/hash URL. The original outside the repo is unchanged. After diagnostics, the temporary JPEG and its ignore rule were removed. The current optional source is the explicitly AI-labeled WebP described below; no photo is currently present.
 
 ## Current oranges construction and production preview
 
@@ -46,13 +68,13 @@ Visible/hidden frame screenshots were captured for all 18 cases. The new default
 
 Pixel samples at transparent cell centers across every case differed by at most 2 of 255 levels in any RGB channel between visible/hidden captures (many were identical); strand samples changed substantially in every case. These small gap differences are consistent with raster/compositing rounding. The asset, image attributes and CSS remain unchanged, but bit-for-bit screenshot identity is not claimed. Pixel checks establish construction, not perceived assimilation.
 
-Photo support is implemented through optional local eager URL discovery. The origin template explicitly states no photo is supplied and requires creator/source/permission/optimization details before one is bundled. Natural photo proportions are preserved without cropping. Only the temporary unknown-license reference was diagnosed; no licensed owner photo has been provided.
+The earlier optional-photo API has been replaced by local AI WebP discovery. Natural image proportions are preserved without cropping. The temporary unknown-license reference remains absent.
 
 ## Existing circle and deployment verification
 
 The circles retain spacing 2-8/default 3, Medium width 360, and Compact/Medium/Large 240/360/720. Prior Chrome 155.0.8059.82 checks covered 320/1440 CSS widths at DPR 1/2, all sizes with spacing 2/3/8, keyboard reveal/disclosure/Reset, target and surface identity, stable reveal bounds, and no overflow. Actual 200% browser page zoom in a 1440-pixel window was also checked (effective 712 CSS pixel viewport, DPR 2, root CSS zoom 1). Those circle construction checks remain relevant; the new browser matrix additionally verifies their normal blend mode.
 
-Pages preparation was locally checked with subpath JS/CSS/favicon loading and brand navigation, and development root /. The favicon was added to eliminate the implicit /favicon.ico 404. The hosted Actions workflow has not been run; Pages settings, repository visibility and pushing remain with the owner.
+Pages preparation was locally checked with subpath JS/CSS/favicon loading and brand navigation, and development root /. The favicon was added to eliminate the implicit /favicon.ico 404. The earlier illustration/grid implementation was subsequently deployed successfully in [Actions run 39400093717](https://github.com/sergeydus/OpticEye/actions/runs/39400093717). This AI-image update is local only and must not be pushed in this task.
 
 ## Viewing and remaining scope
 
@@ -60,4 +82,4 @@ Pages preparation was locally checked with subpath JS/CSS/favicon loading and br
 
 Earlier, the user saw the circle effect only after substantial zoom-out and described previous illustrated-net candidates as weak or absent. The new positive oranges observation does not establish circle calibration. Continue recording skin appearance separately from strand coverage or fine-pattern mixing.
 
-Broader Firefox/WebKit, full forced-colors and actual 200% zoom coverage for the new net are not claimed. The requested current matrix includes fractional DPR 1.25. The redraw retains the exact same grid, color, blend and no-blur rule; transparent-gap samples still differ by at most 2 RGB levels in the final matrix. A comparable green-skin sample of the new default gave median base value 152 and strand hue about 33.3 degrees; these rendering samples are separate from the user's perceptual observation. Earlier netting construction rounds are retained in Git rather than repeated here. The user has authorized committing this rework; pushing remains unrequested.
+Broader Firefox/WebKit, full forced-colors and actual 200% zoom coverage for the new net are not claimed. The requested current matrix includes fractional DPR 1.25. The redraw retains the exact same grid, color, blend and no-blur rule; earlier transparent-gap samples differed by at most 2 RGB levels. A comparable green-skin sample of the default illustration gave median base value 152 and strand hue about 33.3 degrees; these rendering samples are separate from the user's perceptual observation. Earlier netting construction rounds are retained in Git rather than repeated here. The earlier illustration/grid rework is committed and deployed; the selected AI image is prepared for the authorized local commit only.

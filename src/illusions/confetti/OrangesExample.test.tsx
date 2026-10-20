@@ -1,10 +1,12 @@
+/// <reference types="node" />
 import orangesSource from '../../assets/oranges.svg?raw'
 import licenseSource from '../../assets/oranges.LICENSE.txt?raw'
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import Confetti from './Confetti'
-import { getOrangesImage, NET_BLEND_MODE, NET_CELL_SIZE_CSS_PX, NET_COLOR, NET_LINE_WIDTH_CSS_PX, normalizeOrangesViewingWidth, ORANGES_IMAGE, ORANGES_PHOTO_URL } from './orangesModel'
+import { readFileSync } from 'node:fs'
+import { getOrangesImage, NET_BLEND_MODE, NET_CELL_SIZE_CSS_PX, NET_COLOR, NET_LINE_WIDTH_CSS_PX, normalizeOrangesViewingWidth, ORANGES_AI_URL, ORANGES_IMAGE } from './orangesModel'
 
 function section() {
   return screen.getByRole('region', { name: 'At the produce aisle' })
@@ -39,11 +41,33 @@ describe('Oranges source and grid construction', () => {
     for (const width of [0, -1, 360, 500, Infinity, NaN]) expect(normalizeOrangesViewingWidth(width)).toBe(450)
   })
 
-  it('keeps illustration as default and safely resolves an optional local photo', () => {
+  it('keeps illustration as default and safely resolves the optional AI source', () => {
     expect(getOrangesImage('illustration').src).toBe(ORANGES_IMAGE)
-    expect(getOrangesImage('photo', '').id).toBe('illustration')
-    expect(getOrangesImage('invalid', '/owner-photo.jpg').id).toBe('illustration')
-    expect(getOrangesImage('photo', '/owner-photo.jpg')).toMatchObject({ id: 'photo', src: '/owner-photo.jpg', width: undefined, height: undefined })
+    expect(getOrangesImage('ai', '').id).toBe('illustration')
+    expect(getOrangesImage('invalid', '/ai.webp').id).toBe('illustration')
+    expect(getOrangesImage('ai', '/ai.webp')).toMatchObject({ id: 'ai', src: '/ai.webp', width: 1024, height: 687 })
+  })
+
+  it('keeps the AI WebP native-size, metadata-free and under the asset budget', () => {
+    const bytes = readFileSync('src/assets/oranges-ai.webp')
+    expect(bytes.length).toBeLessThanOrEqual(250000)
+    expect(bytes.toString('ascii', 0, 4)).toBe('RIFF')
+    expect(bytes.toString('ascii', 8, 12)).toBe('WEBP')
+    let dimensions: number[] = []
+    const chunks: string[] = []
+    for (let offset = 12; offset + 8 <= bytes.length;) {
+      const tag = bytes.toString('ascii', offset, offset + 4)
+      const size = bytes.readUInt32LE(offset + 4)
+      const payload = offset + 8
+      chunks.push(tag)
+      if (tag === 'VP8X') dimensions = [bytes.readUIntLE(payload + 4, 3) + 1, bytes.readUIntLE(payload + 7, 3) + 1]
+      else if (tag === 'VP8 ' && dimensions.length === 0) dimensions = [bytes.readUInt16LE(payload + 6) & 0x3fff, bytes.readUInt16LE(payload + 8) & 0x3fff]
+      offset = payload + size + size % 2
+    }
+    expect(dimensions).toEqual([1024, 687])
+    expect(chunks).not.toContain('ICCP')
+    expect(chunks).not.toContain('EXIF')
+    expect(chunks).not.toContain('XMP ')
   })
 
   it('uses one full-image square grid with fixed CSS cells and blending only on its strands', () => {
@@ -81,7 +105,7 @@ describe('Single-image oranges comparison', () => {
     expect(image()).toHaveAccessibleDescription('Orange netting')
     expect(screen.getByText('Both states use the same image file.')).toBeVisible()
     expect(screen.queryByRole('combobox', { name: 'Pattern' })).toBeNull()
-    expect(Boolean(screen.queryByRole('combobox', { name: 'Image source' }))).toBe(Boolean(ORANGES_PHOTO_URL))
+    expect(Boolean(screen.queryByRole('combobox', { name: 'Image source' }))).toBe(Boolean(ORANGES_AI_URL))
   })
 
   it('removes only the grid by keyboard without changing or replacing the image', async () => {

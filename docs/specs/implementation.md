@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: implementation baseline, version 1.11. Updated 20 October 2026.
+Status: implementation baseline, version 1.13. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
@@ -33,12 +33,12 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `src/illusions/confetti/Confetti.tsx` | Own stripe/size state, explanation, independent orange visibility/size, and the Reset action shared by both demonstrations. |
 | `src/illusions/confetti/ConfettiStimulus.tsx` | Render a deterministic SVG from typed props. |
 | `src/illusions/confetti/confettiModel.ts` | Palette, defaults, metadata, and pure geometry generation; distinct basename avoids case-insensitive module resolution conflicts with `Confetti.tsx`. |
-| `src/illusions/confetti/OrangesExample.tsx` | Single-image comparison, image size/optional source selectors, Hide netting toggle, and Confetti explanation link. |
+| `src/illusions/confetti/OrangesExample.tsx` | Single-image comparison, image size/optional AI source selectors, Hide netting toggle, and Confetti explanation link. |
 | `src/illusions/confetti/ProduceNetting.tsx` | Separate fixed-CSS-pixel square grid with the oranges-only overlay blend mode; never baked into the asset. |
-| `src/illusions/confetti/orangesModel.ts` | Local image selection/provenance, optional photo discovery, size normalization, and named grid/blend constants. |
+| `src/illusions/confetti/orangesModel.ts` | Local image selection/provenance, optional AI WebP discovery, size normalization, and named grid/blend constants. |
 | `src/assets/oranges.svg` | Original optimized illustration, the default source in both net visibility states. |
-| `src/assets/oranges-photo.jpg` (optional) | Reserved for an owner-supplied photo that can be committed with provenance/permission. The diagnostic reference was removed; never publish an unlicensed prototype/downloaded photo. |
-| `src/assets/oranges-photo.ORIGIN.md` | Photo origin/license instructions and record; explicitly records when no photo is supplied. |
+| `src/assets/oranges-ai.webp` | Optional Gemini-generated base selected by owner, globally processed at linear-light x1.25 exposure, native resolution, stripped metadata and under 250 KB. Illustration remains default. |
+| `src/assets/oranges-ai.ORIGIN.md` | Gemini provenance, exact prompts, date, processing and usage terms or an explicit pending field. |
 | `src/assets/oranges.LICENSE.txt` | Origin and license status: original project asset, no separate public license chosen; no third-party research image is used. |
 | `src/illusions/confetti/` tests | Meaningful geometry and interaction checks near the feature. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
@@ -56,7 +56,7 @@ Metadata MUST include a stable illusion ID, title, short instructions, explanati
 - A reveal MUST modify only the context identified in the feature spec. Target positions, dimensions, fills, and background MUST remain invariant unless that feature explicitly defines a separate comparison mode.
 - Render the stimulus on a fixed, opaque surface. Page themes MUST NOT alter its colors, opacity, contrast, or blending.
 - No decorative gradients, shadows, filters, hover styling, selection effects, or transitions may affect target pixels or context geometry.
-- **Oranges overlay exception:** fixed base-asset shading is allowed. Only the separate net strands may use `mix-blend-mode: overlay` and the specified RGBA alpha, within an isolated image frame. A wrapped net is lit along with the skin beneath it; backdrop-dependent strand brightness is a visual approximation of a lit net. Gegenfurtner (2024) also notes net–fruit interreflections ([paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/)); this CSS technique is a project choice, not the paper's method or a physical simulation. Transparent cell interiors leave the underlying rendered skin unchanged. No blur, filters, transitions, or blending on the image/frame/Confetti stimulus. Keep the image source and attributes unchanged on net toggles; only explicit size/source controls may change their respective choices. The strict no-blending rule still applies to every Confetti layer.
+- **Oranges overlay exception:** fixed base-asset shading is allowed. Only the separate net strands may use `mix-blend-mode: overlay` and the specified RGBA alpha, within an isolated image frame. A wrapped net is lit along with the skin beneath it; backdrop-dependent strand brightness is a visual approximation of a lit net. Gegenfurtner (2024) also notes net–fruit interreflections ([paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/)); this CSS technique is a project choice, not the paper's method or a physical simulation. Transparent cell interiors leave the underlying rendered skin unchanged. No blur, filters, transitions, or blending on the image/frame/Confetti stimulus. Keep the image source and attributes unchanged on net toggles; only explicit size/source controls may change their respective choices. An exposure A/B must edit a separate base-image asset, never apply runtime filters or switch files during reveal. The strict no-blending rule still applies to every Confetti layer.
 - Layout MUST be deterministic across React renders, reset, viewport changes, and development Strict Mode. Avoid unseeded randomness and time-dependent geometry.
 - SVG definitions MUST use instance-unique IDs, for example with React `useId`, so multiple instances cannot share unintended patterns or clipping paths.
 - Preserve proportions when scaling. Document where mobile dimensions could weaken the effect; never silently substitute a different construction.
