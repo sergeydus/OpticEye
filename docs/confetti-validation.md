@@ -17,7 +17,7 @@ The reports do not specify new perceived hues or isolate a mechanism. Viewer 1's
 
 ## Current engineering state
 
-- Last engineering checks: Oxlint/JSX accessibility lint, **55 tests across 6 files** (37 Confetti/oranges), TypeScript and the multi-page Vite build passed. This update changes documentation only; it does not claim a new local test run.
+- Current engineering checks: Oxlint/JSX accessibility lint, **69 tests across 8 files** (37 Confetti/oranges), TypeScript and the multi-page Vite build passed during the Café Wall addition. The prior human observations above are unchanged.
 - Circle tests verify shared target fills/geometry, occlusion/phase, context-only reveal, normalized controls, size, Reset/focus and isolated instances. Oranges tests verify the unchanged base-image node/src/attributes, fixed 6px grid and 1px strands, overlay-only blending, source fallback and Reset.
 - The standalone page is `/OpticEye/confetti/`. [Page validation](pages-validation.md) records direct loads/refreshes/navigation, styles/assets, stable reveal bounds and no 404s/overflow at 320/1440 CSS widths. Additional engineering checks covered DPR 1/1.25/2 and actual 200% zoom; those are not human phone observations.
 - Rendering and viewer metadata remain separate. Earlier transparent-gap raster samples differed by at most 2/255 RGB levels; bit-for-bit screenshot identity is not claimed. Browser/forced-color coverage beyond the recorded checks is not asserted. Manual screen-reader testing remains outside scope.
@@ -28,4 +28,4 @@ The default is the original 600x400 SVG with 37 mid-green fruit. Netting is a se
 
 Earlier circles needed substantial zoom-out, and earlier netting drawings were weak. Denser circle stripes and the mid-tone fruit redraw preceded positive observations. Viewer 1 preferred the +25% AI exposure for image quality despite a slightly stronger original effect; the rejected AI variant and unknown-license prototype photo were removed. Historical A/B details and median-strand diagnostics remain in Git (for example, this file at `c707f4d`); they are rendering diagnostics, not calibration evidence.
 
-The Munker/page-split commits were deployed successfully in [run 39439023910](https://github.com/sergeydus/OpticEye/actions/runs/39439023910). Live Home/Confetti/Munker loads and refreshes passed at 320/1440, with correct assets, navigation and trailing-slash redirects. The local server remains stopped.
+The Munker/page-split commits were deployed successfully in [run 39439023910](https://github.com/sergeydus/OpticEye/actions/runs/39439023910). Live Home/Confetti/Munker loads and refreshes passed at 320/1440, with correct assets, navigation and trailing-slash redirects. Café Wall now has a local preview for owner viewing; this does not alter these calibration observations.

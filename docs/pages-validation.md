@@ -2,7 +2,9 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-## Build and tests
+Current extension: Café Wall adds a fourth real document and a third Home card. Lint, 69 tests across 8 files and the four-page build pass. All four links and refreshes were checked at 320/1440 with no errors/overflow; see [Café Wall validation](cafe-wall-validation.md) for the current browser matrix and calibration status. The original three-page checkpoint results below are historical and remain applicable to unchanged features.
+
+## Three-page checkpoint: build and tests
 
 Lint, all **55 tests across 6 files**, and TypeScript/Vite build pass. Existing 37 Confetti/oranges and 9 Munker tests are retained; 9 page tests replace the 2 obsolete combined-page integration tests. Page tests exercise the actual entries with mounting side effects mocked, home titles/descriptions/links, and current-page/base-aware header links for `/` and `/OpticEye/`.
 

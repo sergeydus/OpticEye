@@ -4,7 +4,7 @@ Updated 20 October 2026. **Implemented and calibrated.** M11 is complete: both v
 
 ## Engineering completion: M01–M10
 
-- Lint passes. All **55 tests across 6 files** pass, including 37 Confetti/oranges tests, 9 Munker tests and 9 page/navigation tests. TypeScript/Vite production build passes.
+- Lint passes. All **69 tests across 8 files** pass, including 37 Confetti/oranges, 9 Munker, 11 Café Wall and 12 page/navigation tests. TypeScript/Vite production build passes.
 - Tests verify both green targets' exact geometry and identical shared fill, bounded alternating background coverage, opposite foreground colors and matching global phase at stripe widths 3/6/7/12, including partial bands at boundaries. They verify target clips, repeated context-only reveal, the shared proof swatch, normalization, hidden parameter changes, Reset/focus, keyboard disclosure and unique IDs across two instances.
 - Current page tests cover the home list, base-aware navigation/current-page semantics under development and production bases, and actual standalone HTML-entry compositions with one h1 and no other illusion mounted. ViewingSizeControl is exercised at its real feature call sites. No router/dependencies or generic illusion renderer were added.
 
@@ -42,4 +42,4 @@ Defaults are stripe width 6 and Medium (360 CSS px maximum). The mobile follow-u
 
 **Both desktop and mobile portions of M11 are complete.** The explicit mobile confirmation supplies the evidence; Compact/Medium/Large settings on desktop alone would not establish phone calibration. Preserve target identity and record weak/absent observations if further viewing differs; this result does not guarantee the effect for everyone.
 
-Firefox/WebKit and forced-colors rendering have not been manually checked. Manual screen-reader testing is outside the agreed scope. Munker (`c9e9adc`) and the page split (`c707f4d`) were pushed and deployed in [run 39439023910](https://github.com/sergeydus/OpticEye/actions/runs/39439023910); live loads/refreshes and navigation passed at 320/1440 with no 404s. These engineering viewport checks are not human phone observations. The local server remains stopped.
+Firefox/WebKit and forced-colors rendering have not been manually checked. Manual screen-reader testing is outside the agreed scope. Munker (`c9e9adc`) and the page split (`c707f4d`) were pushed and deployed in [run 39439023910](https://github.com/sergeydus/OpticEye/actions/runs/39439023910); live loads/refreshes and navigation passed at 320/1440 with no 404s. These engineering viewport checks are not human phone observations. The local preview is now available for viewing the unpushed Café Wall addition.

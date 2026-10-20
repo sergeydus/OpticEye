@@ -1,6 +1,6 @@
 # Café Wall illusion specification
 
-Status: **approved for implementation; not yet implemented or calibrated**. Version 1.0, 20 October 2026. The owner approved the unchanged construction, including mortar width 1–8. Depends on [implementation.md](implementation.md). Stable feature ID and folder: `cafe-wall`.
+Status: **implemented; perceptual calibration pending**. Version 1.0, 20 October 2026. CW01–CW12 pass; CW13 has no human observations yet. The approved mortar range remains 1–8. See [validation](../cafe-wall-validation.md). Depends on [implementation.md](implementation.md). Stable feature ID and folder: `cafe-wall`.
 
 ## 1. Intended outcome and scope
 
@@ -22,7 +22,7 @@ All numbers below are OpticEye design choices awaiting calibration, not measured
 
 Production URL: `/OpticEye/cafe-wall/`; development: `/cafe-wall/`. Use the existing multi-page architecture, `SiteLayout`, `SiteHeader`, `SiteFooter`, `mountPage` and `ViewingSizeControl`.
 
-Create these only when implementation is requested:
+Implementation files:
 
 | File | Responsibility |
 | --- | --- |
@@ -34,9 +34,9 @@ Create these only when implementation is requested:
 | `src/illusions/cafe-wall/` tests | Geometry, reveal, controls, focus and instance isolation. |
 | `docs/cafe-wall-validation.md` | Actual engineering checks and separate human calibration observations. |
 
-During implementation add one metadata entry in `src/illusions.ts`: ID `cafe-wall`, navigation name “Café Wall”, title “Café Wall illusion”, and description “Parallel mortar lines can look tilted between offset tile rows. Hide the tiles to compare their actual geometry.” The list supplies Home, navigation and build inputs; do not manually add a router or component registry.
+The metadata entry in `src/illusions.ts` has ID `cafe-wall`, navigation name “Café Wall”, title “Café Wall illusion”, and description “Parallel mortar lines can look tilted between offset tile rows. Hide the tiles to compare their actual geometry.” The list supplies Home, navigation and build inputs; do not manually add a router or component registry.
 
-HTML description: “Explore the Café Wall illusion: adjust staggered tile rows and mortar width, then hide the tiles to reveal horizontal, parallel lines.” The illusion title is the single h1, with h2 controls/explanation headings. Shared navigation includes Home, Confetti, Munker and Café Wall, uses BASE_URL, and marks only Café Wall aria-current="page". Each page retains local state; other experiments remain unchanged. Do not add an entry or empty page in this documentation step.
+HTML description: “Explore the Café Wall illusion: adjust staggered tile rows and mortar width, then hide the tiles to reveal horizontal, parallel lines.” The illusion title is the single h1, with h2 controls/explanation headings. Shared navigation includes Home, Confetti, Munker and Café Wall, uses BASE_URL, and marks only Café Wall aria-current="page". Each page retains local state; other experiments remain unchanged.
 
 ## 4. Defaults and state contract
 

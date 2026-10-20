@@ -11,6 +11,12 @@ export const ILLUSIONS = [
     title: 'Munker illusion',
     description: 'Two identical green bars meet different colored grids. Remove the context and compare their shared fill.',
   },
+  {
+    id: 'cafe-wall',
+    name: 'Café Wall',
+    title: 'Café Wall illusion',
+    description: 'Parallel mortar lines can look tilted between offset tile rows. Hide the tiles to compare their actual geometry.',
+  },
 ] as const
 
 export type PageId = 'home' | (typeof ILLUSIONS)[number]['id']
