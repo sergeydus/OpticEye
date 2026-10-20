@@ -64,6 +64,8 @@ These are research candidates, **not approved specifications or new implementati
 
 The owner subsequently checked six demos and selected this **specification/implementation order**: [Scintillating grid](specs/scintillating-grid.md), [Poggendorff](specs/poggendorff.md), [Ebbinghaus](specs/ebbinghaus.md), [Hering](specs/hering.md), [Ponzo](specs/ponzo.md), [Checker-shadow](specs/checker-shadow.md). The owner approved five specs, requested Ponzo minimum gap88 and a tighter eight-disk small surround for Ebbinghaus, then authorized scintillating grid first. It is now implemented and calibrated on desktop and mobile: both viewers confirmed defaults on desktop and real phones, and the owner approved listing/deployment; see [validation](scintillating-grid-validation.md). This order supersedes the research priority ranking below; later features await their implementation turn.
 
+The grid's deployment and live checks succeeded. Poggendorff is subsequently implemented locally, unlisted/noindex with calibration pending; see [validation](poggendorff-validation.md). Its reveal preserves the full pre-existing diagonal beneath the removable strip. Keep this feature unpushed for owner viewing before moving to Ebbinghaus.
+
 ### Recommended static shortlist
 
 | Order | Candidate | What users may see | Proposed proof/comparison | Effort / main uncertainty |

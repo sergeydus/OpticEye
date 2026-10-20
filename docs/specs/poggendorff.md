@@ -1,6 +1,6 @@
 # Poggendorff specification
 
-Status: **approved; awaiting implementation**. Version 1.1, 21 October 2026. Second in the implementation order. ID/folder: `poggendorff`; title/h1: “Poggendorff illusion”; HTML title: “Poggendorff illusion | OpticEye”. Description: “A straight diagonal can appear misaligned behind a strip. Hide the strip to see its unchanged continuation.”
+Status: **implemented; perceptual calibration pending**. Version 1.2, 21 October 2026. PG01–PG04 pass; see [actual validation](../poggendorff-validation.md). Unlisted/noindex, committed locally without pushing for owner viewing. Second in the implementation order. ID/folder: `poggendorff`; title/h1: “Poggendorff illusion”; HTML title: “Poggendorff illusion | OpticEye”. Description: “A straight diagonal can appear misaligned behind a strip. Hide the strip to see its unchanged continuation.”
 
 Inherit page integration, unlisted/noindex policy, Reset, normalization, accessibility, testing and two-viewer calibration from [implementation.md](implementation.md). First version is an original static line/occluder drawing, without alignment quizzes, draggable segments, transparency controls or animation.
 
@@ -55,4 +55,4 @@ At θ65°,w160 and W288, the shortest exposed line pieces are about 19.34px each
 | PG04 | Shared page/interaction/test/browser requirements pass, including every size, angle/width extremes and stated DPR checks. Record actual results in docs/poggendorff-validation.md; direct entry remains unlisted/noindex until owner approval. Existing features remain intact. |
 | PG05 | Calibration only: two viewers on desktop/mobile report apparent alignment with the strip and straightness after hiding it at defaults. Record weak/absent/opposite offsets and only supplied conditions; follow shared status/listing rules. |
 
-PG01–PG04 define implemented; PG05 defines calibration. The owner authorized implementation on 21 October 2026 after the grid deployment succeeds. Keep listed:false/noindex; verify and commit locally, without pushing, for owner viewing.
+PG01–PG04 define implemented and pass; PG05 defines calibration and remains pending. The owner authorized implementation on 21 October 2026 after the grid deployment; that deploy and live checks succeeded before code. Keep listed:false/noindex and this verified commit local for owner viewing. Later features await their implementation turn.

@@ -2,7 +2,11 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current structure (21 October 2026): seven real documents, five listed Home cards, and six header links (Home plus five listed illusions). Kanizsa remains unlisted/noindex by owner decision; calibration is not pursued. Scintillating grid is calibrated with two viewers on desktop and real phones, with listing and deployment approved. Its nav marker/noindex now follow the listed-page rules. Earlier checkpoints below are historical.
+Current structure (21 October 2026): eight local documents, five listed Home cards, and six header links (Home plus five listed illusions). Kanizsa remains unlisted/noindex, calibration not pursued. Scintillating grid is calibrated/listed/deployed; local Poggendorff is unlisted/noindex with calibration pending and is not pushed. Both unlisted pages have no current marker. Earlier checkpoints below are historical.
+
+## Poggendorff checkpoint
+
+Lint,119 tests/16 files and eight-page build pass. Chrome155.0.8059.85 checked all eight direct URLs/refreshes at320/1440,DPR1: five cards, six base-aware links, correct current/noindex states, styles/images, no overflow/errors/404s. Poggendorff additionally passed the six-environment DPR1/1.25/2 and actual200% zoom matrix, with retained-line reveal, all sizes and angle/width extremes; see [validation](poggendorff-validation.md). Dev /poggendorff/ works at root base. No router/dependency/workflow changes. The grid's [Pages deployment](https://github.com/sergeydus/OpticEye/actions/runs/39510721006) succeeded and live checks passed before Poggendorff implementation; only the grid checkpoint is pushed.
 
 ## Grid listing checkpoint: 21 October 2026
 

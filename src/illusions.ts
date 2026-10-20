@@ -41,6 +41,13 @@ export const ILLUSIONS = [
     title: 'Scintillating grid',
     description: 'Look around a static grid, then hide its gray lines while keeping the same white disks.',
   },
+  {
+    id: 'poggendorff',
+    listed: false,
+    name: 'Poggendorff',
+    title: 'Poggendorff illusion',
+    description: 'A straight diagonal can appear misaligned behind a strip. Hide the strip to see its unchanged continuation.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

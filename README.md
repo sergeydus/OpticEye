@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all seven HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/` and `/scintillating-grid/`.
+`build` checks TypeScript and produces all eight HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/` and `/poggendorff/`.
 
 ## GitHub Pages
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all seven addresses, including a refresh and navigation between them:
+Check all eight addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -42,8 +42,9 @@ Check all seven addresses, including a refresh and navigation between them:
 - [Müller-Lyer](http://localhost:4173/OpticEye/muller-lyer/)
 - [Kanizsa (unlisted, direct URL only)](http://localhost:4173/OpticEye/kanizsa/)
 - [Scintillating grid](http://localhost:4173/OpticEye/scintillating-grid/)
+- [Poggendorff (unlisted, local viewing)](http://localhost:4173/OpticEye/poggendorff/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the five listed illusions and marks the current listed page. Unlisted Kanizsa has no current marker and includes a static noindex robots directive. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The build includes all seven documents. The owner approved publishing the listed grid alongside the existing experiments.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the five listed illusions and marks the current listed page. Unlisted Kanizsa and local Poggendorff have no current marker and include static noindex robots directives. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes eight documents. The listed grid is deployed alongside the existing experiments; Poggendorff remains local, unlisted and unpushed for owner viewing.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner handles this setting, repository visibility, and pushing. The workflow does not automatically enable Pages.
 
@@ -60,6 +61,8 @@ Müller-Lyer is implemented and calibrated on desktop and mobile with fin angle 
 Kanizsa is implemented with three 60° cutout disks, a Cutout rotation range 0–90° (step 5), Align cutouts, radius 32–96 (default 92), and optional inverted outline corners on by default. The 720×512 drawing fits those corners without moving the disks. No upright triangle is drawn; protected central gaps remain white. Reset restores rotation 0, radius 92, outline on and Medium/540. It is unlisted by owner decision (effect judged too weak); calibration is not pursued. See [Kanizsa validation](docs/kanizsa-validation.md) for actual engineering results.
 
 Scintillating grid uses a static 9×9 arrangement of white disks over gray lines on black. Grid spacing (56–80, default72) and disk diameter (14–22, default18) are drawing-unit controls; Hide grid removes only the gray lines. Reset restores the shown grid, defaults and Medium540. It is listed and calibrated: two viewers confirmed the default effect and Hide grid comparison on desktop and real phones. See [its specification](docs/specs/scintillating-grid.md) and [validation](docs/scintillating-grid-validation.md).
+
+Poggendorff draws one full 480-unit diagonal beneath a separate opaque strip. Line angle25–65° (default45) changes its orientation; strip width64–160 (default112) affects only context. Hide strip uncovers the same line, and Reset restores defaults/Medium540. It remains unlisted/noindex with calibration pending; see [its spec](docs/specs/poggendorff.md) and [validation](docs/poggendorff-validation.md).
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 

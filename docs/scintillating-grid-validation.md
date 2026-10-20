@@ -34,3 +34,7 @@ Screenshots of shown/hidden states at 320/DPR1 and 1440/DPR1, plus the shown 200
 ## Listing checkpoint: 21 October 2026
 
 Lint, **107 tests/14 files** and build pass after listing. Chrome155.0.8059.85 checked all seven URLs directly and after refresh at 320×1200 and1440×1200/DPR1, plus Home/grid at actual200% zoom (inner712×552,DPR2,CSS zoom1): five Home cards, six base-aware nav links, grid current marker, no grid noindex; Kanizsa remains unlisted/noindex with no marker. Grid defaults, 81 retained disks on Hide grid, restored 18 lines on Reset, styles/images and navigation passed with no overflow/errors/404s. Report: `grid-listed-preview-check.json` outside Git in the task visualization directory. The previous full feature DPR matrix remains applicable to unchanged geometry.
+
+## Hosted deployment
+
+Commit **20d2c86** was pushed to origin/main. The [Deploy to GitHub Pages run](https://github.com/sergeydus/OpticEye/actions/runs/39510721006) succeeded (build and deploy), observed with gh run watch. The [live grid](https://sergeydus.github.io/OpticEye/scintillating-grid/) and all six other live URLs passed direct load/refresh and listed-navigation checks in Chrome155.0.8059.85 at320/1440,DPR1: grid styles/render/default controls, retained disks on reveal/Reset, five Home cards, six links, correct active marker, no grid noindex, no overflow/errors/404s. Report: `grid-listed-live-check.json` outside Git. This deployment predates the local Poggendorff implementation; that feature is not pushed.

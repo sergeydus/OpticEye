@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: scintillating grid calibrated on desktop/mobile and approved for listing/deployment; version 1.34, 21 October 2026. After deploying it, implement Poggendorff unlisted locally, commit and do not push that feature.
+Status: scintillating grid calibrated/listed/deployed; Poggendorff implemented locally and unlisted, calibration pending; version 1.35, 21 October 2026. Keep the Poggendorff commit local for owner viewing; later features await their turn.
 
 ## 1. Purpose and scope
 
@@ -8,7 +8,7 @@ OpticEye lets people observe optical illusions, manipulate their context, reveal
 
 This document defines project-wide rules. The implemented scope is a Home page listing five illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), [Café Wall](cafe-wall.md), and calibrated [Müller-Lyer](muller-lyer.md). A fifth illusion, [Kanizsa triangle](kanizsa.md), is implemented; unlisted by owner decision (effect judged too weak); calibration not pursued. It remains built and reachable directly, with owner authorization to publish it on main. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
 
-The owner selected six further illusions in this order: [Scintillating grid](scintillating-grid.md), [Poggendorff](poggendorff.md), [Ebbinghaus](ebbinghaus.md), [Hering](hering.md), [Ponzo](ponzo.md), [Checker-shadow](checker-shadow.md). Scintillating grid is implemented and calibrated with two viewers on desktop and real phones, listed/deployment approved; see [validation](../scintillating-grid-validation.md). Four later specs are approved, including Ponzo with minimum rail gap88; Ebbinghaus is revised to six large and eight closely spaced small inducers. After the grid deploy succeeds, implement only Poggendorff next, unlisted/noindex and committed locally without pushing. Later features await their turn; Poggendorff listing/calibration is not approved.
+The owner selected six further illusions in this order: [Scintillating grid](scintillating-grid.md), [Poggendorff](poggendorff.md), [Ebbinghaus](ebbinghaus.md), [Hering](hering.md), [Ponzo](ponzo.md), [Checker-shadow](checker-shadow.md). Scintillating grid is implemented and calibrated with two viewers on desktop and real phones, listed and deployed; see [validation](../scintillating-grid-validation.md). After that successful deployment, Poggendorff was implemented locally, unlisted/noindex with calibration pending; see [validation](../poggendorff-validation.md). Three later specs are approved, including Ponzo with minimum rail gap88; Ebbinghaus is revised to six large and eight closely spaced small inducers. Later features await their turn. Poggendorff listing/pushing/calibration is not approved.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -75,7 +75,7 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `docs/pages-validation.md` | Multi-page build, direct-load/refresh/navigation, metadata, development-base and responsive browser results. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
-| `<id>/index.html`, `<id>/main.tsx` for the selected features | Static documents/entries, added only during each approved implementation; scintillating-grid now exists. |
+| `<id>/index.html`, `<id>/main.tsx` for the selected features | Static documents/entries, added only during each approved implementation; scintillating-grid and poggendorff now exist. |
 | `src/illusions/<id>/<Feature>.tsx`, `<Feature>Stimulus.tsx`, `<camelCaseId>Model.ts` | Future feature-local state, drawing and pure constants/geometry; use the existing naming pattern, not a new renderer registry. |
 | `docs/<id>-validation.md` | Created during each approved implementation with actual results, not placeholder passes. |
 | `vite.config.ts` | React/Tailwind, build-only `/OpticEye/` base and build.rollupOptions.input containing Home plus HTML files derived from the illusion list. |
@@ -109,7 +109,7 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 ### Static page structure
 
-- The current build has Home and six illusion documents, including unlisted Kanizsa and scintillating grid. Each approved addition adds `<id>/index.html` → `/OpticEye/<id>/` (dev `/<id>/`). Derive all illusion inputs from src/illusions.ts, including unlisted entries. Use Vite build.rollupOptions.input; no router or fallback 404.html is required.
+- The current local build has Home and seven illusion documents, including unlisted Kanizsa and Poggendorff; scintillating grid is listed. Each approved addition adds `<id>/index.html` → `/OpticEye/<id>/` (dev `/<id>/`). Derive all illusion inputs from src/illusions.ts, including unlisted entries. Use Vite build.rollupOptions.input; no router or fallback 404.html is required.
 - Every document has its own static title and meta description. Home uses “OpticEye — Optical illusions”; illusion documents use “Confetti illusion | OpticEye”, “Munker illusion | OpticEye”, “Café Wall illusion | OpticEye”, “Müller-Lyer illusion | OpticEye” and “Kanizsa triangle | OpticEye”. Each rendered page has exactly one h1; illusion subordinate headings use h2. Remove the shell's in-page section navigation and extra page heading from illusion pages.
 - Shared header navigation is labeled “Main navigation” and links Home plus listed illusions with import.meta.env.BASE_URL: currently six links on every page. Only an owner-approved listing change increases this count. Mark the current listed link aria-current="page"; an unlisted page has no current marker. The brand links Home. Use ordinary document links; preserve feature-local explanation fragments.
 - Each HTML entry mounts only its own page. Navigation/refresh loads a document with local defaults; no shared state, custom cross-page persistence or global Reset. Native browser Back/Forward and its document-cache behavior need no interception. Confetti Reset still covers its circles/oranges; Reset Munker remains local.
@@ -118,7 +118,7 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 ### Listing and direct pages
 
-- New illusions MUST enter the metadata list with **listed:false**, remain directly reachable/buildable, and switch to **listed:true only after explicit owner viewing approval**. Implementation completion alone does not authorize listing. Existing five listed illusions remain true, including the owner-approved grid; Kanizsa remains false. The current code's missing-flag fallback is a legacy detail, not permission to omit false from a new entry. Use the existing shared filtered list for both discovery surfaces.
+- New illusions MUST enter the metadata list with **listed:false**, remain directly reachable/buildable, and switch to **listed:true only after explicit owner viewing approval**. Implementation completion alone does not authorize listing. Existing five listed illusions remain true, including the owner-approved grid; Kanizsa and local Poggendorff are false. The current code's missing-flag fallback is a legacy detail, not permission to omit false from a new entry. Use the existing shared filtered list for both discovery surfaces.
 - Build inputs and valid page IDs MUST continue to use every entry. Verify output count as `1 + all entries`, Home cards as `listed entries`, and nav links as `1 + listed entries`, rather than hardcoding a future total. Unlisting changes discovery, not access control.
 - Unlisted illusion documents MUST have static `<meta name="robots" content="noindex">` and no current marker in their normal listed nav. When the owner approves listing, update the flag and remove noindex together; listed pages have their own current marker. Kanizsa stays noindex, with its existing behavior unchanged.
 - Owner viewing approval to list is distinct from section 8.2's two-viewer desktop/mobile calibration. Record both decisions separately; neither an engineering test nor one owner's approval establishes full calibration.
