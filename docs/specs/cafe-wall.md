@@ -1,6 +1,6 @@
 # Café Wall illusion specification
 
-Status: **implemented; perceptual calibration pending (1 of 2 viewers)**. Version 1.1, 20 October 2026. CW01–CW12 pass; viewer 1 confirms desktop and mobile for CW13. A second viewer is still required. The approved mortar range remains 1–8, default 3. See [validation](../cafe-wall-validation.md). Depends on [implementation.md](implementation.md). Stable feature ID and folder: `cafe-wall`.
+Status: **implemented and calibrated on desktop and mobile**. Version 1.2, 20 October 2026. CW01–CW12 pass; CW13 is complete with two viewers confirming the default effect and reveal. The approved mortar range remains 1–8, default 3. See [validation](../cafe-wall-validation.md). Depends on [implementation.md](implementation.md). Stable feature ID and folder: `cafe-wall`.
 
 ## 1. Intended outcome and scope
 
@@ -148,4 +148,4 @@ CW01–CW12 define implementation completion. CW13 is a separate perceptual mile
 
 ## 10. Approval record
 
-On 20 October 2026 the owner approved implementation of this spec. The documents were committed as “Add Café Wall specification”, followed by verified implementation as “Add Café Wall illusion”. After local viewing, the owner confirmed the effect as viewer 1 on desktop and mobile, retained default mortar width 3 within range 1–8, and authorized pushing main and checking Pages. Human calibration remains separate: CW13 needs a second viewer before passing.
+On 20 October 2026 the owner approved implementation of this spec. The documents were committed as “Add Café Wall specification”, followed by verified implementation as “Add Café Wall illusion”. After local viewing, the owner confirmed the effect as viewer 1 on desktop and mobile, retained default mortar width 3 within range 1–8, and authorized pushing main and checking Pages. Following successful deployment, the owner reported viewer 2 also confirmed all works fine, completing CW13 for desktop and mobile. See the validation record for supplied and unknown viewing conditions.

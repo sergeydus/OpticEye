@@ -1,6 +1,6 @@
 # Café Wall implementation validation
 
-20 October 2026. **Implemented; perceptual calibration pending (1 of 2 viewers).** CW01–CW12 pass. Viewer 1 confirms the effect on desktop and mobile; CW13 still needs a second viewer. The spec was committed separately as `ba34827` before feature code. The approved mortar range remains **1–8**, default **3**; no optional range/tile-count changes were made.
+20 October 2026. **Implemented and calibrated on desktop and mobile.** CW01–CW12 pass; CW13 is complete with two viewers confirming the effect. The spec was committed separately as `ba34827` before feature code. The approved mortar range remains **1–8**, default **3**; no optional range/tile-count changes were made.
 
 ## Engineering checks
 
@@ -39,6 +39,8 @@ Visible/revealed/default section screenshots were captured in the checked enviro
 
 **Viewer 1, 20 October 2026:** the owner confirms Café Wall works on desktop and mobile. At default settings and normal page zoom, mortar lines look tilted before reveal and straight/parallel after Hide tiles. Offset 0 and 100 weaken the effect as expected. Thinner mortar strengthens it, but the default width 3 is already noticeable and is retained. The follow-up confirms mobile as well; no browser, exact viewport, DPR or viewing distance was supplied. Default settings are offset 50%, mortar 3 and Medium image size (540px maximum, constrained by the viewport).
 
-**CW13: 1 of 2 viewers; desktop and mobile observed.** A second viewer must confirm both device sizes before marking calibration complete. Existing Confetti/Munker calibration does not cover this new illusion. Firefox/WebKit and forced-colors checks are not claimed; manual screen-reader testing is outside scope.
+**Viewer 2, 20 October 2026:** the owner reports “all works fine,” confirming the desktop/mobile default-and-reveal comparison described above. No separate browser, viewport, DPR, viewing distance or detailed parameter observations were supplied for viewer 2.
 
-The implementation checkpoint is `eea8e80` (“Add Café Wall illusion”), after specification checkpoint `ba34827`. Following local viewing, the owner authorized pushing main and checking the Pages deployment. No dependencies or workflow changes were needed; deployment results are reported with the workflow run.
+**CW13 complete: 2 of 2 viewers; desktop and mobile confirmed.** This records the reported default effect, not every possible parameter combination or display. Firefox/WebKit and forced-colors engineering checks are not claimed; manual screen-reader testing is outside scope.
+
+The implementation checkpoint is `eea8e80` (“Add Café Wall illusion”), after specification checkpoint `ba34827`. The owner authorized pushing main after local viewing. [Pages deployment of `9d96c42`](https://github.com/sergeydus/OpticEye/actions/runs/39456768285) succeeded, including lint, tests and build. Live Chromium checks at 320/1440px passed direct loads/refresh, styles, base-aware navigation, unchanged mortar nodes/attributes/bounds on reveal, Reset and no 404s or console errors. No dependencies or workflow changes were needed.
