@@ -32,7 +32,7 @@ Use one shared target color, two inducer colors, and adjustable stripe width. Ke
 
 Source: [Michael Bach, Munker Illusion](https://michaelbach.de/ot/col-Munker/), with references to Munker (1970) and subsequent work. Keep chromatic assimilation distinct from monochrome White lightness effects when writing explanations.
 
-The source was rechecked on 20 October 2026 for the [Munker spec](specs/munker.md). The owner approved two identical green bars and two colored stripe contexts, with native section navigation alongside Confetti, on 20 October 2026. The numeric palette and geometry remain provisional project choices pending human calibration.
+The source was rechecked on 20 October 2026 for the [Munker spec](specs/munker.md). The owner approved two identical green bars and two colored stripe contexts, then requested a separate static Munker page alongside the Home and Confetti documents. The numeric palette and geometry remain provisional project choices pending human calibration.
 
 ## 3. Cafe Wall
 

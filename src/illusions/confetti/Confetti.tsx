@@ -38,7 +38,7 @@ export default function Confetti() {
     <article aria-labelledby={`${id}-heading`}>
       <div className="mb-8 sm:mb-10">
         <p className="mb-4 font-mono text-xs tracking-widest text-teal-800 uppercase">Experiment 001 / Color & context</p>
-        <h2 id={`${id}-heading`} className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">{CONFETTI.title}</h2>
+        <h1 id={`${id}-heading`} className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">{CONFETTI.title}</h1>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{CONFETTI.instructions}</p>
       </div>
 
@@ -68,7 +68,7 @@ export default function Confetti() {
         </div>
 
         <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
-          <h3 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h3>
+          <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
           <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Remove the stripes to compare the circles.</p>
           <button type="button" aria-pressed={!stripesVisible} aria-describedby={`${id}-reveal-help`} onClick={toggleReveal} className={`flex min-h-12 w-full items-center justify-center gap-3 rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>
             Show base colors
@@ -90,12 +90,12 @@ export default function Confetti() {
       </div>
 
       <section className="mt-10 border-t border-slate-300 sm:mt-14">
-        <h3>
+        <h2>
           <button id={`${id}-explanation-toggle`} type="button" aria-expanded={explanationOpen} aria-controls={`${id}-explanation`} onClick={() => setExplanationOpen(!explanationOpen)} className={`flex min-h-16 w-full items-center justify-between gap-4 py-5 text-left text-lg font-medium ${focus}`}>
             Why it happens
             <span aria-hidden="true" className="font-mono text-xl text-teal-800">{explanationOpen ? '−' : '+'}</span>
           </button>
-        </h3>
+        </h2>
         <div id={`${id}-explanation`} hidden={!explanationOpen} className="max-w-3xl pb-6 text-sm leading-relaxed text-slate-700">
           <p>{CONFETTI.explanation}</p>
           <p className="mt-4">{CONFETTI.attribution}.</p>

@@ -2,13 +2,14 @@
 
 ## Purpose
 
-Build a browser-based optical illusion playground. Users should be able to observe an illusion, change relevant parameters, reveal the underlying colors or geometry, and read a concise explanation with sources. Confetti and Munker share a page with native section navigation and independent experiment state.
+Build a browser-based optical illusion playground. Users should be able to observe an illusion, change relevant parameters, reveal the underlying colors or geometry, and read a concise explanation with sources. Each illusion has its own static page; Home lists the experiments. Confetti's oranges example stays on its page.
 
 ## Stack and structure
 
 - React, TypeScript, Vite, and Tailwind CSS through `@tailwindcss/vite`.
 - Use npm and keep `package-lock.json` synchronized with dependency changes.
-- Keep the scaffold minimal until a feature is requested. Prefer React state over adding a state library; add routing or a backend only when needed.
+- Use Vite's multi-page build with index.html for Home and <illusion-id>/index.html plus main.tsx for each illusion. Do not add a router library or GitHub Pages SPA fallback. Shared header/footer and navigation live in src/components/; all navigation uses import.meta.env.BASE_URL.
+- Keep a small metadata list in src/illusions.ts for home cards, navigation and build inputs. Adding a page requires its folder/entry and one list entry, not a plugin system. Each document owns its experiment state; do not persist or share it across pages.
 - Put future illusion components under `src/illusions/`. Keep reusable controls separate from illusion rendering and scientific metadata.
 - Read `docs/illusion-research.md` before implementing an illusion. Preserve source links and attribution with each implementation.
 - Follow `docs/specs/implementation.md` for shared implementation rules and the feature contracts in `docs/specs/confetti.md` and `docs/specs/munker.md`. Update the affected specs when implementation decisions change their requirements.
@@ -34,6 +35,7 @@ Build a browser-based optical illusion playground. Users should be able to obser
 
 - Run `npm run lint` and `npm run build` after code changes.
 - For implemented illusions, visually inspect the default state and reveal at small and large viewport sizes.
+- For page changes, check direct loads, refreshes and navigation at /OpticEye/, /OpticEye/confetti/ and /OpticEye/munker/ in the production preview at 320 and 1440 CSS pixels, including styles/assets and no 404s. Keep the development base at /.
 - Add meaningful tests for geometry/color invariants and nontrivial interaction logic when those features exist. Do not add placeholder tests merely for the scaffold.
 - Use the planned Vitest/jsdom/React Testing Library stack when implementing the first feature. Track engineering completion separately from human perceptual calibration as defined in the implementation spec; finish available work and report calibration as pending when human observations are unavailable.
 - Keep secrets, dependencies, and generated build output out of Git.

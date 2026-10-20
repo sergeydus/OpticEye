@@ -4,11 +4,11 @@ Updated 20 October 2026. **Implemented; perceptual calibration pending.** The ow
 
 ## Engineering completion: M01–M10
 
-- Lint passes. All **48 tests across 6 files** pass, including the existing 37 Confetti/oranges tests, 9 Munker tests and 2 page integration tests. TypeScript/Vite production build passes.
+- Lint passes. All **55 tests across 6 files** pass, including 37 Confetti/oranges tests, 9 Munker tests and 9 page/navigation tests. TypeScript/Vite production build passes.
 - Tests verify both green targets' exact geometry and identical shared fill, bounded alternating background coverage, opposite foreground colors and matching global phase at stripe widths 3/6/7/12, including partial bands at boundaries. They verify target clips, repeated context-only reveal, the shared proof swatch, normalization, hidden parameter changes, Reset/focus, keyboard disclosure and unique IDs across two instances.
-- Integration checks cover the heading hierarchy, native section links and independent state across both Resets. The extracted ViewingSizeControl is exercised at its real Confetti and Munker call sites. No routing/dependencies or generic illusion renderer were added.
+- Current page tests cover the home list, base-aware navigation/current-page semantics under development and production bases, and actual standalone HTML-entry compositions with one h1 and no other illusion mounted. ViewingSizeControl is exercised at its real feature call sites. No router/dependencies or generic illusion renderer were added.
 
-Production preview: `http://localhost:4173/OpticEye/#munker`. Chrome **155.0.8059.85** covered 320 and 1440 CSS widths at **DPR 1, 1.25 and 2**. Every environment exercised stripe widths 3/6/12 at Compact/Medium/Large: **54 size/width/environment cases**, each with repeated reveal and target/surface/bounds assertions.
+Current preview: `http://localhost:4173/OpticEye/munker/`. See [page validation](pages-validation.md) for direct loads/refreshes at 320/1440, navigation, standalone reveal/sizes, DPR and actual 200% zoom. The geometry is unchanged from checkpoint `c9e9adc`: Chrome **155.0.8059.85** covered 320 and 1440 widths at **DPR 1, 1.25 and 2**, all stripe widths 3/6/12 at Compact/Medium/Large (**54 cases**). Those construction results remain applicable; the combined-page navigation checks below are historical.
 
 | Viewport | Compact | Medium (default) | Large |
 | --- | --- | --- | --- |
@@ -17,7 +17,7 @@ Production preview: `http://localhost:4173/OpticEye/#munker`. Chrome **155.0.805
 
 Default stripes render at 2.4 CSS px on the narrow Medium drawing and 3 CSS px on wide Medium. Foreground uses only magenta on the left and blue on the right. Target fills, geometry and opaque white surface stay unchanged. Computed stimulus filter is none, blending normal, opacity 1 and transform none. Proof/status changes do not resize or move the SVG. At fractional DPR, stripe edges can rasterize unevenly; no density substitution or blur is applied.
 
-Each environment additionally verified:
+At the original checkpoint, each environment additionally verified:
 
 - Direct `#munker` load, section links, native browser Back, and retained settings across hash navigation.
 - Space reveal, Enter disclosure, range Home/End, correct pressed/expanded state, and Reset Munker retaining focus.
@@ -33,4 +33,4 @@ Screenshots were captured for visible/revealed Medium and full experiment layout
 
 The saturated palette, 6-unit default stripes and Medium size are provisional product choices. Record at least two viewers at narrow/wide sizes with settings, browser, viewport, DPR and viewing conditions. Ask whether visible green portions appear different before reveal; distinguish this from the overall color mixture of thin stripes. Weak/absent results are valid observations. Tune only with documented spec changes that preserve target identity.
 
-Firefox/WebKit and forced-colors rendering have not been manually checked. Manual screen-reader testing is outside the agreed scope. Implementation is local and uncommitted; no Munker deployment has been performed.
+Firefox/WebKit and forced-colors rendering have not been manually checked. Manual screen-reader testing is outside the agreed scope. Munker was committed as checkpoint `c9e9adc`; the page split is a separate local commit. Neither change has been pushed or deployed in this task.

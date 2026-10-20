@@ -1,33 +1,22 @@
-import Confetti from './illusions/confetti/Confetti'
-import Munker from './illusions/munker/Munker'
+import SiteLayout from './components/SiteLayout'
+import { ILLUSIONS, pageHref } from './illusions'
 
 export default function App() {
   return (
-    <div className="min-h-svh bg-[#f6f5f0] text-slate-900">
-      <header className="mx-auto flex max-w-6xl items-center justify-between border-b border-slate-300/70 px-4 py-6 sm:px-8">
-        <a href={import.meta.env.BASE_URL} className="flex min-h-11 items-center gap-2.5 rounded-sm text-xl font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">
-          <svg viewBox="0 0 32 32" width="30" height="30" fill="none" aria-hidden="true">
-            <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="16" cy="16" r="8" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="16" cy="16" r="3" fill="currentColor" />
-          </svg>
-          OpticEye
-        </a>
-        <span className="font-mono text-xs text-slate-600">A study in seeing</span>
-      </header>
-      <main id="main" className="mx-auto max-w-6xl px-4 pt-10 pb-12 sm:px-8 sm:pt-14">
-        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Explore optical illusions</h1>
-        <nav aria-label="Illusions" className="mt-4 mb-12 flex flex-wrap gap-x-6 gap-y-2 border-b border-slate-300 pb-6">
-          <a href="#confetti" className="inline-flex min-h-11 items-center text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Confetti</a>
-          <a href="#munker" className="inline-flex min-h-11 items-center text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Munker</a>
-        </nav>
-        <div id="confetti" className="scroll-mt-6"><Confetti /></div>
-        <div id="munker" className="mt-16 scroll-mt-6 border-t border-slate-300 pt-12 sm:mt-20 sm:pt-16"><Munker /></div>
-      </main>
-      <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 border-t border-slate-300/70 px-4 py-6 text-xs text-slate-600 sm:px-8">
-        <p>OpticEye · Explore your perception.</p>
-        <p>Look closer. Then look again.</p>
-      </footer>
-    </div>
+    <SiteLayout currentPage="home">
+      <p className="mb-4 font-mono text-xs tracking-widest text-teal-800 uppercase">A study in seeing</p>
+      <h1 className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">Explore optical illusions</h1>
+      <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">Choose an experiment. Compare what you see, change the context, and reveal what stays the same.</p>
+      <ul className="mt-10 grid gap-6 sm:grid-cols-2">
+        {ILLUSIONS.map((illusion) => (
+          <li key={illusion.id} className="rounded-lg border border-slate-300 bg-white/50 p-6">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              <a href={pageHref(illusion.id, import.meta.env.BASE_URL)} className="inline-flex min-h-11 items-center text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">{illusion.title}</a>
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">{illusion.description}</p>
+          </li>
+        ))}
+      </ul>
+    </SiteLayout>
   )
 }

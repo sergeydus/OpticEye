@@ -1,12 +1,12 @@
 # OpticEye implementation specification
 
-Status: implementation baseline including the owner-approved Munker extension, version 1.15. Updated 20 October 2026.
+Status: implementation baseline for separate static illusion pages, version 1.16. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. It does not request implementation of the app by itself. The completed first scope is the Confetti experience, including the oranges/netting example. The owner-approved next scope adds a static Munker experiment on the same page, defined in [munker.md](munker.md). Confetti engineering observations and outstanding coverage are recorded in [the validation record](../confetti-validation.md). A gallery, accounts, backend, analytics, routing, downloads, and further standalone illusions remain outside scope.
+This document defines project-wide rules. The current scope is a Home page listing the illusions, a Confetti page (including oranges/netting), and a Munker page defined in [munker.md](munker.md). Each is a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further illusions remain outside scope. Feature engineering/calibration records remain separate.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -17,7 +17,7 @@ At the user's direction, this is a visual-first experience. Manual screen-reader
 - The app MUST use the existing React, TypeScript, Vite, and Tailwind CSS setup, with npm and the committed lockfile.
 - Target Node.js 24, recorded in `.nvmrc` and `package.json` engines. Keep the Oxlint `jsx-a11y` plugin enabled; static accessibility linting supplements interaction checks.
 - Tailwind MUST style page layout, typography, controls, and responsive behavior. Stimulus colors and geometry MUST be explicit typed constants or SVG attributes rather than inherited theme values.
-- Use local React state for interaction. The second illusion uses native section-anchor navigation, without a router, global state, a component library or a backend.
+- Use local React state for interaction. Each static page mounts only its own experience, without a router, global state, a component library or a backend.
 - Static stimuli SHOULD use SVG. Canvas requires a documented performance or rendering need and an equivalent accessible description.
 - The experience MUST run without runtime requests to research sites, image hosts, or other external services. Source links may navigate externally when selected.
 - Do not add dependencies unless existing browser or project capabilities cannot reasonably meet the requirement.
@@ -28,7 +28,12 @@ Create these files as the implementation needs them; do not add empty abstractio
 
 | Location | Responsibility |
 | --- | --- |
-| `src/App.tsx` | Compose Confetti and Munker with one page heading and native section navigation. |
+| `index.html`, `src/main.tsx`, `src/App.tsx` | Home document, React entry and list of illusion cards. |
+| `confetti/index.html`, `confetti/main.tsx` | Confetti document and entry, composing its experience with the shared shell. |
+| `munker/index.html`, `munker/main.tsx` | Munker document and entry, composing its experience with the shared shell. |
+| `src/illusions.ts` | Small typed metadata list (ID/folder, navigation name, title, one-line description); drives cards, navigation and HTML build inputs. |
+| `src/mountPage.tsx` | Shared React StrictMode mounting and Tailwind CSS import. |
+| `src/components/SiteLayout.tsx`, `SiteHeader.tsx`, `SiteFooter.tsx` | Shared page shell and base-aware Home/illusion navigation, with current-page state supplied by each entry. |
 | `src/components/ViewingSizeControl.tsx` | Labeled native size select used by Confetti and Munker; callers own choices, normalization and state. |
 | `src/illusions/confetti/Confetti.tsx` | Own stripe/size state, explanation, independent orange visibility/size, and the Reset action shared by both demonstrations. |
 | `src/illusions/confetti/ConfettiStimulus.tsx` | Render a deterministic SVG from typed props. |
@@ -45,11 +50,12 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `src/illusions/munker/MunkerStimulus.tsx` | Deterministic two-target SVG and separate context layers. |
 | `src/illusions/munker/munkerModel.ts` | Shared target fill, two context colors, normalized controls, geometry and attribution. |
 | `src/illusions/munker/` tests | Target/phase/reveal invariants, interactions and instance isolation. |
-| `src/App.test.tsx` | Section links, heading hierarchy and independent experiment state. |
+| `src/pages.test.tsx` | Home links, base-aware/current-page navigation and actual page-entry composition without mounting another illusion. |
 | `docs/munker-validation.md` | Actual engineering results and separate human observations. |
+| `docs/pages-validation.md` | Multi-page build, direct-load/refresh/navigation, metadata, development-base and responsive browser results. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
-| `vite.config.ts` | React/Tailwind plugins and build-only `/OpticEye/` asset base; development stays at `/`. |
+| `vite.config.ts` | React/Tailwind, build-only `/OpticEye/` base and build.rollupOptions.input containing Home plus HTML files derived from the illusion list. |
 | `vitest.config.ts` | Independent jsdom test configuration, unaffected by the deployment base. |
 | `.github/workflows/deploy.yml` | Validate/build/upload `dist/`, then deploy with official GitHub Pages actions. |
 | `src/assets/optic-eye.svg` | Original small eye favicon matching the header geometry, referenced by `index.html` and processed by Vite. |
@@ -71,18 +77,18 @@ Metadata MUST include a stable illusion ID, title, short instructions, explanati
 
 ## 5. Experience and interaction
 
-The first page MUST present a title, brief viewing prompt, stimulus, reveal/reset controls, experiment controls, explanation, and sources in a logical reading order. A wide layout may position controls beside the stimulus; narrow layouts MUST stack them without reordering keyboard navigation.
+Each illusion page MUST present its title, viewing prompt, stimulus, reveal/reset controls, experiment controls, explanation and sources in a logical reading order. Home presents a title and cards linking the experiments with one-line descriptions. Wide illusion layouts may position controls beside the stimulus; narrow layouts MUST stack them without reordering keyboard navigation.
 
 The user MUST be able to observe the initial effect before reading the answer. Put the full explanation in an explicitly labeled disclosure, initially collapsed. Revealing the construction MUST remain independent of opening that disclosure.
 
-### Approved two-illusion page
+### Static page structure
 
-- Keep both experiments mounted in document order: Confetti (including oranges), then Munker. Add a wrapping native `nav` labeled “Illusions” with “Confetti” → `#confetti` and “Munker” → `#munker`. No tabs, router, lazy mounting, active-section tracking or smooth-scroll animation.
-- Add one page `h1`, “Explore optical illusions.” Each experiment has an `h2`; its controls, explanation and everyday-example headings use `h3` where appropriate. Preserve existing accessible names and unique internal IDs.
-- Anchor targets have stable shell-owned IDs and suitable scroll margins. Hash navigation, direct hash loads and browser Back/Forward use native behavior and do not reset either experiment. The brand still points to `import.meta.env.BASE_URL`.
-- Each experiment owns its state and Reset. Confetti Reset continues to reset its oranges example; Munker uses “Reset Munker” and cannot change Confetti or oranges. No page-wide reset is added.
-- Extract only actual shared UI used by both implementations into `src/components/` (for example a viewing-size select with per-feature choices). Keep geometry, palettes, descriptions and state local to each illusion. No extraction is required merely because two controls look similar; avoid a generic experiment engine or plugin registry.
-- Update affected Confetti heading expectations and integration tests with the approved composition. The owner approved implementation on 20 October 2026; deployment still requires a separate instruction.
+- Build `index.html` → `/OpticEye/`, `confetti/index.html` → `/OpticEye/confetti/`, and `munker/index.html` → `/OpticEye/munker/`. Use Vite build.rollupOptions.input for all three, deriving illusion inputs from src/illusions.ts. Vite 8 exposes this as a compatibility alias; no router or fallback 404.html is required.
+- Every document has its own static title and meta description. Home uses “OpticEye — Optical illusions”; illusion documents use “Confetti illusion | OpticEye” and “Munker illusion | OpticEye”. Each rendered page has exactly one h1; illusion subordinate headings use h2. Remove the shell's in-page section navigation and extra page heading from illusion pages.
+- Shared header navigation is labeled “Main navigation” and links Home/Confetti/Munker with import.meta.env.BASE_URL. Mark exactly the current link aria-current="page". The brand links Home. Use ordinary document links; preserve feature-local explanation fragments.
+- Each HTML entry mounts only its own page. Navigation/refresh loads a document with local defaults; no shared state, custom cross-page persistence or global Reset. Native browser Back/Forward and its document-cache behavior need no interception. Confetti Reset still covers its circles/oranges; Reset Munker remains local.
+- Adding an illusion requires a new top-level folder with index.html and main.tsx, its original feature code, and one metadata-list entry. Do not add a component registry, dynamic renderer, router or plugin system. Build inputs, home cards and nav pick up the list entry automatically.
+- Extract the actual shared shell and size select into src/components/. Preserve geometry, palettes, labels, defaults and controls while changing composition. Commit the verified restructure separately from the Munker checkpoint; do not push in this task.
 
 - Every interaction MUST work with pointer, touch, and keyboard. No essential feature may depend on hover, dragging alone, or holding a button.
 - Reveal MUST be persistent until toggled again; experiment controls MUST retain their selected values through reveal toggles.
@@ -141,7 +147,7 @@ Read this document alongside root `AGENTS.md`. Apply the feature spec to feature
 Target URL: [OpticEye on GitHub Pages](https://sergeydus.github.io/OpticEye/). This section specifies deployment preparation; actual hosted deployment is verified only after the owner enables Pages and pushes the workflow.
 
 - `vite.config.ts` MUST export a config function and set `base: command === 'build' ? '/OpticEye/' : '/'`. Keep React/Tailwind plugins and the separate Vitest config working. Development stays at `http://localhost:5173/`.
-- The brand link MUST use `import.meta.env.BASE_URL`. Use imported asset URLs or base-aware paths for app assets/navigation, with no hardcoded origin-root application links. Vite processes the `/src/main.tsx` entry in `index.html` and rewrites built assets under `/OpticEye/`; fragment/source links remain unchanged.
+- The brand and shared navigation MUST use `import.meta.env.BASE_URL`. Use imported assets or base-aware paths, with no hardcoded origin-root application links. Vite processes each HTML document's relative module/favicon paths and rewrites built assets under `/OpticEye/`; feature-local fragment/source links remain unchanged.
 - Declare the original local eye SVG as the favicon in `index.html` using a relative source path processed by Vite. This prevents an implicit origin-root `/favicon.ico` request and its 404; retain correct icon loading in development and production.
 - `npm run preview` MUST serve the built app at `http://localhost:4173/OpticEye/`. Because Vite preview loads configuration with command `serve`, set the preview script to `vite preview --base /OpticEye/`; the config's build-only condition remains intact. This preview override must not affect `npm run dev` or tests.
 - Workflow triggers: pushes to `main` and manual `workflow_dispatch`. Permissions: `contents: read`, `pages: write`, `id-token: write`. Concurrency group `pages`, `cancel-in-progress: false`.
@@ -150,4 +156,4 @@ Target URL: [OpticEye on GitHub Pages](https://sergeydus.github.io/OpticEye/). T
 - Use current official action majors, verified 19 October 2026: [checkout v7](https://github.com/actions/checkout/releases/tag/v7.0.1), [setup-node v7](https://github.com/actions/setup-node/releases/tag/v7.1.0), [configure-pages v6](https://github.com/actions/configure-pages/releases/tag/v6.0.0), [upload-pages-artifact v5](https://github.com/actions/upload-pages-artifact/releases/tag/v5.0.0), [deploy-pages v5](https://github.com/actions/deploy-pages/releases/tag/v5.0.1).
 - The owner sets repository Settings → Pages → Build and deployment → Source to **GitHub Actions** and handles pushing and repository visibility. Preparing these files does not authorize changing those settings or pushing.
 
-Local acceptance: lint, tests, and production build pass; start `npm run preview` and open `/OpticEye/` in Chromium. Confirm styled content, the oranges image decodes and stays identical through net toggles, brand navigation staying in `/OpticEye/`, and no failed requests/404 responses. Also check development at `/`. Record actual local results separately from an unrun hosted workflow.
+Local acceptance: lint, tests and production build pass. In Chromium at 320/1440 widths, directly load and refresh `/OpticEye/`, `/OpticEye/confetti/` and `/OpticEye/munker/`; verify per-page titles/descriptions, one h1, correct active nav, styles/assets, reveal/reset, cross-page navigation and no failed requests/404s. Confirm all three HTML outputs exist under dist and development works at `/`, `/confetti/`, `/munker/`. The Pages workflow already uploads all of dist and needs no change. Record actual local results separately from hosted deployment.

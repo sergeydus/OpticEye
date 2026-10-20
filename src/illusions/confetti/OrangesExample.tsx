@@ -22,7 +22,7 @@ export default function OrangesExample({ nettingHidden, viewingWidth, onViewingW
   return (
     <section aria-labelledby={`${id}-heading`} className="mt-10 border-t border-slate-300 pt-8">
       <p className="font-mono text-xs tracking-widest text-teal-800 uppercase">03 / Out in the world</p>
-      <h3 id={`${id}-heading`} className="mt-3 text-2xl font-semibold tracking-tight">At the produce aisle</h3>
+      <h2 id={`${id}-heading`} className="mt-3 text-2xl font-semibold tracking-tight">At the produce aisle</h2>
       <p id={`${id}-instructions`} className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">{image.id === 'illustration' ? 'These oranges are deliberately illustrated as greenish and unripe.' : 'This AI-generated image depicts unripe green citrus.'} Does the net make the skin look more orange? Look between the strands, then hide the netting to compare.</p>
 
       <figure aria-label="Oranges with removable orange netting" data-orange-viewing-frame className="mt-6 w-full min-w-0" style={{ maxWidth: normalizeOrangesViewingWidth(viewingWidth) }}>

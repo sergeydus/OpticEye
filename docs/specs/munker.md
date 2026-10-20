@@ -1,6 +1,6 @@
 # Munker illusion specification
 
-Status: **implemented; perceptual calibration pending**, 20 October 2026. M01–M10 pass; M11 has no human observations yet. See [validation](../munker-validation.md). Version 1.0. Depends on [implementation.md](implementation.md). Stable feature ID: `munker`.
+Status: **implemented; perceptual calibration pending**, 20 October 2026. M01–M10 pass; M11 has no human observations yet. See [validation](../munker-validation.md). Version 1.1. Depends on [implementation.md](implementation.md). Stable feature ID: `munker`.
 
 ## 1. Outcome and scope
 
@@ -18,7 +18,7 @@ All numeric choices below are provisional OpticEye design values, not measuremen
 
 ## 3. Page integration
 
-Use the approved native section navigation in implementation.md: Confetti and its oranges example first, then Munker, both mounted. Add `#confetti` and `#munker` links with a single page h1 and experiment h2 headings. Keep all three demonstrations' states independent. Native hash navigation changes position only; it does not trigger reveals or reset controls. Direct `/OpticEye/#munker` loads must work without a router or extra network requests.
+Munker has its own static document at `/OpticEye/munker/` (development `/munker/`), with a Munker-specific HTML title and description. Its title is the single h1; controls/explanation headings use h2. Use the shared header/footer and base-aware Home/Confetti/Munker links, marking Munker aria-current="page". Mount no Confetti or oranges component here. Direct loads and refreshes use the actual built HTML, without a router or fallback. No custom cross-page state is retained; native browser document-cache behavior is allowed.
 
 The Munker article is named by its heading. Its controls and status are scoped to the article. Use a distinct “Reset Munker” button so existing Confetti Reset remains unambiguous. Shared components are extracted only when both features actually use them; do not couple their state or geometry.
 
@@ -79,14 +79,14 @@ SVG title: “Munker color illusion”. Visible description: “Two green bars c
 | M04 | Width normalization, minimum/default/maximum and changes during reveal work without modifying target geometry/fill. Size normalization, scaling and persistence work. |
 | M05 | Keyboard reveal, disclosure and Reset expose correct labels/states/status and retain appropriate focus. Reset restores every local default. |
 | M06 | Two Munker instances have unique definition IDs and independent state. No renderer inherits page colors or uses blending/filters. |
-| M07 | Both experiments remain mounted. Navigation links and direct hashes work under `/OpticEye/` without a router. One h1, experiment h2 headings and appropriate subordinate headings. Links, reveals and each Reset preserve other experiments' state. |
+| M07 | Munker mounts alone at /OpticEye/munker/ with a unique HTML title/description, one h1 and subordinate h2 headings. Shared nav is base-aware and marks only Munker current. Direct loads, refreshes and links to Home/Confetti work without a router or 404. State/Reset remain local to this document. |
 | M08 | Attribution and explanation distinguish assimilation from Munker–White lightness effects and identify the original project construction. No copied third-party assets/code or runtime requests. |
 | M09 | Lint, all existing/new meaningful tests and production build pass. Preserve Confetti/oranges invariants and cover shared components at actual call sites if extracted. |
-| M10 | Chromium at 320/1440 widths, DPR 1/2 plus fractional 1.25, covers default/reveal/width extremes/sizes/Reset and stable bounds. Check actual 200% page zoom, keyboard use, no horizontal overflow, loaded styles/assets, no 404s and base-aware brand/anchor navigation. Record actual results and missing coverage. |
+| M10 | Chromium at 320/1440 widths, DPR 1/2 plus fractional 1.25, covers default/reveal/width extremes/sizes/Reset and stable bounds. Check actual 200% page zoom, keyboard use, no horizontal overflow, loaded styles/assets, no 404s and base-aware page navigation. Record actual results and missing coverage. |
 | M11 | Calibration only: at least two viewers compare the default at narrow/wide sizes, with settings/display conditions and weak/absent observations recorded. Compare visible target portions, rather than treating blurred mixtures as proof. |
 
 M01–M10 define engineering completion. M11 is a separate human milestone and does not block finishing authorized engineering work. Create `docs/munker-validation.md` during implementation; do not invent passed checks or human observations in advance. If the starting palette/scale is weak, update the spec with the deliberate tuning and repeat affected checks.
 
 ## 8. Approval record
 
-The owner approved this construction and section-navigation plan on 20 October 2026 with “Approve and implement.” Implement the feature and necessary composition/shared-control changes, preserving Confetti/oranges behavior. This approval does not itself request a commit or push. Record actual checks in docs/munker-validation.md and keep human calibration pending until observations are available.
+The owner approved the original construction on 20 October 2026 and subsequently requested separate static pages, superseding the shared-page composition. Geometry, controls, reveal and calibration rules are unchanged. Checkpoint Munker as “Add Munker illusion”, then commit the verified page split separately as “Split illusions into separate pages”. Do not push in this task. Record actual checks in docs/munker-validation.md and keep human calibration pending until observations are available.

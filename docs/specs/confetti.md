@@ -1,8 +1,8 @@
 # Confetti illusion specification
 
-Status: Owner selected the +25% exposure AI image as the sole optional AI source and Illustration as the load/Reset default. One viewer reports the effect remains visible in the selected AI image; two-viewer calibration is incomplete. Version 1.18, 20 October 2026. See [validation](../confetti-validation.md).
+Status: Owner selected the +25% exposure AI image as the sole optional AI source and Illustration as the load/Reset default. One viewer reports the effect remains visible in the selected AI image; two-viewer calibration is incomplete. Version 1.19, 20 October 2026. See [validation](../confetti-validation.md).
 
-Depends on [implementation.md](implementation.md). Stable feature ID: `confetti`. In the two-experiment page, the shell owns the `#confetti` anchor; the experiment title is an h2 and subordinate headings are h3. The shared image-size control keeps this feature's values, labels and normalization. Confetti Reset affects only its circles/oranges; Munker state is independent.
+Depends on [implementation.md](implementation.md). Stable feature ID: `confetti`. Its document is `/OpticEye/confetti/` (development `/confetti/`), with a Confetti-specific HTML title/meta description, one h1 for the experiment and h2 subordinate headings. Shared header/footer links Home/Confetti/Munker through BASE_URL, marking Confetti current. Only Confetti and its oranges example mount here; Munker is a separate document. The shared size select preserves this feature's values, labels and normalization. Reveal and Reset behavior remain unchanged; no state is shared across pages.
 
 ## 1. Intended outcome
 
@@ -176,7 +176,7 @@ Implementation completion requires C01–C11, C13–C22, and C24–C30, includin
 | Reference construction review | Figure 10 inspected; contiguous background stripes confirmed. |
 | Implementation and engineering checks | Denser baseline and viewing-size controls implemented; C10 keyboard/automated interface checks pass. See current checks in [validation](../confetti-validation.md). |
 | Human perceptual calibration | Circles: viewer 1 reports differently colored circles at spacing 3, Medium, normal page zoom. Oranges: viewer 1 reports a green-to-yellowish shift at default 450px. Both are 1 of 2 viewers; second viewer and full narrow/wide comparison remain pending. |
-| Everyday oranges example | Single-image square grid with isolated strand blending implemented; lint, 48 project tests (including 37 Confetti/oranges tests) and build pass. Illustration checked in Chromium 320/1440 at DPR 1/1.25/2; both sources checked at DPR 1/1.25. Oranges: 1 of 2 viewers: effect visible; calibration incomplete. |
+| Everyday oranges example | Single-image square grid with isolated strand blending implemented; lint, 55 project tests (including 37 Confetti/oranges tests) and build pass. Illustration checked in Chromium 320/1440 at DPR 1/1.25/2; both sources checked at DPR 1/1.25. Standalone page loads/refreshes checked at 320/1440. Oranges: 1 of 2 viewers: effect visible; calibration incomplete. |
 
 The validation record contains browser/viewport/device-pixel-ratio observations and remaining limitations. Geometry remains radius 34 and thickness ratio 1; spacing is now 2–8/default 3 and display size defaults to Medium. Reference review and screenshots are not perceptual validation of this stimulus. Report “implemented; perceptual calibration pending.” Manual screen-reader testing is outside scope and must not be reported as outstanding project work.
 

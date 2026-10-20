@@ -4,10 +4,12 @@ Updated 20 October 2026. **Implemented; perceptual calibration pending.** Circle
 
 ## Current engineering checks
 
-- Oxlint/JSX accessibility lint passes; all **48 project tests across 6 files** pass after adding Munker, including the existing **37 Confetti/oranges tests**; TypeScript/Vite production build passes with `/OpticEye/` asset paths.
+- Oxlint/JSX accessibility lint passes; all **55 project tests across 6 files** pass after the page split, including the existing **37 Confetti/oranges tests**; TypeScript/Vite production build passes with `/OpticEye/` asset paths.
 - Circle tests cover shared target colors/geometry, stripe occlusion and phase, context-only reveal, parameter boundaries, sizes, Reset/focus and instance isolation.
 - Oranges tests cover unchanged image node/src/attributes through keyboard reveal, deterministic 6px cells/1px strands, overlay-only blending, size/source independence, fallback and Reset. The two source options are **Illustration** and **Citrus in a crate**; the latter keeps the visible caption “AI-generated image; the net is drawn on top.” in both net states.
 - Defaults: circles spacing 3, Medium/360px; oranges Illustration, Medium/450px, net visible. Reset restores those values.
+
+Confetti now mounts alone at `/OpticEye/confetti/`, with one h1 and its own HTML title/description. The [page-split checks](pages-validation.md) verify current direct loads, refreshes, navigation, both orange assets and unchanged reveal geometry at 320/1440, with no 404s. The following density/calibration records remain applicable to the unchanged stimuli; earlier combined-page composition is historical.
 
 Chrome 155.0.8059.85 checked the production preview at 320/1440 CSS widths, DPR 1 and 1.25, both retained sources and all three oranges sizes (24 combinations). Assets decoded at native dimensions. Grid stayed 6px/1px with overlay blending on strands only; image filter none, transition 0s, image blending normal. Space hide/show preserved every image attribute and document-space rectangle. The AI caption persisted, source changes while hidden stayed hidden, and Reset restored Illustration/450/visible net with focus. Brand remained `/OpticEye/`. No failed requests, console/page errors, 4xx/5xx or horizontal overflow. Final AI phone/desktop screenshots were inspected. The subsequent source-label rename passes the same 37 tests, lint and build.
 

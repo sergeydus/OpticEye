@@ -30,7 +30,7 @@ export default function Munker() {
     <article aria-labelledby={`${id}-heading`}>
       <div className="mb-8 sm:mb-10">
         <p className="mb-4 font-mono text-xs tracking-widest text-teal-800 uppercase">Experiment 002 / Color & context</p>
-        <h2 id={`${id}-heading`} className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">{MUNKER.title}</h2>
+        <h1 id={`${id}-heading`} className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">{MUNKER.title}</h1>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{MUNKER.instructions}</p>
       </div>
 
@@ -56,7 +56,7 @@ export default function Munker() {
         </div>
 
         <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
-          <h3 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h3>
+          <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
           <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Remove the grid to compare the bars.</p>
           <button type="button" aria-pressed={!contextVisible} aria-describedby={`${id}-reveal-help`} onClick={toggleReveal} className={`min-h-12 w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>Show base color</button>
           <button type="button" onClick={reset} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Reset Munker</button>
@@ -75,9 +75,9 @@ export default function Munker() {
       </div>
 
       <section className="mt-10 border-t border-slate-300 sm:mt-14">
-        <h3><button id={`${id}-explanation-toggle`} type="button" aria-expanded={explanationOpen} aria-controls={`${id}-explanation`} onClick={() => setExplanationOpen(!explanationOpen)} className={`flex min-h-16 w-full items-center justify-between gap-4 py-5 text-left text-lg font-medium ${focus}`}>
+        <h2><button id={`${id}-explanation-toggle`} type="button" aria-expanded={explanationOpen} aria-controls={`${id}-explanation`} onClick={() => setExplanationOpen(!explanationOpen)} className={`flex min-h-16 w-full items-center justify-between gap-4 py-5 text-left text-lg font-medium ${focus}`}>
           Why it happens<span aria-hidden="true" className="font-mono text-xl text-teal-800">{explanationOpen ? '−' : '+'}</span>
-        </button></h3>
+        </button></h2>
         <div id={`${id}-explanation`} hidden={!explanationOpen} className="max-w-3xl pb-6 text-sm leading-relaxed text-slate-700">
           <p>{MUNKER.explanation}</p><p className="mt-3">{MUNKER.limitation}</p>
           <p className="mt-4">{MUNKER.attribution}</p>

@@ -63,7 +63,7 @@ describe('Munker construction', () => {
 describe('Munker experience', () => {
   it('starts at the specified defaults without exposing the proof or explanation', () => {
     const { container } = render(<Munker />)
-    expect(screen.getByRole('heading', { name: 'Munker illusion', level: 2 })).toBeVisible()
+    expect(screen.getByRole('heading', { name: 'Munker illusion', level: 1 })).toBeVisible()
     expect(screen.getByRole('img', { name: 'Munker color illusion' })).toHaveAccessibleDescription(/Use Show base color/)
     expect(screen.getByRole('button', { name: 'Show base color' })).toHaveAttribute('aria-pressed', 'false')
     expect(screen.getByRole('slider', { name: 'Stripe width' })).toHaveValue('6')
