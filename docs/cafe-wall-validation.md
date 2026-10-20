@@ -1,6 +1,6 @@
 # Café Wall implementation validation
 
-20 October 2026. **Implemented; perceptual calibration pending.** CW01–CW12 pass. CW13 has no human-viewing observations. The spec was committed separately as `ba34827` before feature code. The approved mortar range remains **1–8**; no optional range/tile-count changes were made.
+20 October 2026. **Implemented; perceptual calibration pending (1 of 2 viewers).** CW01–CW12 pass. Viewer 1 confirms the effect on desktop and mobile; CW13 still needs a second viewer. The spec was committed separately as `ba34827` before feature code. The approved mortar range remains **1–8**, default **3**; no optional range/tile-count changes were made.
 
 ## Engineering checks
 
@@ -37,6 +37,8 @@ Visible/revealed/default section screenshots were captured in the checked enviro
 
 ## Human calibration and delivery
 
-CW13 remains pending. At defaults, ask at least two viewers on desktop and mobile whether gray mortar looks tilted/wedge-shaped with tiles and parallel after Hide tiles. Record settings and viewing conditions where supplied; retain unknown details as unknown and weak/absent results honestly. Existing Confetti/Munker calibration does not cover this new illusion. Firefox/WebKit and forced-colors checks are not claimed; manual screen-reader testing is outside scope.
+**Viewer 1, 20 October 2026:** the owner confirms Café Wall works on desktop and mobile. At default settings and normal page zoom, mortar lines look tilted before reveal and straight/parallel after Hide tiles. Offset 0 and 100 weaken the effect as expected. Thinner mortar strengthens it, but the default width 3 is already noticeable and is retained. The follow-up confirms mobile as well; no browser, exact viewport, DPR or viewing distance was supplied. Default settings are offset 50%, mortar 3 and Medium image size (540px maximum, constrained by the viewport).
 
-The implementation is committed locally as “Add Café Wall illusion” after the spec checkpoint. Neither commit is pushed or deployed in this task. No dependencies or workflow changes were needed.
+**CW13: 1 of 2 viewers; desktop and mobile observed.** A second viewer must confirm both device sizes before marking calibration complete. Existing Confetti/Munker calibration does not cover this new illusion. Firefox/WebKit and forced-colors checks are not claimed; manual screen-reader testing is outside scope.
+
+The implementation checkpoint is `eea8e80` (“Add Café Wall illusion”), after specification checkpoint `ba34827`. Following local viewing, the owner authorized pushing main and checking the Pages deployment. No dependencies or workflow changes were needed; deployment results are reported with the workflow run.
