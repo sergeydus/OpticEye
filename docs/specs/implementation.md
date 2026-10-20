@@ -1,12 +1,12 @@
 # OpticEye implementation specification
 
-Status: implementation baseline for separate static illusion pages, version 1.17. Updated 20 October 2026.
+Status: implementation baseline for separate static illusion pages, with the approved Café Wall extension, version 1.19. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. The current scope is a Home page listing the illusions, a Confetti page (including oranges/netting), and a Munker page defined in [munker.md](munker.md). Each is a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further illusions remain outside scope. Feature engineering/calibration records remain separate.
+This document defines project-wide rules. The scope is a Home page listing the illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), and the approved [Café Wall](cafe-wall.md) extension. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -31,6 +31,7 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `index.html`, `src/main.tsx`, `src/App.tsx` | Home document, React entry and list of illusion cards. |
 | `confetti/index.html`, `confetti/main.tsx` | Confetti document and entry, composing its experience with the shared shell. |
 | `munker/index.html`, `munker/main.tsx` | Munker document and entry, composing its experience with the shared shell. |
+| `cafe-wall/index.html`, `cafe-wall/main.tsx` (planned) | Café Wall document and entry; create only when implementation is requested. |
 | `src/illusions.ts` | Small typed metadata list (ID/folder, navigation name, title, one-line description); drives cards, navigation and HTML build inputs. |
 | `src/mountPage.tsx` | Shared React StrictMode mounting and Tailwind CSS import. |
 | `src/components/SiteLayout.tsx`, `SiteHeader.tsx`, `SiteFooter.tsx` | Shared page shell and base-aware Home/illusion navigation, with current-page state supplied by each entry. |
@@ -50,8 +51,13 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `src/illusions/munker/MunkerStimulus.tsx` | Deterministic two-target SVG and separate context layers. |
 | `src/illusions/munker/munkerModel.ts` | Shared target fill, two context colors, normalized controls, geometry and attribution. |
 | `src/illusions/munker/` tests | Target/phase/reveal invariants, interactions and instance isolation. |
+| `src/illusions/cafe-wall/CafeWall.tsx` (planned) | Local offset, mortar width, size, reveal, explanation and Reset state. |
+| `src/illusions/cafe-wall/CafeWallStimulus.tsx` (planned) | Fixed surface/mortar targets and removable square-tile context. |
+| `src/illusions/cafe-wall/cafeWallModel.ts` (planned) | Palette, defaults, normalization, original tile/mortar geometry and attribution. |
+| `src/illusions/cafe-wall/` tests (planned) | Row coverage/parity, parallel targets, context-only reveal, controls and instance isolation. |
 | `src/pages.test.tsx` | Home links, base-aware/current-page navigation and actual page-entry composition without mounting another illusion. |
 | `docs/munker-validation.md` | Actual engineering results and separate human observations. |
+| `docs/cafe-wall-validation.md` (planned) | Actual engineering/calibration record; create during implementation, without advance pass claims. |
 | `docs/pages-validation.md` | Multi-page build, direct-load/refresh/navigation, metadata, development-base and responsive browser results. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
@@ -89,6 +95,14 @@ The user MUST be able to observe the initial effect before reading the answer. P
 - Each HTML entry mounts only its own page. Navigation/refresh loads a document with local defaults; no shared state, custom cross-page persistence or global Reset. Native browser Back/Forward and its document-cache behavior need no interception. Confetti Reset still covers its circles/oranges; Reset Munker remains local.
 - Adding an illusion requires a new top-level folder with index.html and main.tsx, its original feature code, and one metadata-list entry. Do not add a component registry, dynamic renderer, router or plugin system. Build inputs, home cards and nav pick up the list entry automatically.
 - Extract the actual shared shell and size select into src/components/. Preserve geometry, palettes, labels, defaults and controls while changing composition. Commit the verified restructure separately from the Munker checkpoint; do not push in this task.
+
+### Approved Café Wall extension
+
+- When implementation is requested, add `cafe-wall/index.html` → `/OpticEye/cafe-wall/` (development `/cafe-wall/`) and its relative entry, with HTML title “Café Wall illusion | OpticEye” and the feature-specific description in cafe-wall.md. Mount only that experience, with one h1 and subordinate h2 headings.
+- Add one `cafe-wall` metadata entry. Existing Home, nav and build-input generation must include it automatically. The shared nav then has Home/Confetti/Munker/Café Wall, exactly one current-page marker, and wrapping/touch targets that fit 320px. Do not change the existing base-path condition, introduce a router, or duplicate the shell.
+- Reuse SiteLayout, SiteHeader, SiteFooter, mountPage and ViewingSizeControl. The new size values/default belong to Café Wall's model; sharing the select must not change Confetti/Munker choices. Keep rendering/state local, without a generic stimulus engine.
+- Café Wall's reveal removes only tiles and retains the same mortar rectangles, surface and bounds. Mortar-width controls may deliberately change thickness/spacing; row-offset controls change only tile context. These parameter changes must not be confused with reveal invariants.
+- During implementation extend page tests, direct-load/refresh checks and dist output checks to all four documents; retain all existing feature tests/calibration records. Current three-page code and deployment are unchanged by this draft. Do not create empty page/code files in the spec-writing step.
 
 - Every interaction MUST work with pointer, touch, and keyboard. No essential feature may depend on hover, dragging alone, or holding a button.
 - Reveal MUST be persistent until toggled again; experiment controls MUST retain their selected values through reveal toggles.

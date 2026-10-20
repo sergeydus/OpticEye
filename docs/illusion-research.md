@@ -1,6 +1,6 @@
 # Browser-renderable optical illusions
 
-Researched 19 October 2026; Munker source rechecked 20 October. Confetti and Munker are implemented and calibrated for their default demonstrations, with two viewers confirming desktop and mobile. The initial report specifies defaults/normal zoom; the mobile follow-up explicitly confirms both viewers without further condition details. See [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for the scope and engineering evidence. The remaining illusions are a backlog. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
+Researched 19 October 2026; Munker and Café Wall sources rechecked 20 October. Confetti and Munker are implemented and calibrated for their default demonstrations, with two viewers confirming desktop and mobile. The initial report specifies defaults/normal zoom; the mobile follow-up explicitly confirms both viewers without further condition details. See [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for the scope and engineering evidence. Café Wall now has a draft spec; the other unimplemented illusions remain a backlog. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
 
 ## Suggested starting set
 
@@ -8,7 +8,7 @@ Researched 19 October 2026; Munker source rechecked 20 October. Confetti and Mun
 | --- | --- | --- | --- |
 | 1 | Confetti | Identical base objects appear to have several hues under different colored stripes. | SVG disks with foreground stripe patterns; hide the stripes to expose identical base fills. |
 | 2 | Munker | Identical color segments appear different within differently colored grids. | SVG or CSS stripes; remove the grid and show the target segments side by side. |
-| 3 | Cafe Wall | Parallel mortar lines between offset tile rows appear tilted. | SVG tiles and thin gray mortar; align rows or hide tiles and overlay straight reference lines. |
+| 3 | Café Wall | Parallel mortar lines between offset tile rows appear tilted. | Original SVG tile context and shared gray mortar targets; hide tiles while preserving the same target bands. Draft spec ready. |
 | 4 | Muller-Lyer | Line lengths are misjudged in the presence of arrow fins. | SVG equal-length shafts with opposing fins; hide fins and show endpoint guides. |
 | 5 | Kanizsa triangle | Aligned cutout disks suggest a triangle with contours that were not drawn. | SVG disks with wedges; rotate the disks out of alignment to weaken the implied shape. |
 
@@ -34,13 +34,13 @@ Source: [Michael Bach, Munker Illusion](https://michaelbach.de/ot/col-Munker/), 
 
 The source was rechecked on 20 October 2026 for the [Munker spec](specs/munker.md). The owner approved two identical green bars and two colored stripe contexts, then requested a separate static Munker page alongside the Home and Confetti documents. The numeric palette and geometry remain provisional project choices pending human calibration.
 
-## 3. Cafe Wall
+## 3. Café Wall
 
 Gregory and Heard describe an arrangement of staggered light and dark tiles separated by mortar lines that appear sloped despite being parallel. Mortar width and luminance are relevant stimulus parameters.
 
-Use high-contrast tile rows with a controlled horizontal offset and thin gray separators. Provide offset and mortar-width controls. A reveal should leave the horizontal reference lines visible while removing the tiles. Preserve the pattern's proportions on narrow screens.
+The [draft Café Wall spec](specs/cafe-wall.md) defines six rows of original square tiles, five shared gray mortar bands, row-offset/mortar-width controls and a context-only reveal. It proposes a standalone `/cafe-wall/` page using the existing static-page setup. The reveal retains the actual mortar rectangles rather than replacing them with guides. Numerical colors/dimensions are project choices awaiting implementation and calibration.
 
-Source: Richard L. Gregory and Priscilla Heard (1979), *Border locking and the Cafe Wall illusion*, Perception 8, 365-380, [author-hosted paper](https://www.richardgregory.org/papers/cafe_wall/cafe-wall_p1.htm).
+Sources rechecked 20 October 2026: Richard L. Gregory and Priscilla Heard (1979), *Border locking and the Café Wall illusion*, Perception 8, 365–380, [author-hosted paper](https://www.richardgregory.org/papers/cafe_wall/cafe-wall_p1.htm) and [results/discussion](https://www.richardgregory.org/papers/cafe_wall/cafe-wall_p3.htm); [Michael Bach's demonstration](https://michaelbach.de/ot/ang-cafewall/). The latter supports the half-tile starting displacement; distinguish half a tile from half of a two-tile color repeat. Mortar-width effects do not imply a universal CSS-pixel optimum. Keep proposed mechanisms tentative. This is a documentation-only draft; no Café Wall page/code or calibration result exists yet.
 
 ## 4. Muller-Lyer
 

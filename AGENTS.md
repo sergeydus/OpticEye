@@ -13,6 +13,7 @@ Build a browser-based optical illusion playground. Users should be able to obser
 - Put future illusion components under `src/illusions/`. Keep reusable controls separate from illusion rendering and scientific metadata.
 - Read `docs/illusion-research.md` before implementing an illusion. Preserve source links and attribution with each implementation.
 - Follow `docs/specs/implementation.md` for shared implementation rules and the feature contracts in `docs/specs/confetti.md` and `docs/specs/munker.md`. Update the affected specs when implementation decisions change their requirements.
+- Read `docs/specs/cafe-wall.md` for the approved Café Wall construction. Keep its context-only reveal distinct from parameter changes, and record engineering checks separately from human calibration.
 
 ## Rendering and scientific accuracy
 
