@@ -1,6 +1,6 @@
 # Kanizsa triangle specification
 
-Status: **approved for implementation; engineering and perceptual calibration pending**. Version 1.1, 20 October 2026. No implementation, engineering checks or human calibration is claimed. Depends on [implementation.md](implementation.md). Stable feature ID, folder and URL slug: `kanizsa`.
+Status: **implemented; perceptual calibration pending**. Version 1.2, 20 October 2026. K01–K09 pass; K10 has no human observations yet. See [validation](../kanizsa-validation.md). The feature is local and unpushed for owner viewing. Depends on [implementation.md](implementation.md). Stable feature ID, folder and URL slug: `kanizsa`.
 
 ## 1. Intended outcome and scope
 
@@ -20,9 +20,9 @@ The two research abstracts/bibliographic records were read, not their full texts
 
 ## 3. Page and file responsibilities
 
-Production URL: `/OpticEye/kanizsa/`; development: `/kanizsa/`. Reuse SiteLayout, SiteHeader, SiteFooter, mountPage and ViewingSizeControl. After approval, add one `kanizsa` entry to `src/illusions.ts`; the list supplies Home, navigation and build inputs. Current five-document runtime stays unchanged until approved.
+Production URL: `/OpticEye/kanizsa/`; development: `/kanizsa/`. Reuse SiteLayout, SiteHeader, SiteFooter, mountPage and ViewingSizeControl. Add one `kanizsa` entry to `src/illusions.ts`; the list supplies Home, navigation and build inputs. The build now contains Home plus five illusion documents.
 
-| Planned file | Responsibility |
+| File | Responsibility |
 | --- | --- |
 | `kanizsa/index.html` | Static title “Kanizsa triangle \| OpticEye”, unique meta description, relative local favicon/module and root. |
 | `kanizsa/main.tsx` | Mount only Kanizsa in SiteLayout, currentPage="kanizsa". |
@@ -30,11 +30,11 @@ Production URL: `/OpticEye/kanizsa/`; development: `/kanizsa/`. Reuse SiteLayout
 | `src/illusions/kanizsa/KanizsaStimulus.tsx` | Fixed surface and exactly three deterministic cutout-disk paths. |
 | `src/illusions/kanizsa/kanizsaModel.ts` | Named constants, normalization, center/orientation/path geometry and source metadata; distinct basename for Windows. |
 | `src/illusions/kanizsa/` tests | Sector geometry, alignment/rotation, unchanged surface/envelopes, controls and instance isolation. |
-| `docs/kanizsa-validation.md` | Actual engineering results and separately recorded human observations, created during approved implementation. |
+| `docs/kanizsa-validation.md` | Actual engineering results and separately recorded human observations, recorded during implementation. |
 
 Metadata: ID `kanizsa`, name “Kanizsa”, title “Kanizsa triangle”, description “Aligned cutout disks can suggest a triangle. Rotate the cutouts to compare the surrounding shapes.” HTML description: “Explore the Kanizsa triangle: compare aligned and rotated cutout disks, adjust disk size, and examine how a shape can appear between them.” Keep HTML and list titles/descriptions synchronized.
 
-One h1 (“Kanizsa triangle”), subordinate h2 headings. Navigation after approval: Home / Confetti / Munker / Café Wall / Müller-Lyer / Kanizsa, using BASE_URL and exactly one aria-current="page". Six links must wrap at 320px and actual 200% zoom. Keep build-only `/OpticEye/` and dev `/`, no router or workflow changes, no experiment state shared across documents. Preserve existing demonstrations and calibration records.
+One h1 (“Kanizsa triangle”), subordinate h2 headings. Shared navigation: Home / Confetti / Munker / Café Wall / Müller-Lyer / Kanizsa, using BASE_URL and exactly one aria-current="page". Six links must wrap at 320px and actual 200% zoom. Keep build-only `/OpticEye/` and dev `/`, no router or workflow changes, no experiment state shared across documents. Preserve existing demonstrations and calibration records.
 
 ## 4. Defaults and state
 

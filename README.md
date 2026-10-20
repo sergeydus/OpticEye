@@ -1,6 +1,6 @@
 # OpticEye
 
-A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. Home lists the experiments; each illusion has its own static page. Confetti compares identical circles under three stripe colors and includes an oranges/netting example. Munker compares identical green bars under two stripe contexts. Café Wall explores apparent tilt in parallel mortar bands between staggered tile rows. Müller-Lyer compares fixed, equal-length shafts with opposing arrow fins. Change the context or viewing size, then reveal the unchanged targets. Each experiment owns its state and Reset; Confetti Reset also restores its oranges example.
+A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. Home lists the experiments; each illusion has its own static page. Confetti compares identical circles under three stripe colors and includes an oranges/netting example. Munker compares identical green bars under two stripe contexts. Café Wall explores apparent tilt in parallel mortar bands between staggered tile rows. Müller-Lyer compares fixed, equal-length shafts with opposing arrow fins. Kanizsa uses three cutout disks to suggest a triangle without drawing one. Change the context or viewing size, then reveal the unchanged targets. Each experiment owns its state and Reset; Confetti Reset also restores its oranges example.
 
 ## Development
 
@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all five HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/` and `/muller-lyer/`.
+`build` checks TypeScript and produces all six HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/` and `/kanizsa/`.
 
 ## GitHub Pages
 
@@ -33,15 +33,16 @@ npm run build
 npm run preview
 ```
 
-Check all five addresses, including a refresh and navigation between them:
+Check all six addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
 - [Munker](http://localhost:4173/OpticEye/munker/)
 - [Café Wall](http://localhost:4173/OpticEye/cafe-wall/)
 - [Müller-Lyer](http://localhost:4173/OpticEye/muller-lyer/)
+- [Kanizsa](http://localhost:4173/OpticEye/kanizsa/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header/footer navigation marks the current page. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The owner has authorized deploying Müller-Lyer after two-viewer calibration; the same Pages workflow publishes all five documents.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header/footer navigation marks the current page. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The existing four illusions are deployed and calibrated. Kanizsa remains local for owner viewing; the existing Pages workflow can publish all six documents when authorized.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner handles this setting, repository visibility, and pushing. The workflow does not automatically enable Pages.
 
@@ -54,6 +55,8 @@ See the [Confetti validation record](docs/confetti-validation.md) and [Munker va
 Café Wall is implemented with row offset 0–100% (default 50), mortar width 1–8 drawing units (default 3), and Compact/Medium/Large 240/540/720px maximum widths. Hide tiles removes only the tile context; mortar-width changes deliberately change target thickness/spacing. Very thin settings can be faint at small sizes. [Café Wall validation](docs/cafe-wall-validation.md) records engineering checks and two viewers confirming the effect on desktop and mobile. Café Wall is implemented and calibrated; the default mortar width remains 3.
 
 Müller-Lyer is implemented and calibrated on desktop and mobile with fin angle 15–90° (default 35), fin arm length 24–96 drawing units (default 64), and image sizes 240/540/720px (default Medium/540). Hide fins removes four miter-joined polylines while preserving both shaft elements. [Müller-Lyer validation](docs/muller-lyer-validation.md) records passing engineering checks and both viewers seeing the lower line as longer before reveal and the two as equal afterward, at defaults and normal zoom.
+
+Kanizsa is implemented locally with three 60° cutout disks, a 90° rotation comparison, radius 32–96 drawing units (default 64), and image sizes 240/540/720px (default Medium/540). Only sector paths and a white surface are drawn; no triangle layer exists. Human calibration remains pending. See [Kanizsa validation](docs/kanizsa-validation.md) for actual engineering results.
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 
@@ -76,6 +79,7 @@ Add one item (folder ID, navigation name, title and description) to `src/illusio
 - `src/illusions/munker/`: independent two-bar experiment, SVG renderer, geometry/metadata, and tests.
 - `src/illusions/cafe-wall/`: independent tile/mortar experiment, SVG renderer, geometry/metadata, and tests.
 - `src/illusions/muller-lyer/`: independent fin-angle/length experiment, persistent shaft targets, geometry/metadata and tests.
+- `src/illusions/kanizsa/`: original sector geometry, rotation comparison, radius control and tests.
 - `src/components/ViewingSizeControl.tsx`: native image-size select shared by the experiments.
 - `src/assets/oranges.svg` and `oranges.LICENSE.txt`: original textured illustration of 37 smaller, mid-tone green fruit (no separate public license chosen), shown in one frame. The square net retains 1 CSS pixel strands in 6 CSS pixel cells, blending only strands with the image. Hide netting leaves the same image underneath. Reset restores Medium (450px maximum), Illustration and visible netting. Calibrated with two viewers on desktop and mobile.
 - Optional `src/assets/oranges-ai.webp`: Gemini-generated image selected by the owner with a global +25% linear-light exposure edit, native 1024 × 687 resolution and stripped metadata. Choose it under Image source; Illustration remains the default on load and Reset. The visible caption identifies the AI image and separate net overlay. Exact prompts, Google terms and processing are in `src/assets/oranges-ai.ORIGIN.md`: no license asserted; AI-generated content may not be eligible for copyright.
@@ -87,5 +91,6 @@ Add one item (folder ID, navigation name, title and description) to `src/illusio
 - [Munker specification](docs/specs/munker.md): second illusion's construction, controls, page integration and acceptance criteria.
 - [Café Wall specification](docs/specs/cafe-wall.md): tile/mortar construction, control/reveal rules and acceptance criteria.
 - [Müller-Lyer specification](docs/specs/muller-lyer.md): connected fin geometry, fixed shafts, controls, reveal and acceptance criteria.
+- [Kanizsa specification](docs/specs/kanizsa.md): equilateral sectors, rotation invariants, controls and acceptance criteria.
 
 No backend, router, analytics, or UI library is configured. The experience uses no downloaded source artwork or runtime research requests. Further illusions remain in the research backlog.

@@ -23,6 +23,12 @@ export const ILLUSIONS = [
     title: 'Müller-Lyer illusion',
     description: 'Arrow fins can change perceived line length. Hide the fins to compare the horizontal shafts.',
   },
+  {
+    id: 'kanizsa',
+    name: 'Kanizsa',
+    title: 'Kanizsa triangle',
+    description: 'Aligned cutout disks can suggest a triangle. Rotate the cutouts to compare the surrounding shapes.',
+  },
 ] as const
 
 export type PageId = 'home' | (typeof ILLUSIONS)[number]['id']

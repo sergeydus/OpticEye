@@ -1,12 +1,12 @@
 # OpticEye implementation specification
 
-Status: implementation baseline for separate static illusion pages, including calibrated Müller-Lyer, with the approved Kanizsa extension; version 1.26. Updated 20 October 2026.
+Status: implementation baseline for separate static illusion pages, including calibrated Müller-Lyer, with the approved Kanizsa extension; version 1.27. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. The implemented scope is a Home page listing the illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), and [Café Wall](cafe-wall.md). A fourth illusion, [Müller-Lyer](muller-lyer.md), is implemented and calibrated on desktop and mobile; the owner has authorized deployment. A fifth illusion, [Kanizsa triangle](kanizsa.md), is approved for implementation; engineering and calibration are not yet claimed. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
+This document defines project-wide rules. The implemented scope is a Home page listing the illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), and [Café Wall](cafe-wall.md). A fourth illusion, [Müller-Lyer](muller-lyer.md), is implemented and calibrated on desktop and mobile; the owner has authorized deployment. A fifth illusion, [Kanizsa triangle](kanizsa.md), is implemented locally with perceptual calibration pending; keep it unpushed for owner viewing. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -60,16 +60,16 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `src/illusions/muller-lyer/MullerLyerStimulus.tsx` | Fixed surface and two shaft targets with removable fin context. |
 | `src/illusions/muller-lyer/mullerLyerModel.ts` | Shared shaft constants, explicit fin directions, pure geometry, normalization and attribution. |
 | `src/illusions/muller-lyer/` tests | Equal spans, fin bounds/orientation, target preservation, controls and instance isolation. |
-| `kanizsa/index.html`, `kanizsa/main.tsx` (planned) | Fifth illusion document and isolated entry after owner approval. |
-| `src/illusions/kanizsa/Kanizsa.tsx` (planned) | Rotation comparison, radius/size controls, disclosure, proof/status and Reset. |
-| `src/illusions/kanizsa/KanizsaStimulus.tsx` (planned) | Fixed white surface and exactly three sector paths; no triangle layer. |
-| `src/illusions/kanizsa/kanizsaModel.ts` (planned) | Equilateral centers, cutout orientation, normalization, path construction and source metadata. |
-| `src/illusions/kanizsa/` tests (planned) | Alignment, sector/bounds invariants, rotation comparison, controls and instance isolation. |
+| `kanizsa/index.html`, `kanizsa/main.tsx` | Fifth illusion document and isolated entry, added after the specification checkpoint. |
+| `src/illusions/kanizsa/Kanizsa.tsx` | Rotation comparison, radius/size controls, disclosure, proof/status and Reset. |
+| `src/illusions/kanizsa/KanizsaStimulus.tsx` | Fixed white surface and exactly three sector paths; no triangle layer. |
+| `src/illusions/kanizsa/kanizsaModel.ts` | Equilateral centers, cutout orientation, normalization, path construction and source metadata. |
+| `src/illusions/kanizsa/` tests | Alignment, sector/bounds invariants, rotation comparison, controls and instance isolation. |
 | `src/pages.test.tsx` | Home links, base-aware/current-page navigation and actual page-entry composition without mounting another illusion. |
 | `docs/munker-validation.md` | Actual engineering results and separate human observations. |
 | `docs/cafe-wall-validation.md` | Actual Café Wall engineering results and separate human calibration observations. |
 | `docs/muller-lyer-validation.md` | Actual Müller-Lyer engineering checks and separate human viewing, recorded during approved implementation. |
-| `docs/kanizsa-validation.md` (planned) | Actual Kanizsa engineering results and separate human observations, created during approved implementation. |
+| `docs/kanizsa-validation.md` | Actual Kanizsa engineering results and separate human observations, recorded during implementation. |
 | `docs/pages-validation.md` | Multi-page build, direct-load/refresh/navigation, metadata, development-base and responsive browser results. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
@@ -102,9 +102,9 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 ### Static page structure
 
-- Build `index.html` → `/OpticEye/`, `confetti/index.html` → `/OpticEye/confetti/`, `munker/index.html` → `/OpticEye/munker/`, `cafe-wall/index.html` → `/OpticEye/cafe-wall/`, and `muller-lyer/index.html` → `/OpticEye/muller-lyer/`. Use Vite build.rollupOptions.input for all five, deriving illusion inputs from src/illusions.ts. Vite 8 exposes this as a compatibility alias; no router or fallback 404.html is required.
-- Every document has its own static title and meta description. Home uses “OpticEye — Optical illusions”; illusion documents use “Confetti illusion | OpticEye”, “Munker illusion | OpticEye”, “Café Wall illusion | OpticEye” and “Müller-Lyer illusion | OpticEye”. Each rendered page has exactly one h1; illusion subordinate headings use h2. Remove the shell's in-page section navigation and extra page heading from illusion pages.
-- Shared header navigation is labeled “Main navigation” and links Home/Confetti/Munker/Café Wall/Müller-Lyer with import.meta.env.BASE_URL. Mark exactly the current link aria-current="page". The brand links Home. Use ordinary document links; preserve feature-local explanation fragments.
+- Build `index.html` → `/OpticEye/`, `confetti/index.html` → `/OpticEye/confetti/`, `munker/index.html` → `/OpticEye/munker/`, `cafe-wall/index.html` → `/OpticEye/cafe-wall/`, `muller-lyer/index.html` → `/OpticEye/muller-lyer/`, and `kanizsa/index.html` → `/OpticEye/kanizsa/`. Use Vite build.rollupOptions.input for all six, deriving illusion inputs from src/illusions.ts. Vite 8 exposes this as a compatibility alias; no router or fallback 404.html is required.
+- Every document has its own static title and meta description. Home uses “OpticEye — Optical illusions”; illusion documents use “Confetti illusion | OpticEye”, “Munker illusion | OpticEye”, “Café Wall illusion | OpticEye”, “Müller-Lyer illusion | OpticEye” and “Kanizsa triangle | OpticEye”. Each rendered page has exactly one h1; illusion subordinate headings use h2. Remove the shell's in-page section navigation and extra page heading from illusion pages.
+- Shared header navigation is labeled “Main navigation” and links Home/Confetti/Munker/Café Wall/Müller-Lyer/Kanizsa with import.meta.env.BASE_URL. Mark exactly the current link aria-current="page". The brand links Home. Use ordinary document links; preserve feature-local explanation fragments.
 - Each HTML entry mounts only its own page. Navigation/refresh loads a document with local defaults; no shared state, custom cross-page persistence or global Reset. Native browser Back/Forward and its document-cache behavior need no interception. Confetti Reset still covers its circles/oranges; Reset Munker remains local.
 - Adding an illusion requires a new top-level folder with index.html and main.tsx, its original feature code, and one metadata-list entry. Do not add a component registry, dynamic renderer, router or plugin system. Build inputs, home cards and nav pick up the list entry automatically.
 - Extract the actual shared shell and size select into src/components/. Preserve geometry, palettes, labels, defaults and controls while changing composition. Commit the verified restructure separately from the Munker checkpoint; do not push in this task.
@@ -130,7 +130,7 @@ The user MUST be able to observe the initial effect before reading the answer. P
 - [kanizsa.md](kanizsa.md) is approved as a sixth HTML document: Home plus five illusions. Commit the specification before feature code; do not push until owner viewing and authorization.
 - Add `kanizsa/index.html` and `main.tsx`, plus one metadata entry for `/OpticEye/kanizsa/` (dev `/kanizsa/`). Existing metadata-driven inputs/cards/nav should include it automatically; verify six wrapping nav links and exactly one current marker at 320px/200% zoom.
 - Reuse the shared shell/mounting/size select. Keep three cutout-disk paths and all feature state local, with no triangle layer, router, registry, shared experiment state, dependencies or workflow changes.
-- The comparison rotates openings 90° without moving circle envelopes; radius and viewing size are independent controls. Retain all existing demos/calibration. Extend meaningful tests and page/browser/build checks to six documents only during implementation; record actual engineering results separately from human calibration.
+- The comparison rotates openings 90° without moving circle envelopes; radius and viewing size are independent controls. Retain all existing demos/calibration. Extend meaningful tests and page/browser/build checks to six documents only during implementation; K01–K09 now pass; see docs/kanizsa-validation.md. K10 remains pending human viewing. The implementation is local and unpushed.
 
 ### Shared interaction requirements
 
@@ -201,4 +201,4 @@ Target URL: [OpticEye on GitHub Pages](https://sergeydus.github.io/OpticEye/). T
 - Use current official action majors, verified 19 October 2026: [checkout v7](https://github.com/actions/checkout/releases/tag/v7.0.1), [setup-node v7](https://github.com/actions/setup-node/releases/tag/v7.1.0), [configure-pages v6](https://github.com/actions/configure-pages/releases/tag/v6.0.0), [upload-pages-artifact v5](https://github.com/actions/upload-pages-artifact/releases/tag/v5.0.0), [deploy-pages v5](https://github.com/actions/deploy-pages/releases/tag/v5.0.1).
 - The owner sets repository Settings → Pages → Build and deployment → Source to **GitHub Actions** and handles pushing and repository visibility. Preparing these files does not authorize changing those settings or pushing.
 
-Local acceptance: lint, tests and production build pass. In Chromium at 320/1440 widths, directly load and refresh `/OpticEye/`, `/OpticEye/confetti/`, `/OpticEye/munker/`, `/OpticEye/cafe-wall/` and `/OpticEye/muller-lyer/`; verify per-page titles/descriptions, one h1, correct active nav, styles/assets, reveal/reset, cross-page navigation and no failed requests/404s. Confirm all five HTML outputs exist under dist and development works at `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`. The Pages workflow already uploads all of dist and needs no change. Record actual local results separately from hosted deployment.
+Local acceptance: lint, tests and production build pass. In Chromium at 320/1440 widths, directly load and refresh `/OpticEye/`, `/OpticEye/confetti/`, `/OpticEye/munker/`, `/OpticEye/cafe-wall/`, `/OpticEye/muller-lyer/` and `/OpticEye/kanizsa/`; verify per-page titles/descriptions, one h1, correct active nav, styles/assets, reveal/reset, cross-page navigation and no failed requests/404s. Confirm all six HTML outputs exist under dist and development works at `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`. The Pages workflow already uploads all of dist and needs no change. Record actual local results separately from hosted deployment.
