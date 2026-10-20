@@ -62,6 +62,8 @@ Sources checked 20 October 2026: [Michael Bach, Kanizsa Illusion](https://michae
 
 These are research candidates, **not approved specifications or new implementation scope**. The priority and effort estimates are engineering judgments about this project, not measured effect strengths. Source pages and the paper abstracts identified below were read; no interactive demonstration was perceptually validated in this research pass. No source artwork, scripts or movies were copied. None of these candidates is calibrated for OpticEye.
 
+The owner subsequently checked six demos and selected this **specification/implementation order**: [Scintillating grid](specs/scintillating-grid.md), [Poggendorff](specs/poggendorff.md), [Ebbinghaus](specs/ebbinghaus.md), [Hering](specs/hering.md), [Ponzo](specs/ponzo.md), [Checker-shadow](specs/checker-shadow.md). Their draft specs await approval; this selection supersedes the research priority ranking below for scheduling. No implementation is authorized by the documentation checkpoint.
+
 ### Recommended static shortlist
 
 | Order | Candidate | What users may see | Proposed proof/comparison | Effort / main uncertainty |
