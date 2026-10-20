@@ -16,7 +16,7 @@ export default function Poggendorff() {
 
   function toggleStrip() {
     setStripVisible(!stripVisible)
-    setStatus(stripVisible ? POGGENDORFF.proof : 'Strip shown.')
+    setStatus(stripVisible ? POGGENDORFF.proof : 'Strips shown.')
   }
   function reset() {
     setStripVisible(true)
@@ -37,7 +37,7 @@ export default function Poggendorff() {
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,720px)_minmax(240px,1fr)] lg:gap-10">
         <div className="min-w-0">
           <div className="mb-3 flex items-center justify-between gap-3 font-mono text-xs text-slate-600">
-            <span>01 / Observe</span><span>{stripVisible ? 'Strip visible' : 'Strip hidden'}</span>
+            <span>01 / Observe</span><span>{stripVisible ? 'Strips visible' : 'Strips hidden'}</span>
           </div>
           <div data-poggendorff-viewing-frame className="mx-auto w-full" style={{ maxWidth: viewingWidth }}>
             <div className="overflow-hidden outline outline-slate-300"><PoggendorffStimulus angle={angle} stripWidth={stripWidth} stripVisible={stripVisible} /></div>
@@ -50,8 +50,8 @@ export default function Poggendorff() {
         </div>
         <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
           <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
-          <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Remove the strip to compare the diagonal across the gap.</p>
-          <button type="button" aria-pressed={!stripVisible} aria-describedby={`${id}-reveal-help`} onClick={toggleStrip} className={`min-h-12 w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>Hide strip</button>
+          <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Remove the yellow strips to follow the uninterrupted diagonals.</p>
+          <button type="button" aria-pressed={!stripVisible} aria-describedby={`${id}-reveal-help`} onClick={toggleStrip} className={`min-h-12 w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>Hide strips</button>
           <button type="button" onClick={reset} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Reset Poggendorff</button>
           <div className="mt-7 border-t border-slate-300 pt-6">
             <div className="flex items-center justify-between gap-3">
@@ -59,7 +59,7 @@ export default function Poggendorff() {
               <output htmlFor={`${id}-angle`} className="font-mono text-sm text-teal-800" aria-live="off">{angle}°</output>
             </div>
             <input id={`${id}-angle`} type="range" min={ANGLE.min} max={ANGLE.max} step={ANGLE.step} value={angle} onChange={(event) => setAngle(normalizeAngle(event.currentTarget.valueAsNumber))} aria-describedby={`${id}-angle-help`} className={`my-2 block min-h-11 w-full cursor-pointer accent-teal-800 ${focus}`} />
-            <p id={`${id}-angle-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Angle to the horizontal. This rotates the line; its length stays fixed.</p>
+            <p id={`${id}-angle-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Angle to the horizontal. This changes orientation, spacing and which lines fit inside the frame.</p>
           </div>
           <div className="mt-6">
             <div className="flex items-center justify-between gap-3">
@@ -67,7 +67,7 @@ export default function Poggendorff() {
               <output htmlFor={`${id}-stripWidth`} className="font-mono text-sm text-teal-800" aria-live="off">{stripWidth} units</output>
             </div>
             <input id={`${id}-stripWidth`} type="range" min={STRIP_WIDTH.min} max={STRIP_WIDTH.max} step={STRIP_WIDTH.step} value={stripWidth} onChange={(event) => setStripWidth(normalizeStripWidth(event.currentTarget.valueAsNumber))} aria-describedby={`${id}-stripWidth-help`} className={`my-2 block min-h-11 w-full cursor-pointer accent-teal-800 ${focus}`} />
-            <p id={`${id}-stripWidth-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Width of the opaque strip, in drawing units. Only the strip changes.</p>
+            <p id={`${id}-stripWidth-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Width of each yellow strip, in drawing units. Only the strips change.</p>
           </div>
           <ViewingSizeControl id={`${id}-size`} label="Poggendorff image size" value={viewingWidth} choices={VIEWING_SIZES} onChange={(width) => setViewingWidth(normalizeViewingWidth(width))} />
           <output aria-live="polite" aria-atomic="true" className="mt-5 block min-h-12 text-sm leading-relaxed text-teal-900">{status}</output>

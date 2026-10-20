@@ -46,7 +46,7 @@ export const ILLUSIONS = [
     listed: false,
     name: 'Poggendorff',
     title: 'Poggendorff illusion',
-    description: 'A straight diagonal can appear misaligned behind a strip. Hide the strip to see its unchanged continuation.',
+    description: 'Parallel diagonals can appear misaligned behind yellow strips. Hide the strips to expose the same continuous lines.',
   },
 ] as const
 

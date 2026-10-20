@@ -64,7 +64,7 @@ These are research candidates, **not approved specifications or new implementati
 
 The owner subsequently checked six demos and selected this **specification/implementation order**: [Scintillating grid](specs/scintillating-grid.md), [Poggendorff](specs/poggendorff.md), [Ebbinghaus](specs/ebbinghaus.md), [Hering](specs/hering.md), [Ponzo](specs/ponzo.md), [Checker-shadow](specs/checker-shadow.md). The owner approved five specs, requested Ponzo minimum gap88 and a tighter eight-disk small surround for Ebbinghaus, then authorized scintillating grid first. It is now implemented and calibrated on desktop and mobile: both viewers confirmed defaults on desktop and real phones, and the owner approved listing/deployment; see [validation](scintillating-grid-validation.md). This order supersedes the research priority ranking below; later features await their implementation turn.
 
-The grid's deployment and live checks succeeded. Poggendorff is subsequently implemented locally, unlisted/noindex with calibration pending; see [validation](poggendorff-validation.md). Its reveal preserves the full pre-existing diagonal beneath the removable strip. Keep this feature unpushed for owner viewing before moving to Ebbinghaus.
+The grid's deployment and live checks succeeded. Poggendorff is subsequently implemented locally, unlisted/noindex with calibration pending; see [validation](poggendorff-validation.md). After the owner found its single-line version weak, it now uses repeated straight diagonals beneath yellow strips. Reveal preserves every full pre-existing diagonal. Keep this feature unpushed for owner viewing before moving to Ebbinghaus.
 
 ### Recommended static shortlist
 
@@ -95,11 +95,11 @@ Sources: [Bach's Ebbinghaus demonstration](https://michaelbach.de/ot/cog-Ebbingh
 
 **Evidence:** Bach demonstrates apparent misalignment of collinear segments separated by an occluding rectangle and explores occluder width. His explanation is tentative; do not present a single depth-processing account as established.
 
-**Proposed construction:** one straight SVG line from a shared slope/intercept, with a separate opaque rectangular context layer covering its middle. “Hide strip” removes only that layer, uncovering the pre-existing continuation; no new connecting line is inserted. Angle and strip-width controls change geometry explicitly, independently of reveal. Keep the visible end segments and full line fixed through the toggle.
+**Current construction:** repeated parallel diagonals under eight opaque yellow strips, inspired by Bach's right-hand variation, which the owner specifically preferred after finding our single-line version weak. “Hide strips” removes only context, uncovering the same complete lines. Angle changes orientation/clipping explicitly; width never changes line geometry. Original project geometry/colors are specified in [poggendorff.md](specs/poggendorff.md); no source artwork or code is reused.
 
-**Calibration concern:** shallow angles or an excessively wide strip can leave too little visible line. Document bounds and check the direction/strength of the apparent offset by eye.
+**Calibration concern:** steeper angles and strip width change apparent continuation, but some combinations weaken the effect. Fine lines can alias at small sizes or fractional DPR. Judge the revised defaults by eye; previous weak feedback is not a calibration pass.
 
-Source: [Bach's Poggendorff demonstration and references](https://michaelbach.de/ot/ang-poggendorff/). Its page text was read; the listed historical papers were not read in this pass.
+Source: [Bach's Poggendorff demonstration and references](https://michaelbach.de/ot/ang-poggendorff/). Page text and the rendered interactive figure were inspected on 21 October 2026. The right-hand figure initially shows70° and repeats yellow occluders; Bach says he selected a conspicuous starting width. These observations motivate the variation, not an optimality claim. Historical papers were not read.
 
 ### 8. Checker-shadow / Adelson-style lightness context
 

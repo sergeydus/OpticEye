@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: scintillating grid calibrated/listed/deployed; Poggendorff implemented locally and unlisted, calibration pending; version 1.35, 21 October 2026. Keep the Poggendorff commit local for owner viewing; later features await their turn.
+Status: scintillating grid calibrated/listed/deployed; Poggendorff's repeated-strip revision implemented locally and unlisted, calibration pending; version 1.36, 21 October 2026. The owner found the single-line version weak and selected the repeated yellow-strip variation. Keep Poggendorff local for owner viewing; later features await their turn.
 
 ## 1. Purpose and scope
 

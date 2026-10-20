@@ -62,7 +62,7 @@ Kanizsa is implemented with three 60° cutout disks, a Cutout rotation range 0�
 
 Scintillating grid uses a static 9×9 arrangement of white disks over gray lines on black. Grid spacing (56–80, default72) and disk diameter (14–22, default18) are drawing-unit controls; Hide grid removes only the gray lines. Reset restores the shown grid, defaults and Medium540. It is listed and calibrated: two viewers confirmed the default effect and Hide grid comparison on desktop and real phones. See [its specification](docs/specs/scintillating-grid.md) and [validation](docs/scintillating-grid-validation.md).
 
-Poggendorff draws one full 480-unit diagonal beneath a separate opaque strip. Line angle25–65° (default45) changes its orientation; strip width64–160 (default112) affects only context. Hide strip uncovers the same line, and Reset restores defaults/Medium540. It remains unlisted/noindex with calibration pending; see [its spec](docs/specs/poggendorff.md) and [validation](docs/poggendorff-validation.md).
+Poggendorff draws complete parallel diagonals beneath eight opaque yellow strips. Line angle45–80° (default70) changes orientation and frame clipping; strip width16–64 (default40) affects only context. Hide strips uncovers the same lines, and Reset restores defaults/Medium540. The owner requested this repeated arrangement after finding the initial single-line version weak. It remains unlisted/noindex with calibration pending; see [its spec](docs/specs/poggendorff.md) and [validation](docs/poggendorff-validation.md).
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 

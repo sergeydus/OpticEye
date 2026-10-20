@@ -11,11 +11,15 @@ export default function PoggendorffStimulus({ angle, stripWidth, stripVisible }:
     <svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`} width={VIEWBOX.width} height={VIEWBOX.height} className="block h-auto w-full" role="img" aria-labelledby={`${id}-title`} aria-describedby={`${id}-description`}>
       <title id={`${id}-title`}>Poggendorff illusion</title>
       <desc id={`${id}-description`}>{stripVisible
-        ? 'Two visible portions of a diagonal, separated by an opaque gray strip. Compare their alignment, then use Hide strip.'
-        : 'The same complete straight diagonal with the gray strip removed.'}</desc>
+        ? 'Parallel black diagonals interrupted by eight opaque yellow strips. Compare their alignment, then use Hide strips.'
+        : 'The same complete parallel straight diagonals with the yellow strips removed.'}</desc>
       <rect data-layer="surface" x="0" y="0" width={VIEWBOX.width} height={VIEWBOX.height} fill={SURFACE_FILL} />
-      <line data-layer="line" {...geometry.line} stroke={LINE_STROKE.color} strokeWidth={LINE_STROKE.width} strokeLinecap="butt" fill="none" />
-      {stripVisible && <rect data-layer="strip" {...geometry.strip} fill={STRIP.fill} stroke={STRIP.stroke} strokeWidth={STRIP.strokeWidth} strokeLinejoin="miter" />}
+      <g data-layer="lines" stroke={LINE_STROKE.color} strokeWidth={LINE_STROKE.width} strokeLinecap="butt" fill="none">
+        {geometry.lines.map(({ k, ...line }) => <line key={k} {...line} />)}
+      </g>
+      {stripVisible && <g data-layer="strips" fill={STRIP.fill} stroke="none">
+        {geometry.strips.map((strip) => <rect key={strip.x} {...strip} />)}
+      </g>}
     </svg>
   )
 }

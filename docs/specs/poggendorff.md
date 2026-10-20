@@ -1,58 +1,52 @@
 # Poggendorff specification
 
-Status: **implemented; perceptual calibration pending**. Version 1.2, 21 October 2026. PG01–PG04 pass; see [actual validation](../poggendorff-validation.md). Unlisted/noindex, committed locally without pushing for owner viewing. Second in the implementation order. ID/folder: `poggendorff`; title/h1: “Poggendorff illusion”; HTML title: “Poggendorff illusion | OpticEye”. Description: “A straight diagonal can appear misaligned behind a strip. Hide the strip to see its unchanged continuation.”
+Status: **repeated-strip revision implemented; perceptual calibration pending**. Version 2.0, 21 October 2026. The owner found the initial single-line version weak and requested the repeated yellow-strip variation on Bach's right. Keep unlisted/noindex and local for viewing. ID/folder: `poggendorff`; h1: “Poggendorff illusion”; HTML title: “Poggendorff illusion | OpticEye”. Description: “Parallel diagonals can appear misaligned behind yellow strips. Hide the strips to expose the same continuous lines.”
 
-Inherit page integration, unlisted/noindex policy, Reset, normalization, accessibility, testing and two-viewer calibration from [implementation.md](implementation.md). First version is an original static line/occluder drawing, without alignment quizzes, draggable segments, transparency controls or animation.
+Inherit page setup, listing policy, Reset, normalization, accessibility, testing and two-viewer calibration from [implementation.md](implementation.md). Replace the first construction; no extra mode, transparency, alignment quiz or animation.
 
 ## 1. Source and attribution
 
-[Michael Bach, Poggendorff Illusion](https://michaelbach.de/ot/ang-poggendorff/) demonstrates apparent misalignment across an obscuring rectangle and varies occluder width. Page text checked 21 October 2026; its listed historical papers were not read in this pass. It supports the phenomenon and exploring context width, not our chosen dimensions or any universal optimum. Bach describes a possible depth interpretation; do not call that the proven cause.
+[Michael Bach, Poggendorff Illusion](https://michaelbach.de/ot/ang-poggendorff/) has a basic single-line figure on the left and repeated oblique lines/adjustable occluding rectangles on the right. The page and rendered interactive figure were inspected on 21 October 2026; its initial angle reads 70°. Bach says he selected the starting rectangle width for a conspicuous apparent offset. This supports trying that arrangement, not a universal optimum or a proven explanation. Historical papers listed there were not read. Depth interpretation remains a proposal.
 
-Attribution: “Original OpticEye drawing of the Poggendorff illusion. See Michael Bach's demonstration and references.” Use original geometry and link the source in the explanation, without copying its illustration/code. Explicitly distinguish this alignment judgment from Müller-Lyer's length judgment. All numbers below are project choices awaiting viewing.
+Attribution: “Original OpticEye drawing of the repeated-strip Poggendorff illusion. Inspired by Michael Bach's demonstration.” Draw original geometry; reuse no source artwork or code. All dimensions below are project choices awaiting viewing, not measurements from research. This is an alignment judgment, distinct from Müller-Lyer's length judgment.
 
 ## 2. Exact original geometry and palette
 
-ViewBox **0 0 720 480**, opaque white **#FFFFFF** surface. One persistent diagonal SVG line, stroke **#000000**, width **6**, butt caps, no fill or transform. Center C=(360,240), half-length L=240. For angle θ in degrees, c=cos(θπ/180), t=sin(θπ/180):
+ViewBox **0 0 720 480**, opaque white **#FFFFFF** surface. Pattern frame **x40…680, y24…456**. Parallel straight lines have black **#000000** strokes, width **3**, butt caps and no fill. For θ measured upward-right from horizontal, their infinite centerlines are:
 
-- Endpoint A=(360−240c,240+240t).
-- Endpoint B=(360+240c,240−240t).
-- Thus B−A=(480c,−480t); the full line is always 480 units long. Angle is measured upward-right from the horizontal, not from the strip edge.
+`y = 240 + 72k − tan(θπ/180)(x−360)`
 
-Draw this **entire line first**, including its middle. Above it, draw a single occluder rectangle: x=360−w/2, y=16, width=w, height=448. Its fill is **#C8C8C8**, stroke **#000000**, stroke-width **2**, miter joins. Its border is context too. Keep both shapes inside the fixed surface; no guides, arrows, extra diagonal segments, transparency or separately drawn continuation.
+Generate integer k from −M to M, where `M=floor((216+320tan(θπ/180))/72)`. Clip each line analytically to the frame: intersect it with x40, x680, y24 and y456; retain in-frame intersections (tolerance 1e−9), use the two extreme endpoints (coincident corner hits do not create extra segments). Omit zero-length tangencies. Render each resulting complete segment once with stable key k, **before** all occluders. Default θ70° yields **31 lines**; θ45° yields15, θ80° yields57. No piecewise offsets or inserted continuation. Stroke edges remain within the larger surface.
 
-At defaults θ45°,w112, endpoints are approximately (190.294,409.706) and (529.706,70.294); the rectangle spans x304…416,y16…464, with stroke extending one unit. The strip crosses the line near its center and hides its middle. Exact hidden boundaries include the border, so do not confuse rectangle width with the total painted width w+2.
-
-Across all settings, line-centerline extrema fit x142.486…577.514 and y22.486…457.514; half-stroke 3 still fits. At the hardest occlusion case θ65°,w160, each visible terminal portion is at least `240−81/cos(65°)≈48.34` units long, accounting for the border. The rectangle always covers the crossing vertically: `tan(65°)*81≈173.71<224`. Test these relationships, not just the default screenshot.
+Draw **eight opaque yellow #FFFF00 rectangles**, no border: strip j=0…7 has x=`40+80j`, y24, width w and height432. Period80 is fixed; changing w affects only the yellow width, leaving a white gap80−w. No transparency, blending, gradients, clipping masks, guides or independent fragments. At default w40, strips and white gaps are equally wide. At θ70°, the vertical travel across a strip is `40tan70°≈109.899` units, about1.526 vertical line pitches. This relation is a design choice for repeated continuation ambiguity, not an actual offset or a calibrated optimum.
 
 ## 3. Controls and reveal contract
 
 | Label / choice | Default | Range / effect |
 | --- | --- | --- |
-| Line angle | 45° | 25–65°, step 5; rotates the full line around fixed C, retaining its 480-unit length |
-| Strip width | 112 | 64–160 units, step 8; changes only the centered occluder width/x |
-| Strip visible | true | Stable “Hide strip” toggle, pressed when hidden |
+| Line angle | 70° | 45–80°, step5; changes orientation and frame clipping, including edge-line counts/lengths |
+| Strip width | 40 | 16–64 units, step4; changes only the eight occluder widths |
+| Strips visible | true | Stable “Hide strips” toggle, pressed when hidden |
 | Poggendorff image size | Medium/540 | Shared 240/540/720 maximum CSS widths |
 
-Prompt: **“Do the two visible line sections look aligned?”** Instruction: “Compare the diagonal on either side of the strip, then hide the strip.” Do not claim everyone sees an offset or announce a correct answer before the viewer compares.
+Prompt: **“Do the diagonals look continuous across the yellow strips?”** Ask users to follow a diagonal across several strips, then hide them. Do not promise an apparent offset. Proof: **“Same straight diagonals. Only the yellow strips were removed.”**
 
-Hide strip removes only the rectangle, including its border. The **same complete diagonal node** stays in the same place with identical endpoints/stroke; its pre-existing occluded middle becomes visible. Revealed proof: **“One straight line. Only the strip was removed.”** This is not insertion of a connecting guide. Visible pixels in the formerly covered middle intentionally change; the claim is retained line geometry, not whole-image pixel identity. The white surface and displayed frame remain fixed.
-
-Angle is an explicit target-geometry parameter, separate from reveal. It may change endpoints while hidden without restoring the strip. Width changes must never modify line endpoints or angle. The next restoration shows the current strip. Reset restores θ45/w112, strip shown, Medium and closed explanation through the shared rules. Keep output/help explicit about angle to the horizontal. SVG descriptions distinguish the covered line from its visible full continuation; no fake misalignment is ever drawn.
+Hide strips removes only the yellow context group. Every existing line node, endpoint/stroke, surface and frame stays identical. Formerly covered pixels intentionally change; there is no whole-image pixel-identity claim. Width changes must never affect lines. Angle explicitly changes target geometry while retaining visibility; vertical pitch stays72, so perpendicular spacing also changes with angle. This exploration does not isolate one perceptual variable or preserve clipped line lengths. Reset restores70°/40/shown/Medium/closed. SVG descriptions name the repeated arrangement and its uncovered straight lines.
 
 ## 4. Responsive concerns
 
-Uniform scale W/720. At W240/288/540/720, full line lengths are **160/192/360/480 CSS px**, strokes **2/2.4/4.5/6px**, and default strip widths **37.33/44.8/84/112px** (excluding border). Even though the full line length is fixed, its horizontal projection varies with θ. Do not label that projection as an invariant length.
+Scale uniformly by W/720. At W240/288/540/720, strokes are **1/1.2/2.25/3 CSS px**, default yellow widths **13.33/16/30/40px**, strip periods **26.67/32/60/80px**, and vertical line pitches **24/28.8/54/72px**. The pattern frame occupies640/720 of the drawing width. Steeper angles make the perpendicular line spacing finer; edge fragments are intentional. Some angle/width combinations can weaken or change the apparent matching.
 
-At θ65°,w160 and W288, the shortest exposed line pieces are about 19.34px each; check they remain usable. Diagonal antialiasing and fractional DPR can change apparent junctions. Do not snap endpoints independently to pixel grids or add a minimum stroke, which could break collinearity or responsive equivalence. Include DPR1/2/1.25 default/reveal checks and shared 320/1440/200%-zoom coverage. Actual dimensions are measured during implementation, not asserted as calibration.
+Do not snap individual endpoints, add minimum strokes or change geometry by device. Check antialiasing/moiré at DPR1,1.25,2, all image sizes, angle/width extremes and shared320/1440/200%-zoom requirements. These are construction checks, not human calibration.
 
 ## 5. Acceptance criteria
 
 | ID | Specific required result |
 | --- | --- |
-| PG01 | All **117** angle/width combinations produce finite endpoints, one 480-unit straight line and the exact centered rectangle/border. Verify collinearity, frame bounds, full occlusion at the crossing and positive visible end lengths, including both extremes. Shared numeric normalization applies. |
-| PG02 | Repeated reveal retains the identical line DOM node, endpoints/stroke/surface/frame and removes only the rectangle. No newly added continuation, replacement fragments, guides, fade or target movement. |
-| PG03 | Angle affects only line geometry; width affects only context. Hidden parameter changes retain the chosen visibility, and Reset restores θ45/w112/shown/Medium/closed. Labels distinguish an explicit line-angle change from context-only reveal. |
-| PG04 | Shared page/interaction/test/browser requirements pass, including every size, angle/width extremes and stated DPR checks. Record actual results in docs/poggendorff-validation.md; direct entry remains unlisted/noindex until owner approval. Existing features remain intact. |
-| PG05 | Calibration only: two viewers on desktop/mobile report apparent alignment with the strip and straightness after hiding it at defaults. Record weak/absent/opposite offsets and only supplied conditions; follow shared status/listing rules. |
+| PG01 | All **104** angle/width combinations yield finite, deterministic frame-clipped straight lines with the shared equation/vertical pitch and exact eight yellow rectangles. Verify boundary intersections, parallelism, counts at45/70/80, palette, bounds and width-independent line geometry. Shared normalization applies. |
+| PG02 | Repeated reveal retains all identical line DOM nodes/attributes, surface and frame, removing only the eight-strip group. No inserted continuation, replacement fragments, guides, fade or target movement. |
+| PG03 | Angle changes only line geometry; width changes only context. Hidden changes retain visibility; Reset restores70°/40/shown/Medium/closed. Labels explain the angle's clipping/spacing effects. |
+| PG04 | Shared engineering/browser requirements pass, including sizes, extremes and DPR checks. Record actual results in docs/poggendorff-validation.md. Remain unlisted/noindex until explicit owner listing approval. Existing features remain intact. |
+| PG05 | Calibration only: two viewers on desktop/mobile report apparent misalignment with strips and straightness after hiding them at defaults. Record weak/absent/opposite responses and supplied conditions only. Previous weak single-line feedback does not calibrate this revision. |
 
-PG01–PG04 define implemented and pass; PG05 defines calibration and remains pending. The owner authorized implementation on 21 October 2026 after the grid deployment; that deploy and live checks succeeded before code. Keep listed:false/noindex and this verified commit local for owner viewing. Later features await their implementation turn.
+PG01–PG04 pass; see [validation](../poggendorff-validation.md). PG05 remains pending and defines calibrated. Finish engineering separately from viewing. Do not push or proceed to Ebbinghaus before owner viewing.
