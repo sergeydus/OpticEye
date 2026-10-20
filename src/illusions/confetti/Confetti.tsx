@@ -1,4 +1,5 @@
 import { useId, useState } from 'react'
+import ViewingSizeControl from '../../components/ViewingSizeControl'
 import { CONFETTI, DEFAULT_VIEWING_WIDTH, DISK_FILL, normalizeSpacing, normalizeViewingWidth, SPACING, VIEWING_SIZES } from './confettiModel'
 import ConfettiStimulus from './ConfettiStimulus'
 import OrangesExample from './OrangesExample'
@@ -37,7 +38,7 @@ export default function Confetti() {
     <article aria-labelledby={`${id}-heading`}>
       <div className="mb-8 sm:mb-10">
         <p className="mb-4 font-mono text-xs tracking-widest text-teal-800 uppercase">Experiment 001 / Color & context</p>
-        <h1 id={`${id}-heading`} className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">{CONFETTI.title}</h1>
+        <h2 id={`${id}-heading`} className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">{CONFETTI.title}</h2>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{CONFETTI.instructions}</p>
       </div>
 
@@ -67,7 +68,7 @@ export default function Confetti() {
         </div>
 
         <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
-          <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
+          <h3 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h3>
           <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Remove the stripes to compare the circles.</p>
           <button type="button" aria-pressed={!stripesVisible} aria-describedby={`${id}-reveal-help`} onClick={toggleReveal} className={`flex min-h-12 w-full items-center justify-center gap-3 rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>
             Show base colors
@@ -83,24 +84,18 @@ export default function Confetti() {
             <div aria-hidden="true" className="flex justify-between font-mono text-xs text-slate-600"><span>Finer</span><span>Wider</span></div>
             <p id={`${id}-spacing-help`} className="mt-3 text-xs leading-relaxed text-slate-600">A larger value makes the stripes wider. Values are drawing units.</p>
           </div>
-          <div className="mt-6">
-            <label htmlFor={`${id}-size`} className="text-sm font-medium">Image size</label>
-            <select id={`${id}-size`} value={viewingWidth} onChange={(event) => setViewingWidth(normalizeViewingWidth(Number(event.currentTarget.value)))} aria-describedby={`${id}-size-help`} className={`mt-3 min-h-11 w-full rounded-md border border-slate-400 bg-transparent px-3 py-2 text-sm ${focus}`}>
-              {VIEWING_SIZES.map((size) => <option key={size.width} value={size.width}>{size.label}</option>)}
-            </select>
-            <p id={`${id}-size-help`} className="mt-3 text-xs leading-relaxed text-slate-600">Shrink just the image to compare the effect. Larger sizes fit your screen.</p>
-          </div>
+          <ViewingSizeControl id={`${id}-size`} label="Image size" value={viewingWidth} choices={VIEWING_SIZES} onChange={(width) => setViewingWidth(normalizeViewingWidth(width))} />
           <output aria-live="polite" aria-atomic="true" className="mt-5 block min-h-12 text-sm leading-relaxed text-teal-900">{status}</output>
         </section>
       </div>
 
       <section className="mt-10 border-t border-slate-300 sm:mt-14">
-        <h2>
+        <h3>
           <button id={`${id}-explanation-toggle`} type="button" aria-expanded={explanationOpen} aria-controls={`${id}-explanation`} onClick={() => setExplanationOpen(!explanationOpen)} className={`flex min-h-16 w-full items-center justify-between gap-4 py-5 text-left text-lg font-medium ${focus}`}>
             Why it happens
             <span aria-hidden="true" className="font-mono text-xl text-teal-800">{explanationOpen ? '−' : '+'}</span>
           </button>
-        </h2>
+        </h3>
         <div id={`${id}-explanation`} hidden={!explanationOpen} className="max-w-3xl pb-6 text-sm leading-relaxed text-slate-700">
           <p>{CONFETTI.explanation}</p>
           <p className="mt-4">{CONFETTI.attribution}.</p>

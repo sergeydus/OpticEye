@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Build a browser-based optical illusion playground. Users should be able to observe an illusion, change relevant parameters, reveal the underlying colors or geometry, and read a concise explanation with sources. Confetti is the first planned illusion.
+Build a browser-based optical illusion playground. Users should be able to observe an illusion, change relevant parameters, reveal the underlying colors or geometry, and read a concise explanation with sources. Confetti and Munker share a page with native section navigation and independent experiment state.
 
 ## Stack and structure
 
@@ -11,7 +11,7 @@ Build a browser-based optical illusion playground. Users should be able to obser
 - Keep the scaffold minimal until a feature is requested. Prefer React state over adding a state library; add routing or a backend only when needed.
 - Put future illusion components under `src/illusions/`. Keep reusable controls separate from illusion rendering and scientific metadata.
 - Read `docs/illusion-research.md` before implementing an illusion. Preserve source links and attribution with each implementation.
-- Follow `docs/specs/implementation.md` for shared implementation rules and `docs/specs/confetti.md` for the first illusion. Update the affected specs when implementation decisions change their requirements.
+- Follow `docs/specs/implementation.md` for shared implementation rules and the feature contracts in `docs/specs/confetti.md` and `docs/specs/munker.md`. Update the affected specs when implementation decisions change their requirements.
 
 ## Rendering and scientific accuracy
 

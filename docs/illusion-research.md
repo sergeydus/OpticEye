@@ -1,6 +1,6 @@
 # Browser-renderable optical illusions
 
-Researched 19 October 2026. Confetti now has an implementation; see its [validation record](confetti-validation.md) for engineering checks and pending perceptual calibration. The other illusions remain a backlog. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
+Researched 19 October 2026; Munker source rechecked 20 October. Confetti and Munker have implementations; see the [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for engineering checks and pending perceptual calibration. The remaining illusions are a backlog. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
 
 ## Suggested starting set
 
@@ -31,6 +31,8 @@ Michael Bach's demonstration uses identical target segments within different col
 Use one shared target color, two inducer colors, and adjustable stripe width. Keep target fills constant when toggling context. Start without animation; a manual switch can change the grid.
 
 Source: [Michael Bach, Munker Illusion](https://michaelbach.de/ot/col-Munker/), with references to Munker (1970) and subsequent work. Keep chromatic assimilation distinct from monochrome White lightness effects when writing explanations.
+
+The source was rechecked on 20 October 2026 for the [Munker spec](specs/munker.md). The owner approved two identical green bars and two colored stripe contexts, with native section navigation alongside Confetti, on 20 October 2026. The numeric palette and geometry remain provisional project choices pending human calibration.
 
 ## 3. Cafe Wall
 

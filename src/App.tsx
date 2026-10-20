@@ -1,4 +1,5 @@
 import Confetti from './illusions/confetti/Confetti'
+import Munker from './illusions/munker/Munker'
 
 export default function App() {
   return (
@@ -15,7 +16,13 @@ export default function App() {
         <span className="font-mono text-xs text-slate-600">A study in seeing</span>
       </header>
       <main id="main" className="mx-auto max-w-6xl px-4 pt-10 pb-12 sm:px-8 sm:pt-14">
-        <Confetti />
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Explore optical illusions</h1>
+        <nav aria-label="Illusions" className="mt-4 mb-12 flex flex-wrap gap-x-6 gap-y-2 border-b border-slate-300 pb-6">
+          <a href="#confetti" className="inline-flex min-h-11 items-center text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Confetti</a>
+          <a href="#munker" className="inline-flex min-h-11 items-center text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Munker</a>
+        </nav>
+        <div id="confetti" className="scroll-mt-6"><Confetti /></div>
+        <div id="munker" className="mt-16 scroll-mt-6 border-t border-slate-300 pt-12 sm:mt-20 sm:pt-16"><Munker /></div>
       </main>
       <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 border-t border-slate-300/70 px-4 py-6 text-xs text-slate-600 sm:px-8">
         <p>OpticEye · Explore your perception.</p>

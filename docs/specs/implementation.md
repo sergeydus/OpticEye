@@ -1,12 +1,12 @@
 # OpticEye implementation specification
 
-Status: implementation baseline, version 1.13. Updated 20 October 2026.
+Status: implementation baseline including the owner-approved Munker extension, version 1.15. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. It does not request implementation of the app by itself. Version 1 is the Confetti experience, including an everyday example comparing deliberately greenish/unripe oranges with and without orange produce netting. Engineering observations and outstanding coverage are recorded in [the validation record](../confetti-validation.md). A gallery, accounts, backend, analytics, routing, downloads, and additional standalone illusions are outside its scope.
+This document defines project-wide rules. It does not request implementation of the app by itself. The completed first scope is the Confetti experience, including the oranges/netting example. The owner-approved next scope adds a static Munker experiment on the same page, defined in [munker.md](munker.md). Confetti engineering observations and outstanding coverage are recorded in [the validation record](../confetti-validation.md). A gallery, accounts, backend, analytics, routing, downloads, and further standalone illusions remain outside scope.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -17,7 +17,7 @@ At the user's direction, this is a visual-first experience. Manual screen-reader
 - The app MUST use the existing React, TypeScript, Vite, and Tailwind CSS setup, with npm and the committed lockfile.
 - Target Node.js 24, recorded in `.nvmrc` and `package.json` engines. Keep the Oxlint `jsx-a11y` plugin enabled; static accessibility linting supplements interaction checks.
 - Tailwind MUST style page layout, typography, controls, and responsive behavior. Stimulus colors and geometry MUST be explicit typed constants or SVG attributes rather than inherited theme values.
-- Use local React state for interaction. Do not add routing, global state, a component library, or a backend for the first illusion.
+- Use local React state for interaction. The second illusion uses native section-anchor navigation, without a router, global state, a component library or a backend.
 - Static stimuli SHOULD use SVG. Canvas requires a documented performance or rendering need and an equivalent accessible description.
 - The experience MUST run without runtime requests to research sites, image hosts, or other external services. Source links may navigate externally when selected.
 - Do not add dependencies unless existing browser or project capabilities cannot reasonably meet the requirement.
@@ -28,8 +28,8 @@ Create these files as the implementation needs them; do not add empty abstractio
 
 | Location | Responsibility |
 | --- | --- |
-| `src/App.tsx` | Compose the current experience and page shell. |
-| `src/components/` | Controls or layout reused by multiple features. |
+| `src/App.tsx` | Compose Confetti and Munker with one page heading and native section navigation. |
+| `src/components/ViewingSizeControl.tsx` | Labeled native size select used by Confetti and Munker; callers own choices, normalization and state. |
 | `src/illusions/confetti/Confetti.tsx` | Own stripe/size state, explanation, independent orange visibility/size, and the Reset action shared by both demonstrations. |
 | `src/illusions/confetti/ConfettiStimulus.tsx` | Render a deterministic SVG from typed props. |
 | `src/illusions/confetti/confettiModel.ts` | Palette, defaults, metadata, and pure geometry generation; distinct basename avoids case-insensitive module resolution conflicts with `Confetti.tsx`. |
@@ -41,6 +41,12 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `src/assets/oranges-ai.ORIGIN.md` | Gemini provenance, exact prompts, date, processing and usage terms or an explicit pending field. |
 | `src/assets/oranges.LICENSE.txt` | Origin and license status: original project asset, no separate public license chosen; no third-party research image is used. |
 | `src/illusions/confetti/` tests | Meaningful geometry and interaction checks near the feature. |
+| `src/illusions/munker/Munker.tsx` | Independent Munker controls, reveal, disclosure, status and Reset. |
+| `src/illusions/munker/MunkerStimulus.tsx` | Deterministic two-target SVG and separate context layers. |
+| `src/illusions/munker/munkerModel.ts` | Shared target fill, two context colors, normalized controls, geometry and attribution. |
+| `src/illusions/munker/` tests | Target/phase/reveal invariants, interactions and instance isolation. |
+| `src/App.test.tsx` | Section links, heading hierarchy and independent experiment state. |
+| `docs/munker-validation.md` | Actual engineering results and separate human observations. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
 | `vite.config.ts` | React/Tailwind plugins and build-only `/OpticEye/` asset base; development stays at `/`. |
@@ -68,6 +74,15 @@ Metadata MUST include a stable illusion ID, title, short instructions, explanati
 The first page MUST present a title, brief viewing prompt, stimulus, reveal/reset controls, experiment controls, explanation, and sources in a logical reading order. A wide layout may position controls beside the stimulus; narrow layouts MUST stack them without reordering keyboard navigation.
 
 The user MUST be able to observe the initial effect before reading the answer. Put the full explanation in an explicitly labeled disclosure, initially collapsed. Revealing the construction MUST remain independent of opening that disclosure.
+
+### Approved two-illusion page
+
+- Keep both experiments mounted in document order: Confetti (including oranges), then Munker. Add a wrapping native `nav` labeled “Illusions” with “Confetti” → `#confetti` and “Munker” → `#munker`. No tabs, router, lazy mounting, active-section tracking or smooth-scroll animation.
+- Add one page `h1`, “Explore optical illusions.” Each experiment has an `h2`; its controls, explanation and everyday-example headings use `h3` where appropriate. Preserve existing accessible names and unique internal IDs.
+- Anchor targets have stable shell-owned IDs and suitable scroll margins. Hash navigation, direct hash loads and browser Back/Forward use native behavior and do not reset either experiment. The brand still points to `import.meta.env.BASE_URL`.
+- Each experiment owns its state and Reset. Confetti Reset continues to reset its oranges example; Munker uses “Reset Munker” and cannot change Confetti or oranges. No page-wide reset is added.
+- Extract only actual shared UI used by both implementations into `src/components/` (for example a viewing-size select with per-feature choices). Keep geometry, palettes, descriptions and state local to each illusion. No extraction is required merely because two controls look similar; avoid a generic experiment engine or plugin registry.
+- Update affected Confetti heading expectations and integration tests with the approved composition. The owner approved implementation on 20 October 2026; deployment still requires a separate instruction.
 
 - Every interaction MUST work with pointer, touch, and keyboard. No essential feature may depend on hover, dragging alone, or holding a button.
 - Reveal MUST be persistent until toggled again; experiment controls MUST retain their selected values through reveal toggles.

@@ -4,7 +4,7 @@ Updated 20 October 2026. **Implemented; perceptual calibration pending.** Circle
 
 ## Current engineering checks
 
-- Oxlint/JSX accessibility lint passes; all **37 tests across 4 files** pass; TypeScript/Vite production build passes with `/OpticEye/` asset paths.
+- Oxlint/JSX accessibility lint passes; all **48 project tests across 6 files** pass after adding Munker, including the existing **37 Confetti/oranges tests**; TypeScript/Vite production build passes with `/OpticEye/` asset paths.
 - Circle tests cover shared target colors/geometry, stripe occlusion and phase, context-only reveal, parameter boundaries, sizes, Reset/focus and instance isolation.
 - Oranges tests cover unchanged image node/src/attributes through keyboard reveal, deterministic 6px cells/1px strands, overlay-only blending, size/source independence, fallback and Reset. The two source options are **Illustration** and **Citrus in a crate**; the latter keeps the visible caption “AI-generated image; the net is drawn on top.” in both net states.
 - Defaults: circles spacing 3, Medium/360px; oranges Illustration, Medium/450px, net visible. Reset restores those values.
@@ -45,4 +45,6 @@ The original six-fruit drawing and earlier opaque/clipped/directional nets recei
 
 The default SVG is an original 4,053-byte, 600x400 illustration of 37 smaller mid-green fruit, with mild texture/shading and no baked net or external assets. Net strands use rgba(245,90,0,.95), isolated overlay blending and about 30.6% geometric coverage. Transparent cell interiors remain uncovered; no blur/fade/clips/stroke floor remain.
 
-The earlier implementation at `ea10ed6` deployed successfully in [run 39400093717](https://github.com/sergeydus/OpticEye/actions/runs/39400093717). The AI option was committed as `2774e1c`. The owner has now authorized pushing it together with the Citrus in a crate label and validation update; the new workflow result will be checked after push.
+The earlier implementation at `ea10ed6` deployed in [run 39400093717](https://github.com/sergeydus/OpticEye/actions/runs/39400093717). The AI option (`2774e1c`) and source-label/viewing update (`be4e9b3`) were subsequently pushed. [Run 39421774284](https://github.com/sergeydus/OpticEye/actions/runs/39421774284) completed successfully for `be4e9b3`, including lint, all 37 tests, build and Pages deployment.
+
+Hosted verification in Chrome 155.0.8059.85 at 320/1440 widths passed: styles loaded, all 24 Confetti circles rendered, illustration and AI WebP decoded at native size, Citrus in a crate label and AI caption appeared, and net reveal preserved image attributes. Following the brand link stayed at `/OpticEye/` and restored the default Illustration. No console/page errors, failed requests, 4xx/5xx or horizontal overflow were observed. The hosted default desktop screenshot was visually inspected.
