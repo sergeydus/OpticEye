@@ -16,7 +16,7 @@ export default function Poggendorff() {
 
   function toggleStrip() {
     setStripVisible(!stripVisible)
-    setStatus(stripVisible ? POGGENDORFF.proof : 'Strips shown.')
+    setStatus(stripVisible ? POGGENDORFF.proof : stripWidth === 0 ? 'Strip width is zero; no yellow is drawn.' : 'Strips shown.')
   }
   function reset() {
     setStripVisible(true)
@@ -37,7 +37,7 @@ export default function Poggendorff() {
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,720px)_minmax(240px,1fr)] lg:gap-10">
         <div className="min-w-0">
           <div className="mb-3 flex items-center justify-between gap-3 font-mono text-xs text-slate-600">
-            <span>01 / Observe</span><span>{stripVisible ? 'Strips visible' : 'Strips hidden'}</span>
+            <span>01 / Observe</span><span>{!stripVisible ? 'Strips hidden' : stripWidth === 0 ? 'Strip width 0' : 'Strips visible'}</span>
           </div>
           <div data-poggendorff-viewing-frame className="mx-auto w-full" style={{ maxWidth: viewingWidth }}>
             <div className="overflow-hidden outline outline-slate-300"><PoggendorffStimulus angle={angle} stripWidth={stripWidth} stripVisible={stripVisible} /></div>
@@ -67,7 +67,7 @@ export default function Poggendorff() {
               <output htmlFor={`${id}-stripWidth`} className="font-mono text-sm text-teal-800" aria-live="off">{stripWidth} units</output>
             </div>
             <input id={`${id}-stripWidth`} type="range" min={STRIP_WIDTH.min} max={STRIP_WIDTH.max} step={STRIP_WIDTH.step} value={stripWidth} onChange={(event) => setStripWidth(normalizeStripWidth(event.currentTarget.valueAsNumber))} aria-describedby={`${id}-stripWidth-help`} className={`my-2 block min-h-11 w-full cursor-pointer accent-teal-800 ${focus}`} />
-            <p id={`${id}-stripWidth-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Width of each yellow strip, in drawing units. Only the strips change.</p>
+            <p id={`${id}-stripWidth-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Width of each yellow strip, in drawing units. At 0, no yellow is drawn. Only the strips change.</p>
           </div>
           <ViewingSizeControl id={`${id}-size`} label="Poggendorff image size" value={viewingWidth} choices={VIEWING_SIZES} onChange={(width) => setViewingWidth(normalizeViewingWidth(width))} />
           <output aria-live="polite" aria-atomic="true" className="mt-5 block min-h-12 text-sm leading-relaxed text-teal-900">{status}</output>

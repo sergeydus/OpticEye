@@ -16,9 +16,9 @@ describe('Poggendorff geometry', () => {
     expect(createPoggendorffGeometry(80, 40).lines).toHaveLength(57)
   })
 
-  it('keeps all 104 configurations parallel, frame-clipped, deterministic and width-independent', () => {
+  it('keeps all 136 configurations parallel, frame-clipped, deterministic and width-independent', () => {
     let combinations = 0
-    for (let angle = 45; angle <= 80; angle += 5) for (let width = 16; width <= 64; width += 4) {
+    for (let angle = 45; angle <= 80; angle += 5) for (let width = 0; width <= 64; width += 4) {
       combinations++
       const geometry = createPoggendorffGeometry(angle, width), { lines, strips } = geometry
       const slope = Math.tan(angle * Math.PI / 180)
@@ -52,12 +52,12 @@ describe('Poggendorff geometry', () => {
         expect(y).toBeCloseTo(240 - slope * (x - 360), 8)
       }
     }
-    expect(combinations).toBe(104)
+    expect(combinations).toBe(136)
   })
 
   it('rounds steps, clamps bounds and normalizes invalid props and viewing sizes', () => {
     expect([23, 45, 47, 48, 79, 90].map(normalizeAngle)).toEqual([45, 45, 45, 50, 80, 80])
-    expect([10, 16, 21, 22, 40, 70].map(normalizeStripWidth)).toEqual([16, 16, 20, 24, 40, 64])
+    expect([-10, 0, 1, 2, 10, 16, 21, 22, 40, 70].map(normalizeStripWidth)).toEqual([0, 0, 0, 4, 12, 16, 20, 24, 40, 64])
     for (const value of [NaN, Infinity, -Infinity]) {
       expect(normalizeAngle(value)).toBe(70)
       expect(normalizeStripWidth(value)).toBe(40)

@@ -1,6 +1,6 @@
 # Poggendorff specification
 
-Status: **repeated-strip revision implemented; perceptual calibration pending**. Version 2.0, 21 October 2026. The owner found the initial single-line version weak and requested the repeated yellow-strip variation on Bach's right. Keep unlisted/noindex and local for viewing. ID/folder: `poggendorff`; h1: “Poggendorff illusion”; HTML title: “Poggendorff illusion | OpticEye”. Description: “Parallel diagonals can appear misaligned behind yellow strips. Hide the strips to expose the same continuous lines.”
+Status: **repeated-strip revision implemented; perceptual calibration pending**. Version 2.1, 21 October 2026. The owner found the initial single-line version weak and requested the repeated yellow-strip variation on Bach's right. Keep unlisted/noindex and local for viewing. ID/folder: `poggendorff`; h1: “Poggendorff illusion”; HTML title: “Poggendorff illusion | OpticEye”. Description: “Parallel diagonals can appear misaligned behind yellow strips. Hide the strips to expose the same continuous lines.”
 
 Inherit page setup, listing policy, Reset, normalization, accessibility, testing and two-viewer calibration from [implementation.md](implementation.md). Replace the first construction; no extra mode, transparency, alignment quiz or animation.
 
@@ -25,27 +25,27 @@ Draw **eight opaque yellow #FFFF00 rectangles**, no border: strip j=0…7 has x=
 | Label / choice | Default | Range / effect |
 | --- | --- | --- |
 | Line angle | 70° | 45–80°, step5; changes orientation and frame clipping, including edge-line counts/lengths |
-| Strip width | 40 | 16–64 units, step4; changes only the eight occluder widths |
+| Strip width | 40 | 0–64 units, step4; changes only the eight occluder widths |
 | Strips visible | true | Stable “Hide strips” toggle, pressed when hidden |
 | Poggendorff image size | Medium/540 | Shared 240/540/720 maximum CSS widths |
 
 Prompt: **“Do the diagonals look continuous across the yellow strips?”** Ask users to follow a diagonal across several strips, then hide them. Do not promise an apparent offset. Proof: **“Same straight diagonals. Only the yellow strips were removed.”**
 
-Hide strips removes only the yellow context group. Every existing line node, endpoint/stroke, surface and frame stays identical. Formerly covered pixels intentionally change; there is no whole-image pixel-identity claim. Width changes must never affect lines. Angle explicitly changes target geometry while retaining visibility; vertical pitch stays72, so perpendicular spacing also changes with angle. This exploration does not isolate one perceptual variable or preserve clipped line lengths. Reset restores70°/40/shown/Medium/closed. SVG descriptions name the repeated arrangement and its uncovered straight lines.
+Hide strips removes only the yellow context group. Every existing line node, endpoint/stroke, surface and frame stays identical. Formerly covered pixels intentionally change; there is no whole-image pixel-identity claim. Width changes must never affect lines. At width0, all eight rectangles have zero area and paint nothing; this does not toggle Hide strips or show its proof. Increasing width restores the chosen width in the existing visibility state. Descriptions/status must distinguish zero-width context from visible strips. Angle explicitly changes target geometry while retaining visibility; vertical pitch stays72, so perpendicular spacing also changes with angle. This exploration does not isolate one perceptual variable or preserve clipped line lengths. Reset restores70°/40/shown/Medium/closed. SVG descriptions name the repeated arrangement and its uncovered straight lines.
 
 ## 4. Responsive concerns
 
 Scale uniformly by W/720. At W240/288/540/720, strokes are **1/1.2/2.25/3 CSS px**, default yellow widths **13.33/16/30/40px**, strip periods **26.67/32/60/80px**, and vertical line pitches **24/28.8/54/72px**. The pattern frame occupies640/720 of the drawing width. Steeper angles make the perpendicular line spacing finer; edge fragments are intentional. Some angle/width combinations can weaken or change the apparent matching.
 
-Do not snap individual endpoints, add minimum strokes or change geometry by device. Check antialiasing/moiré at DPR1,1.25,2, all image sizes, angle/width extremes and shared320/1440/200%-zoom requirements. These are construction checks, not human calibration.
+Do not snap individual endpoints, add minimum strokes or change geometry by device. Check antialiasing/moiré at DPR1,1.25,2, all image sizes, angle/width extremes (including width0) and shared320/1440/200%-zoom requirements. These are construction checks, not human calibration.
 
 ## 5. Acceptance criteria
 
 | ID | Specific required result |
 | --- | --- |
-| PG01 | All **104** angle/width combinations yield finite, deterministic frame-clipped straight lines with the shared equation/vertical pitch and exact eight yellow rectangles. Verify boundary intersections, parallelism, counts at45/70/80, palette, bounds and width-independent line geometry. Shared normalization applies. |
+| PG01 | All **136** angle/width combinations yield finite, deterministic frame-clipped straight lines with the shared equation/vertical pitch and exact eight yellow rectangles. Verify boundary intersections, parallelism, counts at45/70/80, palette, bounds and width-independent line geometry. Shared normalization applies. |
 | PG02 | Repeated reveal retains all identical line DOM nodes/attributes, surface and frame, removing only the eight-strip group. No inserted continuation, replacement fragments, guides, fade or target movement. |
-| PG03 | Angle changes only line geometry; width changes only context. Hidden changes retain visibility; Reset restores70°/40/shown/Medium/closed. Labels explain the angle's clipping/spacing effects. |
+| PG03 | Angle changes only line geometry; width changes only context. Hidden changes retain visibility; Reset restores70°/40/shown/Medium/closed. Width0 paints no yellow without changing lines or the reveal state. Labels explain the angle's clipping/spacing effects. |
 | PG04 | Shared engineering/browser requirements pass, including sizes, extremes and DPR checks. Record actual results in docs/poggendorff-validation.md. Remain unlisted/noindex until explicit owner listing approval. Existing features remain intact. |
 | PG05 | Calibration only: two viewers on desktop/mobile report apparent misalignment with strips and straightness after hiding them at defaults. Record weak/absent/opposite responses and supplied conditions only. Previous weak single-line feedback does not calibrate this revision. |
 

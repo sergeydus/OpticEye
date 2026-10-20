@@ -6,7 +6,7 @@ export const SURFACE_FILL = '#FFFFFF'
 export const LINE_STROKE = { color: '#000000', width: 3 } as const
 export const STRIP = { count: 8, pitch: 80, fill: '#FFFF00' } as const
 export const ANGLE = { min: 45, max: 80, step: 5, default: 70 } as const
-export const STRIP_WIDTH = { min: 16, max: 64, step: 4, default: 40 } as const
+export const STRIP_WIDTH = { min: 0, max: 64, step: 4, default: 40 } as const
 export const VIEWING_SIZES = [
   { label: 'Compact', width: 240 },
   { label: 'Medium', width: 540 },
