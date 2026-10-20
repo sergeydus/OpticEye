@@ -1,6 +1,6 @@
 # Poggendorff specification
 
-Status: **draft; awaiting owner approval**. Version 1.0, 21 October 2026. Second in the implementation order. ID/folder: `poggendorff`; title/h1: “Poggendorff illusion”; HTML title: “Poggendorff illusion | OpticEye”. Description: “A straight diagonal can appear misaligned behind a strip. Hide the strip to see its unchanged continuation.”
+Status: **approved; awaiting implementation**. Version 1.1, 21 October 2026. Second in the implementation order. ID/folder: `poggendorff`; title/h1: “Poggendorff illusion”; HTML title: “Poggendorff illusion | OpticEye”. Description: “A straight diagonal can appear misaligned behind a strip. Hide the strip to see its unchanged continuation.”
 
 Inherit page integration, unlisted/noindex policy, Reset, normalization, accessibility, testing and two-viewer calibration from [implementation.md](implementation.md). First version is an original static line/occluder drawing, without alignment quizzes, draggable segments, transparency controls or animation.
 
@@ -55,4 +55,4 @@ At θ65°,w160 and W288, the shortest exposed line pieces are about 19.34px each
 | PG04 | Shared page/interaction/test/browser requirements pass, including every size, angle/width extremes and stated DPR checks. Record actual results in docs/poggendorff-validation.md; direct entry remains unlisted/noindex until owner approval. Existing features remain intact. |
 | PG05 | Calibration only: two viewers on desktop/mobile report apparent alignment with the strip and straightness after hiding it at defaults. Record weak/absent/opposite offsets and only supplied conditions; follow shared status/listing rules. |
 
-PG01–PG04 define implemented; PG05 defines calibration. No code before approval.
+PG01–PG04 define implemented; PG05 defines calibration. Approved on 21 October 2026; await the owner's instruction to implement this feature.

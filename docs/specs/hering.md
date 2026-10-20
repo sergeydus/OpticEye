@@ -1,6 +1,6 @@
 # Hering specification
 
-Status: **draft; awaiting owner approval**. Version 1.0, 21 October 2026. Fourth in implementation order. ID/folder: `hering`; title/h1: “Hering illusion”; HTML title: “Hering illusion | OpticEye”. Description: “Straight parallel lines can appear bowed across a radial background. Hide the rays to compare their actual geometry.”
+Status: **approved; awaiting implementation**. Version 1.1, 21 October 2026. Fourth in implementation order. ID/folder: `hering`; title/h1: “Hering illusion”; HTML title: “Hering illusion | OpticEye”. Description: “Straight parallel lines can appear bowed across a radial background. Hide the rays to compare their actual geometry.”
 
 Inherit shared page setup, initial unlisted/noindex state, Reset, accessibility, normalization, engineering checks and two-viewer calibration from [implementation.md](implementation.md). This is a static original radial-fan construction, not Bach's combined Hering/Zöllner artwork or a motion variant.
 
@@ -61,4 +61,4 @@ If a tested default is weak, revise the spec before moving the fan center or tar
 | HE04 | Shared engineering/page/tests checklist passes with an unlisted/noindex direct page; include all counts, image sizes and specified DPR checks. Record actual results in docs/hering-validation.md, preserving existing feature records. |
 | HE05 | Calibration only: two viewers on desktop/mobile compare default red lines with rays present/absent and report perceived bowing/straightness, including weak or absent responses. Follow shared size-scoped status and separate owner listing approval. |
 
-HE01–HE04 define implemented; HE05 defines calibration. Await owner approval before code.
+HE01–HE04 define implemented; HE05 defines calibration. Approved for implementation on 21 October 2026; implement only in the owner's requested order.

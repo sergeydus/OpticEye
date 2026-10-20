@@ -1,6 +1,6 @@
 # Ponzo specification
 
-Status: **draft; awaiting owner approval**. Version 1.0, 21 October 2026. Fifth in implementation order. ID/folder: `ponzo`; title/h1: “Ponzo illusion”; HTML title: “Ponzo illusion | OpticEye”. Description: “Compare equal bars between converging rails, then hide the perspective context without changing either bar.”
+Status: **approved; awaiting implementation**. Version 1.1, 21 October 2026. Fifth in implementation order. ID/folder: `ponzo`; title/h1: “Ponzo illusion”; HTML title: “Ponzo illusion | OpticEye”. Description: “Compare equal bars between converging rails, then hide the perspective context without changing either bar.”
 
 Follow [implementation.md](implementation.md) for the shared page, initial unlisted/noindex state, Reset, normalization, accessibility, tests and two-viewer calibration. First version: original static railway-style drawing. Exclude room photographs, target resizing/matching, quizzes, extra perspective modes and animation.
 
@@ -24,13 +24,13 @@ Context consists of two rails and six cross-ties, all drawn before targets. Let 
 
 Paint surface, context ties, context rails, persistent orange targets last. No further grid, vanishing-point marker, arrows, target-end guides, shading or gradients. At defaults q88,t44, upper target y148 is one quarter down the rails, with h=78; lower target y332 is three quarters down, with h=146. Rails therefore straddle the equal targets with different surrounding gaps.
 
-Across q80…160, upper h is 75…105 and lower h is 145…155. Each target half-span is 70, so the rails never cross either bar. At the tightest setting, the 5-unit centerline clearance exceeds the rail's approximately 3.21-unit horizontal half-stroke extent. Ties remain at least 20 units from target centerlines, so their half-stroke plus the target half-stroke cannot touch. Bound the full painted rails, ties and targets inside the frame, not only their endpoints.
+Across q88…160, upper h is 78…105 and lower h is 146…155. Each target half-span is 70, so the rails never cross either bar. At the tightest setting, the 8-unit centerline clearance exceeds the rail's approximately 3.20-unit horizontal half-stroke extent. Ties remain at least 20 units from target centerlines, so their half-stroke plus the target half-stroke cannot touch. Bound the full painted rails, ties and targets inside the frame, not only their endpoints.
 
 ## 3. Controls and invariant reveal
 
 | Choice / label | Default | Range / effect |
 | --- | --- | --- |
-| Top rail gap | 88 | 80–160 drawing units, step 8; changes rail top endpoints and recomputed tie spans |
+| Top rail gap | 88 | 88–160 drawing units, step 8; changes rail top endpoints and recomputed tie spans |
 | Rails visible | true | Stable “Hide rails” toggle, pressed when hidden; includes all cross-ties |
 | Ponzo image size | Medium/540 | Shared 240/540/720 maximum CSS widths |
 
@@ -51,16 +51,16 @@ At scale W/720:
 | Medium540 | 105px | 6px | 6px |
 | Large720 | 140px | 8px | 8px |
 
-The last column precedes subtraction of the rail's projected half-stroke; do not claim it is an empty pixel gap. At minimum q80 and W288 the remaining gap is about **0.72 CSS px**; Compact leaves about **0.60px**. Antialiasing/fractional DPR may make a mathematically separate rail look joined to the bar. Check q80 especially at DPR1/2/1.25; default/reveal and every size follow the shared browser checklist. Do not silently move rail endpoints or shorten targets for phones. If contact weakens the comparison, revise the documented minimum before changing implementation.
+The last column precedes subtraction of the rail's projected half-stroke; do not claim it is an empty pixel gap. The owner raised the minimum from q80 to q88 before implementation. At minimum q88 and W288 the remaining gap is about **1.92 CSS px**; Compact leaves about **1.60px**. Antialiasing/fractional DPR may make a mathematically separate rail look joined to the bar. Check q88 especially at DPR1/2/1.25; default/reveal and every size follow the shared browser checklist. Do not silently move rail endpoints or shorten targets for phones. If contact weakens the comparison, revise the documented minimum before changing implementation.
 
 ## 5. Acceptance criteria
 
 | ID | Specific required result |
 | --- | --- |
-| PO01 | Exactly two fixed equal 140-unit bars, two rails and six ties. All **11** q settings satisfy the interpolation formulas, explicit palette, stroke-safe bounds and target/context separation. Shared step/clamp/non-finite normalization applies. |
+| PO01 | Exactly two fixed equal 140-unit bars, two rails and six ties. All **10** q settings satisfy the interpolation formulas, explicit palette, stroke-safe bounds and target/context separation. Shared step/clamp/non-finite normalization applies. |
 | PO02 | Repeated Hide rails removes only the eight context lines; same target nodes/attributes, white surface, viewBox and displayed size/position remain. No guide, extra bar, target scaling or animation. |
 | PO03 | q changes only rails/tie spans; hidden changes retain visibility. Size/disclosure/Reset follow shared rules and restore q88/shown/Medium/closed. Labels describe top gap and context, not a guaranteed perceptual strength. |
 | PO04 | Shared engineering/page/test requirements pass with unlisted/noindex direct access; cover q extremes, every size and the tight-gap DPR checks. Write actual results in docs/ponzo-validation.md, retaining existing pages/calibration records. |
 | PO05 | Calibration only: two viewers on desktop/mobile compare apparent bar lengths at defaults before/after Hide rails; record direction and weak/absent responses. Shared status/listing rules apply; do not claim perspective guarantees a response. |
 
-PO01–PO04 define implemented; PO05 defines calibration. Await approval before implementation.
+PO01–PO04 define implemented; PO05 defines calibration. Approved on 21 October 2026; await the owner's instruction to implement this feature.

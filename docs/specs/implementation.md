@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: implementation baseline with six additional draft feature specifications awaiting owner approval; version 1.31. Updated 21 October 2026. No implementation of these six is authorized by this documentation checkpoint.
+Status: implementation baseline with five approved additional specifications and the reviewed Ebbinghaus revision; version 1.32. Updated 21 October 2026. The owner authorized scintillating grid first, unlisted for local viewing; later features await their implementation turn.
 
 ## 1. Purpose and scope
 
@@ -8,7 +8,7 @@ OpticEye lets people observe optical illusions, manipulate their context, reveal
 
 This document defines project-wide rules. The implemented scope is a Home page listing four illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), [Café Wall](cafe-wall.md), and calibrated [Müller-Lyer](muller-lyer.md). A fifth illusion, [Kanizsa triangle](kanizsa.md), is implemented; unlisted by owner decision (effect judged too weak); calibration not pursued. It remains built and reachable directly, with owner authorization to publish it on main. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
 
-The owner selected six further illusions for specification, with approval and implementation to follow one at a time in this order: [Scintillating grid](scintillating-grid.md), [Poggendorff](poggendorff.md), [Ebbinghaus](ebbinghaus.md), [Hering](hering.md), [Ponzo](ponzo.md), [Checker-shadow](checker-shadow.md). These documents are drafts, not implemented pages or calibration claims. Do not add their code, metadata entries or build inputs during this documentation-only task.
+The owner selected six further illusions for specification, with approval and implementation to follow one at a time in this order: [Scintillating grid](scintillating-grid.md), [Poggendorff](poggendorff.md), [Ebbinghaus](ebbinghaus.md), [Hering](hering.md), [Ponzo](ponzo.md), [Checker-shadow](checker-shadow.md). Five specs are approved, including Ponzo with minimum rail gap88; Ebbinghaus is revised to six large and eight closely spaced small inducers. Implement scintillating grid first only; do not implement later features yet. Approval does not claim implementation/calibration or authorize listing/pushing.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -118,7 +118,7 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 ### Listing and direct pages
 
-- New illusions MUST enter the metadata list with **listed:false**, remain directly reachable/buildable, and switch to **listed:true only after explicit owner viewing approval**. Implementation completion alone does not authorize listing. Existing four listed illusions remain true; Kanizsa remains false. The current code's missing-flag fallback is a legacy detail, not permission to omit false from a new entry. Use the existing shared filtered list for both discovery surfaces; change no code in this documentation task.
+- New illusions MUST enter the metadata list with **listed:false**, remain directly reachable/buildable, and switch to **listed:true only after explicit owner viewing approval**. Implementation completion alone does not authorize listing. Existing four listed illusions remain true; Kanizsa remains false. The current code's missing-flag fallback is a legacy detail, not permission to omit false from a new entry. Use the existing shared filtered list for both discovery surfaces.
 - Build inputs and valid page IDs MUST continue to use every entry. Verify output count as `1 + all entries`, Home cards as `listed entries`, and nav links as `1 + listed entries`, rather than hardcoding a future total. Unlisting changes discovery, not access control.
 - Unlisted illusion documents MUST have static `<meta name="robots" content="noindex">` and no current marker in their normal listed nav. When the owner approves listing, update the flag and remove noindex together; listed pages have their own current marker. Kanizsa stays noindex, with its existing behavior unchanged.
 - Owner viewing approval to list is distinct from section 8.2's two-viewer desktop/mobile calibration. Record both decisions separately; neither an engineering test nor one owner's approval establishes full calibration.

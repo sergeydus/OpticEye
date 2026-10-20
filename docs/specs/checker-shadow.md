@@ -1,6 +1,6 @@
 # Checker-shadow specification
 
-Status: **draft; awaiting owner approval**. Version 1.0, 21 October 2026. Sixth in implementation order. ID/folder: `checker-shadow`; title/h1: “Checker-shadow illusion”; HTML title: “Checker-shadow illusion | OpticEye”. Description: “Compare two equal-gray tiles in a shaded scene, then isolate the same tiles without changing their fills.”
+Status: **approved; awaiting implementation**. Version 1.1, 21 October 2026. Sixth in implementation order. ID/folder: `checker-shadow`; title/h1: “Checker-shadow illusion”; HTML title: “Checker-shadow illusion | OpticEye”. Description: “Compare two equal-gray tiles in a shaded scene, then isolate the same tiles without changing their fills.”
 
 Use [implementation.md](implementation.md) for shared page setup, unlisted/noindex policy, Reset, accessibility, tests and two-viewer calibration, and its **checker-shadow context-only shading exception**. This is an original schematic scene, not a copy of Adelson's image or a physical lighting simulation. No downloaded art, transparency, blend modes, blur, animation or adjustable target/shadow intensity.
 
@@ -57,4 +57,4 @@ Scale W/720. Target edge vectors become (80W/720,0),(28W/720,44W/720). At W240/2
 | CS04 | Shared engineering/page/tests checklist passes unlisted/noindex; include direct loads, every size and DPR1/2/1.25 default/isolation sampling. Record actual results in docs/checker-shadow-validation.md; preserve other features. |
 | CS05 | Calibration only: two viewers on desktop/mobile compare apparent tile shades at defaults and after isolation; record the reported direction, weak/absent responses and supplied conditions. Listing requires separate owner viewing approval under shared rules. |
 
-CS01–CS04 define implemented; CS05 defines calibration. Await approval before code or shading implementation.
+CS01–CS04 define implemented; CS05 defines calibration. Approved on 21 October 2026; await the owner's instruction to implement this feature.

@@ -1,6 +1,6 @@
 # Scintillating grid specification
 
-Status: **draft; awaiting owner approval**. Version 1.0, 21 October 2026. First in the requested implementation order. ID/folder: `scintillating-grid`; title/h1: “Scintillating grid”; HTML title: “Scintillating grid | OpticEye”. Description: “Look around a static grid, then hide its gray lines while keeping the same white disks.”
+Status: **approved; awaiting implementation**. Version 1.1, 21 October 2026. First in the requested implementation order. ID/folder: `scintillating-grid`; title/h1: “Scintillating grid”; HTML title: “Scintillating grid | OpticEye”. Description: “Look around a static grid, then hide its gray lines while keeping the same white disks.”
 
 Use [implementation.md](implementation.md) for page/files, unlisted entry/noindex, Reset, normalization, accessibility, browser checks and two-viewer calibration. This document adds only feature-specific requirements. No animation, dark-spot simulation or gaze tracking.
 
@@ -58,7 +58,7 @@ Square layout makes the figure taller than existing 3:2 stimuli. Fit the whole g
 | SG01 | All **35** spacing/diameter combinations produce exactly 18 lines and 81 white circles, correct intersections/extents/palette and finite bounds. No overlaps between disks or painted geometry beyond the frame. Test step rounding, extremes and non-finite fallbacks through the shared normalization contract. |
 | SG02 | Repeated Hide grid removes only gray lines; persistent disk nodes/attributes, surface, bounds and size are unchanged at fixed parameters. Restoring uses current settings. No dark-center geometry, animation or fake spots. |
 | SG03 | Both controls alter only their specified geometry, including hidden changes; image sizes and shared Reset restore documented defaults. Proof/descriptions make only the limited grid-removal claim. |
-| SG04 | Shared engineering/page/tests checklist passes with this page unlisted, noindex and directly buildable; record actual results in docs/scintillating-grid-validation.md. Browser coverage includes extremes, each size and the DPR checks above. No runtime pass is claimed by this draft. |
+| SG04 | Shared engineering/page/tests checklist passes with this page unlisted, noindex and directly buildable; record actual results in docs/scintillating-grid-validation.md. Browser coverage includes extremes, each size and the DPR checks above. Spec approval does not claim a runtime pass. |
 | SG05 | Calibration only, per shared two-viewer desktop/mobile rules: record whether transient dark spots are noticed around intersections and how hiding/restoring the grid changes that percept. Record weak/absent responses without assuming dots must vanish at fixation. Owner listing approval is separate. |
 
-SG01–SG04 define implemented; SG05 defines calibration. Await owner approval before code.
+SG01–SG04 define implemented; SG05 defines calibration. Approved for implementation on 21 October 2026; implement only in the owner's requested order.
