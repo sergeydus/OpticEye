@@ -2,7 +2,11 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current structure (21 October 2026): six real documents, four listed Home cards, and five header links (Home plus four listed illusions). Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. Its direct URL and build output remain, with static noindex and no current nav marker on that page. See [Kanizsa validation](kanizsa-validation.md) for construction results and the listing checks. Earlier [Müller-Lyer](muller-lyer-validation.md) and [Café Wall](cafe-wall-validation.md) records retain their calibration; the original three-page checkpoint below is historical and remains applicable to unchanged features.
+Current structure (21 October 2026): seven real documents, four listed Home cards, and five header links (Home plus four listed illusions). Kanizsa remains unlisted by owner decision; calibration is not pursued. Scintillating grid is implemented locally, unlisted/noindex for owner viewing, calibration pending. Both direct URLs/build outputs remain and neither page has a current nav marker. Existing demos/calibration are unchanged; earlier checkpoints below are historical.
+
+## Scintillating-grid checkpoint: 21 October 2026
+
+Lint, **107 tests across 14 files**, and seven-page build pass. Chrome155.0.8059.85 checked every page directly and after refresh at 320×1200 and1440×1200 CSS px/DPR1: all200, four Home cards, five base-aware nav links, correct listed/unlisted markers/noindex, styles/images, no overflow/errors/404s. Navigation between listed pages stayed under /OpticEye/. The new grid additionally passed DPR1/1.25/2, native keyboard controls, retained-node reveal and actual200% zoom checks; see [grid validation](scintillating-grid-validation.md) for exact cases/dimensions and screenshot evidence. Dev /scintillating-grid/ works at base /. Build inputs still include unlisted entries; no dependencies/router/workflow changes. This implementation remains local and unpushed for viewing.
 
 ## Unlisting checkpoint: 21 October 2026
 

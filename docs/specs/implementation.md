@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: implementation baseline with five approved additional specifications and the reviewed Ebbinghaus revision; version 1.32. Updated 21 October 2026. The owner authorized scintillating grid first, unlisted for local viewing; later features await their implementation turn.
+Status: scintillating grid implemented locally and unlisted for owner viewing, with later specifications awaiting their implementation turn; version 1.33. Updated 21 October 2026. Perceptual calibration is pending for the grid; this checkpoint must not be pushed.
 
 ## 1. Purpose and scope
 
@@ -8,7 +8,7 @@ OpticEye lets people observe optical illusions, manipulate their context, reveal
 
 This document defines project-wide rules. The implemented scope is a Home page listing four illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), [Café Wall](cafe-wall.md), and calibrated [Müller-Lyer](muller-lyer.md). A fifth illusion, [Kanizsa triangle](kanizsa.md), is implemented; unlisted by owner decision (effect judged too weak); calibration not pursued. It remains built and reachable directly, with owner authorization to publish it on main. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
 
-The owner selected six further illusions for specification, with approval and implementation to follow one at a time in this order: [Scintillating grid](scintillating-grid.md), [Poggendorff](poggendorff.md), [Ebbinghaus](ebbinghaus.md), [Hering](hering.md), [Ponzo](ponzo.md), [Checker-shadow](checker-shadow.md). Five specs are approved, including Ponzo with minimum rail gap88; Ebbinghaus is revised to six large and eight closely spaced small inducers. Implement scintillating grid first only; do not implement later features yet. Approval does not claim implementation/calibration or authorize listing/pushing.
+The owner selected six further illusions in this order: [Scintillating grid](scintillating-grid.md), [Poggendorff](poggendorff.md), [Ebbinghaus](ebbinghaus.md), [Hering](hering.md), [Ponzo](ponzo.md), [Checker-shadow](checker-shadow.md). Scintillating grid is now implemented locally, unlisted/noindex, with engineering results in [validation](../scintillating-grid-validation.md) and calibration pending. Four later specs are approved, including Ponzo with minimum rail gap88; Ebbinghaus is revised to six large and eight closely spaced small inducers. Do not implement later features yet. Approval does not authorize listing/pushing.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -75,7 +75,7 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `docs/pages-validation.md` | Multi-page build, direct-load/refresh/navigation, metadata, development-base and responsive browser results. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
-| `<id>/index.html`, `<id>/main.tsx` for the six draft features | Future static documents/entries, added only during each approved implementation. |
+| `<id>/index.html`, `<id>/main.tsx` for the selected features | Static documents/entries, added only during each approved implementation; scintillating-grid now exists. |
 | `src/illusions/<id>/<Feature>.tsx`, `<Feature>Stimulus.tsx`, `<camelCaseId>Model.ts` | Future feature-local state, drawing and pure constants/geometry; use the existing naming pattern, not a new renderer registry. |
 | `docs/<id>-validation.md` | Created during each approved implementation with actual results, not placeholder passes. |
 | `vite.config.ts` | React/Tailwind, build-only `/OpticEye/` base and build.rollupOptions.input containing Home plus HTML files derived from the illusion list. |
@@ -109,7 +109,7 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 ### Static page structure
 
-- The current build has Home and five illusion documents, including unlisted Kanizsa. Each approved addition adds `<id>/index.html` → `/OpticEye/<id>/` (dev `/<id>/`). Derive all illusion inputs from src/illusions.ts, including unlisted entries. Use Vite build.rollupOptions.input; no router or fallback 404.html is required.
+- The current build has Home and six illusion documents, including unlisted Kanizsa and scintillating grid. Each approved addition adds `<id>/index.html` → `/OpticEye/<id>/` (dev `/<id>/`). Derive all illusion inputs from src/illusions.ts, including unlisted entries. Use Vite build.rollupOptions.input; no router or fallback 404.html is required.
 - Every document has its own static title and meta description. Home uses “OpticEye — Optical illusions”; illusion documents use “Confetti illusion | OpticEye”, “Munker illusion | OpticEye”, “Café Wall illusion | OpticEye”, “Müller-Lyer illusion | OpticEye” and “Kanizsa triangle | OpticEye”. Each rendered page has exactly one h1; illusion subordinate headings use h2. Remove the shell's in-page section navigation and extra page heading from illusion pages.
 - Shared header navigation is labeled “Main navigation” and links Home plus listed illusions with import.meta.env.BASE_URL: currently five links on every page. Only an owner-approved listing change increases this count. Mark the current listed link aria-current="page"; an unlisted page has no current marker. The brand links Home. Use ordinary document links; preserve feature-local explanation fragments.
 - Each HTML entry mounts only its own page. Navigation/refresh loads a document with local defaults; no shared state, custom cross-page persistence or global Reset. Native browser Back/Forward and its document-cache behavior need no interception. Confetti Reset still covers its circles/oranges; Reset Munker remains local.

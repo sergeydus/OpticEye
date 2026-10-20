@@ -34,6 +34,13 @@ export const ILLUSIONS = [
     title: 'Kanizsa triangle',
     description: 'Aligned cutout disks can suggest a triangle. Rotate the cutouts to compare the surrounding shapes.',
   },
+  {
+    id: 'scintillating-grid',
+    listed: false,
+    name: 'Scintillating grid',
+    title: 'Scintillating grid',
+    description: 'Look around a static grid, then hide its gray lines while keeping the same white disks.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

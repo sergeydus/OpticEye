@@ -1,6 +1,6 @@
 # Scintillating grid specification
 
-Status: **approved; awaiting implementation**. Version 1.1, 21 October 2026. First in the requested implementation order. ID/folder: `scintillating-grid`; title/h1: “Scintillating grid”; HTML title: “Scintillating grid | OpticEye”. Description: “Look around a static grid, then hide its gray lines while keeping the same white disks.”
+Status: **implemented; perceptual calibration pending**. Version 1.2, 21 October 2026. SG01–SG04 pass; see [actual validation](../scintillating-grid-validation.md). Unlisted/noindex for owner viewing; no listing approval or push. First in the requested implementation order. ID/folder: `scintillating-grid`; title/h1: “Scintillating grid”; HTML title: “Scintillating grid | OpticEye”. Description: “Look around a static grid, then hide its gray lines while keeping the same white disks.”
 
 Use [implementation.md](implementation.md) for page/files, unlisted entry/noindex, Reset, normalization, accessibility, browser checks and two-viewer calibration. This document adds only feature-specific requirements. No animation, dark-spot simulation or gaze tracking.
 
@@ -61,4 +61,4 @@ Square layout makes the figure taller than existing 3:2 stimuli. Fit the whole g
 | SG04 | Shared engineering/page/tests checklist passes with this page unlisted, noindex and directly buildable; record actual results in docs/scintillating-grid-validation.md. Browser coverage includes extremes, each size and the DPR checks above. Spec approval does not claim a runtime pass. |
 | SG05 | Calibration only, per shared two-viewer desktop/mobile rules: record whether transient dark spots are noticed around intersections and how hiding/restoring the grid changes that percept. Record weak/absent responses without assuming dots must vanish at fixation. Owner listing approval is separate. |
 
-SG01–SG04 define implemented; SG05 defines calibration. Approved for implementation on 21 October 2026; implement only in the owner's requested order.
+SG01–SG04 define implemented; SG05 defines calibration and remains pending. Approved and implemented on 21 October 2026 after spec checkpoint 8f81fd3. Keep this checkpoint local for owner viewing; later features await their implementation turn.
