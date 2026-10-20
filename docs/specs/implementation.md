@@ -1,12 +1,12 @@
 # OpticEye implementation specification
 
-Status: implementation baseline for separate static illusion pages, including Café Wall, version 1.20. Updated 20 October 2026.
+Status: implementation baseline for separate static illusion pages, including Café Wall, with the approved Müller-Lyer extension; version 1.22. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. The scope is a Home page listing the illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), and [Café Wall](cafe-wall.md). Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
+This document defines project-wide rules. The implemented scope is a Home page listing the illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), and [Café Wall](cafe-wall.md). A fourth illusion, [Müller-Lyer](muller-lyer.md), is approved for implementation, with engineering/calibration still to be verified. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -55,9 +55,15 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `src/illusions/cafe-wall/CafeWallStimulus.tsx` | Fixed surface/mortar targets and removable square-tile context. |
 | `src/illusions/cafe-wall/cafeWallModel.ts` | Palette, defaults, normalization, original tile/mortar geometry and attribution. |
 | `src/illusions/cafe-wall/` tests | Row coverage/parity, parallel targets, context-only reveal, controls and instance isolation. |
+| `muller-lyer/index.html`, `muller-lyer/main.tsx` (planned) | Fourth illusion document and isolated entry, created only after approval. |
+| `src/illusions/muller-lyer/MullerLyer.tsx` (planned) | Local angle/fin-length/size, reveal, disclosure, status and Reset. |
+| `src/illusions/muller-lyer/MullerLyerStimulus.tsx` (planned) | Fixed surface and two shaft targets with removable fin context. |
+| `src/illusions/muller-lyer/mullerLyerModel.ts` (planned) | Shared shaft constants, explicit fin directions, pure geometry, normalization and attribution. |
+| `src/illusions/muller-lyer/` tests (planned) | Equal spans, fin bounds/orientation, target preservation, controls and instance isolation. |
 | `src/pages.test.tsx` | Home links, base-aware/current-page navigation and actual page-entry composition without mounting another illusion. |
 | `docs/munker-validation.md` | Actual engineering results and separate human observations. |
 | `docs/cafe-wall-validation.md` | Actual Café Wall engineering results and separate human calibration observations. |
+| `docs/muller-lyer-validation.md` (planned) | Actual Müller-Lyer engineering checks and separate human viewing, written during approved implementation. |
 | `docs/pages-validation.md` | Multi-page build, direct-load/refresh/navigation, metadata, development-base and responsive browser results. |
 | `src/index.css` | Tailwind entry and essential shared base styles. |
 | `docs/specs/` | Project and feature implementation contracts. |
@@ -103,6 +109,16 @@ The user MUST be able to observe the initial effect before reading the answer. P
 - Reuse SiteLayout, SiteHeader, SiteFooter, mountPage and ViewingSizeControl. The new size values/default belong to Café Wall's model; sharing the select must not change Confetti/Munker choices. Keep rendering/state local, without a generic stimulus engine.
 - Café Wall's reveal removes only tiles and retains the same mortar rectangles, surface and bounds. Mortar-width controls may deliberately change thickness/spacing; row-offset controls change only tile context. These parameter changes must not be confused with reveal invariants.
 - During implementation extend page tests, direct-load/refresh checks and dist output checks to all four documents; retain all existing feature tests/calibration records. Café Wall is deployed and calibrated with two viewers confirming desktop/mobile; see its validation record for the reported conditions and engineering checks.
+
+### Approved Müller-Lyer extension
+
+- [muller-lyer.md](muller-lyer.md) is approved with four connected, miter-joined fin polylines. Commit the specification before feature code; do not push this feature until the owner has viewed it and authorized deployment.
+- Add `muller-lyer/index.html` and its relative entry at `/OpticEye/muller-lyer/` (dev `/muller-lyer/`), plus one metadata entry. Existing list-derived inputs, cards and navigation extend to Home plus four illusions, with five links and one current-page marker. Keep metadata/static HTML titles and descriptions synchronized.
+- Reuse the existing shell, mounting and size select. Check five-link wrapping at 320px and 200% zoom; no router, registry, shared experiment state, dependencies or deployment workflow changes.
+- Two equal, fixed shafts and a white surface persist. Reveal removes only four fin polylines (eight arms), without adding guides. Miter tips are removable context; shaft lengths stay fixed. Fin-angle/length controls affect context only, including while hidden; sizes uniformly scale the drawing. No quiz or shaft-length adjustment in this version.
+- Extend meaningful geometry/component/page tests and direct-load/refresh/navigation/build checks to all five documents during implementation. Record actual results separately from two-viewer desktop/mobile calibration; existing demos and their records stay intact. Record passes only after the corresponding implementation checks actually run.
+
+### Shared interaction requirements
 
 - Every interaction MUST work with pointer, touch, and keyboard. No essential feature may depend on hover, dragging alone, or holding a button.
 - Reveal MUST be persistent until toggled again; experiment controls MUST retain their selected values through reveal toggles.

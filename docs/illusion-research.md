@@ -1,6 +1,6 @@
 # Browser-renderable optical illusions
 
-Researched 19 October 2026; Munker and Café Wall sources rechecked 20 October. Confetti and Munker are implemented and calibrated for their default demonstrations, with two viewers confirming desktop and mobile. The initial report specifies defaults/normal zoom; the mobile follow-up explicitly confirms both viewers without further condition details. See [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for the scope and engineering evidence. Café Wall is also implemented and calibrated, with two viewers confirming desktop and mobile. The other unimplemented illusions remain a backlog. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
+Researched 19 October 2026; Munker, Café Wall and Müller-Lyer sources rechecked 20 October. Confetti and Munker are implemented and calibrated for their default demonstrations, with two viewers confirming desktop and mobile. The initial report specifies defaults/normal zoom; the mobile follow-up explicitly confirms both viewers without further condition details. See [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for the scope and engineering evidence. Café Wall is also implemented and calibrated, with two viewers confirming desktop and mobile. Müller-Lyer now has an approved spec awaiting implementation; Kanizsa remains a backlog item. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
 
 ## Suggested starting set
 
@@ -9,7 +9,7 @@ Researched 19 October 2026; Munker and Café Wall sources rechecked 20 October. 
 | 1 | Confetti | Identical base objects appear to have several hues under different colored stripes. | SVG disks with foreground stripe patterns; hide the stripes to expose identical base fills. |
 | 2 | Munker | Identical color segments appear different within differently colored grids. | SVG or CSS stripes; remove the grid and show the target segments side by side. |
 | 3 | Café Wall | Parallel mortar lines between offset tile rows appear tilted. | Original SVG tile context and shared gray mortar targets; hide tiles while preserving the same target bands. Implemented and calibrated on desktop/mobile. |
-| 4 | Muller-Lyer | Line lengths are misjudged in the presence of arrow fins. | SVG equal-length shafts with opposing fins; hide fins and show endpoint guides. |
+| 4 | Müller-Lyer | Line lengths are misjudged in the presence of arrow fins. | Approved for implementation: original equal-length shafts, four miter-joined fin polylines, angle/length controls and context-only reveal. No guides or quiz. |
 | 5 | Kanizsa triangle | Aligned cutout disks suggest a triangle with contours that were not drawn. | SVG disks with wedges; rotate the disks out of alignment to weaken the implied shape. |
 
 All five can start as static, locally generated graphics without downloaded images, video, or a backend.
@@ -42,13 +42,13 @@ The [Café Wall spec](specs/cafe-wall.md) defines six rows of original square ti
 
 Sources rechecked 20 October 2026: Richard L. Gregory and Priscilla Heard (1979), *Border locking and the Café Wall illusion*, Perception 8, 365–380, [author-hosted paper](https://www.richardgregory.org/papers/cafe_wall/cafe-wall_p1.htm) and [results/discussion](https://www.richardgregory.org/papers/cafe_wall/cafe-wall_p3.htm); [Michael Bach's demonstration](https://michaelbach.de/ot/ang-cafewall/). The latter supports the half-tile starting displacement; distinguish half a tile from half of a two-tile color repeat. Mortar-width effects do not imply a universal CSS-pixel optimum. Keep proposed mechanisms tentative. The approved implementation retains those choices and the 1–8 mortar-width range. Viewer 1 reports visible tilt before reveal and parallel lines afterward on desktop/mobile; viewer 2 subsequently confirms all works fine, completing the two-viewer milestone. Default mortar width 3 is retained. See [Café Wall validation](cafe-wall-validation.md) for engineering results and the reported viewing conditions.
 
-## 4. Muller-Lyer
+## 4. Müller-Lyer
 
 Bach demonstrates a line-bisection variant of the classic illusion, where arrow context biases judgments of length. Our proposed equal-shaft comparison uses the classic two-line arrangement rather than copying that interactive variant.
 
-Store shaft length once and reuse it for both lines. Let users toggle fins or change their angle without altering the shafts. A second interaction could ask users to estimate equality before revealing endpoint guides.
+The approved [Müller-Lyer spec](specs/muller-lyer.md) defines two fixed 320-unit shafts, eight fin arms in four connected miter-joined polylines, shared angle/arm-length controls and a reveal that removes only the fins. The upper arms extend inside the shaft span and the lower arms outside it; explicit vertex/direction formulas avoid ambiguous arrow labels. All geometry/defaults are OpticEye choices awaiting implementation and calibration. A mental “which looks longer?” prompt precedes reveal; quizzes, adjustable shafts and endpoint guides are excluded from this first version. The standalone `/muller-lyer/` page uses the existing metadata-driven multi-page setup, as approved by the owner.
 
-Source: [Michael Bach, Muller-Lyer Illusion](https://michaelbach.de/ot/sze-muelue/index.html), including historical context and research references.
+Sources rechecked 20 October 2026: [Michael Bach, Müller-Lyer Illusion](https://michaelbach.de/ot/sze-muelue/), for the classic/Brentano distinction and an attributed, tentative perspective explanation; [Greene and Nelson (1997), Evaluating Müller-Lyer effects using single fin-set configurations](https://link.springer.com/article/10.3758/BF03211897), *Perception & Psychophysics* 59, 293–312, DOI 10.3758/BF03211897. The publisher abstract was inspected, not the subscription full text. It identifies fin orientation, length and angle among investigated variables; it does not establish our defaults as optimal or make our two-line version a replication. No source assets or code will be copied. Implementation is now approved; engineering checks and perceptual calibration are not yet claimed.
 
 ## 5. Kanizsa triangle
 
