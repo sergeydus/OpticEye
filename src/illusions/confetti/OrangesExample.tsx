@@ -42,7 +42,7 @@ export default function OrangesExample({ nettingHidden, viewingWidth, onViewingW
         <label htmlFor={`${id}-source`} className="text-sm font-medium">Image source</label>
         <select id={`${id}-source`} value={image.id} onChange={(event) => onImageChange(getOrangesImage(event.currentTarget.value).id)} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 bg-transparent px-3 py-2 text-sm ${focus}`}>
           <option value="illustration">Illustration</option>
-          <option value="ai">AI-generated image</option>
+          <option value="ai">Citrus in a crate</option>
         </select>
       </div>}
       <div className="mt-5 max-w-sm">

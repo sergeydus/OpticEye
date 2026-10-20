@@ -12,7 +12,7 @@ it('offers one AI source, labels it honestly, preserves its image/caption throug
   const image = within(section).getByRole('img')
   expect(source).toHaveValue('illustration')
   expect(image).toHaveAttribute('src', ORANGES_IMAGE)
-  expect(within(source).getAllByRole('option').map((option) => option.textContent)).toEqual(['Illustration', 'AI-generated image'])
+  expect(within(source).getAllByRole('option').map((option) => option.textContent)).toEqual(['Illustration', 'Citrus in a crate'])
   await user.selectOptions(source, 'ai')
   expect(image).toHaveAttribute('src', ORANGES_AI_URL)
   expect(image).toHaveAttribute('width', '1024')
