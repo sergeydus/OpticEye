@@ -1,6 +1,6 @@
 # Browser-renderable optical illusions
 
-Researched 19 October 2026; Munker, Café Wall and Müller-Lyer sources rechecked 20 October. Confetti and Munker are implemented and calibrated for their default demonstrations, with two viewers confirming desktop and mobile. The initial report specifies defaults/normal zoom; the mobile follow-up explicitly confirms both viewers without further condition details. See [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for the scope and engineering evidence. Café Wall is also implemented and calibrated, with two viewers confirming desktop and mobile. Müller-Lyer is also implemented and calibrated, with two viewers confirming the default comparison on desktop and mobile; Kanizsa remains a backlog item. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
+Researched 19 October 2026; Munker, Café Wall, Müller-Lyer and Kanizsa sources rechecked 20 October. Confetti and Munker are implemented and calibrated for their default demonstrations, with two viewers confirming desktop and mobile. The initial report specifies defaults/normal zoom; the mobile follow-up explicitly confirms both viewers without further condition details. See [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for the scope and engineering evidence. Café Wall is also implemented and calibrated, with two viewers confirming desktop and mobile. Müller-Lyer is also implemented and calibrated, with two viewers confirming the default comparison on desktop and mobile. Kanizsa now has an approved spec awaiting implementation. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
 
 ## Suggested starting set
 
@@ -10,7 +10,7 @@ Researched 19 October 2026; Munker, Café Wall and Müller-Lyer sources rechecke
 | 2 | Munker | Identical color segments appear different within differently colored grids. | SVG or CSS stripes; remove the grid and show the target segments side by side. |
 | 3 | Café Wall | Parallel mortar lines between offset tile rows appear tilted. | Original SVG tile context and shared gray mortar targets; hide tiles while preserving the same target bands. Implemented and calibrated on desktop/mobile. |
 | 4 | Müller-Lyer | Line lengths are misjudged in the presence of arrow fins. | Implemented and calibrated on desktop/mobile: equal-length shafts, four miter-joined fin polylines, angle/length controls and context-only reveal. |
-| 5 | Kanizsa triangle | Aligned cutout disks suggest a triangle with contours that were not drawn. | SVG disks with wedges; rotate the disks out of alignment to weaken the implied shape. |
+| 5 | Kanizsa triangle | Aligned cutout disks suggest a triangle with contours that were not drawn. | Approved for implementation: three original 300° black sectors, 90° cutout rotation, radius/size controls and no triangle layer. |
 
 All five can start as static, locally generated graphics without downloaded images, video, or a backend.
 
@@ -52,11 +52,11 @@ Sources rechecked 20 October 2026: [Michael Bach, Müller-Lyer Illusion](https:/
 
 ## 5. Kanizsa triangle
 
-Bach shows how aligned disk cutouts create an apparent triangle and how changing context can diminish it.
+Bach describes a textured variation with cutout shapes and context alignment. Our planned black three-disk figure is a different original construction, not a copy of that demonstration.
 
-Draw the inducing shapes rather than an actual filled foreground triangle. Add a rotation control and a reset to the aligned state. A construction reveal can mark the real disk boundaries so users can distinguish drawn edges from implied contours.
+The approved [Kanizsa spec](specs/kanizsa.md) uses equilateral centers 320 units apart and 60° openings. A toggle turns every opening 90° about its own center; disk radius 32–96 (default 64) and viewing size are independent choices. Only the three sector paths are drawn over a fixed white surface. No triangle, guide outlines or white wedge masks are painted. This comparison changes inducing context rather than uncovering a physical target; gaps away from disk boundaries stay white. All numeric choices await implementation and human viewing. The planned `/kanizsa/` page follows the existing multi-page architecture as approved by the owner.
 
-Source: [Michael Bach, Kanizsa Illusion](https://michaelbach.de/ot/cog-Kanizsa/), including references on illusory contours and feedback.
+Sources checked 20 October 2026: [Michael Bach, Kanizsa Illusion](https://michaelbach.de/ot/cog-Kanizsa/); [Kojo, Liinasuo and Rovamo (1993), Spatial and temporal properties of illusory figures](https://pubmed.ncbi.nlm.nih.gov/8506632/), *Vision Research* 33(7), 897–901, DOI 10.1016/0042-6989(93)90072-5; [Shipley and Kellman (1992), Strength of visual interpolation depends on the ratio of physically specified to total edge length](https://link.springer.com/article/10.3758/BF03206762), *Perception & Psychophysics* 52, 97–106, DOI 10.3758/BF03206762. The research abstracts/records were read, not full texts. The first supports the three-sector-disk construction, with sequential experiments we do not reproduce; the second motivates relative-size exploration, without proving our defaults or a guaranteed response. No source artwork/code will be copied. Neural feedback is not asserted as a complete explanation. Implementation is approved; engineering checks and calibration are not yet claimed.
 
 ## Implementation acceptance criteria
 

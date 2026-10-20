@@ -15,6 +15,7 @@ Build a browser-based optical illusion playground. Users should be able to obser
 - Follow `docs/specs/implementation.md` for shared implementation rules and the feature contracts in `docs/specs/confetti.md` and `docs/specs/munker.md`. Update the affected specs when implementation decisions change their requirements.
 - Read `docs/specs/cafe-wall.md` for the approved Café Wall construction. Keep its context-only reveal distinct from parameter changes, and record engineering checks separately from human calibration.
 - Read the approved `docs/specs/muller-lyer.md` for the fourth illusion page. Its reveal removes four miter-joined fin polylines while preserving the same two shafts; record engineering and human calibration separately. Commit the specification before implementation. The owner has confirmed two-viewer desktop/mobile calibration and authorized deployment; preserve the recorded viewing conditions.
+- Read the approved `docs/specs/kanizsa.md` for the fifth illusion page. Its comparison rotates cutout context around fixed disk centers; there is no drawn triangle target to reveal. Preserve the surface and empty gaps, keep engineering/calibration records separate, and commit the specification before implementation. Keep this feature local until the owner authorizes pushing.
 
 ## Rendering and scientific accuracy
 
