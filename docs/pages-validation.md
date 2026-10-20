@@ -2,7 +2,11 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current structure (21 October 2026): seven real documents, four listed Home cards, and five header links (Home plus four listed illusions). Kanizsa remains unlisted by owner decision; calibration is not pursued. Scintillating grid is implemented locally, unlisted/noindex for owner viewing, calibration pending. Both direct URLs/build outputs remain and neither page has a current nav marker. Existing demos/calibration are unchanged; earlier checkpoints below are historical.
+Current structure (21 October 2026): seven real documents, five listed Home cards, and six header links (Home plus five listed illusions). Kanizsa remains unlisted/noindex by owner decision; calibration is not pursued. Scintillating grid is calibrated with two viewers on desktop and real phones, with listing and deployment approved. Its nav marker/noindex now follow the listed-page rules. Earlier checkpoints below are historical.
+
+## Grid listing checkpoint: 21 October 2026
+
+Lint,107 tests/14 files and build pass. Chrome155.0.8059.85 checked all seven pages directly and after refresh at 320/1440 widths,DPR1, plus Home/grid at actual200% zoom: five cards, six nav links, correct current markers, removed grid noindex, styles/assets, retained-disk reveal/Reset, no overflow/errors/404s. See [grid validation](scintillating-grid-validation.md) for viewing conditions and listing evidence. Poggendorff implementation is authorized only after this grid deployment succeeds and will remain local/unlisted.
 
 ## Scintillating-grid checkpoint: 21 October 2026
 

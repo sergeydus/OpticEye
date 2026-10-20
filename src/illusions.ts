@@ -36,7 +36,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'scintillating-grid',
-    listed: false,
+    listed: true,
     name: 'Scintillating grid',
     title: 'Scintillating grid',
     description: 'Look around a static grid, then hide its gray lines while keeping the same white disks.',

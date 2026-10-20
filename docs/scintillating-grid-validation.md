@@ -1,6 +1,6 @@
 # Scintillating grid validation
 
-21 October 2026. **Implemented; perceptual calibration pending.** SG01–SG04 pass. The page remains **listed:false**, static **noindex**, directly reachable at `/OpticEye/scintillating-grid/`, with no current nav marker. Owner listing approval has not been reported. The spec review was committed as `8f81fd3` before code; no push is authorized for this checkpoint.
+21 October 2026. **Implemented and calibrated on desktop and mobile.** SG01–SG05 complete. Both viewers confirmed defaults on desktop and real phones; the owner explicitly approved listing and deployment. The page is now **listed:true**, without noindex, with a current nav marker. The spec review preceded code at `8f81fd3`. The engineering matrix below records the original unlisted implementation; the listing checkpoint supersedes its nav/noindex counts.
 
 ## Engineering
 
@@ -29,4 +29,8 @@ Screenshots of shown/hidden states at 320/DPR1 and 1440/DPR1, plus the shown 200
 
 ## Human viewing (SG05)
 
-**0 of 2 viewers reported for this OpticEye construction; desktop/mobile not yet observed.** The owner's viewing of Bach's separate demo does not calibrate these defaults. Record what is noticed around the intersections and how hiding/restoring the gray grid changes that percept, including weak/absent responses and only supplied conditions. Owner viewing approval to list and two-viewer calibration remain separate decisions. No perception is inferred from screenshots or pixel checks.
+**SG05 complete: 2 of 2 viewers on desktop and real phones.** Both report that the effect works well at defaults: dark spots appear at intersections and hiding the grid removes them. The owner explicitly clarified that both viewers used both desktop and a real phone, rather than phone emulation. Browser, DPR, page zoom, exact viewport and viewing distance were not supplied; none is inferred. The owner separately approved listing, removal of noindex and deployment.
+
+## Listing checkpoint: 21 October 2026
+
+Lint, **107 tests/14 files** and build pass after listing. Chrome155.0.8059.85 checked all seven URLs directly and after refresh at 320×1200 and1440×1200/DPR1, plus Home/grid at actual200% zoom (inner712×552,DPR2,CSS zoom1): five Home cards, six base-aware nav links, grid current marker, no grid noindex; Kanizsa remains unlisted/noindex with no marker. Grid defaults, 81 retained disks on Hide grid, restored 18 lines on Reset, styles/images and navigation passed with no overflow/errors/404s. Report: `grid-listed-preview-check.json` outside Git in the task visualization directory. The previous full feature DPR matrix remains applicable to unchanged geometry.

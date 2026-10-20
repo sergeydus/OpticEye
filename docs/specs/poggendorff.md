@@ -55,4 +55,4 @@ At θ65°,w160 and W288, the shortest exposed line pieces are about 19.34px each
 | PG04 | Shared page/interaction/test/browser requirements pass, including every size, angle/width extremes and stated DPR checks. Record actual results in docs/poggendorff-validation.md; direct entry remains unlisted/noindex until owner approval. Existing features remain intact. |
 | PG05 | Calibration only: two viewers on desktop/mobile report apparent alignment with the strip and straightness after hiding it at defaults. Record weak/absent/opposite offsets and only supplied conditions; follow shared status/listing rules. |
 
-PG01–PG04 define implemented; PG05 defines calibration. Approved on 21 October 2026; await the owner's instruction to implement this feature.
+PG01–PG04 define implemented; PG05 defines calibration. The owner authorized implementation on 21 October 2026 after the grid deployment succeeds. Keep listed:false/noindex; verify and commit locally, without pushing, for owner viewing.
