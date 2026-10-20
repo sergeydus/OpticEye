@@ -2,7 +2,7 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current extension: Café Wall adds a fourth real document and a third Home card. Lint, 69 tests across 8 files and the four-page build pass. All four links and refreshes were checked at 320/1440 with no errors/overflow; see [Café Wall validation](cafe-wall-validation.md) for the current browser matrix and calibration status. The original three-page checkpoint results below are historical and remain applicable to unchanged features.
+Current extension: Müller-Lyer adds a fifth real document and a fourth Home card. Lint, 80 tests across 10 files and the five-page build pass. All five links and refreshes were checked at 320/1440 with no errors/overflow; see [Müller-Lyer validation](muller-lyer-validation.md) for the DPR/zoom matrix and pending human calibration. Both orange sources decoded. Müller-Lyer remains local and unpushed. Earlier Café Wall results are in its [validation record](cafe-wall-validation.md); the original three-page checkpoint below is historical and remains applicable to unchanged features.
 
 ## Three-page checkpoint: build and tests
 

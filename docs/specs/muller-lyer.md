@@ -1,6 +1,6 @@
 # Müller-Lyer illusion specification
 
-Status: **approved for implementation; engineering and perceptual calibration pending**. Version 1.1, 20 October 2026. No implementation, browser checks or human calibration is claimed. Depends on [implementation.md](implementation.md). Stable feature ID, URL slug and folder: `muller-lyer`; use “Müller-Lyer” in visible text.
+Status: **implemented; perceptual calibration pending**. Version 1.2, 20 October 2026. ML01–ML10 pass; ML11 has no human observations yet. See [validation](../muller-lyer-validation.md). The implementation is local and unpushed for owner viewing. Depends on [implementation.md](implementation.md). Stable feature ID, URL slug and folder: `muller-lyer`; use “Müller-Lyer” in visible text.
 
 ## 1. Intended outcome and scope
 
@@ -19,9 +19,9 @@ Page attribution: “Original OpticEye drawing of the Müller-Lyer illusion. See
 
 ## 3. Page integration and files
 
-Production URL: `/OpticEye/muller-lyer/`; development: `/muller-lyer/`. Reuse SiteLayout, SiteHeader, SiteFooter, mountPage and ViewingSizeControl. After approval, add one metadata entry to `src/illusions.ts`; the existing list must supply Home, navigation and build inputs automatically. No runtime route selection or component registry.
+Production URL: `/OpticEye/muller-lyer/`; development: `/muller-lyer/`. Reuse SiteLayout, SiteHeader, SiteFooter, mountPage and ViewingSizeControl. Add one metadata entry to `src/illusions.ts`; the existing list must supply Home, navigation and build inputs automatically. No runtime route selection or component registry.
 
-| Planned file | Responsibility |
+| File | Responsibility |
 | --- | --- |
 | `muller-lyer/index.html` | Static title “Müller-Lyer illusion \| OpticEye”, unique meta description, relative local favicon/module, root. |
 | `muller-lyer/main.tsx` | Mount only Müller-Lyer inside SiteLayout, currentPage="muller-lyer". |
@@ -29,7 +29,7 @@ Production URL: `/OpticEye/muller-lyer/`; development: `/muller-lyer/`. Reuse Si
 | `src/illusions/muller-lyer/MullerLyerStimulus.tsx` | Fixed surface, removable fins and persistent shaft targets. |
 | `src/illusions/muller-lyer/mullerLyerModel.ts` | Constants, attribution, normalization and pure typed geometry. Distinct basename avoids Windows case collisions. |
 | `src/illusions/muller-lyer/` tests | Geometry, target preservation, controls, focus and instance isolation. |
-| `docs/muller-lyer-validation.md` | Actual engineering results and separately recorded human observations; create during implementation, not as a passing placeholder. |
+| `docs/muller-lyer-validation.md` | Actual engineering results and separately recorded human observations. |
 
 Metadata: ID `muller-lyer`, name “Müller-Lyer”, title “Müller-Lyer illusion”, description “Arrow fins can change perceived line length. Hide the fins to compare the horizontal shafts.” HTML description: “Explore the Müller-Lyer illusion: compare two horizontal lines, change the arrow fins, then hide the fins to reveal their actual lengths.” Keep static HTML and metadata wording synchronized.
 

@@ -1,0 +1,115 @@
+import { StrictMode } from 'react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { describe, expect, it } from 'vitest'
+import MullerLyer from './MullerLyer'
+
+const shafts = (root: Element) => Array.from(root.querySelectorAll('[data-layer="shafts"] line'))
+const attributes = (root: Element) => shafts(root).map((line) => line.outerHTML)
+
+describe('Müller-Lyer experience', () => {
+  it('starts with four connected mitered fins and equal targets without visible proof', () => {
+    const { container } = render(<MullerLyer />)
+    expect(screen.getByRole('heading', { level: 1, name: 'Müller-Lyer illusion' })).toBeVisible()
+    expect(screen.getByRole('img')).toHaveAccessibleDescription(/opposing arrow fins/)
+    expect(screen.getByRole('button', { name: 'Hide fins' })).toHaveAttribute('aria-pressed', 'false')
+    expect(screen.getByRole('slider', { name: 'Fin angle' })).toHaveValue('35')
+    expect(screen.getByRole('slider', { name: 'Fin length' })).toHaveValue('64')
+    expect(screen.getByRole('combobox')).toHaveValue('540')
+    expect(screen.getByText('Same two lines. Only the fins were removed.')).not.toBeVisible()
+    expect(container.querySelectorAll('[data-layer="fins"] polyline')).toHaveLength(4)
+    expect(container.querySelector('[data-layer="fins"]')).toHaveAttribute('stroke-linejoin', 'miter')
+    expect(container.querySelector('[data-layer="fins"]')).toHaveAttribute('stroke-miterlimit', '4')
+    expect(container.querySelector('[data-layer="fins"]')).toHaveAttribute('fill', 'none')
+    expect(container.querySelectorAll('[data-layer="fins"] line')).toHaveLength(0)
+    expect(shafts(container).map((line) => ['x1', 'x2', 'y1', 'y2'].map((a) => line.getAttribute(a)))).toEqual([['200', '520', '128', '128'], ['200', '520', '352', '352']])
+    expect(container.querySelector('[data-layer="shafts"]')).toHaveAttribute('stroke-linecap', 'butt')
+    expect(container.querySelector('[transform], filter, linearGradient, [style*="blend"]')).toBeNull()
+  })
+
+  it('repeatedly removes only fins and preserves shaft nodes, attributes, surface and choices', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<StrictMode><MullerLyer /></StrictMode>)
+    const nodes = shafts(container), original = attributes(container)
+    const surface = container.querySelector('[data-layer="surface"]')!.outerHTML
+    const initialPoints = container.querySelector('polyline')!.getAttribute('points')
+    const toggle = screen.getByRole('button', { name: 'Hide fins' })
+    toggle.focus()
+    await user.keyboard(' ')
+    expect(toggle).toHaveFocus()
+    expect(screen.getByRole('img')).toHaveAccessibleDescription(/same two equal-length/)
+    expect(screen.getByText('Same two lines. Only the fins were removed.')).toBeVisible()
+    fireEvent.change(screen.getByRole('slider', { name: 'Fin angle' }), { target: { value: '75' } })
+    fireEvent.change(screen.getByRole('slider', { name: 'Fin length' }), { target: { value: '96' } })
+    await user.selectOptions(screen.getByRole('combobox'), '240')
+    for (let index = 0; index < 3; index++) {
+      expect(container.querySelector('[data-layer="fins"]')).toBeNull()
+      expect(attributes(container)).toEqual(original)
+      shafts(container).forEach((line, i) => expect(line).toBe(nodes[i]))
+      expect(container.querySelector('[data-layer="surface"]')!.outerHTML).toBe(surface)
+      expect(container.querySelector('[data-muller-lyer-viewing-frame]')).toHaveStyle({ maxWidth: '240px' })
+      await user.click(toggle)
+      expect(container.querySelector('polyline')!.getAttribute('points')).not.toBe(initialPoints)
+      const [tip, vertex] = container.querySelector('polyline')!.getAttribute('points')!.split(' ').map((p) => p.split(',').map(Number))
+      expect(Math.hypot(tip[0] - vertex[0], tip[1] - vertex[1])).toBeCloseTo(96, 10)
+      expect(Math.atan2(vertex[1] - tip[1], tip[0] - vertex[0]) * 180 / Math.PI).toBeCloseTo(75, 10)
+      await user.click(toggle)
+    }
+  })
+
+  it('changes visible fins without changing targets or opening the explanation', () => {
+    const { container } = render(<MullerLyer />)
+    const before = attributes(container), original = container.querySelector('polyline')!.outerHTML
+    fireEvent.change(screen.getByRole('slider', { name: 'Fin angle' }), { target: { value: '15' } })
+    fireEvent.change(screen.getByRole('slider', { name: 'Fin length' }), { target: { value: '24' } })
+    expect(container.querySelector('polyline')!.outerHTML).not.toBe(original)
+    expect(attributes(container)).toEqual(before)
+    expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('supports keyboard disclosure independently and resets every choice with focus retained', async () => {
+    const user = userEvent.setup()
+    render(<MullerLyer />)
+    await user.tab()
+    const toggle = screen.getByRole('button', { name: 'Hide fins' })
+    expect(toggle).toHaveFocus()
+    await user.keyboard(' ')
+    const angle = screen.getByRole('slider', { name: 'Fin angle' })
+    const length = screen.getByRole('slider', { name: 'Fin length' })
+    fireEvent.change(angle, { target: { value: '15' } })
+    fireEvent.change(length, { target: { value: '96' } })
+    await user.selectOptions(screen.getByRole('combobox'), '720')
+    const disclosure = screen.getByRole('button', { name: 'Why it happens' })
+    disclosure.focus()
+    await user.keyboard('{Enter}')
+    expect(disclosure).toHaveAttribute('aria-expanded', 'true')
+    expect(toggle).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('link', { name: /Evaluating Müller-Lyer/ })).toHaveAttribute('href', 'https://link.springer.com/article/10.3758/BF03211897')
+    expect(screen.getByRole('link', { name: /Michael Bach/ })).toHaveAttribute('href', 'https://michaelbach.de/ot/sze-muelue/')
+    const reset = screen.getByRole('button', { name: 'Reset Müller-Lyer' })
+    await user.click(reset)
+    expect(reset).toHaveFocus()
+    expect(angle).toHaveValue('35')
+    expect(length).toHaveValue('64')
+    expect(screen.getByRole('combobox')).toHaveValue('540')
+    expect(toggle).toHaveAttribute('aria-pressed', 'false')
+    expect(disclosure).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByText('Müller-Lyer experiment reset.')).toBeVisible()
+  })
+
+  it('isolates instance state and every labelled image/control reference', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<><MullerLyer /><MullerLyer /></>)
+    const ids = Array.from(container.querySelectorAll('[id]')).map((n) => n.id)
+    expect(new Set(ids).size).toBe(ids.length)
+    for (const element of container.querySelectorAll('[aria-labelledby], [aria-describedby], [aria-controls]')) for (const attr of ['aria-labelledby', 'aria-describedby', 'aria-controls']) {
+      for (const id of element.getAttribute(attr)?.split(' ') ?? []) expect(document.getElementById(id)).toBeInTheDocument()
+    }
+    const [first, second] = screen.getAllByRole('article')
+    await user.click(within(first).getByRole('button', { name: 'Hide fins' }))
+    fireEvent.change(within(first).getByRole('slider', { name: 'Fin angle' }), { target: { value: '75' } })
+    expect(first.querySelector('[data-layer="fins"]')).toBeNull()
+    expect(second.querySelectorAll('polyline')).toHaveLength(4)
+    expect(within(second).getByRole('slider', { name: 'Fin angle' })).toHaveValue('35')
+  })
+})

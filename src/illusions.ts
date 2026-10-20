@@ -17,6 +17,12 @@ export const ILLUSIONS = [
     title: 'Café Wall illusion',
     description: 'Parallel mortar lines can look tilted between offset tile rows. Hide the tiles to compare their actual geometry.',
   },
+  {
+    id: 'muller-lyer',
+    name: 'Müller-Lyer',
+    title: 'Müller-Lyer illusion',
+    description: 'Arrow fins can change perceived line length. Hide the fins to compare the horizontal shafts.',
+  },
 ] as const
 
 export type PageId = 'home' | (typeof ILLUSIONS)[number]['id']

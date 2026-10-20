@@ -37,7 +37,7 @@ Build a browser-based optical illusion playground. Users should be able to obser
 
 - Run `npm run lint` and `npm run build` after code changes.
 - For implemented illusions, visually inspect the default state and reveal at small and large viewport sizes.
-- For page changes, check direct loads, refreshes and navigation at /OpticEye/, /OpticEye/confetti/, /OpticEye/munker/ and /OpticEye/cafe-wall/ in the production preview at 320 and 1440 CSS pixels, including styles/assets and no 404s. Keep the development base at /.
+- For page changes, check direct loads, refreshes and navigation at /OpticEye/, /OpticEye/confetti/, /OpticEye/munker/, /OpticEye/cafe-wall/ and /OpticEye/muller-lyer/ in the production preview at 320 and 1440 CSS pixels, including styles/assets and no 404s. Keep the development base at /.
 - Add meaningful tests for geometry/color invariants and nontrivial interaction logic when those features exist. Do not add placeholder tests merely for the scaffold.
 - Use the planned Vitest/jsdom/React Testing Library stack when implementing the first feature. Track engineering completion separately from human perceptual calibration as defined in the implementation spec; finish available work and report calibration as pending when human observations are unavailable.
 - Keep secrets, dependencies, and generated build output out of Git.
