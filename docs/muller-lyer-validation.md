@@ -1,19 +1,19 @@
 # Müller-Lyer implementation validation
 
-20 October 2026. **Implemented; perceptual calibration pending.** ML01–ML10 pass. ML11 has no human observations yet. The approved connected-polyline spec was committed first as `65808fc` (“Add Müller-Lyer specification”). No dependencies, copied assets, router or deployment workflow changes were needed. This feature remains local for owner viewing; it has not been pushed or deployed.
+20 October 2026. **Implemented and calibrated on desktop and mobile.** ML01–ML10 pass; ML11 is complete with two viewers confirming the default effect and reveal. The approved connected-polyline spec was committed first as `65808fc` (“Add Müller-Lyer specification”). No dependencies, copied assets, router or deployment workflow changes were needed. After viewing, the owner authorized pushing main and checking the Pages deployment; deployment results are reported with the workflow run.
 
 ## Engineering results
 
-- Oxlint/JSX accessibility lint passes. All **80 tests across 10 files** pass: 37 Confetti/oranges, 9 Munker, 11 Café Wall, 8 Müller-Lyer and 15 page/navigation tests. TypeScript/Vite build passes, producing Home plus four real illusion HTML documents.
-- Pure geometry tests cover all **247 supported angle/length combinations**, two fixed 320-unit shafts, fin direction/vertices, both arm lengths/angles, miter ratios/tips, viewport bounds and no row/interior-fin crossings. Boundary, off-step, huge finite and non-finite normalization is covered.
+- Oxlint/JSX accessibility lint passes. All **82 tests across 10 files** pass: 37 Confetti/oranges, 9 Munker, 11 Café Wall, 10 Müller-Lyer and 15 page/navigation tests. TypeScript/Vite build passes, producing Home plus four real illusion HTML documents.
+- Pure geometry tests cover all **304 supported angle/length combinations**, two fixed 320-unit shafts, fin direction/vertices, both arm lengths/angles, miter ratios/tips, viewport bounds and no row/interior-fin crossings. Boundary, off-step, huge finite and non-finite normalization is covered. At 90°, exact zero horizontal displacement yields matching vertical end marks for every arm length; target shafts remain unchanged.
 - Component tests verify four three-point polylines with miter joins/limit, persistent target nodes and attributes during repeated reveal and hidden/visible parameter changes, unchanged surface/viewBox, size retention, keyboard reveal/disclosure, local Reset with focus, references/source links and instance isolation. Page tests exercise actual entry compositions and all five current-page choices at `/` and `/OpticEye/` bases.
 
 ## ML09: actual browser checks
 
 Chrome **155.0.8059.85**, production preview `http://localhost:4173/OpticEye/muller-lyer/`:
 
-- **320 and 1440 CSS px**, each at **DPR 1, 1.25 and 2**. Each environment checked Compact/Medium/Large at default angle 35°/length 64, then all four angle 15/75 × length 24/96 corner combinations at Medium: **42 parameter/size/environment cases** total.
-- Every case passed Space/click reveal and restoration with the same two target nodes, attributes, surface, viewBox and document-space SVG bounds. Four fin polylines disappear; two butt-capped shafts remain. Computed fin joins are miter with limit 4; shaft stroke is black, width 6 drawing units and opacity 1. SVG blend is normal, filter/transform none.
+- **320 and 1440 CSS px**, each at **DPR 1, 1.25 and 2**. Each environment checked Compact/Medium/Large at default angle 35°/length 64, then all four angle 15/90 × length 24/96 corner combinations at Medium: **42 parameter/size/environment cases** total.
+- Every case passed Space/click reveal and restoration with the same two target nodes, attributes, surface, viewBox and document-space SVG bounds. Four fin polylines disappear; two butt-capped shafts remain. At 90°/length 24 and 96, the actual SVG polyline points were checked against exact vertical coordinates for both rows. Computed fin joins are miter with limit 4; shaft stroke is black, width 6 drawing units and opacity 1. SVG blend is normal, filter/transform none.
 - All six environments passed hidden parameter changes, independent keyboard disclosure, native range Home/End/ArrowRight steps, visible keyboard focus, Reset/default restoration and retained focus. Initial proof is hidden; revealed proof fits its reserved area without shifting the drawing. No horizontal overflow, console/page errors, failed requests or 4xx/5xx responses.
 
 | Viewport | Compact | Medium (default) | Large |
@@ -29,6 +29,8 @@ A temporary dev server verified `/muller-lyer/`, status 200, correct title and a
 
 The browser report and screenshots were saved outside the repository in the task visualization directory (`muller-lyer-browser-check.json`, `muller-lyer-*-section.png`, visible/hidden stimulus images). Desktop DPR 1, narrow DPR 1.25 and the revealed desktop drawing were visually inspected for layout/construction. These are engineering observations, not human perception results. Firefox/WebKit and forced-colors checks are not claimed; manual screen-reader testing is outside scope.
 
+The owner requested the 90° maximum on 20 October after the initial implementation checkpoint. The spec was updated first; the default remains 35°. Tests and the full matrix above were rerun for the extension. The owner has now approved publishing the extension with the calibrated default experience.
+
 ## ML11: human calibration
 
-**Pending: 0 of 2 viewers; desktop and phone not yet observed.** At defaults and normal page zoom, ask whether the bottom straight section appears longer before Hide fins and whether both appear equal after removal. Record weak/absent/opposite responses and supplied device/settings/browser/DPR/distance details; leave unspecified details unknown. Desktop image-size choices do not substitute for phone observations. Existing demos’ calibration does not establish this illusion’s effect.
+**ML11 complete: 2 of 2 viewers; desktop and mobile confirmed.** On 20 October 2026 the owner reports that viewer 1 and viewer 2 both observed the default stimulus at normal page zoom on desktop and mobile. With fins visible, the lower line looks longer; after Hide fins, the two lines look equal. Defaults are angle 35°, arm length 64 drawing units and Medium/540px maximum (constrained by the viewport). Human browser, exact viewport/rendered dimensions, DPR and viewing distance were not supplied and remain unknown; engineering conditions above are not attributed to either viewer. This confirms the default comparison, not every parameter combination or display.

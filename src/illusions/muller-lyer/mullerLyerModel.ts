@@ -2,7 +2,7 @@ export const VIEWBOX = { width: 720, height: 480 } as const
 export const SURFACE_FILL = '#FFFFFF'
 export const STROKE = { color: '#000000', width: 6, linecap: 'butt', linejoin: 'miter', miterlimit: 4 } as const
 export const SHAFT = { left: 200, right: 520, rows: [128, 352] } as const
-export const FIN_ANGLE = { min: 15, max: 75, step: 5, default: 35 } as const
+export const FIN_ANGLE = { min: 15, max: 90, step: 5, default: 35 } as const
 export const FIN_LENGTH = { min: 24, max: 96, step: 4, default: 64 } as const
 export const VIEWING_SIZES = [
   { label: 'Compact', width: 240 },
@@ -25,10 +25,11 @@ export function normalizeViewingWidth(value: number) {
 export type Point = { x: number; y: number }
 
 export function createMullerLyerGeometry(angleValue: number, lengthValue: number) {
-  const angle = normalizeFinAngle(angleValue) * Math.PI / 180
+  const degrees = normalizeFinAngle(angleValue)
+  const angle = degrees * Math.PI / 180
   const length = normalizeFinLength(lengthValue)
-  const dx = length * Math.cos(angle)
-  const dy = length * Math.sin(angle)
+  const dx = degrees === 90 ? 0 : length * Math.cos(angle)
+  const dy = degrees === 90 ? length : length * Math.sin(angle)
   const shafts = SHAFT.rows.map((y, row) => ({ id: row, x1: SHAFT.left, x2: SHAFT.right, y1: y, y2: y }))
   const fins = shafts.flatMap((shaft, row) => [SHAFT.left, SHAFT.right].map((x, side) => {
     const direction = (row === side ? 1 : -1)

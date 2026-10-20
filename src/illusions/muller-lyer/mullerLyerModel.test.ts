@@ -15,7 +15,7 @@ describe('Müller-Lyer geometry', () => {
 
   it('preserves targets and fits every supported fin arm and miter in the viewport without crossings', () => {
     const originals = createMullerLyerGeometry(35, 64).shafts
-    for (let angle = 15; angle <= 75; angle += 5) for (let length = 24; length <= 96; length += 4) {
+    for (let angle = 15; angle <= 90; angle += 5) for (let length = 24; length <= 96; length += 4) {
       const { shafts, fins } = createMullerLyerGeometry(angle, length)
       expect(shafts).toEqual(originals)
       expect(fins).toHaveLength(4)
@@ -26,7 +26,7 @@ describe('Müller-Lyer geometry', () => {
         const direction = [1, -1, -1, 1][index]
         expect(a.x).toBe(b.x)
         expect(vertex.y - a.y).toBeCloseTo(b.y - vertex.y, 10)
-        expect(Math.sign(a.x - vertex.x)).toBe(direction)
+        expect(Math.sign(a.x - vertex.x)).toBe(angle === 90 ? 0 : direction)
         for (const tip of [a, b]) {
           expect(Math.hypot(tip.x - vertex.x, tip.y - vertex.y)).toBeCloseTo(length, 10)
           expect(Math.atan2(Math.abs(tip.y - vertex.y), Math.abs(tip.x - vertex.x)) * 180 / Math.PI).toBeCloseTo(angle, 10)
@@ -44,7 +44,7 @@ describe('Müller-Lyer geometry', () => {
   })
 
   it('normalizes stepped boundaries and invalid values before generating geometry', () => {
-    for (const [input, expected] of [[-100, 15], [15, 15], [32, 30], [32.5, 35], [75, 75], [100, 75], [Number.MAX_VALUE, 75], [NaN, 35], [Infinity, 35], [-Infinity, 35]]) {
+    for (const [input, expected] of [[-100, 15], [15, 15], [32, 30], [32.5, 35], [75, 75], [87.5, 90], [90, 90], [100, 90], [Number.MAX_VALUE, 90], [NaN, 35], [Infinity, 35], [-Infinity, 35]]) {
       expect(normalizeFinAngle(input)).toBe(expected)
       expect(createMullerLyerGeometry(input, 64)).toEqual(createMullerLyerGeometry(expected, 64))
     }
@@ -54,5 +54,17 @@ describe('Müller-Lyer geometry', () => {
     }
     expect([240, 540, 720].map(normalizeViewingWidth)).toEqual([240, 540, 720])
     expect([0, 360, 450, NaN, Infinity].map(normalizeViewingWidth)).toEqual([540, 540, 540, 540, 540])
+  })
+
+  it('makes both rows exactly identical apart from vertical placement at 90 degrees for every arm length', () => {
+    for (let length = 24; length <= 96; length += 4) {
+      const { fins, shafts } = createMullerLyerGeometry(90, length)
+      fins.forEach(({ points }, index) => {
+        const shaft = shafts[Math.floor(index / 2)]
+        const x = index % 2 === 0 ? shaft.x1 : shaft.x2
+        expect(points).toEqual([{ x, y: shaft.y1 - length }, { x, y: shaft.y1 }, { x, y: shaft.y1 + length }])
+      })
+      expect(fins.slice(0, 2).map(({ points }) => points.map(({ x, y }) => ({ x, y: y - 128 })))).toEqual(fins.slice(2).map(({ points }) => points.map(({ x, y }) => ({ x, y: y - 352 }))))
+    }
   })
 })

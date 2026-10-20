@@ -60,7 +60,7 @@ export default function MullerLyer() {
               <output htmlFor={`${id}-angle`} className="font-mono text-sm text-teal-800" aria-live="off">{finAngleDegrees}°</output>
             </div>
             <input id={`${id}-angle`} type="range" min={FIN_ANGLE.min} max={FIN_ANGLE.max} step={FIN_ANGLE.step} value={finAngleDegrees} onChange={(event) => setFinAngleDegrees(normalizeFinAngle(event.currentTarget.valueAsNumber))} aria-describedby={`${id}-angle-help`} className={`my-2 block min-h-11 w-full cursor-pointer accent-teal-800 ${focus}`} />
-            <p id={`${id}-angle-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Angle between each arm and the horizontal, not the full opening between arms. Both rows change together.</p>
+            <p id={`${id}-angle-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Angle between each arm and the horizontal, not the full opening between arms. Both rows change together. At 90°, both rows have matching vertical end marks.</p>
           </div>
           <div className="mt-6">
             <div className="flex items-center justify-between gap-3">

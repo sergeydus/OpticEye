@@ -1,12 +1,12 @@
 # OpticEye implementation specification
 
-Status: implementation baseline for separate static illusion pages, including Café Wall, with the approved Müller-Lyer extension; version 1.23. Updated 20 October 2026.
+Status: implementation baseline for separate static illusion pages, including Café Wall, with the approved Müller-Lyer extension; version 1.24. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
 OpticEye lets people observe optical illusions, manipulate their context, reveal the underlying construction, and learn about the effect. Confetti is the first implementation, specified in [confetti.md](confetti.md).
 
-This document defines project-wide rules. The implemented scope is a Home page listing the illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), and [Café Wall](cafe-wall.md). A fourth illusion, [Müller-Lyer](muller-lyer.md), is implemented locally with perceptual calibration pending; do not push until owner viewing and authorization. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
+This document defines project-wide rules. The implemented scope is a Home page listing the illusions, a Confetti page (including oranges/netting), a Munker page defined in [munker.md](munker.md), and [Café Wall](cafe-wall.md). A fourth illusion, [Müller-Lyer](muller-lyer.md), is implemented and calibrated on desktop and mobile; the owner has authorized deployment. Each illusion uses a real HTML document built with Vite, without a client-side router. Accounts, backend, analytics, downloads and further unplanned illusions remain outside scope. Feature engineering/calibration records remain separate.
 
 At the user's direction, this is a visual-first experience. Manual screen-reader testing and nonvisual equivalents of the illusions are outside scope and are not implementation or calibration requirements. Keep semantic HTML, accessible labels, keyboard operation, visible focus, and existing accessibility lint checks.
 
@@ -112,11 +112,11 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 ### Approved Müller-Lyer extension
 
-- [muller-lyer.md](muller-lyer.md) is approved with four connected, miter-joined fin polylines. Commit the specification before feature code; do not push this feature until the owner has viewed it and authorized deployment.
+- [muller-lyer.md](muller-lyer.md) is approved with four connected, miter-joined fin polylines. The specification was committed before feature code. After two-viewer desktop/mobile calibration, the owner authorized deployment.
 - Add `muller-lyer/index.html` and its relative entry at `/OpticEye/muller-lyer/` (dev `/muller-lyer/`), plus one metadata entry. Existing list-derived inputs, cards and navigation extend to Home plus four illusions, with five links and one current-page marker. Keep metadata/static HTML titles and descriptions synchronized.
 - Reuse the existing shell, mounting and size select. Check five-link wrapping at 320px and 200% zoom; no router, registry, shared experiment state, dependencies or deployment workflow changes.
 - Two equal, fixed shafts and a white surface persist. Reveal removes only four fin polylines (eight arms), without adding guides. Miter tips are removable context; shaft lengths stay fixed. Fin-angle/length controls affect context only, including while hidden; sizes uniformly scale the drawing. No quiz or shaft-length adjustment in this version.
-- Extend meaningful geometry/component/page tests and direct-load/refresh/navigation/build checks to all five documents during implementation. Record actual results separately from two-viewer desktop/mobile calibration; existing demos and their records stay intact. ML01–ML10 now pass; see docs/muller-lyer-validation.md. ML11 remains pending human viewing. The implementation is local and unpushed.
+- Extend meaningful geometry/component/page tests and direct-load/refresh/navigation/build checks to all five documents during implementation. Record actual results separately from two-viewer desktop/mobile calibration; existing demos and their records stay intact. ML01–ML10 now pass; see docs/muller-lyer-validation.md. ML11 is complete: both viewers confirm the default effect and reveal on desktop/mobile at normal zoom. Unknown human browser/DPR/distance details remain unknown.
 
 ### Shared interaction requirements
 

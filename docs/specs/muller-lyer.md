@@ -1,6 +1,6 @@
 # Müller-Lyer illusion specification
 
-Status: **implemented; perceptual calibration pending**. Version 1.2, 20 October 2026. ML01–ML10 pass; ML11 has no human observations yet. See [validation](../muller-lyer-validation.md). The implementation is local and unpushed for owner viewing. Depends on [implementation.md](implementation.md). Stable feature ID, URL slug and folder: `muller-lyer`; use “Müller-Lyer” in visible text.
+Status: **implemented and calibrated on desktop and mobile**. Version 1.4, 20 October 2026. ML01–ML10 pass; ML11 is complete with both viewers confirming the default effect and reveal on desktop and mobile. See [validation](../muller-lyer-validation.md). Following viewing, the owner authorized pushing main and checking Pages. Depends on [implementation.md](implementation.md). Stable feature ID, URL slug and folder: `muller-lyer`; use “Müller-Lyer” in visible text.
 
 ## 1. Intended outcome and scope
 
@@ -40,7 +40,7 @@ One h1 (“Müller-Lyer illusion”), subordinate h2 headings, shared navigation
 | Configuration / state | Default / allowed values |
 | --- | --- |
 | `finsVisible` | true |
-| `finAngleDegrees` | 35; 15–75 degrees, step 5; acute angle each arm makes with the horizontal axis |
+| `finAngleDegrees` | 35; 15–90 degrees, step 5; angle each arm makes with the horizontal axis |
 | `finLength` | 64; 24–96 drawing units, step 4; endpoint vertex to each arm tip |
 | `viewingWidth` | Medium/540; Compact 240, Medium 540, Large 720 CSS px maximum |
 | `explanationOpen` | false |
@@ -52,7 +52,7 @@ One h1 (“Müller-Lyer illusion”), subordinate h2 headings, shared navigation
 
 Store only user choices; derive geometry from normalized values, with no measurements, timers, random numbers, storage or shared page state. The two targets derive their x endpoints, stroke and length from the same constants. Both rows use the same angle and arm length; only arm direction differs.
 
-Normalize finite angle input to the nearest supported step anchored at 15, then clamp to 15–75. Normalize finite length input similarly, anchored at 24 with step 4, then clamp to 24–96. Non-finite inputs fall back to 35/64. Supported viewing widths pass unchanged, others fall back to 540. Normalize in the pure model as well as on control input; never emit NaN/Infinity SVG attributes.
+Normalize finite angle input to the nearest supported step anchored at 15, then clamp to 15–90. Normalize finite length input similarly, anchored at 24 with step 4, then clamp to 24–96. Non-finite inputs fall back to 35/64. Supported viewing widths pass unchanged, others fall back to 540. Normalize in the pure model as well as on control input; never emit NaN/Infinity SVG attributes.
 
 ## 5. Exact SVG construction
 
@@ -62,7 +62,7 @@ Exactly two SVG `line` elements: (200,128)→(520,128) and (200,352)→(520,352)
 
 ### 5.2 Fin context and unambiguous directions
 
-Let `theta=finAngleDegrees * PI/180`, `dx=finLength*cos(theta)`, `dy=finLength*sin(theta)`. At each shaft endpoint (x,y), draw one connected three-point polyline: `(x+s*dx, y-dy)` → `(x,y)` → `(x+s*dx, y+dy)`. Use stroke-linejoin="miter", stroke-miterlimit="4", butt caps and no fill:
+Let `theta=finAngleDegrees * PI/180`, `dx=finLength*cos(theta)`, `dy=finLength*sin(theta)`. At exactly 90°, set dx to exactly 0 (not a cosine rounding residue) and dy to finLength. Both rows then have identical vertical end marks, translated only in y, while shaft targets remain unchanged. At each shaft endpoint (x,y), draw one connected three-point polyline: `(x+s*dx, y-dy)` → `(x,y)` → `(x+s*dx, y+dy)`. Use stroke-linejoin="miter", stroke-miterlimit="4", butt caps and no fill:
 
 | Row / vertex | s | Construction |
 | --- | --- | --- |
@@ -73,13 +73,13 @@ Let `theta=finAngleDegrees * PI/180`, `dx=finLength*cos(theta)`, `dy=finLength*s
 
 Thus the upper arrangement is `<────>` (arms inside the endpoint span); the lower is `>────<` (arms outside). The lower shaft may look longer. These labels describe arm placement, avoiding ambiguous “inward arrow” terminology; the endpoint coordinate table is authoritative. Do not promise the expected direction to every observer or display it as an initial answer.
 
-There are exactly four polylines, two per row, representing eight arms in one removable context group. Each pair has a clean mitered vertex, rather than two separately capped lines. No arrow markers or extra centerline segments. The miter extends past the shaft endpoint by `(strokeWidth/2)/sin(theta)`: about 5.230 units at 35°, at most 11.591 at 15°. This is fin context, not a longer shaft, and disappears on reveal. The maximum miter ratio is about 3.864, below the explicit limit 4, so no allowed angle falls back to a bevel. Do not round endpoints to screen pixels or force crispEdges.
+There are exactly four polylines, two per row, representing eight arms in one removable context group. Each pair has a clean mitered vertex, rather than two separately capped lines. No arrow markers or extra centerline segments. The miter extends past the shaft endpoint by `(strokeWidth/2)/sin(theta)`: about 5.230 units at 35°, at most 11.591 at 15°. This is fin context, not a longer shaft, and disappears on reveal. The maximum miter ratio is about 3.864, below the explicit limit 4, so no allowed angle falls back to a bevel. At 90° the polyline is a straight vertical mark with no angular miter protrusion. Keep four three-point polylines rather than switching shapes or adding guides. Do not round endpoints to screen pixels or force crispEdges.
 
 At defaults, dx≈52.426 and dy≈36.709. Upper arm tips are x≈252.426/467.574, y≈91.291/164.709; lower tips are x≈147.574/572.426, y≈315.291/388.709. Arms always have the chosen Euclidean length; top/bottom geometry mirrors horizontally about its endpoint, not by stretching a target.
 
 ### 5.3 Bounds and painting
 
-For the entire allowed range, dx≤96*cos(15°)≈92.729, dy≤96*sin(75°)≈92.729. Endpoint centers fit within x≈107.271…612.729 and y≈35.271…444.729. The opposing row envelopes remain separated by at least 224−2*92.729≈38.542 units. These are conservative arm-tip centerline bounds; allow another 3 units for tip strokes. Also bound each miter separately at `(x-s*(3/sin(theta)), y)`; all such tips lie within x≈188.409…531.591, well inside the viewBox and overall arm bounds. Interior arm sets cannot cross each other: 2*dx<320.
+For the entire allowed range, dx≤96*cos(15°)≈92.729, dy≤96. Endpoint centers fit within x≈107.271…612.729 and y=32…448. The opposing row envelopes remain separated by at least 224−2*96=32 units. These are conservative arm-tip centerline bounds; allow another 3 units for tip strokes. Also bound each miter separately at `(x-s*(3/sin(theta)), y)`; all such tips lie within x≈188.409…531.591, well inside the viewBox and overall arm bounds. Interior arm sets cannot cross each other: 2*dx<320.
 
 Paint order: fixed white surface, removable four-polyline/eight-arm group, persistent two-shaft target group last. This keeps target strokes above the endpoint junctions. Reveal removes only the arm group, never the shafts or surface. No blur, blending, opacity tricks, gradients, shadows, animation, transitions, transforms or resizing on reveal. Uniform SVG scaling only. Use unique title/description IDs per instance; no shared definitions that collide across mounts.
 
@@ -89,7 +89,7 @@ Initial prompt: **“Which horizontal line looks longer?”** Viewing instructio
 
 - **“Hide fins”**: stable toggle label, aria-pressed=`!finsVisible`; help “Remove the arrow fins to compare the straight sections.” Revealed status: “Fins hidden. Both horizontal lines have the same length.” Restored status: “Fins shown.” Only the fins disappear. Do not add endpoint guides or move the rows together.
 - Revealed proof outside the SVG: **“Same two lines. Only the fins were removed.”** Reserve proof/status space so wrapping at 320px and 200% zoom cannot shift the drawing or its controls. Avoid answer-bearing proof in the initial visible content.
-- **“Fin angle”**: native range 15–75, step 5, output in degrees. Help: “Angle between each arm and the horizontal. Both rows change together.” Clarify it is not the full opening between two arms (which is 2*theta).
+- **“Fin angle”**: native range 15–90, step 5, output in degrees. Help: “Angle between each arm and the horizontal. Both rows change together.” Clarify it is not the full opening between two arms (which is 2*theta). Add help: “At 90°, both rows have matching vertical end marks.” The default remains 35°; changing angle never changes shaft geometry or automatically hides fins.
 - **“Fin length”**: native range 24–96, step 4, output in drawing units. Help: “Length of each arm from its vertex. The straight sections stay fixed.” Do not promise that longer always means stronger.
 - **“Müller-Lyer image size”**: shared native select with 240/540/720 choices; changes only uniform display scale, retaining geometry/control choices.
 - **“Why it happens”**: initially collapsed, independent of reveal. Suggested explanation: “The arrangement of the fins can bias how long the straight sections appear. Removing the fins exposes their equal lengths. Researchers have proposed several explanations, including how surrounding shapes affect judgments of extent and depth. The effect varies with display, size and viewer.” Include both source links; do not claim a single proven mechanism or equivalence to Confetti’s color assimilation.
@@ -111,21 +111,21 @@ Center width 100% within the chosen maximum, fixed 3:2 aspect ratio. Stack contr
 
 These sizes assume the existing shell gutters/layout; verify actual dimensions during implementation. Fractional DPR and antialiasing affect diagonal edges; CSS dimensions do not establish visual angle. Human viewing must determine whether defaults are effective on desktop and phone. No perceptual result is claimed from geometry alone.
 
-SVG title: “Müller-Lyer illusion”. Initial description: “Two horizontal lines, one above the other, with opposing arrow fins. Compare the straight sections, then use Hide fins.” Revealed description: “The same two equal-length horizontal lines with the arrow fins removed.” One labeled SVG image, no focusable decorative pieces. Native controls, explicit labels/help, visible focus, pressed/expanded states and polite reveal/Reset status; avoid announcing every slider update. Retain the system-color-override note. Manual screen-reader testing is outside scope, as in the shared spec.
+SVG title: “Müller-Lyer illusion”. Initial description: “Two horizontal lines, one above the other, with opposing arrow fins. Compare the straight sections, then use Hide fins.” At 90° with fins shown, use “Two horizontal lines with matching vertical end marks. Compare the straight sections, then use Hide fins.” Revealed description: “The same two equal-length horizontal lines with the arrow fins removed.” One labeled SVG image, no focusable decorative pieces. Native controls, explicit labels/help, visible focus, pressed/expanded states and polite reveal/Reset status; avoid announcing every slider update. Retain the system-color-override note. Manual screen-reader testing is outside scope, as in the shared spec.
 
 ## 8. Acceptance criteria and actual validation
 
 | ID | Required result |
 | --- | --- |
 | ML01 | Two horizontal shafts share exact x endpoints, length, stroke and caps; y values stay 128/352. Fin parameters never alter their attributes. Geometry tests use computed spans and bounds, not snapshots alone. |
-| ML02 | Four three-point polylines follow the explicit sign table, with their central points at the four shaft vertices. Both arms have the selected Euclidean length/angle. Miter joins/limit are explicit; arm strokes and miter tips stay in bounds. Check defaults, both extremes, off-step/out-of-range inputs and non-finite fallbacks. No arm crossover or row overlap. |
+| ML02 | Four three-point polylines follow the explicit sign table, with their central points at the four shaft vertices. Both arms have the selected Euclidean length/angle. Miter joins/limit are explicit; arm strokes and miter tips stay in bounds. Check defaults, both extremes including 90°, off-step/out-of-range inputs and non-finite fallbacks. At 90°, corresponding upper/lower polyline coordinates must match exactly after subtracting row y, with all three x coordinates equal to their shaft endpoint. No arm crossover or row overlap. All 304 supported angle/length combinations are in scope. |
 | ML03 | Repeated reveal removes only fin context. Same two shaft DOM nodes, attributes, surface, viewBox and displayed position/size remain. No transforms, filters, blend, fade or hidden replacement targets. |
-| ML04 | Both sliders work by keyboard/pointer, normalize correctly and affect only fins. Hidden changes preserve targets/visibility; restoring shows new context. Angle output/help unambiguously uses the acute arm-to-horizontal angle. |
+| ML04 | Both sliders work by keyboard/pointer, normalize correctly and affect only fins. Hidden changes preserve targets/visibility; restoring shows new context. Angle output/help unambiguously uses the arm-to-horizontal angle. |
 | ML05 | Size changes scale the same geometry. Reset restores every default, closes explanation, announces status and retains focus. Reveal, controls and disclosure remain independent. |
 | ML06 | Semantic labels, SVG description, focus, pressed/expanded states, source links and polite status work. Two mounted instances have unique IDs and independent state. No initial answer-bearing proof; no forced quiz. |
 | ML07 | Actual standalone entry mounts only Müller-Lyer. Home lists four illusions; five base-aware navigation links/current marker, unique HTML title/meta and one h1 work with dev `/` and build `/OpticEye/`. Existing feature and page tests continue passing. |
 | ML08 | Lint, all meaningful tests and TypeScript/Vite build pass. Dist contains Home and all four illusion HTML documents. No new dependency, copied asset, router or workflow change. |
-| ML09 | Chromium checks at 320/1440px and actual 200% browser zoom: direct load/refresh, default/reveal/Reset, controls/disclosure, every size, all four min/max angle/length combinations, navigation, no overflow/errors/404s. Check default/reveal at DPR 1, 2 and fractional 1.25; record actual browser, dimensions, parameters and coverage. Also verify dev `/muller-lyer/` and retention of all existing pages/assets. |
+| ML09 | Chromium checks at 320/1440px and actual 200% browser zoom: direct load/refresh, default/reveal/Reset, controls/disclosure, every size, all four min/max angle/length combinations (15/90 × 24/96), the 90° matching-end-mark comparison with persistent shaft nodes, navigation, no overflow/errors/404s. Check default/reveal at DPR 1, 2 and fractional 1.25; record actual browser, dimensions, parameters and coverage. Also verify dev `/muller-lyer/` and retention of all existing pages/assets. |
 | ML10 | Write docs/muller-lyer-validation.md with actual engineering results and separate human observations. No fabricated passing checks or screenshot-based perception claims; preserve existing calibration records. |
 | ML11 | Calibration only: at least two viewers compare default fins visible/hidden on desktop and mobile, reporting whether the shafts appear unequal with fins and equal without. Record weak/absent or opposite responses and supplied conditions. Unknown browser/DPR/distance remain unknown. Desktop image-size choices do not count as phone viewing; use size-scoped status if only one device class is covered. |
 
@@ -133,4 +133,6 @@ ML01–ML10 define **implemented**; ML11 separately defines **calibrated**, unde
 
 ## 9. Approval boundary
 
-The owner requested this specification on 20 October 2026, then approved implementation with connected miter-joined fin polylines in place of separately capped arm lines. Update the spec first and commit the documents as “Add Müller-Lyer specification”; implement and verify ML01–ML10, record actual results, then commit as “Add Müller-Lyer illusion”. Do not push or deploy: the owner will view the local result first. ML11 remains a separate human calibration milestone.
+The owner requested this specification on 20 October 2026, then approved implementation with connected miter-joined fin polylines in place of separately capped arm lines. Update the spec first and commit the documents as “Add Müller-Lyer specification”; implement and verify ML01–ML10, record actual results, then commit as “Add Müller-Lyer illusion”. The initial instruction was to keep the implementation local for viewing. The owner subsequently confirmed both viewers on desktop and mobile at defaults/normal zoom, completing ML11, and authorized pushing main and verifying Pages. See the validation record for supplied and unknown viewing conditions.
+
+On 20 October 2026 the owner requested the 90° endpoint to expose matching context without hiding fins. The range is now 15–90°, step 5, with default 35° unchanged. The spec was updated before the extension. Following two-viewer default calibration, the owner authorized publishing it.

@@ -41,7 +41,7 @@ Check all five addresses, including a refresh and navigation between them:
 - [Café Wall](http://localhost:4173/OpticEye/cafe-wall/)
 - [Müller-Lyer](http://localhost:4173/OpticEye/muller-lyer/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header/footer navigation marks the current page. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. Müller-Lyer is local until approved for pushing; the existing pages are already deployed.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header/footer navigation marks the current page. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The owner has authorized deploying Müller-Lyer after two-viewer calibration; the same Pages workflow publishes all five documents.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner handles this setting, repository visibility, and pushing. The workflow does not automatically enable Pages.
 
@@ -53,7 +53,7 @@ See the [Confetti validation record](docs/confetti-validation.md) and [Munker va
 
 Café Wall is implemented with row offset 0–100% (default 50), mortar width 1–8 drawing units (default 3), and Compact/Medium/Large 240/540/720px maximum widths. Hide tiles removes only the tile context; mortar-width changes deliberately change target thickness/spacing. Very thin settings can be faint at small sizes. [Café Wall validation](docs/cafe-wall-validation.md) records engineering checks and two viewers confirming the effect on desktop and mobile. Café Wall is implemented and calibrated; the default mortar width remains 3.
 
-Müller-Lyer is implemented locally with fin angle 15–75° (default 35), fin arm length 24–96 drawing units (default 64), and image sizes 240/540/720px (default Medium/540). Hide fins removes four miter-joined polylines while preserving both shaft elements. [Müller-Lyer validation](docs/muller-lyer-validation.md) records passing engineering checks; human calibration is pending.
+Müller-Lyer is implemented and calibrated on desktop and mobile with fin angle 15–90° (default 35), fin arm length 24–96 drawing units (default 64), and image sizes 240/540/720px (default Medium/540). Hide fins removes four miter-joined polylines while preserving both shaft elements. [Müller-Lyer validation](docs/muller-lyer-validation.md) records passing engineering checks and both viewers seeing the lower line as longer before reveal and the two as equal afterward, at defaults and normal zoom.
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 
