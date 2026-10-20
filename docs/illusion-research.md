@@ -1,8 +1,8 @@
 # Browser-renderable optical illusions
 
-Researched 19 October 2026; Munker, Café Wall, Müller-Lyer and Kanizsa sources rechecked 20 October. Confetti and Munker are implemented and calibrated for their default demonstrations, with two viewers confirming desktop and mobile. The initial report specifies defaults/normal zoom; the mobile follow-up explicitly confirms both viewers without further condition details. See [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for the scope and engineering evidence. Café Wall is also implemented and calibrated, with two viewers confirming desktop and mobile. Müller-Lyer is also implemented and calibrated, with two viewers confirming the default comparison on desktop and mobile. Kanizsa is implemented; unlisted by owner decision (effect judged too weak); calibration not pursued. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
+Researched 19 October 2026; Munker, Café Wall, Müller-Lyer and Kanizsa sources rechecked 20 October; twelve further candidates researched 21 October. Confetti and Munker are implemented and calibrated for their default demonstrations, with two viewers confirming desktop and mobile. The initial report specifies defaults/normal zoom; the mobile follow-up explicitly confirms both viewers without further condition details. See [Confetti validation](confetti-validation.md) and [Munker validation](munker-validation.md) for the scope and engineering evidence. Café Wall is also implemented and calibrated, with two viewers confirming desktop and mobile. Müller-Lyer is also implemented and calibrated, with two viewers confirming the default comparison on desktop and mobile. Kanizsa is implemented; unlisted by owner decision (effect judged too weak); calibration not pursued. Rendering choices, controls, and priority below are project proposals rather than claims from the sources.
 
-## Suggested starting set
+## Original starting set and current status
 
 | Priority | Illusion | Observed effect | Proposed rendering and reveal |
 | --- | --- | --- | --- |
@@ -32,7 +32,7 @@ Use one shared target color, two inducer colors, and adjustable stripe width. Ke
 
 Source: [Michael Bach, Munker Illusion](https://michaelbach.de/ot/col-Munker/), with references to Munker (1970) and subsequent work. Keep chromatic assimilation distinct from monochrome White lightness effects when writing explanations.
 
-The source was rechecked on 20 October 2026 for the [Munker spec](specs/munker.md). The owner approved two identical green bars and two colored stripe contexts, then requested a separate static Munker page alongside the Home and Confetti documents. The numeric palette and geometry remain provisional project choices pending human calibration.
+The source was rechecked on 20 October 2026 for the [Munker spec](specs/munker.md). The owner approved two identical green bars and two colored stripe contexts, then requested a separate static Munker page alongside the Home and Confetti documents. The numeric palette and geometry are project choices; two viewers subsequently confirmed the default effect on desktop and mobile, as recorded in its validation notes.
 
 ## 3. Café Wall
 
@@ -57,6 +57,122 @@ Bach describes a textured variation with cutout shapes and context alignment. Ou
 The revised [Kanizsa spec](specs/kanizsa.md) preserves equilateral disk centers 320 units apart and 60° openings, raises default radius to 92 within 32–96, and adds a 0–90° rotation range (step 5), Align and independently toggleable inverted outline corners (on by default). The corners are three unfilled Vs trimmed outside every disk envelope and the implied upright triangle; no actual upright triangle, mask or white wedge overlay is painted. The canvas grows to 720×512 to fit the bottom outline corner without moving the disks. This is a local construction change prompted by weak viewing feedback, not a result from the cited studies or completed calibration. The protected central gaps remain white across settings. The `/kanizsa/` page retains the existing multi-page architecture.
 
 Sources checked 20 October 2026: [Michael Bach, Kanizsa Illusion](https://michaelbach.de/ot/cog-Kanizsa/); [Kojo, Liinasuo and Rovamo (1993), Spatial and temporal properties of illusory figures](https://pubmed.ncbi.nlm.nih.gov/8506632/), *Vision Research* 33(7), 897–901, DOI 10.1016/0042-6989(93)90072-5; [Shipley and Kellman (1992), Strength of visual interpolation depends on the ratio of physically specified to total edge length](https://link.springer.com/article/10.3758/BF03206762), *Perception & Psychophysics* 52, 97–106, DOI 10.3758/BF03206762. The research abstracts/records were read, not full texts. The first supports the three-sector-disk construction, with sequential experiments we do not reproduce; the second motivates relative-size exploration, without proving our defaults or a guaranteed response. No source artwork/code will be copied. Neural feedback is not asserted as a complete explanation. Implementation engineering is complete; [validation](kanizsa-validation.md) records actual results. On 21 October 2026 the owner judged the strengthened effect too weak: implemented; unlisted by owner decision (effect judged too weak); calibration not pursued. Device/browser/DPR/distance details were not supplied. Its metadata has listed false and its HTML has noindex; Home and navigation omit it while the build and direct /OpticEye/kanizsa/ URL remain available. The owner authorized publishing it on main.
+
+## Additional candidates: 21 October 2026
+
+These are research candidates, **not approved specifications or new implementation scope**. The priority and effort estimates are engineering judgments about this project, not measured effect strengths. Source pages and the paper abstracts identified below were read; no interactive demonstration was perceptually validated in this research pass. No source artwork, scripts or movies were copied. None of these candidates is calibrated for OpticEye.
+
+### Recommended static shortlist
+
+| Order | Candidate | What users may see | Proposed proof/comparison | Effort / main uncertainty |
+| --- | --- | --- | --- | --- |
+| 1 | Ebbinghaus | Equal center circles appear different in size among large versus small surrounding circles. | Hide only the surrounding circles. | Low; surround size and distance interact. |
+| 2 | Poggendorff | Parts of one straight diagonal appear misaligned behind a strip. | Remove the opaque strip from an already continuous line. | Low; diagonal angle and strip width need viewing. |
+| 3 | Checker-shadow | Two equal-gray patches appear different under apparent illumination/shadow. | Isolate the unchanged patches from their scene. | Medium; convincing original shading/context and exact target pixels. |
+| 4 | Ponzo | Equal bars appear unequal within converging perspective lines. | Hide the rails/context, retain both bars. | Low; enough room around each target on phones. |
+| 5 | Hering | Straight parallel lines appear bowed across a radial background. | Hide the radial lines. | Low; adds curvature, though related to existing angular illusions. |
+| 6 | Scintillating grid | Fleeting dark spots appear in white intersection disks away from direct fixation. | Hide only the gray grid, retain white disks on black. | Medium; viewing field, gaze and disk/grid proportions matter. |
+| 7 | Jastrow | Identical curved bands appear different in size when offset/stacked. | Explicitly align congruent copies, without scaling. | Low–medium; needs a position-changing comparison contract. |
+| 8 | Simultaneous brightness contrast | Equal gray patches appear lighter/darker on different surrounds. | Replace both surrounds with the same neutral background. | Low; easy proof, but less visual variety and may be subtle. |
+
+**Recommended next spec: Ebbinghaus.** It adds perceived area/diameter to the current color, tilt and line-length demonstrations; it needs only original circles and a context-only reveal. Poggendorff is the next inexpensive alignment candidate. Checker-shadow is the stronger change of subject if more construction work is acceptable. These rankings do not promise a strong response for this site's viewers.
+
+### 6. Ebbinghaus / Titchener circles
+
+**Evidence:** Bach's demonstration compares center circles with different surrounds and allows hiding/exchanging the surrounds. Roberts, Harris and Yates (2005) found that both relative inducer size and target–inducer distance matter; their balance can change the direction of the size error. Avoid claiming that small neighbors always enlarge the target.
+
+**Proposed construction:** two fixed target disks using one radius/fill constant. Generate two deterministic rings of context disks from explicit geometry. Start with equal targets; hide only the rings. Controls could change surround radius and edge-to-edge target gap. Specify whether counts are fixed: changing count/completeness at the same time would confound the comparison. Never resize a center disk secretly or turn this into a measurement of the viewer.
+
+**Calibration concern:** maintain separation without clipping/overlap at every control setting and on a 320px layout. Pilot the default before exposing a wide control range.
+
+Sources: [Bach's Ebbinghaus demonstration](https://michaelbach.de/ot/cog-Ebbinghaus/); Roberts, Harris & Yates (2005), *The roles of inducer size and distance in the Ebbinghaus illusion (Titchener circles)*, Perception 34, 847–856, [abstract](https://pubmed.ncbi.nlm.nih.gov/16124270/), DOI 10.1068/p5273. The paper abstract, not full text, was read.
+
+### 7. Poggendorff
+
+**Evidence:** Bach demonstrates apparent misalignment of collinear segments separated by an occluding rectangle and explores occluder width. His explanation is tentative; do not present a single depth-processing account as established.
+
+**Proposed construction:** one straight SVG line from a shared slope/intercept, with a separate opaque rectangular context layer covering its middle. “Hide strip” removes only that layer, uncovering the pre-existing continuation; no new connecting line is inserted. Angle and strip-width controls change geometry explicitly, independently of reveal. Keep the visible end segments and full line fixed through the toggle.
+
+**Calibration concern:** shallow angles or an excessively wide strip can leave too little visible line. Document bounds and check the direction/strength of the apparent offset by eye.
+
+Source: [Bach's Poggendorff demonstration and references](https://michaelbach.de/ot/ang-poggendorff/). Its page text was read; the listed historical papers were not read in this pass.
+
+### 8. Checker-shadow / Adelson-style lightness context
+
+**Evidence:** Bach's checker-shadow comparison isolates two matching patches from a depicted lit/shadowed checkerboard. Adelson's 1993 abstract independently shows that perceptual organization matters for brightness judgments; it predates the 1995 checker-shadow image and is not that image's publication.
+
+**Proposed construction:** original SVG board and object/shadow cues, with two target polygons sharing an explicit final RGB fill. An isolate-context mode removes the surrounding scene while retaining the same targets, positions and fills against one neutral surface. Labels must stay outside sampled target interiors. “Identical RGB values” is the testable claim; do not claim measured display luminance.
+
+**Spec dependency:** the current generic ban on decorative shading/gradients must be reconciled explicitly if shaded context is needed. Any exception would apply only to specified context; no shadow/filter/blend may alter target fills. Do not silently add another blending exception. Original construction is needed, not a downloaded checker-shadow picture.
+
+Sources: [Bach's checker-shadow demonstration](https://michaelbach.de/ot/lum-adelsonCheckShadow/index.html); Adelson (1993), *Perceptual organization and the judgment of brightness*, Science 262, 2042–2044, [abstract](https://pubmed.ncbi.nlm.nih.gov/8266102/), DOI 10.1126/science.8266102. Bach's text and the abstract were read. The original MIT checker-shadow/explanation links failed to load in this pass; no original-image inspection or reuse permission is claimed.
+
+### 9. Ponzo
+
+**Evidence:** equal-length targets within converging contours can appear different in size. Schiffman and Thompson's 1978 abstract reports that target orientation and location relative to those contours affected magnitude. A perspective interpretation is useful context, not a complete proven explanation.
+
+**Proposed construction:** two fixed equal horizontal bars inside original converging rails, optionally with sparse cross-ties. Hide only the rail/tie context. A convergence control may change the rails but never the bars. Keep enough clearance between rails and target endpoints throughout its range.
+
+**Calibration concern:** the context's proximity to the upper and lower bars is part of the construction, not an incidental responsive spacing detail. Uniformly scale the stimulus; do not rearrange its contents for mobile.
+
+Sources: Schiffman & Thompson (1978), *The role of apparent depth and context in the perception of the Ponzo illusion*, Perception 7, 47–50, [abstract](https://pubmed.ncbi.nlm.nih.gov/628580/), DOI 10.1068/p070047; [2019 study abstract on perspective and texture in a Ponzo corridor](https://pubmed.ncbi.nlm.nih.gov/31600294/). Abstracts/search-indexed abstract text were inspected, not full papers; no study's room image is proposed for reuse.
+
+### 10. Hering
+
+**Evidence:** Bach's standard figure removes oblique background lines to expose that the apparent bowed bars are straight.
+
+**Proposed construction:** two parallel target lines from shared straight-line geometry, drawn over a radial fan. Hide only the fan. Ray count and fan-center position are possible context controls; keep target endpoints/stroke width invariant on reveal. No curved target paths or corrective animation.
+
+**Calibration concern:** fine intersecting rays can alias on phones/fractional DPR. Start with a bounded moderate density and inspect both geometry and perceived bowing. It is inexpensive, but less distinct from Café Wall than a size/alignment illusion.
+
+Source: [Bach's Hering demonstration](https://michaelbach.de/ot/ang-hering/). Page text read; no claim of a new tested mechanism.
+
+### 11. Scintillating grid
+
+**Evidence:** the classic arrangement places white disks at intersections of gray bars on black. Dark spots can appear transiently while looking around the static pattern. Grid/disk proportions and eye movements matter; this is not an animation and is distinct from a plain Hermann grid.
+
+**Proposed construction:** explicit black surface, deterministic gray grid and white disks in separate layers. “Hide grid” removes only the gray bars while retaining identical white disks/background. Grid spacing and disk diameter are deliberate parameter changes, bounded to avoid overlap. Do not generate dark spots, flash pixels or move the disks to simulate the percept.
+
+**Calibration concern:** test whether the effect remains noticeable within the phone's viewing field; more cells are not automatically better. Explain looking around versus directly at a disk without guaranteeing disappearance at fixation. Avoid reducing its explanation to a settled retinal center–surround account.
+
+Sources: [Bach's scintillating-grid demonstration](https://michaelbach.de/ot/lum-scGrid/); Schrauf, Lingelbach & Wist (1997), *The scintillating grid illusion*, Vision Research 37, 1033–1038, DOI [10.1016/S0042-6989(96)00255-6](https://doi.org/10.1016/S0042-6989(96)00255-6). Bach's page and indexed paper-abstract text were inspected; the full paper was not read. The PubMed record did not return usable content during direct retrieval.
+
+### 12. Jastrow
+
+**Evidence:** Bach's curved-track demonstration compares identical shapes in different arrangements and permits matching them. The mechanism is not settled by a simple slogan about relative size.
+
+**Proposed construction:** two copies of one original annular-sector path, initially translated into the characteristic offset arrangement. Offer an explicit “Align shapes” comparison using translation only, with keyboard buttons rather than drag-only interaction. Verify equal path data, radii, angular span and unit scale before/after alignment. Reset restores the initial offsets.
+
+**Spec dependency:** alignment intentionally changes position. It must be defined as a comparison mode, not a context-only reveal that claims positions stayed fixed. A static step is sufficient; automatic swapping is unnecessary.
+
+Source: [Bach's Jastrow demonstration and historical references](https://michaelbach.de/ot/geom-Jastrow/index.html). Page text read; original historical papers not read.
+
+### 13. Simultaneous brightness contrast
+
+**Evidence:** equal gray patches can look different against light and dark surrounds. Adelson's 1993 abstract describes this basic contrast effect while showing why it is insufficient to explain all organized lightness displays. Bach's brightness-induction page illustrates a related gradient/probe configuration and labels that particular version relatively weak.
+
+**Proposed construction:** two identical gray squares on separate uniform light/dark panels. Replace only those panels with one shared neutral gray on reveal. A surround-contrast control must not modify either target. Start with uniform panels, not Bach's more elaborate gradient-matching experiment.
+
+**Calibration concern:** display tone response and adaptation affect appearance. Same RGB is a construction invariant, not evidence that a viewer must see a difference. This is an easy educational companion rather than the highest-variety next page.
+
+Sources: [Adelson (1993) abstract](https://pubmed.ncbi.nlm.nih.gov/8266102/); [Bach's brightness-induction demonstration](https://michaelbach.de/ot/lum-inducedBrightness/index.html). Abstract/page text read; the separate Sinha et al. (2020) paper linked by Bach was not read and is not being replicated.
+
+### Later candidates needing a different comparison contract
+
+| Candidate | Proposed experience | Why defer / source |
+| --- | --- | --- |
+| Shepard's tables | Two tabletop polygons from one path, related only by rigid rotation/translation, with original leg/depth context. A button places a congruent comparison copy over the other, without scaling/skewing it. | The proof concerns 2D projected shapes, not equal real-world tables. Needs a documented position-changing comparison and careful original context art. [Bach's demonstration](https://michaelbach.de/ot/sze-ShepardTables/index.html), text read; Shepard's cited 1981/1990 originals not read. |
+| Necker cube | Static original wireframe; invite noticing either depth interpretation. Optional “Interpretation A/B” cues are explicitly added context, removable to return to the ambiguous drawing. | There is no unique correct orientation to reveal. A flip is perceptual, not a timed change in the SVG. Do not promise a reversal within a time limit. [Bach's Necker cube](https://michaelbach.de/ot/sze-Necker/index.html), text read; its source demo also rotates, but the proposal is static. |
+| Peripheral drift / rotating-snakes family | Original repeated luminance-sequence rings that remain completely still. Compare with a symmetric sequence, explicitly changing the pattern rather than calling it an unchanged-target reveal. | Potential apparent motion without animation, but gaze, luminance ordering and display response need substantial calibration. A symmetric comparison can still shimmer; do not promise zero perceptual motion. [Bach's luminance-control demonstration](https://michaelbach.de/ot/mot-snakesLum/index.html), a primary project page accompanying his research; page text read, linked research full texts not read. Create original geometry, not a copy of Kitaoka's artwork. |
+| Stepping feet | Two bars follow the same continuous horizontal position function and speed over stripes; switching off/reducing the stripe context leaves their trajectories/time phase unchanged. | Requires an explicitly approved motion extension: user-started animation, Pause/Reset, reduced-motion behavior, elapsed-time rather than frame-count positioning, and pause on hidden tabs. [Bach's demonstration](https://michaelbach.de/ot/mot-feetLin/index.html); [Kitaoka & Anstis (2021), review abstract](https://journalofillusion.net/index.php/joi/article/view/5612), DOI 10.47691/joi.v2.5612. Page/abstract read, not the review full text or movies. |
+
+### Selection and implementation gates
+
+- Write and approve a feature spec before code, including exact original geometry, control bounds and what each comparison changes. Research entries do not authorize rendering exceptions or motion.
+- Prefer a small faithful stimulus at proposed defaults before a broad tuning UI. After engineering checks, obtain owner viewing at normal zoom on desktop and mobile; record a weak/absent result rather than endlessly increasing density or faking a stronger effect. Keep the established two-viewer calibration milestone separate from implementation.
+- For unchanged-target reveals, test identity and persistent geometry, not screenshots alone. For Jastrow/Shepard and ambiguous/motion comparisons, explicitly specify the different invariants and labels rather than reusing the word “reveal” inaccurately.
+- Pixel and geometry checks prove construction; they do not establish perception. Check 320/1440 layouts and fractional DPR where fine patterns matter. No numeric defaults or optimal CSS-pixel sizes are established by this shortlist.
+- Each approved addition fits the existing real-page build and metadata list; keep unapproved candidates out of the Home/nav list. Kanizsa remains unlisted with calibration not pursued.
 
 ## Implementation acceptance criteria
 
