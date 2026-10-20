@@ -1,12 +1,12 @@
 # Kanizsa triangle specification
 
-Status: **implemented; perceptual calibration pending**. Version 1.2, 20 October 2026. K01–K09 pass; K10 has no human observations yet. See [validation](../kanizsa-validation.md). The feature is local and unpushed for owner viewing. Depends on [implementation.md](implementation.md). Stable feature ID, folder and URL slug: `kanizsa`.
+Status: **implemented; perceptual calibration pending for the strengthened revision**. Version 2.1, 20 October 2026. The owner found the initial three-disk figure weak. Default radius 92, optional outline context and continuous rotation supersede version 1; K01–K09 now pass for this revision; engineering checks do not establish calibration. Stable ID/folder: `kanizsa`. See [implementation rules](implementation.md) and [validation](../kanizsa-validation.md).
 
-## 1. Intended outcome and scope
+## 1. Scope
 
-Three black disks with aligned cutouts can suggest a white triangle and edges spanning the gaps. Draw only the inducing shapes on a uniform white surface. The viewer compares the aligned figure with the same cutout disks turned out of alignment; no triangle is removed, uncovered, outlined or painted in either state.
+Suggest an upright white triangle with aligned 60° cutout disks and optional classic inverted-triangle corner context. The upright triangle is never drawn, filled, outlined, masked or given a hit area. Only one opaque white surface, three black sector paths and, when enabled, three separate unfilled black V polylines are permitted.
 
-First version: original static SVG, persistent **Rotate cutouts** comparison, disk-radius control, shared image-size select, local Reset, explanation and source links on a separate page. The rotation toggle itself is the rotation control; no redundant angle slider. Exclude animations/flashing, hover-only interactions, outlined/inverted support triangles, construction guides, color/polarity variants, extra shapes, quizzes, photographs, copied artwork, new dependencies and a router. An outlined support triangle could be proposed later if the three-disk version is weak, after updating the contract and viewing it.
+Use the existing standalone /OpticEye/kanizsa/ page (development /kanizsa/), shared shell, metadata list and image-size control. Add no dependency, router, animation, blur, blend, photograph, copied artwork or automatic movement. The owner has authorized this local revision; do not push.
 
 ## 2. Research basis and attribution
 
@@ -18,117 +18,118 @@ Sources checked 20 October 2026:
 
 The two research abstracts/bibliographic records were read, not their full texts. Link all three sources in the explanation. Use original wording and geometry; no research image, SVG or source code is copied. All numeric values and the 90° comparison below are OpticEye design choices awaiting human calibration. Describe completion/grouping as perceptual phenomena; do not assert a single proven brain mechanism, brightness change in the pixels or universal perception. Neural feedback results linked by Bach are not needed for this first-version explanation.
 
-## 3. Page and file responsibilities
+## 3. Files and page integration
 
-Production URL: `/OpticEye/kanizsa/`; development: `/kanizsa/`. Reuse SiteLayout, SiteHeader, SiteFooter, mountPage and ViewingSizeControl. Add one `kanizsa` entry to `src/illusions.ts`; the list supplies Home, navigation and build inputs. The build now contains Home plus five illusion documents.
+Keep kanizsa/index.html and main.tsx, currentPage="kanizsa", one h1 “Kanizsa triangle”, and the existing six-document build/base-aware nav. Keep current static title/description and metadata synchronized; no page structure or workflow change is required. Existing demos/calibration remain intact.
 
 | File | Responsibility |
 | --- | --- |
-| `kanizsa/index.html` | Static title “Kanizsa triangle \| OpticEye”, unique meta description, relative local favicon/module and root. |
-| `kanizsa/main.tsx` | Mount only Kanizsa in SiteLayout, currentPage="kanizsa". |
-| `src/illusions/kanizsa/Kanizsa.tsx` | Comparison/radius/size/disclosure state, proof/status and Reset. |
-| `src/illusions/kanizsa/KanizsaStimulus.tsx` | Fixed surface and exactly three deterministic cutout-disk paths. |
-| `src/illusions/kanizsa/kanizsaModel.ts` | Named constants, normalization, center/orientation/path geometry and source metadata; distinct basename for Windows. |
-| `src/illusions/kanizsa/` tests | Sector geometry, alignment/rotation, unchanged surface/envelopes, controls and instance isolation. |
-| `docs/kanizsa-validation.md` | Actual engineering results and separately recorded human observations, recorded during implementation. |
+| src/illusions/kanizsa/kanizsaModel.ts | Explicit centers, sector/radius/rotation normalization, outline vertices/stroke and geometric trimming. |
+| src/illusions/kanizsa/KanizsaStimulus.tsx | Surface, optional outline-corner layer and persistent sector paths. |
+| src/illusions/kanizsa/Kanizsa.tsx | Rotation range, Align, radius, outline checkbox, size, disclosure, status and Reset. |
+| src/illusions/kanizsa/ tests | Actual geometry, white-gap protection, controls and Reset; remove obsolete binary-toggle tests. |
+| docs/kanizsa-validation.md | Actual checks of this revision and supplied viewing observations, with a short history. |
 
-Metadata: ID `kanizsa`, name “Kanizsa”, title “Kanizsa triangle”, description “Aligned cutout disks can suggest a triangle. Rotate the cutouts to compare the surrounding shapes.” HTML description: “Explore the Kanizsa triangle: compare aligned and rotated cutout disks, adjust disk size, and examine how a shape can appear between them.” Keep HTML and list titles/descriptions synchronized.
+## 4. Defaults and normalization
 
-One h1 (“Kanizsa triangle”), subordinate h2 headings. Shared navigation: Home / Confetti / Munker / Café Wall / Müller-Lyer / Kanizsa, using BASE_URL and exactly one aria-current="page". Six links must wrap at 320px and actual 200% zoom. Keep build-only `/OpticEye/` and dev `/`, no router or workflow changes, no experiment state shared across documents. Preserve existing demonstrations and calibration records.
-
-## 4. Defaults and state
-
-| Configuration / state | Default / allowed values |
+| Choice | Default / allowed values |
 | --- | --- |
-| `cutoutsRotated` | false: aligned; true: every opening turns 90° clockwise |
-| `diskRadius` | 64; 32–96 drawing units, step 4 |
-| `viewingWidth` | Medium/540; Compact 240, Medium 540, Large 720 CSS px maximum |
-| `explanationOpen` | false |
-| `status` | Empty initially; concise comparison/Reset messages afterward |
-| ViewBox / surface | 720 × 480; opaque `#FFFFFF` |
-| Inducer fill / stroke / opacity | `#000000` / none / 1 |
-| Center-to-center triangle side `SIDE` | 320 drawing units |
-| Cutout opening | 60°, fixed; each disk retains a 300° black sector |
-| Comparison offset | 90°, fixed, clockwise in screen coordinates |
+| diskRadius | **92**; 32–96 drawing units, step 4 |
+| cutoutRotation | **0°** aligned; 0–90°, step 5 |
+| outlineVisible | **true**, checkbox “Outline triangle” |
+| viewingWidth | Medium/540; Compact 240, Medium 540, Large 720 CSS px maximum |
+| explanationOpen / status | false / empty initially |
+| ViewBox / surface | **720 × 512**, opaque #FFFFFF |
+| Disk fill / opening | #000000, stroke none, opacity 1 / 60° |
+| Outline stroke | Shared named constant: #000000, width **4**, linecap butt, linejoin miter, miterlimit 4, opacity 1, **fill none** |
 
-Keep only choices in local React state. Derive geometry from validated values with no DOM measurements, randomness, storage or timers. Normalize radius to the nearest step anchored at 32, then clamp to 32–96; non-finite values fall back to 64. Supported viewing widths pass unchanged; invalid choices fall back to 540. Radius changes deliberately change the inducing disks, including while rotated; they do not realign automatically.
+Normalize radius by nearest step anchored at 32, clamp 32–96, non-finite fallback 92. Normalize rotation by nearest step anchored at 0, clamp 0–90, non-finite fallback 0. Unsupported size falls back to 540. Keep only these choices/disclosure/status in local state; no storage, timers, randomness or DOM measurements. Changing rotation does not alter radius, outline selection, size or disclosure.
 
-## 5. Original SVG construction
+## 5. Geometry
 
-### 5.1 Equilateral placement
+### 5.1 Preserve the upright figure's centers and sector construction
 
-Let `H=SIDE*sqrt(3)/2=160*sqrt(3)≈277.128129`. Set top y=`240-H/2≈101.435935` and bottom y=`240+H/2≈378.564065`:
+SIDE=320, H=160*sqrt(3), disk-layout mid-y=240. Keep the existing centers and aligned opening bisectors:
 
-| ID | Center | Aligned opening bisector α |
+| ID | Center | Bisector |
 | --- | --- | --- |
-| top | (360, 240−H/2) | 90°: downward |
-| left | (200, 240+H/2) | 330°: up/right |
-| right | (520, 240+H/2) | 210°: up/left |
+| top | (360, 240−H/2) ≈ (360,101.435935) | 90° |
+| left | (200, 240+H/2) ≈ (200,378.564065) | 330° |
+| right | (520, 240+H/2) | 210° |
 
-All three center distances equal 320. At alignment, the two radial edges of each opening lie on rays from that vertex toward the other two centers. Do not approximate the center positions with rounded decimal literals or use a 90° wedge: an equilateral triangle requires 60° openings here.
+Every center distance is 320; all aligned radial edges point toward neighbors. Effective bisector = base + normalized cutoutRotation, rotating each opening about its own center. The opening remains 60° and retained black sector 300°. With r=92 the supported-edge ratio 2r/320 is **0.575**; the range remains 0.2–0.6. These are construction ratios, not guarantees of perceived strength.
 
-For the rotated comparison, add 90° to each bisector: 180°, 420° (equivalent to 60°), 300°. Rotation is around each disk's own fixed center, never the group centroid. Do not move or exchange the disks or change the opening size/area. Angles use x=cos(angle), y=sin(angle), so positive rotation is clockwise on screen.
+For effective bisector α, P+=C+r*(cos(α+30°),sin(α+30°)), P−=C+r*(cos(α−30°),sin(α−30°)). Use path M cx cy L P+ A r r 0 1 1 P− Z. One path per disk, no circle underlay or white wedge mask. Preserve three path nodes; rotation changes only their d attributes. At fixed radius, sector areas, centers/fill and surface remain unchanged. Painted path bounds may change; do not move shapes to compensate.
 
-### 5.2 Three paths, no triangle layer
+### 5.2 Three corners of an inverted equilateral triangle
 
-For center C=(cx,cy), radius r and effective α, define points `P+ = C + r*(cos(α+30°), sin(α+30°))` and `P− = C + r*(cos(α−30°), sin(α−30°))`. Convert degrees to radians consistently.
+Let G be the centroid of the three disk centers, G=(360,286.188021535...). Reflect each upright vertex through G and scale its displacement by **q=1.15**. The inverted outline vertices, in perimeter order, are:
 
-Render each disk with path `M cx cy L P+.x P+.y A r r 0 1 1 P−.x P−.y Z`, fill black, stroke none. The large-arc flag 1 and sweep flag 1 trace the remaining 300° clockwise, leaving the 60° opening unpainted. The Z segment returns to the disk center; each path closes only its own sector. Never close a path between different disks. No stroke, full-circle-underlay, white wedge mask, clip path or triangle overlay is needed.
+- D0=(176,179.955572004...),
+- D1=(544,179.955572004...),
+- D2=(360,498.652920597...).
 
-Paint one fixed opaque white surface rectangle, then exactly three sector paths with stable IDs/keys. The white cutouts and all gaps expose the same surface. No polygon/line/path may connect centers, outline an implied edge, paint the apparent triangle, or create a separate central hit area. No gradients, antialias filters, blending, opacity changes, shadows, transforms, fades, animation or responsive substitutions. Calculate orientation directly in the path geometry. Use unique SVG title/description IDs per instance.
+Compute these from centers/G/q rather than rounded literals; all outline side lengths are **368**. Each vertex contributes one V, not a closed triangle: its arms run toward the midpoints of its two adjacent inverted sides, but terminate before reaching a disk envelope or the upright figure. The three Vs never connect. The modest viewBox height extension from 480 to 512 fits the bottom corner, including its 4-unit miter extension, without moving any disk. Do not clip off the corner or shrink/reposition the disks to fit it.
 
-At radius 32…96, every circular envelope fits within x=104…616 and y≈5.436…474.564. Disks cannot touch: center distance 320 exceeds maximum diameter 192, leaving at least 128 drawing units between envelopes along each centerline. The surface and viewBox never change. In the aligned configuration, total physically specified radial-edge length along each notional side is 2r; the unpainted inter-disk interval is 320−2r. Their geometric ratio is 2r/320=0.2…0.6, default 0.4. This describes our construction, not a prediction of perceived strength.
+Use named guard distance **g = strokeWidth/2 + 4 = 6 units**. For each arm from inverted vertex D to adjacent-side midpoint M, parameterize P(t)=D+t*(M−D), 0≤t≤1. End it at the first entry into either of these exclusion regions:
 
-### 5.3 Comparison invariants and limits
+1. Any circle centered on a disk with radius r+g. Obtain the first nonnegative segment-circle intersection from the quadratic; ignore misses/out-of-segment roots.
+2. The upright triangle expanded outward by g along each edge normal. For clockwise vertex order top/right/left, each interior half-plane is cross(B−A,P−A)/|B−A| ≥ −g. Intersect the three linear inequalities to find first segment entry. The additional 4 drawing units keep screenshot pixels inside the upright region clear even at Compact size, including antialias fringes.
 
-This is a **context comparison**, not a hidden-target reveal: no physical triangle target exists. The same surface and three path DOM nodes remain; only the paths' `d` attributes change when cutouts rotate. Circle-envelope centers/radius, black fill, removed-sector angle, sector area and drawing position/size remain fixed. The rotated sectors' actual painted bounding boxes need not match the aligned sectors' boxes; do not translate/scale them to force a match.
+Take the smallest valid entry parameter, clamped to [0,1]. Generate each polyline as trimmed-previous-arm endpoint → D → trimmed-next-arm endpoint. No extra closure, fill, connecting segments, SVG clipPath or masking geometry. Circle clipping makes the corners interrupted near the disks at the default large radius; at smaller radii the upright-region guard can truncate an arm first. Never extend it into the central triangle to force contact with a smaller disk.
 
-Regions away from the three circular envelopes remain white in both states; antialiased fringe pixels at the disk boundaries are excluded from pixel-equality assertions. In particular, the triangle center and the midpoint of each center-to-center side remain outside every disk even at radius 96; do not recolor these gaps or add an outline during comparison. Pixels within envelopes intentionally change because the openings turn. Do not claim the entire notional triangular region is pixel-identical: its parts inside disk envelopes can change. Radius adjustments intentionally change the envelopes and are distinct from rotation invariants; size adjustments uniformly scale the whole drawing.
+At fixed radius the outline data is independent of rotation. Turning openings never reveals a stroke within a disk's missing sector, because outlines exclude the full circular envelope, not just its black sector. Radius changes may deliberately shorten/lengthen corner arms. Toggling the outline removes only its own three polylines; disk path data/surface/frame stay unchanged. Every centerline lies outside the expanded upright region and outside expanded disk envelopes, except tangency at trimmed endpoints. Miter vertices are far outside the upright region; test their stroke extents as well.
+
+### 5.3 Rendering and white-gap integrity
+
+Paint fixed surface, optional outline-corner group, then three sector paths. No other stimulus geometry. Source path generation must not secretly draw an upright triangle; central white is the surface. “No triangle is drawn” always means the **apparent upright** triangle: visible copy must distinguish the optional inverted corner context.
+
+The triangle centroid, side midpoints and additional interior samples outside the circular envelopes stay RGBA white for every rotation/radius/outline choice. Outline strokes may not occupy any part of the implied upright region. Disk pixels inside circular envelopes intentionally change as cutouts rotate; do not claim the entire notional triangular region is pixel-identical across rotation. Exclude antialiased disk-boundary samples. Preserve SVG document-space position/size on rotation, outline toggle and Align; parameter size changes are separate.
 
 ## 6. Interaction and copy
 
-Initial prompt: **“Do you see a triangle between the disks?”** Viewing instruction: “Look at the open space between the three shapes. Rotate the cutouts and compare what you see.” Avoid promising a triangle to everyone or saying the effect must vanish.
+Prompt remains “Do you see a triangle between the disks?” Viewing instruction: “Turn the cutouts, or switch off the outline corners, and compare the open space between the disks.”
 
-- **“Rotate cutouts”**: stable native toggle, aria-pressed=`cutoutsRotated`, help “Turn each opening 90° without moving the disks.” Rotated status: “Cutouts rotated 90°. Compare the open space between the disks.” Restored status: “Cutouts aligned.” Toggling twice restores the same path data deterministically. No hover interaction, timed movement or auto-disclosure.
-- Rotated proof outside the SVG: **“Only the cutouts turned. No triangle was drawn.”** Reserve enough proof/status space so wrapping at 320px and 200% zoom never shifts the drawing or controls. Keep answer-bearing proof hidden initially.
-- **“Disk radius”**: native range 32–96, step 4, output in drawing units. Help “Change all three disks together. Their centers and cutout angles stay fixed.” Do not label radius as diameter or promise larger always means stronger. Changing it while rotated keeps that comparison state.
-- **“Kanizsa image size”**: shared native select with this feature's 240/540/720 choices, changing display scale only. Retain radius/comparison/disclosure choices.
-- **“Why it happens”**: initially closed disclosure, independent of comparison. Suggested explanation: “Aligned cutouts can suggest the edges and surface of a triangle where no triangle is drawn. Turning the cutouts changes the surrounding shape cues. The gaps stay the same white as the background. This is an example of illusory contours: perceived boundaries without a drawn edge across the gaps. Strength varies with display, size and viewer.” Follow with original-drawing attribution and links to all sources. No settled neural-mechanism or guaranteed brighter-surface claim.
-- **“Reset Kanizsa”**: aligned cutouts, radius 64, Medium/540, closed disclosure; status “Kanizsa experiment reset.” Keep Reset enabled at defaults and retain focus. Do not modify any other page.
+- **Cutout rotation**: native range 0–90, step 5, output in degrees. Help: “0° aligns the openings. Turn all three around their own centers.” No animation, binary Rotate cutouts button or auto-reset of other controls. Initial aligned accessible description and rotated description report actual rotation. Do not announce every slider movement in a live region.
+- **Align cutouts**: sets only rotation to 0, preserves radius/outline/size/disclosure, retains focus and announces “Cutouts aligned.” Enabled at 0 as well.
+- **Outline triangle**: labeled native checkbox, checked by default. Help: “Three unfilled corners of an inverted triangle; the upright triangle is not drawn.” Changes only outline visibility. No fake upright outline, fill or guide appears.
+- **Disk radius**: native range 32–96, step 4, current units; help “Change all three disks together. Their centers and cutout angles stay fixed.” Radius changes retain rotation/outline/size.
+- **Kanizsa image size**: shared native select 240/540/720; affects uniform display scale only.
+- **Why it happens**: independent, initially closed disclosure. Explain illusory contours/grouping tentatively, include all three source links. Say: “Only the cutout disks and optional inverted outline corners are drawn. The upright triangle is not drawn. The open space has the same white fill as the surface.” Its strength varies by viewer, display and size. Do not promise brightness change, universal perception or full disappearance at 90°.
+- Proof outside SVG, when rotation>0: “No upright triangle is drawn. Only the surrounding shapes changed.” Reserve proof/status height so wrapping cannot move the stimulus or controls. Initial answer-bearing proof stays hidden.
+- **Reset Kanizsa**: radius 92, rotation 0, outline on, Medium/540, disclosure closed, “Kanizsa experiment reset.” Retain focus and keep it enabled. No state shared with another page.
 
 ## 7. Responsive and accessible representation
 
-Fit width 100% to the selected maximum, fixed 3:2 ratio; stack controls below on narrow screens without changing tab order. At rendered width W, scale=W/720, disk diameter=2r*scale, center separation=320*scale, and aligned edge gap=(320−2r)*scale. Do not impose a CSS-pixel radius floor or alter the construction by breakpoint.
+Use width 100% within chosen max, fixed aspect **720:512**, no responsive geometry/stroke substitution. At W, scale=W/720, default disk diameter=184*scale and center separation=320*scale.
 
-| Viewport / selection | Drawing size | Default disk diameter | Center separation | Default edge gap |
-| --- | --- | --- | --- | --- |
-| 320 / Compact | 240×160 | 42.67px | 106.67px | 64px |
-| 320 / Medium or Large | 288×192 | 51.2px | 128px | 76.8px |
-| 1440 / Compact | 240×160 | 42.67px | 106.67px | 64px |
-| 1440 / Medium (default) | 540×360 | 96px | 240px | 144px |
-| 1440 / Large | 720×480 | 128px | 320px | 192px |
+| Viewport / choice | Drawing size | Default disk diameter |
+| --- | --- | --- |
+| 320 / Compact | 240×170.667 | 61.333px |
+| 320 / Medium or Large | 288×204.8 | 73.6px |
+| 1440 / Compact | 240×170.667 | 61.333px |
+| 1440 / Medium | 540×384 | 138px |
+| 1440 / Large | 720×512 | 184px |
 
-These dimensions assume the existing shell; measure actual rendering in implementation. DPR/antialiasing affect curved/radial edges, and CSS pixels do not establish viewing angle. Human viewing must establish effect strength on desktop and phone.
+Measure actual dimensions and DPR. Curves/diagonals can rasterize differently at fractional scaling. Keep one labeled SVG image, unique title/description references, native keyboard controls, explicit labels/help/values, visible focus, checkbox/expanded states and polite Align/Reset status. Description names the optional outline corners and actual opening rotation, without claiming a drawn upright target. Retain the forced-colors note; manual screen-reader testing remains outside scope.
 
-SVG title: “Kanizsa triangle”. Aligned description: “Three black disks with 60-degree cutouts facing the space between them. Compare the open space, then use Rotate cutouts.” Rotated description: “The same three cutout disks with their openings turned 90 degrees out of alignment.” One labeled SVG image; no focusable decorative paths. Native labels/help, current radius, visible focus, pressed/expanded state, polite comparison/Reset status and instance-unique references. Avoid live-announcing every range move. Retain the system-color-override note. Manual screen-reader testing remains outside scope.
-
-## 8. Acceptance and verification
+## 8. Acceptance criteria
 
 | ID | Required result |
 | --- | --- |
-| K01 | Exactly three original black sector paths and one white surface; no drawn central triangle, connecting/outline geometry, masks or filters. Inspect actual renderer structure and central gap pixels, not screenshots alone. |
-| K02 | Equilateral center distances 320; aligned rays point toward adjacent centers, openings are 60° and arcs retain 300°. Endpoints lie on the chosen circle. Test all 17 radius choices in both orientations, sector area, bounds, non-overlap and radius/size normalization including off-step/non-finite inputs. |
-| K03 | Rotation adds exactly 90° about each fixed center. Same three path nodes and surface persist; only `d` changes. Fill, radius, opening, sector area, frame/viewBox and displayed bounds remain. Toggle twice restores original data; central samples outside envelopes stay white. No nonexistent triangle target is asserted. |
-| K04 | Native range/size/toggle/disclosure work independently by keyboard and pointer. Radius deliberately changes envelopes without realigning; Reset restores every default/status and retains focus. Invalid input never produces non-finite SVG data. |
-| K05 | Accessible names/descriptions/references, help/current value, pressed/expanded state, focus and source links work. Two mounted instances have unique IDs and isolated state. Initial proof is hidden and no forced quiz exists. |
-| K06 | Standalone entry mounts only Kanizsa. Home lists five illusions; six base-aware nav links wrap with one current marker. Unique title/meta, one h1, correct favicon/module URLs and direct load/refresh in dev/build paths. Existing feature/page tests and calibration records retained. |
-| K07 | Lint, meaningful tests and TypeScript/Vite build pass; dist contains Home plus all five illusion HTML documents. No dependency, registry, router or workflow change. |
-| K08 | Chromium at 320/1440 and actual 200% page zoom: direct load/refresh, six-page navigation, styles/assets, default/rotated/Reset, radius 32/64/96, each image size, keyboard/focus/disclosure, stable rotation bounds, no overflow/errors/404s. Check aligned/rotated defaults at DPR 1/2 and fractional 1.25; record browser/version/parameters/dimensions and actual coverage. Also check dev `/kanizsa/`. |
-| K09 | Actual docs/kanizsa-validation.md separates engineering from human observation. Screenshots prove layout/construction only. For the gap check, sample points outside the circular envelopes in both states at default/min/max radius; do not sample antialiased borders or invent passes. |
-| K10 | Calibration only: at least two viewers compare default aligned/rotated figure on desktop and mobile. Record whether a triangle/illusory boundaries appear when aligned and weaken/change on rotation, including weak/absent results. No requirement that the effect fully disappears or the interior looks brighter. Unknown browser/viewport/DPR/distance stays unknown; desktop size choices do not count as phone viewing. Use device-scoped status for incomplete coverage. |
+| K01 | One surface, three sector paths, optional three unfilled V polylines only. No filled/outlined upright triangle, masks or hidden paint. |
+| K02 | Correct equilateral centers, 60° openings/300° arcs and area; all 17 radii × 19 rotations normalize correctly and stay in bounds. Default radius 92/rotation 0. No non-finite geometry. |
+| K03 | Inverted vertices are equilateral with side368; each V follows two sides and is trimmed by circle/upright half-plane exclusions. Shared stroke/fill-none explicit. Test centerlines, miter bounds and whole-stroke upright exclusion, both outline states and all radii. Outline geometry is independent of rotation. |
+| K04 | Rotation changes only persistent disk d attributes. Outline toggle changes only its layer. Surface/envelopes/frame and disk nodes remain stable; Align changes rotation only. Radius intentionally changes disk size and outline arm lengths. |
+| K05 | Native rotation/radius/size/outline controls, Align, disclosure and Reset work independently with keyboard and pointer. Reset restores 92/0/on/540/closed with focus. Accessible labels/help/actual descriptions/references and instance isolation pass. No obsolete toggle behavior/dead code. |
+| K06 | Standalone page, six nav destinations/current marker, five Home cards, metadata/one h1/base paths work. Existing tests/calibration remain intact. |
+| K07 | Lint, meaningful tests and TypeScript/Vite build pass; six real HTML outputs, no dependency/router/workflow changes. |
+| K08 | Chromium at 320/1440, DPR1/1.25/2 and actual 200% zoom: direct load/refresh/nav/assets, rotations0/45/90, radii32/92/96, outline on/off, each image size, keyboard controls/Align/Reset/disclosure, stable bounds, no overflow/errors/404s. Record exact coverage; full Cartesian browser matrix not required. Also check dev /kanizsa/. |
+| K09 | Actual white-pixel checks at centroid, side midpoints and protected interior samples outside disks, across rotation/radius/outline states. Include black disk and outline-stroke samples as positive controls. Record actual engineering outcomes separately from perception in validation notes. |
+| K10 | Calibration only: two viewers on desktop/mobile compare new defaults and changed context, recording triangle/contour perception and weak/absent responses. Do not transfer calibration from the earlier weak construction. Unknown browser/DPR/distance remains unknown; desktop image sizes are not mobile observations. |
 
-K01–K09 define **implemented**; K10 separately defines **calibrated** under shared section 8. Finish authorized engineering and report calibration pending if observations are unavailable. Optional Firefox/WebKit/390/768px checks follow the shared SHOULD rule. Tune weak defaults only after updating the spec and repeating affected verification; never strengthen the effect by secretly drawing the implied triangle.
+K01–K09 define implemented; K10 is separate calibrated status. Screenshots/pixels establish construction only. No human pass is claimed for this revision until reported.
 
-## 9. Approval boundary
+## 9. Approval/history
 
-The owner approved this specification on 20 October 2026, including the optional radius extension to 32–96 (step 4, default 64). Commit these documents as “Add Kanizsa specification” before implementation. Implement and verify K01–K09, record actual results, then commit as “Add Kanizsa triangle”. Keep human calibration separate. Do not push or deploy: the owner will view it locally first.
+Initial spec checkpoint 99a95a2 and implementation dbb7a82 used radius 64 and a binary 90° toggle, with no outline. The owner reports that version weak (device/browser/settings not supplied). On 20 October 2026 the owner requested radius 92, outline on by default, rotation 0–90° step 5 and Align. Update this spec before code, verify and commit as “Strengthen Kanizsa figure”. Do not push: the owner will view it first.

@@ -1,38 +1,37 @@
 # Kanizsa implementation validation
 
-20 October 2026. **Implemented; perceptual calibration pending.** K01–K09 pass; K10 has no human observations yet. The approved specification, including radius 32–96 with default 64, was committed first as `99a95a2` (“Add Kanizsa specification”). No dependencies, copied assets, router or workflow changes were needed. This implementation remains local for owner viewing; it is not pushed or deployed.
+20 October 2026. **Implemented; perceptual calibration pending for the strengthened revision.** K01–K09 pass. K10 has no viewing results for the new defaults. Radius **92**, rotation **0°**, outline **on**, Medium/540 are the new defaults. The feature remains local and unpushed for owner viewing.
 
 ## Engineering results
 
-- Oxlint/JSX accessibility lint passes. All **94 tests across 12 files** pass: 37 Confetti/oranges, 9 Munker, 11 Café Wall, 10 Müller-Lyer, 9 Kanizsa and 18 page/navigation tests. TypeScript/Vite build passes and produces Home plus five actual illusion HTML documents.
-- Pure geometry tests cover all **17 radii in both orientations**, equilateral center distances, neighbor-facing radial edges, 300° retained arcs, sector area, quarter-turn endpoint relations, fixed centers, viewport/non-overlap bounds and clear gap samples. Stepped/out-of-range/non-finite normalization and deterministic restoration are covered.
-- Component tests inspect the actual SVG structure: one white surface and three black sector paths; no triangle, connecting geometry, masks, circles or filters. Tests retain the same path and surface nodes through repeated rotation, with only path data changing; verify radius/size/disclosure independence, Reset/focus, labels/states/sources and isolated instance references/state.
+- Lint/JSX accessibility lint, all **94 tests across 12 files**, and TypeScript/Vite build pass. Existing feature/page tests remain: 37 Confetti/oranges, 9 Munker, 11 Café Wall, 10 Müller-Lyer, 9 Kanizsa and 18 page/navigation tests. All six real HTML documents build; no dependency, router or workflow changes.
+- Geometry tests cover **17 radii × 19 rotations = 323 disk configurations**, correct centers, angles/300° arcs, sector areas and finite normalization. Outline tests cover all 17 radii: inverted equilateral side 368, arm collinearity/trimming, shared stroke, stroke/miter viewport bounds and guarded exclusion from the upright region and full disk envelopes.
+- Component tests replace the old binary-toggle behavior with the native rotation range, Align and outline checkbox. Rotation retains sector nodes/surface and changes only sector path data; outline toggle leaves disks unchanged. Tests cover independent controls, radius-dependent corner lengths, Reset to 92/0/on/540/closed with focus, labels/states/sources and instance isolation.
+- The canvas is **720×512**, retaining the original disk centers; the extra height fits the bottom inverted corner. Only surface, three sectors and optional three unfilled V polylines are rendered. No upright triangle, fill/mask or connecting geometry is added. Outline guard is 6 drawing units, leaving 4 units beyond the half-stroke width for white-pixel clearance at Compact scale.
 
-## K08: actual browser results
+## Browser checks (K08)
 
-Chrome **155.0.8059.85**, production preview `http://localhost:4173/OpticEye/kanizsa/`:
+Chrome **155.0.8059.85**, production preview /OpticEye/kanizsa/: **320×1200 and 1440×1200 CSS px**, each at **DPR 1, 1.25 and 2**. Every environment ran 21 case executions: three viewing sizes at defaults, then radius **32/92/96 × rotation 0/45/90 × outline on/off** at Medium (the default Medium case is intentionally repeated). This is **126 executions**, not a full browser Cartesian product of all slider values.
 
-- **320/1440 CSS px**, each at **DPR 1, 1.25 and 2**. Each environment tested radius **32/64/96 × Compact/Medium/Large**: **54 parameter/size/environment cases**, including default radius 64/Medium. Every case passed Space/click rotation and exact restoration with the same three path nodes, stable non-path attributes, surface/viewBox and document-space SVG position/size. Centers and arc radii remain fixed on rotation; only path data changes.
-- All six environments passed radius changes while rotated, independent keyboard disclosure, native range Home/End/ArrowRight operation, visible keyboard focus, Reset of all choices with retained focus, correct title/description/current navigation, hidden initial proof and visible comparison proof. No horizontal overflow, console/page errors, failed requests or 4xx/5xx responses.
-- Computed SVG blend is normal, filter/transform none; disks are black, stroke none, opacity 1. Actual SVG contains exactly three paths and one surface, without a triangle layer.
+All passed stable SVG document-space bounds through rotation/outline toggles, retained disk nodes, unchanged outline data on rotation, restored exact sector data, independent Align/radius/size/outline/disclosure behavior, Reset/defaults/focus, native keyboard range Home/End/ArrowRight and checkbox Space, visible focus, metadata/styles and no overflow/errors/failed requests/404s.
 
-| Viewport | Compact | Medium (default) | Large |
+| Viewport | Compact | Medium | Large |
 | --- | --- | --- | --- |
-| 320 CSS px | 240×160 | 288×192 | 288×192 |
-| 1440 CSS px | 240×160 | 540×360 | 720×480 |
+| 320 | 240×170.66 | 288×204.80 | 288×204.80 |
+| 1440 | 240×170.66 | 540×384 | 720×512 |
 
-At 320/1440 DPR 1, all **six** navigation destinations and refreshes returned 200, with one h1, correct current-page marker, correct `/OpticEye/` links and no overflow/errors. Home lists five cards. Styles/favicon/modules load; both Confetti orange sources decoded (illustration native width 600; AI WebP width 1024). Existing experiments’ tests and calibration records remain intact.
+At both widths/DPR 1, all six navigation destinations and refreshes returned 200, with one h1, correct current marker and base-aware links; Home has five cards. Both orange sources decoded (illustration width 600; AI WebP width 1024). Existing human calibration records are retained.
 
-**Actual 200% browser page zoom**, via a fresh Chrome profile preference rather than CSS/pinch zoom: outer width 1440, inner width 712, DPR 2, root CSS zoom 1. The same **nine** size/radius cases and interaction checks passed; Medium remains 540×360 and Large fits at 648×432. The six-link header fits without overflow. Native CDP viewport captures were used for zoom pixel sampling because element/full-page captures cropped the wrong physical region at this zoom; samples were mapped from the current SVG CSS bounds into native screenshot pixels. This required no application change.
+**Actual 200% browser zoom** via a fresh profile: outer width 1440, inner **712×552**, DPR 2, root CSS zoom 1. The same **21 executions** passed; Medium 540×384, Large 648×460.80, six-link header without overflow. Native CDP viewport captures map CSS bounds to screenshot pixels, avoiding the element-capture coordinate issue previously observed at real page zoom. A temporary dev server checked /kanizsa/ and all six dev-base nav paths with status 200/no errors; it was stopped. Existing preview on 4173 remains available.
 
-A temporary dev server checked `/kanizsa/`: status 200, correct title and all six navigation paths based at `/`, without browser/network errors. It was stopped afterward. Existing production preview on 4173 remains running for owner viewing.
+## White gaps and positive controls (K09)
 
-## K09: gap and construction checks
+Across all **147 executions including zoom**, native screenshot samples at the upright centroid, side midpoints and a barycentric interior grid outside disk envelopes were **RGBA(255,255,255,255)**: **6,762 white-sample checks**. This includes outline on/off and intermediate rotation. Three retained-sector interior samples per execution were black. At three outline arm positions, a 3×3 neighborhood detected the antialiased black stroke when on (minimum channel below 192), and remained white when off. Curve/fringe samples are excluded. These tests establish construction integrity, not perceived strength.
 
-For every case above, in aligned **and** rotated states, actual browser screenshot pixels were sampled at the triangle centroid and all three center-to-center side midpoints, away from every disk envelope even at radius 96. All four samples were **RGBA(255,255,255,255)**. Three additional samples inside the retained sectors, away from radial/curved boundaries, were **RGBA(0,0,0,255)** in each state. The pixel check covers all **63 cases including zoom**; it establishes the specified uniform gaps and drawn sectors, not whether a viewer perceives a triangle. Antialiased boundary pixels are excluded.
+Reports/screenshots are outside the repo in the task visualization directory: kanizsa-v2-browser-check.json and kanizsa-v2-*.png. Default desktop/narrow views and rotated/zoom views were inspected for construction/layout. Firefox/WebKit and forced-colors checks are not claimed. Manual screen-reader testing is outside scope.
 
-The report (`kanizsa-browser-check.json`) and aligned/rotated/section screenshots are saved in the task visualization directory outside the repo. Desktop aligned, narrow section, desktop rotated and native zoom views were inspected for construction/layout. Firefox/WebKit and forced-colors checks are not claimed; manual screen-reader testing is outside scope.
+## Viewing and short history (K10)
 
-## K10: human calibration
+The owner found the initial radius-64, three-sector-only figure weak; browser/device/settings were not supplied. Initial spec/implementation checkpoints were 99a95a2/dbb7a82. The owner then requested the larger default, inverted outline context and continuous rotation. The spec was updated before code. This history is not a calibration pass for the strengthened construction.
 
-**Pending: 0 of 2 viewers; desktop and mobile not yet observed.** At defaults/normal zoom, ask whether aligned cutouts suggest a triangle or contours across the gaps, and whether rotation weakens or changes it. Record weak/absent responses and supplied conditions without requiring full disappearance or a brighter interior. Unknown browser/viewport/DPR/distance stays unknown. Desktop image-size choices do not count as phone observations. Existing demos’ calibration does not establish this new effect.
+**New revision: 0 of 2 viewers; desktop/mobile not yet observed.** Compare defaults with rotated cutouts and with the outline off. Record whether the upright triangle/contours appear and how context changes them, including weak/absent responses. Do not require complete disappearance or brighter pixels. Unknown viewing details stay unknown; desktop image-size choices do not substitute for phone observations.

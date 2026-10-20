@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: implementation baseline for separate static illusion pages, including calibrated Müller-Lyer, with the approved Kanizsa extension; version 1.27. Updated 20 October 2026.
+Status: implementation baseline for separate static illusion pages, including calibrated Müller-Lyer, with the approved Kanizsa extension; version 1.29. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
@@ -61,8 +61,8 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `src/illusions/muller-lyer/mullerLyerModel.ts` | Shared shaft constants, explicit fin directions, pure geometry, normalization and attribution. |
 | `src/illusions/muller-lyer/` tests | Equal spans, fin bounds/orientation, target preservation, controls and instance isolation. |
 | `kanizsa/index.html`, `kanizsa/main.tsx` | Fifth illusion document and isolated entry, added after the specification checkpoint. |
-| `src/illusions/kanizsa/Kanizsa.tsx` | Rotation comparison, radius/size controls, disclosure, proof/status and Reset. |
-| `src/illusions/kanizsa/KanizsaStimulus.tsx` | Fixed white surface and exactly three sector paths; no triangle layer. |
+| `src/illusions/kanizsa/Kanizsa.tsx` | Rotation range, Align, outline checkbox, radius/size controls, disclosure, proof/status and Reset. |
+| `src/illusions/kanizsa/KanizsaStimulus.tsx` | Fixed white surface, three sector paths and optional inverted outline corners; no upright triangle layer. |
 | `src/illusions/kanizsa/kanizsaModel.ts` | Equilateral centers, cutout orientation, normalization, path construction and source metadata. |
 | `src/illusions/kanizsa/` tests | Alignment, sector/bounds invariants, rotation comparison, controls and instance isolation. |
 | `src/pages.test.tsx` | Home links, base-aware/current-page navigation and actual page-entry composition without mounting another illusion. |
@@ -84,7 +84,7 @@ Metadata MUST include a stable illusion ID, title, short instructions, explanati
 
 - Identical targets MUST derive their fills and dimensions from shared values. Never simulate the effect by assigning different target colors.
 - A reveal MUST modify only the context identified in the feature spec. Target positions, dimensions, fills, and background MUST remain invariant unless that feature explicitly defines a separate comparison mode.
-- **Kanizsa context comparison:** no physical triangle target is drawn. Its approved comparison may rotate each cutout sector about its fixed disk center. Surface, center/radius, fill, sector area and frame stay fixed; path data and pixels within circular envelopes intentionally change. Empty gaps away from antialiased disk boundaries remain white. Do not treat nonexistent triangle pixels as a retained target, draw a triangle to fake the effect, or replace the fixed-surface rule. Radius/overall-size controls are separate parameter changes. The exact construction is defined in kanizsa.md and is approved with radius 32–96, default 64.
+- **Kanizsa context comparison:** no physical upright triangle target is drawn. Its approved comparison may rotate each cutout sector about its fixed disk center. Surface, center/radius, fill, sector area and frame stay fixed; path data and pixels within circular envelopes intentionally change. Protected central gaps within the implied upright region, away from antialiased disk boundaries, remain white. Optional inverted outline corners stay outside that region and the full disk envelopes; no upright triangle is drawn. Do not treat nonexistent triangle pixels as a retained target, draw a triangle to fake the effect, or replace the fixed-surface rule. Radius/overall-size controls are separate parameter changes. The exact construction is defined in kanizsa.md and is approved with radius 32–96, default 92, rotation 0–90° step 5, and optional inverted outline corners trimmed outside disks and the implied upright region.
 - Render the stimulus on a fixed, opaque surface. Page themes MUST NOT alter its colors, opacity, contrast, or blending.
 - No decorative gradients, shadows, filters, hover styling, selection effects, or transitions may affect target pixels or context geometry.
 - **Oranges overlay exception:** fixed base-asset shading is allowed. Only the separate net strands may use `mix-blend-mode: overlay` and the specified RGBA alpha, within an isolated image frame. A wrapped net is lit along with the skin beneath it; backdrop-dependent strand brightness is a visual approximation of a lit net. Gegenfurtner (2024) also notes net–fruit interreflections ([paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/)); this CSS technique is a project choice, not the paper's method or a physical simulation. Transparent cell interiors leave the underlying rendered skin unchanged. No blur, filters, transitions, or blending on the image/frame/Confetti stimulus. Keep the image source and attributes unchanged on net toggles; only explicit size/source controls may change their respective choices. An exposure A/B must edit a separate base-image asset, never apply runtime filters or switch files during reveal. The strict no-blending rule still applies to every Confetti layer.
@@ -129,8 +129,8 @@ The user MUST be able to observe the initial effect before reading the answer. P
 
 - [kanizsa.md](kanizsa.md) is approved as a sixth HTML document: Home plus five illusions. Commit the specification before feature code; do not push until owner viewing and authorization.
 - Add `kanizsa/index.html` and `main.tsx`, plus one metadata entry for `/OpticEye/kanizsa/` (dev `/kanizsa/`). Existing metadata-driven inputs/cards/nav should include it automatically; verify six wrapping nav links and exactly one current marker at 320px/200% zoom.
-- Reuse the shared shell/mounting/size select. Keep three cutout-disk paths and all feature state local, with no triangle layer, router, registry, shared experiment state, dependencies or workflow changes.
-- The comparison rotates openings 90° without moving circle envelopes; radius and viewing size are independent controls. Retain all existing demos/calibration. Extend meaningful tests and page/browser/build checks to six documents only during implementation; K01–K09 now pass; see docs/kanizsa-validation.md. K10 remains pending human viewing. The implementation is local and unpushed.
+- Reuse the shared shell/mounting/size select. Keep three cutout-disk paths and all feature state local, with an optional three-V inverted outline layer, but no drawn upright triangle, router, registry, shared experiment state, dependencies or workflow changes.
+- The rotation range turns openings 0–90° without moving circle centers; Align sets rotation to 0. Radius, outline visibility and viewing size are independent controls. The v2 canvas is 720×512 to fit the outlined bottom corner without moving the disks. Retain all existing demos/calibration. Extend meaningful tests and page/browser/build checks to six documents only during implementation. The radius-92/outline revision passes K01–K09; actual results are in docs/kanizsa-validation.md. K10 remains pending human viewing. The implementation is local and unpushed.
 
 ### Shared interaction requirements
 

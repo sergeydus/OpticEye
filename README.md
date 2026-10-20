@@ -56,7 +56,7 @@ Café Wall is implemented with row offset 0–100% (default 50), mortar width 1�
 
 Müller-Lyer is implemented and calibrated on desktop and mobile with fin angle 15–90° (default 35), fin arm length 24–96 drawing units (default 64), and image sizes 240/540/720px (default Medium/540). Hide fins removes four miter-joined polylines while preserving both shaft elements. [Müller-Lyer validation](docs/muller-lyer-validation.md) records passing engineering checks and both viewers seeing the lower line as longer before reveal and the two as equal afterward, at defaults and normal zoom.
 
-Kanizsa is implemented locally with three 60° cutout disks, a 90° rotation comparison, radius 32–96 drawing units (default 64), and image sizes 240/540/720px (default Medium/540). Only sector paths and a white surface are drawn; no triangle layer exists. Human calibration remains pending. See [Kanizsa validation](docs/kanizsa-validation.md) for actual engineering results.
+Kanizsa is implemented locally with three 60° cutout disks, a Cutout rotation range 0–90° (step 5), Align cutouts, radius 32–96 (default 92), and optional inverted outline corners on by default. The 720×512 drawing fits those corners without moving the disks. No upright triangle is drawn; protected central gaps remain white. Reset restores rotation 0, radius 92, outline on and Medium/540. Human calibration of this stronger revision remains pending. See [Kanizsa validation](docs/kanizsa-validation.md) for actual engineering results.
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 
