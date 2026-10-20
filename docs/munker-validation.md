@@ -1,6 +1,6 @@
 # Munker implementation validation
 
-Updated 20 October 2026. **Implemented; perceptual calibration pending.** The owner approved the spec and page composition before implementation. No Munker human-viewing observations have been recorded. Screenshots establish layout/construction, not perceived effect.
+Updated 20 October 2026. **Implemented; calibrated at desktop only.** M11 is complete for desktop viewing with two viewers; phone viewing is not yet observed. Screenshots remain engineering evidence, separate from these human reports.
 
 ## Engineering completion: M01–M10
 
@@ -27,10 +27,19 @@ At the original checkpoint, each environment additionally verified:
 
 **Actual 200% page zoom** was checked using a fresh Chrome profile's page-zoom preference, not CSS zoom or pinch scaling. A 1440px window yielded innerWidth 712, DPR 2, CSS root zoom 1. The same 9 size/width cases and interaction/isolation checks passed. Large fits at 648x432; default Medium stays 360x240. No overflow or inaccessible controls were observed.
 
-Screenshots were captured for visible/revealed Medium and full experiment layouts. Desktop DPR 1, phone DPR 1.25 and uncovered desktop views were visually inspected. The two plain revealed bars have the same green appearance in the rendering; no human calibration claim follows from this.
+Screenshots were captured for visible/revealed Medium and full experiment layouts. Wide viewport DPR 1, 320px viewport DPR 1.25 and uncovered wide views were visually inspected. The two plain revealed bars have the same green appearance in the rendering; no human calibration claim follows from this.
 
-## Calibration: M11 pending
+## Calibration: M11 complete for desktop only
 
-The saturated palette, 6-unit default stripes and Medium size are provisional product choices. Record at least two viewers at narrow/wide sizes with settings, browser, viewport, DPR and viewing conditions. Ask whether visible green portions appear different before reveal; distinguish this from the overall color mixture of thin stripes. Weak/absent results are valid observations. Tune only with documented spec changes that preserve target identity.
+On 20 October 2026, the user reports that two viewers (the user and one other person) see the intended Munker effect before reveal at default settings and normal page zoom. The correction specifies desktop viewing; the user's extra checks covered all image-size settings.
 
-Firefox/WebKit and forced-colors rendering have not been manually checked. Manual screen-reader testing is outside the agreed scope. Munker was committed as checkpoint `c9e9adc`; the page split is a separate local commit. Neither change has been pushed or deployed in this task.
+| Viewer | Device class | Settings covered | Observation |
+| --- | --- | --- | --- |
+| 1 — user | Desktop | Defaults plus Compact/Medium/Large | The intended difference between the bars is visible before reveal. |
+| 2 — other viewer, reported by user | Desktop | Defaults; additional image-size settings not specified | The intended difference between the bars is visible before reveal. |
+
+Defaults are stripe width 6 and Medium (360 CSS px maximum). No exact rendered image size or viewport was supplied. Browser/version, DPR, display dimensions and viewing distance are unknown for this report; the Chrome versions in the engineering section must not be assigned to the viewers. No specific perceived hues, measurements or isolated perceptual mechanism were reported.
+
+**Phone viewing is not yet observed for either viewer.** Compact/Medium/Large settings on desktop do not establish phone calibration. Thus M11 is complete only for desktop, and full desktop/phone calibration is still incomplete. Preserve target identity and record weak/absent observations if further viewing differs; this limited result does not guarantee the effect for everyone.
+
+Firefox/WebKit and forced-colors rendering have not been manually checked. Manual screen-reader testing is outside the agreed scope. Munker (`c9e9adc`) and the page split (`c707f4d`) were pushed and deployed in [run 39439023910](https://github.com/sergeydus/OpticEye/actions/runs/39439023910); live loads/refreshes and navigation passed at 320/1440 with no 404s. These engineering viewport checks are not human phone observations. The local server remains stopped.

@@ -1,6 +1,6 @@
 # Munker illusion specification
 
-Status: **implemented; perceptual calibration pending**, 20 October 2026. M01–M10 pass; M11 has no human observations yet. See [validation](../munker-validation.md). Version 1.1. Depends on [implementation.md](implementation.md). Stable feature ID: `munker`.
+Status: **implemented; calibrated at desktop only**, 20 October 2026. M01–M10 pass. M11 desktop portion is complete: two viewers report the effect before reveal at defaults and normal page zoom; viewer 1 also checked all image sizes on desktop. Phone viewing is not yet observed. See [validation](../munker-validation.md). Version 1.2. Depends on [implementation.md](implementation.md). Stable feature ID: `munker`.
 
 ## 1. Outcome and scope
 
@@ -14,7 +14,7 @@ Michael Bach's [Munker demonstration](https://michaelbach.de/ot/col-Munker/) des
 
 Attribution: “Inspired by Hans Munker's chromatic grids (1970). Explore Michael Bach's Munker demonstration.” Link the latter phrase to the page above. Use original geometry and paraphrased text; do not copy its images, application code or animation.
 
-All numeric choices below are provisional OpticEye design values, not measurements or a reproduction of Bach's default stimulus. They require human calibration. Proposed explanation: “The grid can change how identical colors look. Each bar is crossed by a different stripe color. Hide the grid to compare their shared green fill. This is an example of color assimilation; appearance depends on the pattern, display, size and viewer.” Do not claim a complete neural explanation or promise particular perceived hues.
+All numeric choices below are OpticEye design values, not measurements or a reproduction of Bach's default stimulus. Two-viewer calibration now covers desktop only; phone viewing remains unobserved. Explanation: “The grid can change how identical colors look. Each bar is crossed by a different stripe color. Hide the grid to compare their shared green fill. This is an example of color assimilation; appearance depends on the pattern, display, size and viewer.” Do not claim a complete neural explanation or promise particular perceived hues.
 
 ## 3. Page integration
 
@@ -83,10 +83,10 @@ SVG title: “Munker color illusion”. Visible description: “Two green bars c
 | M08 | Attribution and explanation distinguish assimilation from Munker–White lightness effects and identify the original project construction. No copied third-party assets/code or runtime requests. |
 | M09 | Lint, all existing/new meaningful tests and production build pass. Preserve Confetti/oranges invariants and cover shared components at actual call sites if extracted. |
 | M10 | Chromium at 320/1440 widths, DPR 1/2 plus fractional 1.25, covers default/reveal/width extremes/sizes/Reset and stable bounds. Check actual 200% page zoom, keyboard use, no horizontal overflow, loaded styles/assets, no 404s and base-aware page navigation. Record actual results and missing coverage. |
-| M11 | Calibration only: at least two viewers compare the default at narrow/wide sizes, with settings/display conditions and weak/absent observations recorded. Compare visible target portions, rather than treating blurred mixtures as proof. |
+| M11 | Calibration only: two viewers report the default effect on desktop at normal zoom; desktop portion complete. Viewer 1 also checked all image-size settings on desktop. Phone portion not yet observed; browser, viewport, DPR and distance are unknown. Report calibrated at desktop only. Continue distinguishing visible-target appearance from fine-pattern mixing. |
 
 M01–M10 define engineering completion. M11 is a separate human milestone and does not block finishing authorized engineering work. Create `docs/munker-validation.md` during implementation; do not invent passed checks or human observations in advance. If the starting palette/scale is weak, update the spec with the deliberate tuning and repeat affected checks.
 
 ## 8. Approval record
 
-The owner approved the original construction on 20 October 2026 and subsequently requested separate static pages, superseding the shared-page composition. Geometry, controls, reveal and calibration rules are unchanged. Checkpoint Munker as “Add Munker illusion”, then commit the verified page split separately as “Split illusions into separate pages”. Do not push in this task. Record actual checks in docs/munker-validation.md and keep human calibration pending until observations are available.
+The owner approved the original construction on 20 October 2026 and subsequently requested separate static pages, superseding the shared-page composition. Munker and the page split were committed separately, then pushed at the owner's direction. The latest two-viewer report completes desktop-only calibration; phone observations remain pending. This documentation update is authorized for commit and push as “Record two-viewer calibration”.

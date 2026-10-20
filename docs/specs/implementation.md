@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: implementation baseline for separate static illusion pages, version 1.16. Updated 20 October 2026.
+Status: implementation baseline for separate static illusion pages, version 1.17. Updated 20 October 2026.
 
 ## 1. Purpose and scope
 
@@ -133,6 +133,7 @@ Automated accessible-name/state assertions, keyboard checks, and linting cover t
 An implemented illusion may separately be marked **calibrated** after human viewing confirms that its intended effect is discernible under recorded conditions. Until then, report “implemented; perceptual calibration pending.” An agent MUST finish available engineering work and report the pending milestone without waiting indefinitely for human viewers or claiming that screenshots prove perception.
 
 - Before marking calibration complete, record observations from at least two human viewers of the default stimulus at both narrow and wide display sizes. Record differing or weak responses; do not require every viewer to perceive the effect.
+- When two viewers confirm only desktop or only phone viewing, report **implemented; calibrated at desktop only** or **implemented; calibrated at phone only** and mark only that portion of the feature criterion complete. Leave the other device class explicitly unobserved. Compact/Medium/Large image settings on a desktop are viewing-scale checks, not phone observations. Unknown browser, viewport, DPR and distance remain unknown; do not infer them from engineering checks or another viewing session.
 - Record browser, viewport, displayed stimulus size, device pixel ratio, parameter values, and viewing observations. If the effect is weak, tune documented geometry while preserving target identity and reveal invariants, then repeat affected checks.
 - SHOULD extend visual checks to 390 and 768 CSS pixel widths, Firefox, WebKit where available, and device pixel ratios 1 and 2. This is an additional coverage target, not a required Cartesian product of engines, widths, and densities. Record missing coverage.
 
