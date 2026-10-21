@@ -1,12 +1,12 @@
 # Ebbinghaus validation
 
-21 October 2026. **Implemented; perceptual calibration pending.** EB01–EB04 pass. The page is **listed:false/noindex**, reachable directly in local preview, with no current nav marker. The owner authorized a local commit only after Poggendorff deployment/live checks succeeded. The approved revised geometry is unchanged.
+21 October 2026. **Implemented; perceptual calibration pending.** EB01–EB04 pass. The owner now approves **listed:true**, removal of noindex and deployment. The active navigation marker follows the listed page. Calibration remains pending while the report’s device placeholders are clarified. Initial implementation followed successful Poggendorff deployment/live checks. The approved revised geometry is unchanged.
 
 ## Engineering
 
 - Lint/JSX accessibility checks, **131 tests across18 files**, and TypeScript/Vite build pass. Nine feature tests cover all **20** large-radius/gap settings, six/eight phases, exact separate target-edge gaps, finite/bounded coordinates, deterministic geometry and right-ring invariance. Minimum large-neighbor clearance is4 drawing units at R44/g20; small-neighbor clearance is15.2068757776 units. Group envelopes stay at least132 units apart horizontally.
 - Both target nodes retain centers(190,240)/(530,240), radius28 and the shared exact fill#F28C28 through repeated reveal, both controls and size changes. Only14 blue context circles disappear. Radius/gap affect only the six-disk left surround; the right radius10/gap8/count8 remain fixed. Hidden updates, disclosure, source links, normalization, independent instances, unique labels/references, Reset40/20/shown/Medium/closed and focus pass.
-- Nine HTML documents build, including `dist/ebbinghaus/index.html`. Home retains six listed cards; every header has seven base-aware links. Ebbinghaus/Kanizsa are unlisted/noindex, without current markers. Poggendorff remains listed/calibrated. No new dependency, source image, router, timers, animation or workflow changes.
+- Nine HTML documents build, including `dist/ebbinghaus/index.html`. At the initial unlisted checkpoint Home retained six cards/seven nav links. After the approved listing it has seven cards/eight nav links; only Kanizsa remains unlisted/noindex. Poggendorff remains listed/calibrated. No new dependency, source image, router, timers, animation or workflow changes.
 
 ## Chromium production preview
 
@@ -25,8 +25,12 @@ All **nine** production-preview URLs returned200 directly and after refresh at32
 
 Reports/screenshots are outside Git in the task visualization directory: `ebbinghaus-browser-check.json`, `pages-ebbinghaus.json`, `ebbinghaus-*.png`. Firefox/WebKit and forced-colors checks were not performed. Manual screen-reader testing remains outside scope.
 
+## Listing checkpoint
+
+Lint,131 tests/18 files and build pass after listing. Chrome155.0.8059.85 checked all nine preview direct URLs/refreshes at320/1440,DPR1: seven cards/eight base-aware links, Ebbinghaus active marker and no noindex, styles/images, unchanged-target reveal/Reset, no overflow/errors/404s. Narrow listing screenshot inspected; report `pages-ebbinghaus-listed.json` outside Git. Push/deployment is approved; outcome will be recorded after it finishes.
+
 ## Human viewing (EB05)
 
-**0 of2 viewers reported for this OpticEye drawing; desktop/mobile pending.** At defaults, compare the orange center circles before and after Hide surrounds. Record direction and weak/absent responses with supplied conditions only. Geometry tests and screenshots do not establish calibration. Owner viewing/listing approval is still required; Ebbinghaus is not pushed.
+**0 of2 viewers reported for this OpticEye drawing; desktop/mobile pending.** At defaults, compare the orange center circles before and after Hide surrounds. Record direction and weak/absent responses with supplied conditions only. Geometry tests and screenshots do not establish calibration. The owner separately approves listing/deployment. The new message contains unresolved viewer-device placeholders; clarification is pending, so no new device-scoped calibration pass is inferred.
 
 Poggendorff commit3e186f7 was pushed and [Pages run39582321188](https://github.com/sergeydus/OpticEye/actions/runs/39582321188) succeeded. Its live page and all existing routes passed320/1440 checks before Ebbinghaus implementation started. That deployment does not contain Ebbinghaus.

@@ -1,8 +1,8 @@
 # Ebbinghaus specification
 
-Status: **implemented; perceptual calibration pending**. Version 1.2, 21 October 2026. Third in implementation order. ID/folder: `ebbinghaus`; title/h1: “Ebbinghaus illusion”; HTML title: “Ebbinghaus illusion | OpticEye”. Description: “Equal center circles meet different surrounding circles. Hide the surrounds to compare their actual sizes.”
+Status: **implemented; perceptual calibration pending**. Version 1.3, 21 October 2026. Third in implementation order. ID/folder: `ebbinghaus`; title/h1: “Ebbinghaus illusion”; HTML title: “Ebbinghaus illusion | OpticEye”. Description: “Equal center circles meet different surrounding circles. Hide the surrounds to compare their actual sizes.”
 
-Use [implementation.md](implementation.md) for page setup, initial unlisted/noindex state, Reset, normalization, accessibility, tests and two-viewer calibration. This version uses fixed equal targets, not a size-matching task. No automatic ring rotation, target-size slider, score, dragging or context exchange.
+Use [implementation.md](implementation.md) for page setup, page listing policy (owner now approves Ebbinghaus listing), Reset, normalization, accessibility, tests and two-viewer calibration. This version uses fixed equal targets, not a size-matching task. No automatic ring rotation, target-size slider, score, dragging or context exchange.
 
 ## 1. Research and attribution
 
@@ -51,7 +51,7 @@ The smallest allowed gap between neighboring large context disks is only 4 drawi
 | EB01 | Exactly two equal-radius/equal-fill targets and fourteen context disks with sixfold/eightfold phases and separate exact edge gaps and finite coordinates. Right radius10/gap8/count8 stay fixed across all **20** left R/g settings, which satisfy target/context separation, neighbor clearance, group separation and viewport bounds. Verify defaults and normalized extremes, not snapshots alone. |
 | EB02 | R changes only left context radius/ring distance; g changes only the left ring distance. Neither slider changes the eight-disk right context. Target nodes/attributes never change during either slider or repeated context reveal. The revealed surface/frame and target positions are unchanged. |
 | EB03 | Hidden parameter updates, size, disclosure and Reset follow the shared contract and restore all documented defaults. No target resize/matching UI, artificial comparison outlines, animation or incorrect monotonic-strength copy. |
-| EB04 | Shared engineering checklist passes; include all image sizes, both slider extremes and fine-clearance DPR checks. Unlisted/noindex standalone entry and existing pages work. Record actual results in docs/ebbinghaus-validation.md. |
+| EB04 | Shared engineering checklist passes; include all image sizes, both slider extremes and fine-clearance DPR checks. Owner-approved listed entry (no noindex) and existing pages work. Record actual results in docs/ebbinghaus-validation.md. |
 | EB05 | Calibration only: two viewers on desktop/mobile compare apparent center sizes at defaults before/after Hide surrounds. Record direction and weak/absent responses as supplied, without assuming a universally larger side; shared listing approval remains separate. |
 
-EB01–EB04 pass; see [actual validation](../ebbinghaus-validation.md). EB05 remains pending and defines calibration. Revised as requested on 21 October 2026; the owner advanced to this feature after successful Poggendorff deployment/live checks. Preserve the approved geometry and keep the implementation unlisted/noindex, committed locally without pushing.
+EB01–EB04 pass; see [actual validation](../ebbinghaus-validation.md). EB05 remains pending and defines calibration. Revised as requested on 21 October 2026; the owner advanced to this feature after successful Poggendorff deployment/live checks. Preserve the approved geometry. The owner now approves listed:true, removal of noindex, committing and pushing, then Hering. Device placeholders in the viewing report must be clarified before assigning device-scoped calibration. Follow the new shared unlisted-deployment workflow for subsequent illusions.

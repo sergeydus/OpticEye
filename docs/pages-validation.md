@@ -2,7 +2,11 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current structure (21 October 2026): nine local documents, six listed Home cards and seven header links (Home plus six listed illusions). Kanizsa remains unlisted/noindex, calibration not pursued. Poggendorff is now calibrated on desktop and real phones and owner-approved for listing/deployment. Poggendorff deployment/live verification passed. Ebbinghaus is now implemented locally/unlisted with calibration pending, not pushed. Earlier checkpoints below are historical.
+Current structure (21 October 2026): nine documents, seven listed Home cards and eight header links. Kanizsa stays unlisted/noindex, calibration not pursued. Ebbinghaus listing/deployment is approved; its device-scoped calibration is awaiting clarification. Hering is approved next, to be deployed unlisted for real-phone viewing. Earlier checkpoints are historical.
+
+## Ebbinghaus listing checkpoint
+
+Lint,131 tests/18 files and build pass. Chrome155.0.8059.85 checked all nine preview direct URLs/refreshes at320/1440,DPR1: seven cards/eight base-aware links, Ebbinghaus active marker and no noindex, preserved targets on reveal/Reset, loaded styles/images and no overflow/errors/404s. Listed/brand navigation stayed under /OpticEye/. Publishing is approved; its result will be recorded after the Pages run.
 
 ## Ebbinghaus checkpoint: 21 October 2026
 

@@ -50,7 +50,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'ebbinghaus',
-    listed: false,
+    listed: true,
     name: 'Ebbinghaus',
     title: 'Ebbinghaus illusion',
     description: 'Equal center circles meet different surrounding circles. Hide the surrounds to compare their actual sizes.',
