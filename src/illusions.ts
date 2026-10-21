@@ -69,6 +69,13 @@ export const ILLUSIONS = [
     title: 'Ponzo illusion',
     description: 'Compare equal bars between converging rails, then hide the perspective context without changing either bar.',
   },
+  {
+    id: 'checker-shadow',
+    listed: false,
+    name: 'Checker-shadow',
+    title: 'Checker-shadow illusion',
+    description: 'Compare two equal-gray tiles in a shaded scene, then isolate the same tiles without changing their fills.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

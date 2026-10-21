@@ -70,3 +70,9 @@ Screenshots were captured for all six page/viewport cases. Home at 320/1440, Mun
 A temporary Vite dev process on port 5174 checked `/`, `/confetti/` and `/munker/`. All returned 200 with the correct page, metadata, styles and navigation based at `/`. The temporary process was stopped afterward; the existing production preview on 4173 remains available.
 
 The Pages workflow already deploys all of `dist/` and is unchanged. The Munker checkpoint and page split are committed locally as requested; no push or hosted deployment is performed in this task. Existing viewer observations and remaining calibration are recorded in the feature validation files.
+
+## Ponzo listing and checker-shadow addition — 22 October 2026
+
+Ponzo is owner-approved listed, with the calibrated railway scene first and unchanged drawing second. Checker-shadow adds the twelfth document unlisted/noindex; Home has nine cards and every header has ten links. Kanizsa stays unlisted. All12 production-preview documents passed direct loads/refreshes/navigation/assets/styles and current-marker/noindex checks at320/1440 CSSpx, with no overflow, browser errors or HTTP4xx/5xx. The checker-shadow pixel/size/DPR/zoom matrix is recorded in [its validation](checker-shadow-validation.md).
+
+All12 development documents also passed direct loads/refreshes/navigation at320/1440 under the root base `/` on a temporary port5173 server, with no errors. Production-preview base remains `/OpticEye/`.
