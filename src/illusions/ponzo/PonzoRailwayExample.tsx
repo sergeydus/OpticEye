@@ -23,13 +23,13 @@ export default function PonzoRailwayExample({ visible, viewingWidth, status, onT
     <section aria-labelledby={`${id}-heading`} className="mt-10 border-t border-slate-300 pt-8 sm:mt-14">
       <p className="font-mono text-xs tracking-widest text-teal-800 uppercase">03 / Another perspective</p>
       <h2 id={`${id}-heading`} className="mt-3 text-2xl font-semibold tracking-tight">Railway scene</h2>
-      <p id={`${id}-instructions`} className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">Which orange bar looks longer here? Compare them over the receding track, then hide the image.</p>
+      <p id={`${id}-instructions`} className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">Which yellow bar looks longer here? Compare them over the receding track, then hide the image.</p>
       <div className="mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,720px)_minmax(240px,1fr)] lg:gap-10">
         <figure data-railway-viewing-frame className="mx-auto w-full min-w-0" style={{ maxWidth: normalizeViewingWidth(viewingWidth) }}>
           <div className="overflow-hidden outline outline-slate-300">
             <svg viewBox={`0 0 ${RAILWAY_IMAGE.width} ${RAILWAY_IMAGE.height}`} width={RAILWAY_IMAGE.width} height={RAILWAY_IMAGE.height} className="block h-auto w-full" role="img" aria-labelledby={`${id}-title`} aria-describedby={`${id}-description ${id}-caption`}>
               <title id={`${id}-title`}>Ponzo railway scene</title>
-              <desc id={`${id}-description`}>{visible ? 'Two orange horizontal bars over an AI-generated image of a straight railway track. Compare their apparent lengths, then use Hide image.' : 'The same two equal-length orange bars with only the AI-generated railway image removed.'}</desc>
+              <desc id={`${id}-description`}>{visible ? 'Two yellow horizontal bars over an AI-generated image of a straight railway track. Compare their apparent lengths, then use Hide image.' : 'The same two equal-length yellow bars with only the AI-generated railway image removed.'}</desc>
               <rect data-layer="surface" x="0" y="0" width={RAILWAY_IMAGE.width} height={RAILWAY_IMAGE.height} fill={SURFACE_FILL} />
               {visible && <image data-layer="railway-image" href={RAILWAY_IMAGE.src} x="0" y="0" width={RAILWAY_IMAGE.width} height={RAILWAY_IMAGE.height} preserveAspectRatio="xMidYMid meet" aria-hidden="true" />}
               <g data-layer="targets" stroke={RAILWAY_TARGET_STROKE.color} strokeWidth={RAILWAY_TARGET_STROKE.width} strokeLinecap="butt" fill="none">

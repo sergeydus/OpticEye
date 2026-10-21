@@ -6,7 +6,7 @@
 - Input: `D:/projects/OpticEye/Gemini_Generated_Image_27z45n27z45n27z4.jpeg`.
 - Input bytes:910,029; SHA-256:`425d4af3c8e2ef7637fd3bf8dcbba9378648d2e17f8bcef8fb75330dcb79e160`.
 - Native dimensions:1264×848, RGB. The full frame is retained without cropping, resizing, upscaling, exposure adjustment or regeneration.
-- This is an AI-generated scene, not a camera photograph. The app draws both orange bars separately; they are absent from the asset.
+- This is an AI-generated scene, not a camera photograph. The app draws both target bars separately; they are absent from the asset.
 
 ## Terms previously supplied by the owner for Gemini
 

@@ -9,7 +9,7 @@ const scene = () => screen.getByRole('region', { name: 'Railway scene' })
 const drawing = () => screen.getByRole('img', { name: 'Ponzo illusion' })
 const svg = () => screen.getByRole('img', { name: 'Ponzo railway scene' })
 const caption = 'AI-generated image; the bars are drawn on top.'
-const proof = 'Both orange bars have the same length. Only the AI-generated image was removed.'
+const proof = 'Both yellow bars have the same length. Only the AI-generated image was removed.'
 
 describe('additional railway scene', () => {
   it('bundles the native full-frame WebP below the byte limit without private metadata', () => {
@@ -40,7 +40,8 @@ describe('additional railway scene', () => {
     const bars = [...svg().querySelectorAll('[data-layer="targets"] line')]
     expect(bars.map((bar) => ['x1', 'y1', 'x2', 'y2'].map((key) => bar.getAttribute(key)))).toEqual([['492', '430', '772', '430'], ['492', '720', '772', '720']])
     for (const bar of bars) expect(Number(bar.getAttribute('x2')) - Number(bar.getAttribute('x1'))).toBe(280)
-    expect(svg().querySelector('[data-layer="targets"]')).toHaveAttribute('stroke', '#D14D00')
+    expect(svg().querySelector('[data-layer="targets"]')).toHaveAttribute('stroke', '#FFD400')
+    expect(drawing().querySelector('[data-layer="targets"]')).toHaveAttribute('stroke', '#D14D00')
     expect(svg().querySelector('[data-layer="targets"]')).toHaveAttribute('stroke-width', '14')
     expect(image.nextElementSibling).toBe(svg().querySelector('[data-layer="targets"]'))
     expect(svg().querySelector('filter,mask,clipPath,animate,[transform],[opacity]')).toBeNull()
