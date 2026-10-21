@@ -62,7 +62,7 @@ describe('Ponzo experience', () => {
   it('repeatedly removes only context, preserving the same bar nodes, attributes, surface and viewBox', async () => {
     const user = userEvent.setup()
     render(<StrictMode><Ponzo /></StrictMode>)
-    const svg = screen.getByRole('img'), pair = targets(svg), original = attributes(svg)
+    const svg = screen.getByRole('img', { name: 'Ponzo illusion' }), pair = targets(svg), original = attributes(svg)
     const group = svg.querySelector('[data-layer="targets"]'), surface = svg.querySelector('[data-layer="surface"]')!
     const surfaceData = surface.outerHTML, toggle = screen.getByRole('button', { name: 'Hide rails' })
     for (let i = 0; i < 3; i++) {
@@ -88,7 +88,7 @@ describe('Ponzo experience', () => {
   it('changes only the rail/tie context at all seven gaps, and keeps hidden updates hidden', async () => {
     const user = userEvent.setup()
     render(<Ponzo />)
-    const svg = screen.getByRole('img'), original = attributes(svg), pair = targets(svg)
+    const svg = screen.getByRole('img', { name: 'Ponzo illusion' }), original = attributes(svg), pair = targets(svg)
     const slider = screen.getByRole('slider', { name: 'Rail convergence' })
     let previous = ''
     for (let q = 0; q <= 24; q += 4) {
@@ -110,14 +110,14 @@ describe('Ponzo experience', () => {
   it('keeps size and disclosure independent, links sources, and resets all defaults with focus retained', async () => {
     const user = userEvent.setup()
     const { container } = render(<Ponzo />)
-    const svg = screen.getByRole('img'), original = attributes(svg)
+    const svg = screen.getByRole('img', { name: 'Ponzo illusion' }), original = attributes(svg)
     const disclosure = screen.getByRole('button', { name: 'Why it happens' })
     await user.click(disclosure)
     expect(screen.getByRole('link', { name: 'Schiffman & Thompson (1978): depth and context' })).toHaveAttribute('href', 'https://pubmed.ncbi.nlm.nih.gov/628580/')
     expect(screen.getByRole('link', { name: 'Yildiz et al. (2019): perspective and texture cues' })).toHaveAttribute('href', 'https://pubmed.ncbi.nlm.nih.gov/31600294/')
     expect(screen.getByRole('link', { name: 'NTT Illusion Forum: Ponzo railway demonstration' })).toHaveAttribute('href', 'https://illusion-forum.ilab.ntt.co.jp/ponzo/index.html')
     for (const size of ['240', '720']) {
-      await user.selectOptions(screen.getByRole('combobox'), size)
+      await user.selectOptions(screen.getByRole('combobox', { name: 'Ponzo image size' }), size)
       expect(container.querySelector('[data-ponzo-viewing-frame]')).toHaveStyle({ maxWidth: `${size}px` })
       expect(attributes(svg)).toBe(original)
     }
@@ -128,7 +128,7 @@ describe('Ponzo experience', () => {
     await user.click(reset)
     expect(reset).toHaveFocus()
     expect(screen.getByRole('slider')).toHaveValue('8')
-    expect(screen.getByRole('combobox')).toHaveValue('540')
+    expect(screen.getByRole('combobox', { name: 'Ponzo image size' })).toHaveValue('540')
     expect(screen.getByRole('button', { name: 'Hide rails' })).toHaveAttribute('aria-pressed', 'false')
     expect(disclosure).toHaveAttribute('aria-expanded', 'false')
     expect(attributes(svg)).toBe(original)
@@ -142,7 +142,7 @@ describe('Ponzo experience', () => {
     const ids = [...document.querySelectorAll('[id]')].map((n) => n.id)
     expect(new Set(ids).size).toBe(ids.length)
     for (const article of [first, second]) {
-      const svg = within(article).getByRole('img'), slider = within(article).getByRole('slider')
+      const svg = within(article).getByRole('img', { name: 'Ponzo illusion' }), slider = within(article).getByRole('slider')
       for (const attr of ['aria-labelledby', 'aria-describedby']) expect(document.getElementById(svg.getAttribute(attr)!)).not.toBeNull()
       expect(slider).toHaveAccessibleName('Rail convergence')
       expect(document.getElementById(slider.getAttribute('aria-describedby')!)).not.toBeNull()

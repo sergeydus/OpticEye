@@ -1,10 +1,10 @@
 # Ponzo validation
 
-21 October 2026. **Drawing implemented and calibrated on desktop and real phones. PO01–PO04 pass for version1.5; PO05 complete for the drawing.** The corrected railway remains `listed:false`/`noindex`, directly reachable but absent from Home/navigation, with no current marker. Publication while unlisted is owner-authorized for real-phone viewing.
+21 October 2026. **Drawing implemented and calibrated on desktop and real phones. PO01–PO04 pass for version1.5; PO05 complete for the drawing; additional AI section implemented, PO06–PO09 pass locally and PO10 pending.** The corrected railway remains `listed:false`/`noindex`, directly reachable but absent from Home/navigation, with no current marker. Publication while unlisted is owner-authorized for real-phone viewing.
 
 ## Engineering
 
-- Lint/JSX accessibility checks, **156 tests across 22 files**, and TypeScript/Vite build pass. Nine Ponzo tests cover identical targets, all seven gap settings (0–24, step4), independent inverse projection of every sleeper corner to equal world length2.5/depth0.03/pitch0.15, tapered rail faces, finite polygon bounds, exact shared near/far rail-and-sleeper endpoints, minimum0.68CSSpx white clearance atCompact240, intentional upper-bar/rail intersections, lower-rail clearance, normalization, retained-target reveal, hidden updates, Reset/focus, controls/sources and instance isolation.
+- Lint/JSX accessibility checks, **161 tests across 23 files**, and TypeScript/Vite build pass. Nine Ponzo tests cover identical targets, all seven gap settings (0–24, step4), independent inverse projection of every sleeper corner to equal world length2.5/depth0.03/pitch0.15, tapered rail faces, finite polygon bounds, exact shared near/far rail-and-sleeper endpoints, minimum0.68CSSpx white clearance atCompact240, intentional upper-bar/rail intersections, lower-rail clearance, normalization, retained-target reveal, hidden updates, Reset/focus, controls/sources and instance isolation.
 - Targets are unchanged: (290,148)→(430,148) and (290,332)→(430,332), endpoint spans140, shared #D14D00/8 stroke, butt caps. Surface #FFFFFF; 26 solid #111111 sleeper polygons precede two rail polygons, with targets last. All28 context surfaces use one ground-plane projection; there are no fixed track strokes. Rail faces end at the outer edges of the first/last sleeper (Z0.985/4.765). The retained26 sleeper polygons are unchanged from version1.4. Hide rails removes those polygons only. Reset restores gap8/shown/Medium540/closed. No added guides, target adjustment, gradients, blending, filters, animation or third-party artwork.
 - Eleven static documents build, including dist/ponzo/index.html. Home retains eight listed cards; headers retain nine base-aware links. Hering remains listed/current, Kanizsa/Ponzo unlisted/noindex. No dependencies or workflow changes.
 - [Research](ponzo-research.md) records the inspected railway references and source-reading limits. Follow-up research included the full HTML methods/results of Yildiz et al. (2019); the earlier implementation relied on its abstract. The actual NTT railway image was also inspected for tapered faces and receding sleeper depth, and original48/96-sleeper prototypes compared. Source artwork is not copied. These project dimensions do not replicate a measured experiment.
@@ -25,6 +25,24 @@ Native **200% Chrome page zoom** used a fresh profile: outer width1440, inner712
 All eleven preview pages passed direct loads/refreshes/navigation at320/1440,DPR1, including listed/current versus unlisted/noindex behavior, styles/images and brand paths under /OpticEye/. **No horizontal overflow, console/page errors, failed requests or HTTP4xx/5xx.** A temporary development server passed /ponzo/ with root base /, 28 context polygons and correct navigation; it was stopped. Preview4173 remains available.
 
 Evidence outside Git in the task visualization directory: ponzo-browser-check.json, pages-ponzo-hering-preview.json and ponzo-*.png. Firefox/WebKit and forced-colors checks were not performed. Manual screen-reader testing is outside scope.
+
+## Additional AI railway scene (PO06–PO10)
+
+The owner supplied the Gemini JPEG and requested an additional section, so the drawing remains above it unchanged. The full1264×848 frame is encoded as metadata-free WebP,232,312bytes, quality88/method6, without cropping, resizing or exposure adjustment. The origin note records the exact supplied prompt, input/output hashes and owner-supplied Gemini terms/no-license assertion. Actual generation date/model and use of the separate negative-prompt field were not supplied and remain unknown.
+
+Five added tests check the WebP's real dimensions, metadata and byte cap; native image attributes/context order; exact equal280-unit targets at y430/720 (stroke14/#D14D00); repeated keyboard reveal retaining target/surface nodes and image attributes; independent size/visibility, local/global Reset and focus; explanation link and multi-instance IDs. These pass with the existing drawing/page tests.
+
+Chrome155.0.8059.85 checked the new section at320/1440 widths, each DPR1/1.25/2, all three sizes:18 shown/hidden/restored cases plus3 at native200% zoom, **21 cases total**. Target-center screenshot samples remain RGB209,77,0 before/after hiding; a track-context sample becomes white. Target nodes/group/surface and document-space frame bounds persist; image restores with identical href/attributes. Native200% metrics remain outer1440/inner712×552/DPR2/CSSzoom1. Keyboard Space/Enter, visible focus via Tab/Shift+Tab, caption persistence, explanation link, independent controls, local Reset and global Reset passed. The base-prefixed WebP request returns200. No overflow, browser/console errors, failed requests or HTTP4xx/5xx.
+
+| Viewport | Compact | Medium | Large |
+| --- | --- | --- | --- |
+| 320 | 240×161.00 | 288×193.20 | 288×193.20 |
+| 1440 | 240×161.00 | 540×362.27 | 720×483.03 |
+| Native200% | 240×161.01 | 540×362.27 | 648×434.73 |
+
+The320/DPR1 and1440/DPR1 shown scenes,1440 reveal and native200% shown screenshot were visually inspected. Both bars sit over the track, the whole source frame is retained, and hiding leaves the same bars on white. This establishes construction, not perceptual strength. The existing drawing matrix also passed63 cases after the shared Reset addition; all eleven preview pages passed direct loads/refreshes/navigation/assets at320/1440. Evidence outside Git: ponzo-railway-preview.json, ponzo-railway-*.png, ponzo-browser-check.json and pages-ponzo-hering-preview.json. Firefox/WebKit were not tested; manual screen-reader testing remains outside scope.
+
+**PO10 pending:** no human viewing result for this additional image section has been reported. Drawing calibration below does not transfer. New-section deployment/live checks are pending.
 
 ## Human viewing (PO05)
 

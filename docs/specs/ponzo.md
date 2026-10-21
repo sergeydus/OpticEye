@@ -1,6 +1,6 @@
 # Ponzo specification
 
-Status: **drawing implemented and calibrated on desktop and real phones; additional AI railway section specified; image received, implementation pending; unlisted by owner decision**. Version 1.8, 21 October 2026. ID/folder: `ponzo`; title/h1: “Ponzo illusion”; HTML title: “Ponzo illusion | OpticEye”. Description: “Compare equal bars between converging rails, then hide the perspective context without changing either bar.”
+Status: **drawing implemented and calibrated on desktop and real phones; additional AI railway section implemented, its calibration pending; unlisted by owner decision**. Version 1.8, 21 October 2026. ID/folder: `ponzo`; title/h1: “Ponzo illusion”; HTML title: “Ponzo illusion | OpticEye”. Description: “Compare equal bars between converging rails, then hide the perspective context without changing either bar.”
 
 Inherit page setup, unlisted/noindex, Reset, labels/keyboard access, normalization, testing and two-viewer calibration from [implementation.md](implementation.md). Sections2–5 define the implemented original drawing. Section6 specifies an additional railway-image section using the supplied Gemini image. The drawing stays unchanged. No matching task, corridor mode or animation.
 
@@ -81,3 +81,5 @@ The owner supplied `Gemini_Generated_Image_27z45n27z45n27z4.jpeg` and requested 
 | PO08 | Identical280-unit image targets; Hide image removes only raster context. Retain target nodes/attributes, surface/viewBox and displayed bounds; repeated show uses the same image src/attributes. No filters/blending/target changes. |
 | PO09 | Lint/tests/build and Chromium matrix pass for both examples, with all-page/direct-navigation/assets checks and actual results recorded. Asset tests check dimensions/metadata/bytes; interaction tests check isolation and both resets. |
 | PO10 | New section's owner/two-viewer viewing is recorded separately, including weak responses. PO05 drawing calibration remains complete. Listing still requires explicit owner approval. |
+
+PO06–PO09 pass engineering checks for the supplied image; see docs/ponzo-validation.md. PO10 remains pending. Origin fields not supplied by the owner are explicitly marked unknown.

@@ -2,6 +2,8 @@ import { useId, useState } from 'react'
 import ViewingSizeControl from '../../components/ViewingSizeControl'
 import { DEFAULT_VIEWING_WIDTH, normalizeTopGap, normalizeViewingWidth, PONZO, TOP_GAP, VIEWING_SIZES } from './ponzoModel'
 import PonzoStimulus from './PonzoStimulus'
+import PonzoRailwayExample from './PonzoRailwayExample'
+import { RAILWAY_PROOF } from './ponzoRailwayModel'
 
 const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700'
 
@@ -12,6 +14,9 @@ export default function Ponzo() {
   const [viewingWidth, setViewingWidth] = useState(DEFAULT_VIEWING_WIDTH)
   const [explanationOpen, setExplanationOpen] = useState(false)
   const [status, setStatus] = useState('')
+  const [railwayVisible, setRailwayVisible] = useState(true)
+  const [railwayWidth, setRailwayWidth] = useState(DEFAULT_VIEWING_WIDTH)
+  const [railwayStatus, setRailwayStatus] = useState('')
 
   function toggleRails() {
     setRailsVisible(!railsVisible)
@@ -23,6 +28,9 @@ export default function Ponzo() {
     setViewingWidth(DEFAULT_VIEWING_WIDTH)
     setExplanationOpen(false)
     setStatus('Ponzo experiment reset.')
+    setRailwayVisible(true)
+    setRailwayWidth(DEFAULT_VIEWING_WIDTH)
+    setRailwayStatus('')
   }
 
   return (
@@ -75,6 +83,13 @@ export default function Ponzo() {
           </ul>
         </div>
       </section>
+      <PonzoRailwayExample
+        visible={railwayVisible} viewingWidth={railwayWidth} status={railwayStatus}
+        onToggle={() => { setRailwayVisible(!railwayVisible); setRailwayStatus(railwayVisible ? RAILWAY_PROOF : 'AI-generated railway image shown.') }}
+        onViewingWidthChange={(width) => setRailwayWidth(normalizeViewingWidth(width))}
+        onReset={() => { setRailwayVisible(true); setRailwayWidth(DEFAULT_VIEWING_WIDTH); setRailwayStatus('Railway scene reset.') }}
+        explanationTarget={`${id}-explanation`} onShowExplanation={() => setExplanationOpen(true)}
+      />
     </article>
   )
 }

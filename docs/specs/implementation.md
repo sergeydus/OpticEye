@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: Ebbinghaus implemented/calibrated on desktop and real phones, listed/deployed; Hering implemented/calibrated on desktop and real phones, listed/deployed; Ponzo drawing implemented/calibrated on desktop and real phones, unlisted/noindex by owner decision; additional AI image section specified; version 1.49, 21 October 2026. Ebbinghaus deployment/live checks passed; Hering passed engineering, Pages deployment and live checks while unlisted/noindex for real-phone viewing. The owner now authorizes pushing new implemented illusions while unlisted; discovery still requires separate owner approval.
+Status: Ebbinghaus implemented/calibrated on desktop and real phones, listed/deployed; Hering implemented/calibrated on desktop and real phones, listed/deployed; Ponzo drawing implemented/calibrated on desktop and real phones, unlisted/noindex by owner decision; additional AI image section implemented, its calibration pending; version 1.49, 21 October 2026. Ebbinghaus deployment/live checks passed; Hering passed engineering, Pages deployment and live checks while unlisted/noindex for real-phone viewing. The owner now authorizes pushing new implemented illusions while unlisted; discovery still requires separate owner approval.
 
 ## 1. Purpose and scope
 

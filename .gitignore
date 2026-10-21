@@ -23,6 +23,8 @@ logs/
 .idea/
 .DS_Store
 Thumbs.db
+# Local input; the optimized copy and provenance are bundled under src/assets/.
+/Gemini_Generated_Image_27z45n27z45n27z4.jpeg
 *.suo
 *.ntvs*
 *.njsproj
