@@ -1,6 +1,6 @@
 # Ponzo validation
 
-21 October 2026. **Drawing implemented and calibrated on desktop and real phones. PO01–PO04 pass for version1.5; PO05 complete for the drawing; additional AI section implemented, PO06–PO09 pass locally and PO10 pending.** The corrected railway remains `listed:false`/`noindex`, directly reachable but absent from Home/navigation, with no current marker. Publication while unlisted is owner-authorized for real-phone viewing.
+21 October 2026. **Drawing implemented and calibrated on desktop and real phones. PO01–PO04 pass for version1.5; PO05 complete for the drawing; additional AI section implemented, PO06–PO09 pass locally and hosted; PO10 pending.** The corrected railway remains `listed:false`/`noindex`, directly reachable but absent from Home/navigation, with no current marker. Publication while unlisted is owner-authorized for real-phone viewing.
 
 ## Engineering
 
@@ -42,7 +42,7 @@ Chrome155.0.8059.85 checked the new section at320/1440 widths, each DPR1/1.25/2,
 
 The320/DPR1 and1440/DPR1 shown scenes,1440 reveal and native200% shown screenshot were visually inspected. Both bars sit over the track, the whole source frame is retained, and hiding leaves the same bars on white. This establishes construction, not perceptual strength. The existing drawing matrix also passed63 cases after the shared Reset addition; all eleven preview pages passed direct loads/refreshes/navigation/assets at320/1440. Evidence outside Git: ponzo-railway-preview.json, ponzo-railway-*.png, ponzo-browser-check.json and pages-ponzo-hering-preview.json. Firefox/WebKit were not tested; manual screen-reader testing remains outside scope.
 
-**PO10 pending:** no human viewing result for this additional image section has been reported. Drawing calibration below does not transfer. New-section deployment/live checks are pending.
+**PO10 pending:** no human viewing result for this additional image section has been reported. Drawing calibration below does not transfer. The new section deployed from f4f38ac in [Pages run39644778694](https://github.com/sergeydus/OpticEye/actions/runs/39644778694), watched with gh run watch --exit-status. The same18 railway cases passed on the live site at320/1440 andDPR1/1.25/2, including target pixels, context-only reveal, both Reset paths, keyboard focus, persistent caption and a200 asset response under /OpticEye/assets/. All eleven live pages passed direct loads/refreshes/navigation/assets at320/1440, with no overflow, browser/console errors, failed requests or HTTP4xx/5xx. The live320/DPR1 scene screenshot was inspected. Evidence: ponzo-railway-live.json, ponzo-railway-live-*.png and pages-ponzo-hering-live.json outside Git. These checks do not establish the new section's perceptual calibration.
 
 ## Human viewing (PO05)
 
