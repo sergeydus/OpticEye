@@ -27,7 +27,7 @@ Reports/screenshots are outside Git in the task visualization directory: `ebbing
 
 ## Listing checkpoint
 
-Lint,131 tests/18 files and build pass after listing. Chrome155.0.8059.85 checked all nine preview direct URLs/refreshes at320/1440,DPR1: seven cards/eight base-aware links, Ebbinghaus active marker and no noindex, styles/images, unchanged-target reveal/Reset, no overflow/errors/404s. Narrow listing screenshot inspected; report `pages-ebbinghaus-listed.json` outside Git. Push/deployment is approved; outcome will be recorded after it finishes.
+Lint,131 tests/18 files and build pass after listing. Chrome155.0.8059.85 checked all nine preview direct URLs/refreshes at320/1440,DPR1: seven cards/eight base-aware links, Ebbinghaus active marker and no noindex, styles/images, unchanged-target reveal/Reset, no overflow/errors/404s. Narrow listing screenshot inspected; report `pages-ebbinghaus-listed.json` outside Git. Listing commitb28f267 was pushed; [Pages run39586186161](https://github.com/sergeydus/OpticEye/actions/runs/39586186161) succeeded. Chrome155 checked all nine live direct URLs/refreshes at320/1440,DPR1: seven cards/eight nav links, Ebbinghaus active/no noindex, retained-target reveal/Reset, styles/images, no overflow/errors/404s. Report `pages-ebbinghaus-live.json` is outside Git.
 
 ## Human viewing (EB05)
 

@@ -2,11 +2,15 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current structure (21 October 2026): nine documents, seven listed Home cards and eight header links. Kanizsa stays unlisted/noindex, calibration not pursued. Ebbinghaus listing/deployment is approved; its device-scoped calibration is awaiting clarification. Hering is approved next, to be deployed unlisted for real-phone viewing. Earlier checkpoints are historical.
+Current structure (21 October 2026): ten documents, seven listed Home cards and eight header links. Kanizsa stays unlisted/noindex, calibration not pursued. Ebbinghaus listing/deployment is approved; its device-scoped calibration is awaiting clarification. Hering is implemented/unlisted/noindex with calibration pending and authorized deployment for real-phone viewing. Earlier checkpoints are historical.
+
+## Hering engineering checkpoint
+
+Lint,143 tests/20 files and ten-page build pass. Chrome155.0.8059.85 checked all ten preview direct URLs/refreshes at320/1440,DPR1: seven Home cards/eight base-aware links, listed active markers, Hering/Kanizsa noindex and no marker, styles/images, no overflow/errors/404s. Hering passed all four ray counts/all three sizes at DPR1/1.25/2 and actual200% page zoom (84 executions), unchanged-target reveal/Reset, keyboard controls and root-base development; see [validation](hering-validation.md). It remains unlisted, authorized for push/live verification. The owner’s new workflow deploys validated unlisted pages for real-phone viewing before listing approval.
 
 ## Ebbinghaus listing checkpoint
 
-Lint,131 tests/18 files and build pass. Chrome155.0.8059.85 checked all nine preview direct URLs/refreshes at320/1440,DPR1: seven cards/eight base-aware links, Ebbinghaus active marker and no noindex, preserved targets on reveal/Reset, loaded styles/images and no overflow/errors/404s. Listed/brand navigation stayed under /OpticEye/. Publishing is approved; its result will be recorded after the Pages run.
+Lint,131 tests/18 files and build pass. Chrome155.0.8059.85 checked all nine preview direct URLs/refreshes at320/1440,DPR1: seven cards/eight base-aware links, Ebbinghaus active marker and no noindex, preserved targets on reveal/Reset, loaded styles/images and no overflow/errors/404s. Listed/brand navigation stayed under /OpticEye/. Listing commitb28f267 was pushed; [Pages run39586186161](https://github.com/sergeydus/OpticEye/actions/runs/39586186161) succeeded. All nine live direct URLs/refreshes and listed/brand navigation passed320/1440,DPR1 checks, including Ebbinghaus reveal/Reset, with no errors/404s.
 
 ## Ebbinghaus checkpoint: 21 October 2026
 

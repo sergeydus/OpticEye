@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all nine HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/` and `/ebbinghaus/`.
+`build` checks TypeScript and produces all ten HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/` and `/hering/`.
 
 ## GitHub Pages
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all nine addresses, including a refresh and navigation between them:
+Check all ten addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -44,10 +44,11 @@ Check all nine addresses, including a refresh and navigation between them:
 - [Scintillating grid](http://localhost:4173/OpticEye/scintillating-grid/)
 - [Poggendorff](http://localhost:4173/OpticEye/poggendorff/)
 - [Ebbinghaus](http://localhost:4173/OpticEye/ebbinghaus/)
+- [Hering (unlisted, direct URL only)](http://localhost:4173/OpticEye/hering/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the seven listed illusions and marks the current listed page. Unlisted Kanizsa has no current marker and includes a static noindex robots directive. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes nine documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus listing/deployment is owner-approved; viewing device details are being clarified.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the seven listed illusions and marks the current listed page. Unlisted Kanizsa and Hering have no current marker and include static noindex robots directives. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes ten documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus listing/deployment is owner-approved; viewing device details are being clarified.
 
-In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner handles this setting, repository visibility, and pushing. The workflow does not automatically enable Pages.
+In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner controls this setting and repository visibility; authorized pushes trigger the deployment workflow. The workflow does not automatically enable Pages.
 
 `.github/workflows/deploy.yml` runs on pushes to `main` or manually from Actions. It installs Node from `.nvmrc`, runs `npm ci`, lint, tests, and build, uploads `dist/`, then deploys through the official Pages actions. A failed validation/build prevents deployment. The deployment environment is `github-pages`.
 
@@ -66,6 +67,8 @@ Scintillating grid uses a static 9×9 arrangement of white disks over gray lines
 Poggendorff draws complete parallel diagonals beneath eight opaque yellow strips. Line angle45–80° (default70) changes orientation and frame clipping; strip width0–64 (default40; zero paints no yellow) affects only context. Hide strips uncovers the same lines, and Reset restores defaults/Medium540. The owner requested this repeated arrangement after finding the initial single-line version weak. Both viewers confirmed misalignment with strips and straightness without on desktop and real phones; it is calibrated and owner-approved for listing/deployment; see [its spec](docs/specs/poggendorff.md) and [validation](docs/poggendorff-validation.md).
 
 Ebbinghaus uses two identical orange circles (radius28) with six large blue neighbors on the left and eight small neighbors on the right. Large surround radius32–44 (default40) and gap20–36 (default20) affect only the left context; the right radius10/gap8 remain fixed. Hide surrounds preserves both targets. Reset restores defaults and Medium540. Its listing/deployment is owner-approved; calibration device confirmation is pending; see [its specification](docs/specs/ebbinghaus.md) and [validation](docs/ebbinghaus-validation.md). Its direct page is published through the normal Pages workflow.
+
+Hering draws two fixed straight red lines over a dark radial fan. Ray count24–60 (step12, default36) changes only the background; Hide rays removes it while keeping the same target nodes and geometry. Reset restores36/shown/Medium540/closed. It remains unlisted/noindex for viewing through its direct deployed URL before owner listing approval; see [its specification](docs/specs/hering.md) and [validation](docs/hering-validation.md). Perceptual calibration is pending.
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 

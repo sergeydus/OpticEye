@@ -55,6 +55,13 @@ export const ILLUSIONS = [
     title: 'Ebbinghaus illusion',
     description: 'Equal center circles meet different surrounding circles. Hide the surrounds to compare their actual sizes.',
   },
+  {
+    id: 'hering',
+    listed: false,
+    name: 'Hering',
+    title: 'Hering illusion',
+    description: 'Straight parallel lines can appear bowed across a radial background. Hide the rays to compare their actual geometry.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.
