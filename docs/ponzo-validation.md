@@ -34,4 +34,6 @@ Evidence outside Git in the task visualization directory: ponzo-browser-check.js
 
 The initial unlisted Ponzo implementation a7e0fd4 deployed successfully in [Pages run39593496991](https://github.com/sergeydus/OpticEye/actions/runs/39593496991), with eleven-page live checks at320/1440. Its gap88 default, six gray ties and upper bar inside the rails are superseded by this correction. Hering listing/calibration and its successful deployment remain unchanged.
 
-Corrected-version deployment/live validation is pending. Direct viewing URL: https://sergeydus.github.io/OpticEye/ponzo/.
+Correction cf6c6fe was pushed unlisted/noindex. The push event had not produced a run when checked, so the existing workflow was manually dispatched. [Pages run39623546305](https://github.com/sergeydus/OpticEye/actions/runs/39623546305) succeeded; watched with gh run watch --exit-status.
+
+Chrome155 checked all eleven live pages at320/1440,DPR1: direct loads/refreshes, eight Home cards/nine navigation links, current/noindex behavior, styles/images and navigation/brand paths. Ponzo retained both target groups on Hide rails, updated hidden gap24 context correctly and restored Reset8. No overflow, console/page errors, failed requests or HTTP4xx/5xx. The320px live default screenshot was visually inspected. Evidence outside Git: pages-ponzo-hering-live.json and ponzo-live-*.png. These engineering checks do not establish perceptual calibration. Direct viewing URL: https://sergeydus.github.io/OpticEye/ponzo/.
