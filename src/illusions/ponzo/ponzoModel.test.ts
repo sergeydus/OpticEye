@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { createPonzoContext, normalizeTopGap, normalizeViewingWidth, TARGETS } from './ponzoModel'
 
 describe('Ponzo geometry', () => {
-  it('keeps equal fixed bar spans and the documented default rail opening', () => {
+  it('keeps equal fixed bar spans and the documented default rail faces', () => {
     expect(TARGETS).toEqual([
       { id: 'upper', x1: 290, y1: 148, x2: 430, y2: 148 },
       { id: 'lower', x1: 290, y1: 332, x2: 430, y2: 332 },
@@ -12,66 +12,110 @@ describe('Ponzo geometry', () => {
       expect(Math.hypot(bar.x2 - bar.x1, bar.y2 - bar.y1)).toBe(140)
     }
     expect(TARGETS[1].y1 - TARGETS[0].y1).toBe(184)
-    expect(createPonzoContext(8).rails).toEqual([
-      { id: 'left', x1: 356, y1: 64, x2: 120, y2: 448 },
-      { id: 'right', x1: 364, y1: 64, x2: 600, y2: 448 },
-    ])
+    const { rails } = createPonzoContext(8)
+    expect(rails.map((rail) => rail.id)).toEqual(['left', 'right'])
+    const expected = [
+      [[355.92, 64], [356.08, 64], [124.8, 448], [115.2, 448]],
+      [[363.92, 64], [364.08, 64], [604.8, 448], [595.2, 448]],
+    ]
+    rails.forEach((rail, i) => rail.points.forEach((point, j) => {
+      expect(point.x).toBeCloseTo(expected[i][j][0], 10)
+      expect(point.y).toBe(expected[i][j][1])
+    }))
   })
 
-  it('projects twelve sleepers beyond both rails, with a dense far section and intentional upper-bar crossings at every gap', () => {
+  it('recovers equal ground-plane track dimensions and pitch from all polygon corners at every gap', () => {
     for (let q = 0; q <= 24; q += 4) {
       const context = createPonzoContext(q)
       expect(context).toEqual(createPonzoContext(q))
       expect(context.rails).toHaveLength(2)
-      expect(context.ties).toHaveLength(12)
-      expect(context.ties[0].y1).toBeCloseTo(432, 10)
-      expect(context.ties[11].y1).toBeCloseTo(96, 10)
-      expect(new Set([...context.rails, ...context.ties].map((line) => line.id)).size).toBe(14)
-      const [left, right] = context.rails
-      expect(right.x1 - left.x1).toBe(q)
-      expect([left.x2, right.x2, left.y2, right.y2]).toEqual([120, 600, 448, 448])
-      const slope = (right.x2 - right.x1) / (right.y2 - right.y1)
-      const horizon = right.y1 - (right.x1 - 360) / slope
-      const depths: number[] = []
-      const spacings: number[] = []
+      expect(context.ties).toHaveLength(96)
+      expect(new Set([...context.rails, ...context.ties].map((part) => part.id)).size).toBe(98)
+      // Independent inverse derived from the specified rail centerline endpoints,
+      // rather than calling the projection under test or importing its dimensions.
+      const slope = (240 - q / 2) / 384
+      const horizon = 64 - (q / 2) / slope
+      const depthScale = 440 - horizon
+      const horizontalScale = slope * depthScale
+      const invert = ({ x, y }: { x: number; y: number }) => {
+        const z = depthScale / (y - horizon)
+        return { x: (x - 360) * z / horizontalScale, z }
+      }
+      const centerYs: number[] = []
+      const projectedLengths: number[] = []
+      const projectedDepths: number[] = []
+      const recoveredDepths: number[] = []
       context.ties.forEach((tie, i) => {
-        expect(tie.y1).toBe(tie.y2)
-        expect(tie.x1 + tie.x2).toBeCloseTo(720, 10)
-        for (const [rail, x] of [[left, tie.x1], [right, tie.x2]] as const) {
-          const ratio = (tie.y1 - rail.y1) / (rail.y2 - rail.y1)
-          const railX = rail.x1 + ratio * (rail.x2 - rail.x1)
-          expect(x).toBeCloseTo(360 + 1.25 * (railX - 360), 10)
-          expect(Math.abs(x - 360)).toBeGreaterThan(Math.abs(railX - 360))
-        }
-        depths.push(1 / (tie.y1 - horizon))
-        if (i > 0) spacings.push(context.ties[i - 1].y1 - tie.y1)
+        expect(tie.id).toBe(`tie-${i}`)
+        expect(tie.points).toHaveLength(4)
+        const ground = tie.points.map(invert)
+        const expectedWorldX = [-1.25, 1.25, 1.25, -1.25]
+        expectedWorldX.forEach((x, j) => expect(ground[j].x).toBeCloseTo(x, 10))
+        expect(ground[1].x - ground[0].x).toBeCloseTo(2.5, 10)
+        expect(ground[2].x - ground[3].x).toBeCloseTo(2.5, 10)
+        expect(ground[0].z).toBeCloseTo(ground[1].z, 10)
+        expect(ground[2].z).toBeCloseTo(ground[3].z, 10)
+        expect(ground[3].z - ground[0].z).toBeCloseTo(0.03, 10)
+        const centerDepth = (ground[0].z + ground[3].z) / 2
+        expect(centerDepth).toBeCloseTo(1 + 0.15 * i, 10)
+        recoveredDepths.push(centerDepth)
+        centerYs.push(horizon + depthScale / centerDepth)
+        const [frontLeft, frontRight, backRight, backLeft] = tie.points
+        expect(frontLeft.y).toBe(frontRight.y)
+        expect(backLeft.y).toBe(backRight.y)
+        expect(frontLeft.x + frontRight.x).toBeCloseTo(720, 10)
+        expect(backLeft.x + backRight.x).toBeCloseTo(720, 10)
+        expect(frontRight.x - frontLeft.x).toBeGreaterThan(backRight.x - backLeft.x)
+        projectedLengths.push(frontRight.x - frontLeft.x)
+        projectedDepths.push(frontLeft.y - backLeft.y)
       })
-      for (let i = 1; i < spacings.length; i++) {
-        expect(spacings[i]).toBeGreaterThan(0)
-        expect(spacings[i]).toBeLessThan(spacings[i - 1])
-        expect(depths[i + 1] - depths[i]).toBeCloseTo(depths[1] - depths[0], 12)
+      expect(centerYs[0]).toBeCloseTo(440, 10)
+      expect(centerYs[0] - centerYs[1]).toBeGreaterThan(49)
+      expect(centerYs[0] - centerYs[1]).toBeLessThan(52)
+      expect(centerYs.filter((y) => y > TARGETS[1].y1)).toHaveLength(3)
+      for (let i = 1; i < context.ties.length; i++) {
+        expect(recoveredDepths[i] - recoveredDepths[i - 1]).toBeCloseTo(0.15, 10)
+        expect(projectedLengths[i]).toBeLessThan(projectedLengths[i - 1])
+        expect(projectedDepths[i]).toBeGreaterThan(0)
+        expect(projectedDepths[i]).toBeLessThan(projectedDepths[i - 1])
+        expect(centerYs[i]).toBeLessThan(centerYs[i - 1])
+        if (i > 1) expect(centerYs[i - 1] - centerYs[i]).toBeLessThan(centerYs[i - 2] - centerYs[i - 1])
       }
-      expect(context.ties.filter((tie) => tie.y1 < TARGETS[0].y1).length).toBeGreaterThanOrEqual(7)
-      for (const rail of context.rails) {
-        const dx = rail.x2 - rail.x1, dy = rail.y2 - rail.y1
-        const upper = TARGETS[0], lower = TARGETS[1]
-        const upperCrossing = rail.x1 + dx * (upper.y1 - rail.y1) / dy
-        // The entire rail half-stroke fits beneath the upper bar's endpoint span.
-        const projectedHalfStroke = 3 * Math.sqrt(1 + (dx / dy) ** 2)
-        expect(upperCrossing - projectedHalfStroke).toBeGreaterThan(upper.x1)
-        expect(upperCrossing + projectedHalfStroke).toBeLessThan(upper.x2)
-        for (const x of [lower.x1, lower.x2]) for (const y of [lower.y1 - 4, lower.y1 + 4]) {
-          expect(Math.abs(dy * (x - rail.x1) - dx * (y - rail.y1)) / Math.hypot(dx, dy)).toBeGreaterThan(3)
-        }
+      if (q === 8) {
+        expect(centerYs[1]).toBeCloseTo(390.1076, 4)
+        expect(centerYs[95]).toBeCloseTo(82.574, 3)
+        expect(projectedDepths[0]).toBeCloseTo(11.4778, 4)
       }
-      for (const [lines, halfStroke] of [[context.rails, 3], [context.ties, 1.5], [TARGETS, 4]] as const) {
-        for (const line of lines) {
-          expect([line.x1, line.y1, line.x2, line.y2].every(Number.isFinite)).toBe(true)
-          expect(Math.min(line.x1, line.x2) - halfStroke).toBeGreaterThan(0)
-          expect(Math.max(line.x1, line.x2) + halfStroke).toBeLessThan(720)
-          expect(Math.min(line.y1, line.y2) - halfStroke).toBeGreaterThan(0)
-          expect(Math.max(line.y1, line.y2) + halfStroke).toBeLessThan(480)
+      context.rails.forEach((rail, i) => {
+        expect(rail.points).toHaveLength(4)
+        const expectedX = i === 0 ? [-1.02, -0.98, -0.98, -1.02] : [0.98, 1.02, 1.02, 0.98]
+        rail.points.forEach((point, j) => {
+          expect(point.y).toBe(j < 2 ? 64 : 448)
+          if (point.y === horizon) expect(point.x).toBe(360)
+          else expect(invert(point).x).toBeCloseTo(expectedX[j], 10)
+        })
+        const [topLeft, topRight, bottomRight, bottomLeft] = rail.points
+        expect(bottomRight.x - bottomLeft.x).toBeGreaterThan(topRight.x - topLeft.x)
+        // Every face edge converges to the same horizon point. At the upper
+        // target both face edges must fit beneath its full opaque orange span.
+        const faceX = (worldX: number, y: number) => 360 + worldX * slope * (y - horizon)
+        for (const y of [144, 152]) for (const x of expectedX.slice(0, 2)) {
+          expect(faceX(x, y)).toBeGreaterThan(TARGETS[0].x1)
+          expect(faceX(x, y)).toBeLessThan(TARGETS[0].x2)
         }
+        for (const y of [328, 336]) {
+          if (i === 0) expect(faceX(-0.98, y)).toBeLessThan(TARGETS[1].x1)
+          else expect(faceX(0.98, y)).toBeGreaterThan(TARGETS[1].x2)
+        }
+      })
+      const topCenters = context.rails.map((rail) => (rail.points[0].x + rail.points[1].x) / 2)
+      expect(topCenters[1] - topCenters[0]).toBeCloseTo(q, 10)
+      for (const polygon of [...context.rails, ...context.ties]) for (const { x, y } of polygon.points) {
+        expect([x, y].every(Number.isFinite)).toBe(true)
+        expect(x).toBeGreaterThan(0)
+        expect(x).toBeLessThan(720)
+        expect(y).toBeGreaterThanOrEqual(64)
+        expect(y).toBeLessThanOrEqual(448)
       }
     }
   })

@@ -61,3 +61,18 @@ Update the spec before code:
 4. Hide only the revised track context, retain the same target nodes/surface and Reset/size controls, and rerun engineering checks plus human viewing. Reproduce the construction with original SVG geometry; do not trace or ship the reference artwork. No stronger perceptual result is claimed until observed.
 
 The original research pass changed docs only. The subsequent owner-approved implementation retains original SVG artwork, target identity and unlisted publication; actual engineering/deployment results belong in [validation](ponzo-validation.md).
+
+
+## Second perspective audit: finite track surfaces
+
+The owner rejected the deployed twelve-sleeper correction: the railway still looked flawed. No new perceptual calibration or viewing conditions were supplied. The previous centerlines and inverse-depth positions are mathematically valid, but do not fully describe a finite-width track: rails stayed6 drawing units wide and sleepers3 units deep at every distance. At default the near sleeper centers were approximately432 and265, leaving most of the foreground without texture.
+
+New actual image inspections (21 October 2026):
+
+- [NTT Communication Science Laboratories, Illusion Forum](https://illusion-forum.ilab.ntt.co.jp/ponzo/index.html), [fifth image](https://illusion-forum.ilab.ntt.co.jp/ponzo/ponzo_5.png): finite rail faces taper, and sleeper depth and intervals recede along the ground. Its background includes scenery; this project does not copy its artwork, colors or scene.
+- Beginning Psychology's actual figure was inspected again: projecting sleepers and upper-bar crossings remain useful schematic references, but its constant strokes alone do not model every track dimension.
+- [Optical Toys' author demonstration](https://optical.toys/ponzo-illusion/), actual preview image inspected: many rungs supply stronger repeated context, but the screenshot has approximately constant screen-space rung intervals. It is not evidence of a physically consistent sleeper projection. The author's effect reports are personal observations, not measurements for our version.
+
+The engineering diagnosis is an inference from drawing geometry and these comparisons, not an experimentally established cause of this viewer's weak response. Version1.4 in the [spec](specs/ponzo.md) uses a single explicit ground-plane mapping for both rail strips and all four corners of96 sleepers. Every sleeper has the same world length, depth and pitch; widths, projected depth and spacing diminish together. It keeps the exact orange targets, centerline endpoints, range/default, reveal and unlisted status.96 sleepers carry the texture farther toward the horizon than the48-sleeper prototype; the far end is necessarily subpixel on a phone. No minimum-width floor, blur, shading or animation is added.
+
+Prototype screenshots and reference-image screenshots are outside Git: ponzo-ground-prototype*.png and ponzo-perspective-reference-*.png. No reference image is shipped. Whether the corrected perspective strengthens the illusion still requires owner viewing.

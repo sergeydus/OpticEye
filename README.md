@@ -73,7 +73,7 @@ Hering draws two fixed straight red lines over a dark radial fan. The owner-appr
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 
-Ponzo uses the same equal140-unit orange bars over corrected converging rails and12 projecting sleepers with perspective spacing. The upper bar crosses the rails; they are painted underneath it. Top rail gap0–24 (step4, default8) changes only context; Hide rails preserves both bars. Reset restores8/shown/Medium540/closed. It is published unlisted/noindex for real-phone viewing at [the direct Ponzo page](https://sergeydus.github.io/OpticEye/ponzo/), with perceptual calibration pending; see [its specification](docs/specs/ponzo.md) and [validation](docs/ponzo-validation.md).
+Ponzo uses the same equal140-unit orange bars over two tapered rail faces and96 finite-depth sleepers, all projected from one ground plane. Rail widths and sleeper lengths, depths and intervals recede consistently. The upper bar crosses the rails; they are painted underneath it. Top rail gap0–24 (step4, default8) changes only context; Hide rails preserves both bars. Reset restores8/shown/Medium540/closed. It is published unlisted/noindex for real-phone viewing at [the direct Ponzo page](https://sergeydus.github.io/OpticEye/ponzo/), with perceptual calibration pending; see [its specification](docs/specs/ponzo.md) and [validation](docs/ponzo-validation.md).
 
 ## Adding an illusion page
 
