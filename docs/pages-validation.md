@@ -2,11 +2,11 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current structure (21 October 2026): ten documents, seven listed Home cards and eight header links. Kanizsa stays unlisted/noindex, calibration not pursued. Ebbinghaus listing/deployment is approved; its device-scoped calibration is awaiting clarification. Hering is implemented/unlisted/noindex with calibration pending and authorized deployment for real-phone viewing. Earlier checkpoints are historical.
+Current structure (21 October 2026): ten documents, seven listed Home cards and eight header links. Kanizsa stays unlisted/noindex, calibration not pursued. Ebbinghaus listing/deployment is approved; both viewers confirmed its default effect/reveal on desktop and real phones, completing calibration. Hering is implemented/deployed unlisted/noindex with calibration pending for real-phone viewing. Earlier checkpoints are historical.
 
 ## Hering engineering checkpoint
 
-Lint,143 tests/20 files and ten-page build pass. Chrome155.0.8059.85 checked all ten preview direct URLs/refreshes at320/1440,DPR1: seven Home cards/eight base-aware links, listed active markers, Hering/Kanizsa noindex and no marker, styles/images, no overflow/errors/404s. Hering passed all four ray counts/all three sizes at DPR1/1.25/2 and actual200% page zoom (84 executions), unchanged-target reveal/Reset, keyboard controls and root-base development; see [validation](hering-validation.md). It remains unlisted, authorized for push/live verification. The owner’s new workflow deploys validated unlisted pages for real-phone viewing before listing approval.
+Lint,143 tests/20 files and ten-page build pass. Chrome155.0.8059.85 checked all ten preview direct URLs/refreshes at320/1440,DPR1: seven Home cards/eight base-aware links, listed active markers, Hering/Kanizsa noindex and no marker, styles/images, no overflow/errors/404s. Hering passed all four ray counts/all three sizes at DPR1/1.25/2 and actual200% page zoom (84 executions), unchanged-target reveal/Reset, keyboard controls and root-base development; see [validation](hering-validation.md). Commit85ec35b was pushed while unlisted/noindex. [Pages run39587386335](https://github.com/sergeydus/OpticEye/actions/runs/39587386335) succeeded; all ten live direct URLs/refreshes passed320/1440,DPR1 checks, including Hering noindex/absence from discovery, retained-target reveal, hidden count/restoration, Reset and no errors/404s. The owner’s new workflow deploys validated unlisted pages for real-phone viewing before listing approval.
 
 ## Ebbinghaus listing checkpoint
 
