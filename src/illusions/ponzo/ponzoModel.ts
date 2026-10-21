@@ -8,7 +8,7 @@ export const TARGETS = [
 export const TRACK_FILL = '#111111'
 export const TOP_GAP = { min: 0, max: 24, step: 4, default: 8 } as const
 export const TRACK = { centerX: 360, top: 64, bottom: 448, halfBase: 240, railHalfWidth: 0.02 } as const
-export const SLEEPERS = { count: 96, nearY: 440, pitch: 0.15, halfLength: 1.25, halfDepth: 0.015 } as const
+export const SLEEPERS = { count: 26, nearY: 440, pitch: 0.15, halfLength: 1.25, halfDepth: 0.015 } as const
 export const VIEWING_SIZES = [
   { label: 'Compact', width: 240 },
   { label: 'Medium', width: 540 },
@@ -33,15 +33,17 @@ export function createPonzoContext(gapValue: number) {
   const verticalScale = SLEEPERS.nearY - vanishingY
   const horizontalScale = slope * verticalScale
   const project = (x: number, z: number) => ({ x: centerX + horizontalScale * x / z, y: vanishingY + verticalScale / z })
+  const nearZ = 1 - SLEEPERS.halfDepth
+  const farZ = 1 + (SLEEPERS.count - 1) * SLEEPERS.pitch + SLEEPERS.halfDepth
   return {
     rails: ([-1, 1] as const).map((side) => ({
       id: side < 0 ? 'left' : 'right',
-      // Constant world-width strips; the top is the horizon limit when gap is zero.
+      // End both rail faces at the same outer edges as the first/last sleeper.
       points: [
-        { x: centerX + (side - TRACK.railHalfWidth) * halfGap, y: top },
-        { x: centerX + (side + TRACK.railHalfWidth) * halfGap, y: top },
-        { x: centerX + (side + TRACK.railHalfWidth) * halfBase, y: bottom },
-        { x: centerX + (side - TRACK.railHalfWidth) * halfBase, y: bottom },
+        project(side - TRACK.railHalfWidth, farZ),
+        project(side + TRACK.railHalfWidth, farZ),
+        project(side + TRACK.railHalfWidth, nearZ),
+        project(side - TRACK.railHalfWidth, nearZ),
       ],
     })),
     ties: Array.from({ length: SLEEPERS.count }, (_, i) => {
@@ -65,7 +67,7 @@ export const PONZO = {
   instructions: 'Which orange bar looks longer?',
   viewingInstruction: 'Compare the upper and lower bars, then hide the rails and cross-ties.',
   proof: 'Both orange bars have the same length. Only the rails and cross-ties were removed.',
-  explanation: 'Converging context can bias perceived length even when both bars have equal endpoint spans. Perspective and size interpretation are among the proposed accounts; this drawing does not establish a single mechanism. The track uses one ground-plane projection: equal-size sleepers at equal depth intervals become shorter, shallower and closer together in the distance, and the rail faces taper too. Very distant details can merge into a fine texture on a screen. Hide rails removes only the two rails and ninety-six cross-ties: both orange bars keep their endpoints, stroke and position. The upper bar crosses the rails, which are drawn underneath it; the lower bar sits inside the wider opening. The top-gap control widens the opening between the rail centerlines at the top; it does not resize the bars or guarantee a stronger effect. Perceived length and effect strength can vary with viewer, context, image size and display.',
+  explanation: 'Converging context can bias perceived length even when both bars have equal endpoint spans. Perspective and size interpretation are among the proposed accounts; this drawing does not establish a single mechanism. The track uses one ground-plane projection: equal-size sleepers at equal depth intervals become shorter, shallower and closer together in the distance, and the rail faces taper too. The track stops before the distant sleepers become a packed texture; fine edges can still antialias on a screen. Hide rails removes only the two rails and twenty-six cross-ties: both orange bars keep their endpoints, stroke and position. The upper bar crosses the rails, which are drawn underneath it; the lower bar sits inside the wider opening. The convergence control spreads the rails farther apart in the distance at larger settings; it does not resize the bars or guarantee a stronger effect. Perceived length and effect strength can vary with viewer, context, image size and display.',
   attribution: 'Original OpticEye drawing of the Ponzo illusion. See Schiffman & Thompson (1978) on depth and context.',
   sources: [
     { title: 'Schiffman & Thompson (1978): depth and context', url: 'https://pubmed.ncbi.nlm.nih.gov/628580/', citation: 'Abstract read: changing target orientation and location relative to converging contours affected the illusion. The original dimensions here are project choices, not a replication.' },

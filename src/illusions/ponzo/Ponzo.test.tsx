@@ -11,13 +11,18 @@ const railTopCenters = (svg: Element) => [...svg.querySelectorAll('[data-layer="
   const points = polygon.getAttribute('points')!.split(' ').map((point) => point.split(',').map(Number))
   return (points[0][0] + points[1][0]) / 2
 })
+const expectDefaultRailEnds = (svg: Element) => {
+  const centers = railTopCenters(svg)
+  expect(centers[0]).toBeCloseTo(310.66456803078, 10)
+  expect(centers[1]).toBeCloseTo(409.33543196922, 10)
+}
 const proof = 'Both orange bars have the same length. Only the rails and cross-ties were removed.'
 
 describe('Ponzo experience', () => {
   it('starts with exact colors, ties behind rails, bars last, and no initial answer', () => {
     render(<Ponzo />)
     const svg = screen.getByRole('img', { name: 'Ponzo illusion' })
-    expect(svg).toHaveAccessibleDescription(/two converging rails and ninety-six projected cross-ties/i)
+    expect(svg).toHaveAccessibleDescription(/two converging rails and twenty-six projected cross-ties/i)
     expect(svg).toHaveAttribute('viewBox', '0 0 720 480')
     expect([...svg.children].map((n) => n.tagName)).toEqual(['title', 'desc', 'rect', 'g', 'g'])
     expect(svg.querySelector('[data-layer="surface"]')).toHaveAttribute('fill', '#FFFFFF')
@@ -26,7 +31,7 @@ describe('Ponzo experience', () => {
     expect(context).toHaveAttribute('stroke', 'none')
     expect(context.querySelector('line,[stroke-width]')).toBeNull()
     expect([...context.children].map((n) => n.getAttribute('data-layer'))).toEqual(['ties', 'rails'])
-    for (const [layer, count] of [['ties', 96], ['rails', 2]] as const) {
+    for (const [layer, count] of [['ties', 26], ['rails', 2]] as const) {
       const group = svg.querySelector(`[data-layer="${layer}"]`)!
       expect(group.querySelectorAll('polygon')).toHaveLength(count)
       for (const polygon of group.querySelectorAll('polygon')) {
@@ -43,7 +48,9 @@ describe('Ponzo experience', () => {
     expect(targetGroup.querySelectorAll('line')).toHaveLength(2)
     expect(context.nextElementSibling).toBe(svg.querySelector('[data-layer="targets"]'))
     expect(targets(svg).map((n) => ['x1', 'y1', 'x2', 'y2'].map((key) => n.getAttribute(key)))).toEqual([['290', '148', '430', '148'], ['290', '332', '430', '332']])
-    expect(screen.getByRole('slider', { name: 'Top rail gap' })).toHaveValue('8')
+    expect(screen.getByRole('slider', { name: 'Rail convergence' })).toHaveValue('8')
+    expect(screen.getByRole('slider')).toHaveAccessibleDescription('A larger setting spreads the rails farther apart in the distance. The orange bars stay fixed.')
+    expect(svg.closest('article')!.querySelector('output[for]')).toHaveTextContent(/^8$/)
     expect(screen.getByRole('slider')).toHaveAttribute('min', '0')
     expect(screen.getByRole('slider')).toHaveAttribute('max', '24')
     expect(screen.getByRole('slider')).toHaveAttribute('step', '4')
@@ -73,7 +80,7 @@ describe('Ponzo experience', () => {
       expect(svg).toHaveAccessibleDescription(/same two equal-length orange bars/)
       for (const message of screen.getAllByText(proof)) expect(message).toBeVisible()
       await user.click(toggle)
-      expect(svg.querySelectorAll('[data-layer="context"] polygon')).toHaveLength(98)
+      expect(svg.querySelectorAll('[data-layer="context"] polygon')).toHaveLength(28)
       expect(attributes(svg)).toBe(original)
     }
   })
@@ -82,7 +89,7 @@ describe('Ponzo experience', () => {
     const user = userEvent.setup()
     render(<Ponzo />)
     const svg = screen.getByRole('img'), original = attributes(svg), pair = targets(svg)
-    const slider = screen.getByRole('slider', { name: 'Top rail gap' })
+    const slider = screen.getByRole('slider', { name: 'Rail convergence' })
     let previous = ''
     for (let q = 0; q <= 24; q += 4) {
       fireEvent.change(slider, { target: { value: String(q) } })
@@ -96,7 +103,7 @@ describe('Ponzo experience', () => {
     fireEvent.change(slider, { target: { value: '8' } })
     expect(svg.querySelector('[data-layer="context"]')).toBeNull()
     await user.click(screen.getByRole('button', { name: 'Hide rails' }))
-    expect(railTopCenters(svg)).toEqual([356, 364])
+    expectDefaultRailEnds(svg)
     expect(attributes(svg)).toBe(original)
   })
 
@@ -137,19 +144,19 @@ describe('Ponzo experience', () => {
     for (const article of [first, second]) {
       const svg = within(article).getByRole('img'), slider = within(article).getByRole('slider')
       for (const attr of ['aria-labelledby', 'aria-describedby']) expect(document.getElementById(svg.getAttribute(attr)!)).not.toBeNull()
-      expect(slider).toHaveAccessibleName('Top rail gap')
+      expect(slider).toHaveAccessibleName('Rail convergence')
       expect(document.getElementById(slider.getAttribute('aria-describedby')!)).not.toBeNull()
     }
     await user.click(within(first).getByRole('button', { name: 'Hide rails' }))
     fireEvent.change(within(first).getByRole('slider'), { target: { value: '24' } })
-    expect(second.querySelectorAll('[data-layer="context"] polygon')).toHaveLength(98)
+    expect(second.querySelectorAll('[data-layer="context"] polygon')).toHaveLength(28)
     expect(within(second).getByRole('slider')).toHaveValue('8')
   })
 
   it('falls back for invalid stimulus props without changing targets or emitting non-finite attributes', () => {
     const { container } = render(<PonzoStimulus topGap={Infinity} railsVisible />)
     expect(container.innerHTML).not.toMatch(/NaN|Infinity/)
-    expect(railTopCenters(container)).toEqual([356, 364])
+    expectDefaultRailEnds(container)
     expect(container.querySelectorAll('[data-layer="targets"] line')).toHaveLength(2)
   })
 })

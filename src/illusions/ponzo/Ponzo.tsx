@@ -53,11 +53,11 @@ export default function Ponzo() {
           <button type="button" onClick={reset} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Reset Ponzo</button>
           <div className="mt-7 border-t border-slate-300 pt-6">
             <div className="flex items-center justify-between gap-3">
-              <label htmlFor={`${id}-topGap`} className="text-sm font-medium">Top rail gap</label>
-              <output htmlFor={`${id}-topGap`} className="font-mono text-sm text-teal-800" aria-live="off">{topGap} units</output>
+              <label htmlFor={`${id}-topGap`} className="text-sm font-medium">Rail convergence</label>
+              <output htmlFor={`${id}-topGap`} className="font-mono text-sm text-teal-800" aria-live="off">{topGap}</output>
             </div>
             <input id={`${id}-topGap`} type="range" min={TOP_GAP.min} max={TOP_GAP.max} step={TOP_GAP.step} value={topGap} onChange={(event) => setTopGap(normalizeTopGap(event.currentTarget.valueAsNumber))} aria-describedby={`${id}-topGap-help`} className={`my-2 block min-h-11 w-full cursor-pointer accent-teal-800 ${focus}`} />
-            <p id={`${id}-topGap-help`} className="mt-2 text-xs leading-relaxed text-slate-600">Distance between the rail centerlines at the top. A larger value widens the opening; only the context changes.</p>
+            <p id={`${id}-topGap-help`} className="mt-2 text-xs leading-relaxed text-slate-600">A larger setting spreads the rails farther apart in the distance. The orange bars stay fixed.</p>
           </div>
           <ViewingSizeControl id={`${id}-size`} label="Ponzo image size" value={viewingWidth} choices={VIEWING_SIZES} onChange={(width) => setViewingWidth(normalizeViewingWidth(width))} />
           <output aria-live="polite" aria-atomic="true" className="mt-5 block min-h-12 text-sm leading-relaxed text-teal-900">{status}</output>

@@ -15,12 +15,12 @@ describe('Ponzo geometry', () => {
     const { rails } = createPonzoContext(8)
     expect(rails.map((rail) => rail.id)).toEqual(['left', 'right'])
     const expected = [
-      [[355.92, 64], [356.08, 64], [124.8, 448], [115.2, 448]],
-      [[363.92, 64], [364.08, 64], [604.8, 448], [595.2, 448]],
+      [[309.6778593913956, 137.76612659398512], [311.6512766701644, 137.76612659398512], [126.10998307952622, 445.82500215090766], [116.56345177664971, 445.82500215090766]],
+      [[408.3487233298356, 137.76612659398512], [410.3221406086044, 137.76612659398512], [603.4365482233503, 445.82500215090766], [593.8900169204737, 445.82500215090766]],
     ]
     rails.forEach((rail, i) => rail.points.forEach((point, j) => {
       expect(point.x).toBeCloseTo(expected[i][j][0], 10)
-      expect(point.y).toBe(expected[i][j][1])
+      expect(point.y).toBeCloseTo(expected[i][j][1], 10)
     }))
   })
 
@@ -29,14 +29,18 @@ describe('Ponzo geometry', () => {
       const context = createPonzoContext(q)
       expect(context).toEqual(createPonzoContext(q))
       expect(context.rails).toHaveLength(2)
-      expect(context.ties).toHaveLength(96)
-      expect(new Set([...context.rails, ...context.ties].map((part) => part.id)).size).toBe(98)
-      // Independent inverse derived from the specified rail centerline endpoints,
+      expect(context.ties).toHaveLength(26)
+      expect(new Set([...context.rails, ...context.ties].map((part) => part.id)).size).toBe(28)
+      // Independent inverse derived from the specified camera calibration anchors,
       // rather than calling the projection under test or importing its dimensions.
       const slope = (240 - q / 2) / 384
       const horizon = 64 - (q / 2) / slope
       const depthScale = 440 - horizon
       const horizontalScale = slope * depthScale
+      const farDepth = 1 + 25 * 0.15 + 0.015
+      const nearDepth = 1 - 0.015
+      const farY = horizon + depthScale / farDepth
+      const nearY = horizon + depthScale / nearDepth
       const invert = ({ x, y }: { x: number; y: number }) => {
         const z = depthScale / (y - horizon)
         return { x: (x - 360) * z / horizontalScale, z }
@@ -80,22 +84,33 @@ describe('Ponzo geometry', () => {
         expect(projectedDepths[i]).toBeLessThan(projectedDepths[i - 1])
         expect(centerYs[i]).toBeLessThan(centerYs[i - 1])
         if (i > 1) expect(centerYs[i - 1] - centerYs[i]).toBeLessThan(centerYs[i - 2] - centerYs[i - 1])
+        // Even the smallest supported drawing avoids the former subpixel
+        // density cascade. This is a clearance bound, not an alias-free claim.
+        const clearGap = context.ties[i - 1].points[3].y - context.ties[i].points[0].y
+        expect(clearGap * 240 / 720).toBeGreaterThanOrEqual(0.68)
       }
       if (q === 8) {
         expect(centerYs[1]).toBeCloseTo(390.1076, 4)
-        expect(centerYs[95]).toBeCloseTo(82.574, 3)
+        expect(centerYs[25]).toBeCloseTo(138.0196, 4)
         expect(projectedDepths[0]).toBeCloseTo(11.4778, 4)
       }
       context.rails.forEach((rail, i) => {
         expect(rail.points).toHaveLength(4)
         const expectedX = i === 0 ? [-1.02, -0.98, -0.98, -1.02] : [0.98, 1.02, 1.02, 0.98]
         rail.points.forEach((point, j) => {
-          expect(point.y).toBe(j < 2 ? 64 : 448)
-          if (point.y === horizon) expect(point.x).toBe(360)
-          else expect(invert(point).x).toBeCloseTo(expectedX[j], 10)
+          const expectedDepth = j < 2 ? farDepth : nearDepth
+          expect(point.y).toBeCloseTo(j < 2 ? farY : nearY, 10)
+          expect(point.x).toBeCloseTo(360 + horizontalScale * expectedX[j] / expectedDepth, 10)
+          expect(invert(point).x).toBeCloseTo(expectedX[j], 10)
+          expect(invert(point).z).toBeCloseTo(expectedDepth, 10)
+          // Rails end at the exact terminal sleeper edges at both ends;
+          // neither end may retain the old bare rail extensions.
+          expect(point.y).toBeCloseTo(j < 2 ? context.ties[25].points[3].y : context.ties[0].points[0].y, 10)
         })
         const [topLeft, topRight, bottomRight, bottomLeft] = rail.points
         expect(bottomRight.x - bottomLeft.x).toBeGreaterThan(topRight.x - topLeft.x)
+        expect(topLeft.y).toBeLessThan(144)
+        expect(bottomLeft.y).toBeGreaterThan(336)
         // Every face edge converges to the same horizon point. At the upper
         // target both face edges must fit beneath its full opaque orange span.
         const faceX = (worldX: number, y: number) => 360 + worldX * slope * (y - horizon)
@@ -108,14 +123,12 @@ describe('Ponzo geometry', () => {
           else expect(faceX(0.98, y)).toBeGreaterThan(TARGETS[1].x2)
         }
       })
-      const topCenters = context.rails.map((rail) => (rail.points[0].x + rail.points[1].x) / 2)
-      expect(topCenters[1] - topCenters[0]).toBeCloseTo(q, 10)
       for (const polygon of [...context.rails, ...context.ties]) for (const { x, y } of polygon.points) {
         expect([x, y].every(Number.isFinite)).toBe(true)
         expect(x).toBeGreaterThan(0)
         expect(x).toBeLessThan(720)
-        expect(y).toBeGreaterThanOrEqual(64)
-        expect(y).toBeLessThanOrEqual(448)
+        expect(y).toBeGreaterThanOrEqual(farY)
+        expect(y).toBeLessThanOrEqual(nearY)
       }
     }
   })
