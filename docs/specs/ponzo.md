@@ -1,6 +1,6 @@
 # Ponzo specification
 
-Status: **implemented; perceptual calibration pending**. Version 1.5, 21 October 2026. ID/folder: `ponzo`; title/h1: “Ponzo illusion”; HTML title: “Ponzo illusion | OpticEye”. Description: “Compare equal bars between converging rails, then hide the perspective context without changing either bar.”
+Status: **drawing implemented and calibrated on desktop and real phones; unlisted by owner decision while an AI image variation is explored**. Version 1.6, 21 October 2026. ID/folder: `ponzo`; title/h1: “Ponzo illusion”; HTML title: “Ponzo illusion | OpticEye”. Description: “Compare equal bars between converging rails, then hide the perspective context without changing either bar.”
 
 Inherit page setup, unlisted/noindex, Reset, labels/keyboard access, normalization, testing and two-viewer calibration from [implementation.md](implementation.md). Original static railway geometry only; no photos, matching task, corridor mode or animation.
 
@@ -61,4 +61,4 @@ The owner called version1.4 much better, but its96-sleeper far field rasterized 
 | PO04 | Shared engineering/page checks pass, retaining unlisted/noindex direct access and existing calibration records. Record actual checks in docs/ponzo-validation.md. |
 | PO05 | Calibration only: two viewers on desktop/real phones report default apparent bar lengths before/after reveal, including weak/absent responses. Listing requires separate owner approval. |
 
-PO01–PO04 pass for this endpoint/detail revision; see the actual validation record. Publish validated changes while unlisted under the existing workflow; PO05 remains pending. Preserve the owner's weak-effect and rejected-perspective observations as history.
+PO01–PO04 pass for this endpoint/detail revision; see the actual validation record. Publish validated changes while unlisted under the existing workflow; PO05 is complete for the current drawing only; see the reported conditions in validation. Preserve the owner's weak-effect and rejected-perspective observations as history.

@@ -1,6 +1,6 @@
 # Ponzo validation
 
-21 October 2026. **Implemented; perceptual calibration pending. PO01–PO04 pass for version1.5; PO05 pending.** The corrected railway remains `listed:false`/`noindex`, directly reachable but absent from Home/navigation, with no current marker. Publication while unlisted is owner-authorized for real-phone viewing.
+21 October 2026. **Drawing implemented and calibrated on desktop and real phones. PO01–PO04 pass for version1.5; PO05 complete for the drawing.** The corrected railway remains `listed:false`/`noindex`, directly reachable but absent from Home/navigation, with no current marker. Publication while unlisted is owner-authorized for real-phone viewing.
 
 ## Engineering
 
@@ -28,7 +28,9 @@ Evidence outside Git in the task visualization directory: ponzo-browser-check.js
 
 ## Human viewing (PO05)
 
-**The first railway version was too weak for the owner:** bars felt identical and rails felt off. The owner subsequently rejected the twelve-sleeper correction's perspective as still flawed. Device, browser, DPR, zoom, selected gap/image size and distance were unspecified. These are not calibration passes. The owner called the version1.4 ground-plane drawing much better, but supplied a screenshot showing exposed rail tips and distant aliasing. This is drawing feedback, not a confirmed two-viewer illusion result. Version1.5 endpoint/detail viewing and a second-viewer result remain pending on desktop/real phones. Record only supplied conditions and actual responses, including weak/absent effects. Phone emulation is not a real-phone observation. Listing requires separate owner approval.
+**PO05 complete for the current line drawing.** On21 October2026 the owner explicitly confirmed that viewer1 and viewer2 both tested the current Ponzo illusion on desktop and real phones and confirmed it works. The owner finds the result underwhelming and chose to try an owner-supplied Gemini railway image while keeping Ponzo unlisted. Browser, DPR, distance, viewport dimensions, chosen controls/image size and zoom were not supplied; do not infer them from engineering checks. This calibration applies to the drawing only, not the planned AI image.
+
+Earlier observations remain history: the initial bars felt identical and rails felt off; the twelve-sleeper correction still looked flawed. The owner called the later ground-plane drawing much better, then identified exposed rail tips/distant aliasing in a screenshot; version1.5 fixed those. These earlier responses do not override the subsequent explicit two-viewer confirmation. Listing remains a separate owner decision and has not been approved.
 
 ## Deployment and short history
 
