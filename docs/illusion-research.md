@@ -125,9 +125,9 @@ Sources: Schiffman & Thompson (1978), *The role of apparent depth and context in
 
 **Evidence:** Bach's standard figure removes oblique background lines to expose that the apparent bowed bars are straight.
 
-**Current construction:** two fixed parallel red lines over an original radial fan, centered at(360,240). Ray count24–60/step12/default36 changes only the fan. Hide rays removes context and retains the same straight targets; no curved paths or corrective animation. The fan center stays fixed. See [spec](specs/hering.md) and [validation](hering-validation.md). It is implemented/deployed unlisted with calibration pending for real-phone viewing under the owner's new workflow.
+**Current construction:** two fixed parallel red lines over an original radial fan, centered at(360,240). Ray count24–60/step12/default60, target separation80 changes only the fan. Hide rays removes context and retains the same straight targets; no curved paths or corrective animation. The fan center stays fixed. See [spec](specs/hering.md) and [validation](hering-validation.md). It is implemented/deployed unlisted with calibration pending for real-phone viewing under the owner's new workflow.
 
-**Calibration concern:** fine intersecting rays can alias on phones/fractional DPR. Start with a bounded moderate density and inspect both geometry and perceived bowing. It is inexpensive, but less distinct from Café Wall than a size/alignment illusion.
+**Calibration concern:** the owner reports the implemented figure is too subtle. [Strengthening research](hering-research.md) finds that the current separation excludes intersections below30°, and proposes comparing narrower target spacing and higher density before palette changes. The owner approved the first trial: separation80/default60 rays. It awaits fresh viewing, not a calibrated improvement. Community reports include mixed Hering responses and a strongly received related guide-line/text distortion; they do not establish an optimal radial construction. Fine intersecting rays can alias on phones/fractional DPR; inspect geometry and perceived bowing separately.
 
 Source: [Bach's Hering demonstration](https://michaelbach.de/ot/ang-hering/). Page text read; no claim of a new tested mechanism.
 

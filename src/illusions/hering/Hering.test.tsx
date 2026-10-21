@@ -10,17 +10,17 @@ const targets = (svg: Element) => [...svg.querySelectorAll('[data-layer="targets
 const data = (nodes: Element[]) => nodes.map((node) => node.outerHTML)
 
 describe('Hering experience', () => {
-  it('starts with 36 rays behind exact red targets and the documented controls', () => {
+  it('starts with 60 rays behind exact red targets and the documented controls', () => {
     render(<Hering />)
     const svg = screen.getByRole('img', { name: 'Hering illusion' })
-    expect(svg).toHaveAccessibleDescription(/fan of 36 dark rays/)
+    expect(svg).toHaveAccessibleDescription(/fan of 60 dark rays/)
     expect(svg).toHaveAttribute('viewBox', '0 0 720 480')
     expect([...svg.children].map((n) => n.tagName)).toEqual(['title', 'desc', 'rect', 'g', 'g'])
     expect(svg.querySelector('[data-layer="surface"]')).toHaveAttribute('fill', '#FFFFFF')
     const rays = svg.querySelector('[data-layer="rays"]')!
     expect(rays).toHaveAttribute('stroke', '#333333')
     expect(rays).toHaveAttribute('stroke-width', '2.5')
-    expect(rays.querySelectorAll('line')).toHaveLength(36)
+    expect(rays.querySelectorAll('line')).toHaveLength(60)
     const group = svg.querySelector('[data-layer="targets"]')!
     expect(rays.nextElementSibling).toBe(group)
     expect(group).toHaveAttribute('stroke', '#CC2A2A')
@@ -29,13 +29,13 @@ describe('Hering experience', () => {
     expect(group).toHaveAttribute('fill', 'none')
     const pair = targets(svg)
     expect(pair).toHaveLength(2)
-    expect(pair.map((n) => n.getAttribute('x1'))).toEqual(['260', '460'])
+    expect(pair.map((n) => n.getAttribute('x1'))).toEqual(['320', '400'])
     for (const line of pair) {
       expect(line.getAttribute('x1')).toBe(line.getAttribute('x2'))
       expect(line).toHaveAttribute('y1', '60')
       expect(line).toHaveAttribute('y2', '420')
     }
-    expect(screen.getByRole('slider', { name: 'Ray count' })).toHaveValue('36')
+    expect(screen.getByRole('slider', { name: 'Ray count' })).toHaveValue('60')
     expect(screen.getByRole('combobox', { name: 'Hering image size' })).toHaveValue('540')
     expect(screen.getByRole('button', { name: 'Hide rays' })).toHaveAttribute('aria-pressed', 'false')
     expect(screen.getByText(proof)).not.toBeVisible()
@@ -63,7 +63,7 @@ describe('Hering experience', () => {
       expect(surface.outerHTML).toBe(surfaceData)
       expect(svg).toHaveAccessibleDescription(/same two straight parallel red lines/)
       await user.click(toggle)
-      expect(svg.querySelectorAll('[data-layer="rays"] line')).toHaveLength(36)
+      expect(svg.querySelectorAll('[data-layer="rays"] line')).toHaveLength(60)
       expect(data(targets(svg))).toEqual(original)
     }
   })
@@ -99,18 +99,18 @@ describe('Hering experience', () => {
       expect(container.querySelector('[data-hering-viewing-frame]')).toHaveStyle({ maxWidth: `${size}px` })
       expect(data(targets(svg))).toEqual(original)
     }
-    fireEvent.change(screen.getByRole('slider', { name: 'Ray count' }), { target: { value: '60' } })
+    fireEvent.change(screen.getByRole('slider', { name: 'Ray count' }), { target: { value: '24' } })
     await user.click(screen.getByRole('button', { name: 'Hide rays' }))
     expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'true')
     const reset = screen.getByRole('button', { name: 'Reset Hering' })
     await user.click(reset)
     expect(reset).toHaveFocus()
-    expect(screen.getByRole('slider', { name: 'Ray count' })).toHaveValue('36')
+    expect(screen.getByRole('slider', { name: 'Ray count' })).toHaveValue('60')
     expect(screen.getByRole('combobox')).toHaveValue('540')
     expect(screen.getByRole('button', { name: 'Hide rays' })).toHaveAttribute('aria-pressed', 'false')
     expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'false')
     expect(data(targets(svg))).toEqual(original)
-    expect(svg.querySelectorAll('[data-layer="rays"] line')).toHaveLength(36)
+    expect(svg.querySelectorAll('[data-layer="rays"] line')).toHaveLength(60)
     expect(screen.getByText('Hering experiment reset.')).toBeVisible()
   })
 
@@ -128,15 +128,15 @@ describe('Hering experience', () => {
       expect(document.getElementById(slider.getAttribute('aria-describedby')!)).not.toBeNull()
     }
     await user.click(within(first).getByRole('button', { name: 'Hide rays' }))
-    fireEvent.change(within(first).getByRole('slider'), { target: { value: '60' } })
-    expect(second.querySelectorAll('[data-layer="rays"] line')).toHaveLength(36)
-    expect(within(second).getByRole('slider')).toHaveValue('36')
+    fireEvent.change(within(first).getByRole('slider'), { target: { value: '24' } })
+    expect(second.querySelectorAll('[data-layer="rays"] line')).toHaveLength(60)
+    expect(within(second).getByRole('slider')).toHaveValue('60')
   })
 
   it('normalizes invalid stimulus props without non-finite coordinates or modified targets', () => {
     const { container } = render(<HeringStimulus rayCount={Infinity} raysVisible />)
     expect(container.innerHTML).not.toMatch(/NaN|Infinity/)
-    expect(container.querySelectorAll('[data-layer="rays"] line')).toHaveLength(36)
+    expect(container.querySelectorAll('[data-layer="rays"] line')).toHaveLength(60)
     expect(container.querySelectorAll('[data-layer="targets"] line')).toHaveLength(2)
   })
 })

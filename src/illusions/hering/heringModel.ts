@@ -2,13 +2,13 @@ export const VIEWBOX = { width: 720, height: 480 } as const
 export const SURFACE_FILL = '#FFFFFF'
 export const TARGET_STROKE = { color: '#CC2A2A', width: 6 } as const
 export const TARGETS = [
-  { id: 'left', x1: 260, y1: 60, x2: 260, y2: 420 },
-  { id: 'right', x1: 460, y1: 60, x2: 460, y2: 420 },
+  { id: 'left', x1: 320, y1: 60, x2: 320, y2: 420 },
+  { id: 'right', x1: 400, y1: 60, x2: 400, y2: 420 },
 ] as const
 export const CENTER = { x: 360, y: 240 } as const
 export const RAY_BOUNDS = { left: 24, right: 696, top: 24, bottom: 456 } as const
 export const RAY_STROKE = { color: '#333333', width: 2.5 } as const
-export const RAY_COUNT = { min: 24, max: 60, step: 12, default: 36 } as const
+export const RAY_COUNT = { min: 24, max: 60, step: 12, default: 60 } as const
 export const VIEWING_SIZES = [
   { label: 'Compact', width: 240 },
   { label: 'Medium', width: 540 },

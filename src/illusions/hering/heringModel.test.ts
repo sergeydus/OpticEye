@@ -1,18 +1,35 @@
 import { describe, expect, it } from 'vitest'
-import { createHeringRays, normalizeRayCount, normalizeViewingWidth, TARGETS } from './heringModel'
+import { createHeringRays, normalizeRayCount, normalizeViewingWidth, RAY_COUNT, TARGETS } from './heringModel'
 
 describe('Hering geometry', () => {
-  it('uses two exact parallel 360-unit targets and the default 36-ray fan', () => {
+  it('uses two exact parallel 360-unit targets and the default 60-ray fan', () => {
     expect(TARGETS).toEqual([
-      { id: 'left', x1: 260, y1: 60, x2: 260, y2: 420 },
-      { id: 'right', x1: 460, y1: 60, x2: 460, y2: 420 },
+      { id: 'left', x1: 320, y1: 60, x2: 320, y2: 420 },
+      { id: 'right', x1: 400, y1: 60, x2: 400, y2: 420 },
     ])
     for (const line of TARGETS) {
       expect(line.x1).toBe(line.x2)
       expect(Math.hypot(line.x2 - line.x1, line.y2 - line.y1)).toBe(360)
     }
-    expect(TARGETS[1].x1 - TARGETS[0].x1).toBe(200)
-    expect(createHeringRays(36)).toHaveLength(36)
+    expect(TARGETS[1].x1 - TARGETS[0].x1).toBe(80)
+    expect(RAY_COUNT.default).toBe(60)
+    expect(createHeringRays(RAY_COUNT.default)).toHaveLength(60)
+  })
+
+  it('introduces acute crossings at the closer targets without bending them', () => {
+    for (const target of TARGETS) {
+      const angles = createHeringRays(RAY_COUNT.default).flatMap((ray) => {
+        const dx = ray.x2 - ray.x1, dy = ray.y2 - ray.y1
+        if (dx === 0) return []
+        const t = (target.x1 - ray.x1) / dx
+        const y = ray.y1 + t * dy
+        if (t < 0 || t > 1 || y < target.y1 || y > target.y2) return []
+        return [Math.atan2(Math.abs(dx), Math.abs(dy)) * 180 / Math.PI]
+      })
+      expect(angles).toHaveLength(25)
+      expect(Math.min(...angles)).toBeCloseTo(18, 10)
+      expect(angles.filter((angle) => angle >= 10 - 1e-9 && angle <= 30 + 1e-9)).toHaveLength(6)
+    }
   })
 
   it('intersects all four fan configurations with exact cardinals, unique directions and opposite pairs', () => {
@@ -49,8 +66,8 @@ describe('Hering geometry', () => {
   it('normalizes stepped counts, clamps bounds and handles non-finite values and sizes', () => {
     expect([-100, 24, 29, 30, 47, 54, 100].map(normalizeRayCount)).toEqual([24, 24, 24, 36, 48, 60, 60])
     for (const value of [NaN, Infinity, -Infinity]) {
-      expect(normalizeRayCount(value)).toBe(36)
-      expect(createHeringRays(value)).toEqual(createHeringRays(36))
+      expect(normalizeRayCount(value)).toBe(60)
+      expect(createHeringRays(value)).toEqual(createHeringRays(60))
     }
     expect([240, 540, 720, 450, 0, NaN].map(normalizeViewingWidth)).toEqual([240, 540, 720, 540, 540, 540])
   })
