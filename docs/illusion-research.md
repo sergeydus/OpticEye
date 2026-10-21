@@ -115,9 +115,11 @@ Sources: [Bach's checker-shadow demonstration](https://michaelbach.de/ot/lum-ade
 
 **Evidence:** equal-length targets within converging contours can appear different in size. Schiffman and Thompson's 1978 abstract reports that target orientation and location relative to those contours affected magnitude. A perspective interpretation is useful context, not a complete proven explanation.
 
-**Current construction:** two fixed equal140-unit orange bars inside original converging rails and six cross-ties. Top rail gap88–160/step8/default88 changes only the rails/tie spans; Hide rails preserves both bars. Ponzo is implemented unlisted/noindex for real-phone viewing, with calibration pending. See [spec](specs/ponzo.md) and [validation](ponzo-validation.md).
+**Current construction:** the same two fixed equal140-unit orange bars over corrected rails and12 projecting sleepers, crowded toward the distance through reciprocal-depth spacing. Top rail gap0–24/step4/default8 changes context only; the upper bar crosses rails painted underneath, and Hide rails preserves both bars. Ponzo is implemented unlisted/noindex for real-phone viewing, with calibration pending. See [spec](specs/ponzo.md) and [validation](ponzo-validation.md).
 
 **Calibration concern:** the context's proximity to the upper and lower bars is part of the construction, not an incidental responsive spacing detail. Uniformly scale the stimulus; do not rearrange its contents for mobile.
+
+**Viewing concern:** the owner finds the current bars equal-looking and rails unconvincing; conditions were unspecified. [Strengthening research](ponzo-research.md) records richer author demonstrations, positive and negative Reddit reports, and the current context audit. The subsequent railway-image comparison identifies a missed construction detail: reference upper bars cross the rails, and sleepers extend beyond them with a denser distant section. The owner approved implementing that railway correction. The spec was updated before code; the corrected version awaits fresh viewing. A corridor remains a later alternative.
 
 Sources: Schiffman & Thompson (1978), *The role of apparent depth and context in the perception of the Ponzo illusion*, Perception 7, 47–50, [abstract](https://pubmed.ncbi.nlm.nih.gov/628580/), DOI 10.1068/p070047; [2019 study abstract on perspective and texture in a Ponzo corridor](https://pubmed.ncbi.nlm.nih.gov/31600294/). Abstracts/search-indexed abstract text were inspected, not full papers; no study's room image is proposed for reuse.
 

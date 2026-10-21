@@ -6,9 +6,10 @@ export const TARGETS = [
   { id: 'lower', x1: 290, y1: 332, x2: 430, y2: 332 },
 ] as const
 export const RAIL_STROKE = { color: '#111111', width: 6 } as const
-export const TIE_STROKE = { color: '#777777', width: 4 } as const
-export const TOP_GAP = { min: 88, max: 160, step: 8, default: 88 } as const
-export const TIE_Y = [104, 128, 176, 224, 288, 384] as const
+export const TIE_STROKE = { color: '#111111', width: 3 } as const
+export const TOP_GAP = { min: 0, max: 24, step: 4, default: 8 } as const
+export const TRACK = { centerX: 360, top: 64, bottom: 448, halfBase: 240 } as const
+export const SLEEPERS = { count: 12, nearY: 432, farY: 96, extension: 1.25 } as const
 export const VIEWING_SIZES = [
   { label: 'Compact', width: 240 },
   { label: 'Medium', width: 540 },
@@ -27,14 +28,22 @@ export function normalizeViewingWidth(value: number) {
 
 export function createPonzoContext(gapValue: number) {
   const halfGap = normalizeTopGap(gapValue) / 2
+  const { centerX, top, bottom, halfBase } = TRACK
+  const slope = (halfBase - halfGap) / (bottom - top)
+  const vanishingY = top - halfGap / slope
+  const nearDepth = SLEEPERS.nearY - vanishingY
+  const farDepth = SLEEPERS.farY - vanishingY
   return {
     rails: [
-      { id: 'left', x1: 360 - halfGap, y1: 56, x2: 180, y2: 424 },
-      { id: 'right', x1: 360 + halfGap, y1: 56, x2: 540, y2: 424 },
+      { id: 'left', x1: centerX - halfGap, y1: top, x2: centerX - halfBase, y2: bottom },
+      { id: 'right', x1: centerX + halfGap, y1: top, x2: centerX + halfBase, y2: bottom },
     ],
-    ties: TIE_Y.map((y) => {
-      const halfWidth = halfGap + (180 - halfGap) * (y - 56) / 368
-      return { id: `tie-${y}`, x1: 360 - halfWidth, y1: y, x2: 360 + halfWidth, y2: y }
+    ties: Array.from({ length: SLEEPERS.count }, (_, i) => {
+      // Equal increments of world depth project to reciprocal screen distances.
+      const a = i / (SLEEPERS.count - 1)
+      const y = vanishingY + 1 / ((1 - a) / nearDepth + a / farDepth)
+      const halfWidth = SLEEPERS.extension * (halfGap + slope * (y - top))
+      return { id: `tie-${i}`, x1: centerX - halfWidth, y1: y, x2: centerX + halfWidth, y2: y }
     }),
   }
 }
@@ -44,10 +53,11 @@ export const PONZO = {
   instructions: 'Which orange bar looks longer?',
   viewingInstruction: 'Compare the upper and lower bars, then hide the rails and cross-ties.',
   proof: 'Both orange bars have the same length. Only the rails and cross-ties were removed.',
-  explanation: 'Converging context can bias perceived length even when both bars have equal endpoint spans. Perspective and size interpretation are among the proposed accounts; this drawing does not establish a single mechanism. Hide rails removes only the two rails and six cross-ties: both orange bars keep their endpoints, stroke and position. The top-gap control widens the opening between the rail endpoints; it does not resize the bars or guarantee a stronger effect. Perceived length and effect strength can vary with viewer, context, image size and display.',
+  explanation: 'Converging context can bias perceived length even when both bars have equal endpoint spans. Perspective and size interpretation are among the proposed accounts; this drawing does not establish a single mechanism. Hide rails removes only the two rails and twelve cross-ties: both orange bars keep their endpoints, stroke and position. The upper bar crosses the rails, which are drawn underneath it; the lower bar sits inside the wider opening. Sleepers extend beyond both rails and crowd together toward the distance. The top-gap control widens the opening between the rail endpoints; it does not resize the bars or guarantee a stronger effect. Perceived length and effect strength can vary with viewer, context, image size and display.',
   attribution: 'Original OpticEye drawing of the Ponzo illusion. See Schiffman & Thompson (1978) on depth and context.',
   sources: [
     { title: 'Schiffman & Thompson (1978): depth and context', url: 'https://pubmed.ncbi.nlm.nih.gov/628580/', citation: 'Abstract read: changing target orientation and location relative to converging contours affected the illusion. The original dimensions here are project choices, not a replication.' },
     { title: 'Yildiz et al. (2019): perspective and texture cues', url: 'https://pubmed.ncbi.nlm.nih.gov/31600294/', citation: 'Abstract read: perspective and texture cues influenced apparent size in a corridor with ring targets. This simple rail drawing does not reproduce that experiment.' },
+    { title: 'Railway construction reference: Beginning Psychology, Figure 4.37', url: 'https://flatworldknowledge.lardbucket.org/books/beginning-psychology/s08-05-accuracy-and-inaccuracy-in-per.html', citation: 'Reference image inspected for projecting sleepers and an upper bar crossing the rails. OpticEye uses original projective SVG geometry; no artwork is copied.' },
   ],
 } as const

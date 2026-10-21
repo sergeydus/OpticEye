@@ -11,7 +11,7 @@ export default function PonzoStimulus({ topGap, railsVisible }: Props) {
     <svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`} width={VIEWBOX.width} height={VIEWBOX.height} className="block h-auto w-full" role="img" aria-labelledby={`${id}-title`} aria-describedby={`${id}-description`}>
       <title id={`${id}-title`}>Ponzo illusion</title>
       <desc id={`${id}-description`}>{railsVisible
-        ? 'Two orange horizontal bars between two converging rails and six cross-ties. Compare their apparent lengths, then use Hide rails.'
+        ? 'Two orange horizontal bars over two converging rails and twelve projecting cross-ties. Compare their apparent lengths, then use Hide rails.'
         : 'The same two equal-length orange bars with only the rails and cross-ties removed.'}</desc>
       <rect data-layer="surface" x="0" y="0" width={VIEWBOX.width} height={VIEWBOX.height} fill={SURFACE_FILL} />
       {railsVisible && <g data-layer="context" strokeLinecap="butt" fill="none">
