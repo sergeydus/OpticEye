@@ -18,15 +18,15 @@ describe('checker-shadow experience', () => {
     expect(svg.querySelectorAll('[data-layer="context-tiles"] polygon')).toHaveLength(23)
     expect(svg.querySelector('[data-tile="0-0"], [data-tile="2-3"]')).toBeNull()
     expect(svg.querySelectorAll('[data-layer="board-faces"] polygon')).toHaveLength(2)
-    expect(svg.querySelector('[data-layer="cylinder"] path')).toHaveAttribute('d', 'M435.2 89.6 L435.2 181.6 A30 12 0 0 0 495.2 181.6 L495.2 89.6 Z')
-    expect(svg.querySelector('[data-layer="cylinder"] ellipse')).toHaveAttribute('cy', '89.6')
+    expect(svg.querySelector('[data-layer="cylinder"] path')?.getAttribute('d')).toMatch(/^M.* L.* A.* 0 0 .* L.* Z$/)
+    expect(Number(svg.querySelector('[data-layer="cylinder"] ellipse')?.getAttribute('cy'))).toBeCloseTo(68.8, 10)
     const pair = targets(svg)
     expect(pair).toHaveLength(2)
     expect(pair.map((n) => n.getAttribute('points'))).toEqual(['90,120 170,120 198,164 118,164', '334,252 414,252 442,296 362,296'])
     for (const target of pair) expect(target).toHaveAttribute('fill', '#707070')
     expect(svg.querySelector('[data-layer="targets"]')).toHaveAttribute('opacity', '1')
     expect(svg.querySelector('[data-layer="targets"]')).toHaveAttribute('stroke', 'none')
-    expect([...svg.querySelectorAll('[data-layer="labels"] text')].map((n) => [n.textContent, n.getAttribute('x'), n.getAttribute('y')])).toEqual([['A', '80', '149'], ['B', '324', '281']])
+    expect([...svg.querySelectorAll('[data-layer="labels"] text')].map((n) => [n.textContent, n.getAttribute('x'), n.getAttribute('y')])).toEqual([['A', '144', '142'], ['B', '388', '274']])
     expect(screen.getByRole('combobox', { name: 'Checker-shadow image size' })).toHaveValue('540')
     expect(screen.getByRole('button', { name: 'Isolate tiles' })).toHaveAttribute('aria-pressed', 'false')
     expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'false')
@@ -40,16 +40,43 @@ describe('checker-shadow experience', () => {
     const gradients = [...context.querySelectorAll('radialGradient')]
     expect(gradients).toHaveLength(2)
     for (const gradient of gradients) {
-      expect(gradient).toHaveAttribute('gradientUnits', 'userSpaceOnUse')
-      expect(gradient).toHaveAttribute('gradientTransform', 'matrix(192 0 53.2 83.6 440.8 256.4)')
+      expect(gradient).toHaveAttribute('gradientUnits', 'objectBoundingBox')
+      expect(gradient).toHaveAttribute('cx', '0.5')
+      expect(gradient).toHaveAttribute('cy', '0.5')
+      expect(gradient).toHaveAttribute('r', '0.5')
       expect(gradient).toHaveAttribute('color-interpolation', 'sRGB')
       expect([...gradient.children].map((n) => n.getAttribute('offset'))).toEqual(['0', '0.8', '1'])
     }
     expect(gradients.map((g) => [...g.children].map((n) => n.getAttribute('stop-color')))).toEqual([['#383838', '#383838', '#707070'], ['#707070', '#707070', '#E0E0E0']])
-    expect(context.querySelectorAll('linearGradient')).toHaveLength(1)
+    expect(context.querySelectorAll('linearGradient')).toHaveLength(3)
+    const patterns = [...context.querySelectorAll('pattern')]
+    expect(patterns).toHaveLength(2)
+    for (const pattern of patterns) {
+      expect(pattern).toHaveAttribute('patternUnits', 'userSpaceOnUse')
+      expect(pattern).toHaveAttribute('width', '720')
+      expect(pattern).toHaveAttribute('height', '480')
+      const background = pattern.firstElementChild!
+      expect(background.tagName).toBe('rect')
+      expect(['#707070', '#E0E0E0']).toContain(background.getAttribute('fill'))
+      const field = pattern.lastElementChild!
+      expect([...field.children].map((n) => n.tagName)).toEqual(['circle', 'circle', 'rect'])
+      expect([...field.querySelectorAll('circle')].map((n) => n.getAttribute('r'))).toEqual(['1.1', '1.1'])
+      const body = field.lastElementChild!
+      expect(Number(body.getAttribute('height'))).toBe(2.2)
+      const fillId = body.getAttribute('fill')!.slice(5, -1)
+      const gradient = document.getElementById(fillId)!
+      expect([...gradient.children].map((n) => n.getAttribute('offset'))).toEqual(['0', '0.1', '0.9', '1'])
+    }
+    for (const tile of context.querySelectorAll('[data-tile]')) {
+      const fillId = tile.getAttribute('fill')!.slice(5, -1)
+      expect(document.getElementById(fillId)?.tagName).toBe('pattern')
+    }
     for (const stop of context.querySelectorAll('stop')) expect(stop).toHaveAttribute('stop-opacity', '1')
     for (const node of svg.querySelectorAll('[fill^="url("]')) expect(context.contains(node)).toBe(true)
-    expect(svg.querySelector('filter,mask,clipPath,image,animate,[transform],[style]')).toBeNull()
+    expect(svg.querySelector('filter,mask,clipPath,image,animate,[style]')).toBeNull()
+    for (const node of svg.querySelectorAll('[transform]')) expect(context.contains(node)).toBe(true)
+    expect(svg.querySelector('[data-layer="labels"]')).toHaveAttribute('text-anchor', 'middle')
+    expect(svg.querySelector('[data-layer="labels"]')).toHaveAttribute('fill', '#111111')
   })
 
   it('isolates only context through repeated keyboard toggles, retaining targets, labels and surface nodes', async () => {
@@ -71,7 +98,7 @@ describe('checker-shadow experience', () => {
       expect(svg.querySelector('[data-layer="surface"]')).toBe(surface)
       expect(svg.querySelector('[data-layer="labels"]')).toBe(labels)
       expect(labels.outerHTML).toBe(labelData)
-      expect(svg).toHaveAccessibleDescription(/both flat #707070/)
+      expect(svg).toHaveAccessibleDescription(/both with flat #707070 fills/)
       await user.keyboard('{Enter}')
       expect(svg.querySelector('[data-layer="context"]')!.outerHTML).toBe(contextData)
     }

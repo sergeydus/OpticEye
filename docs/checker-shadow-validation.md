@@ -1,17 +1,22 @@
 # Checker-shadow validation
 
-22 October 2026. **Implemented: CS01–CS04 pass. Unlisted/noindex for owner viewing; CS05 perceptual calibration pending.** No human viewing result is recorded yet.
+22 October 2026, specification1.3. **Implemented: CS01–CS04 pass for the corrected scene. Unlisted/noindex; CS05 calibration pending.**
 
-## Construction and automated checks
+## Owner feedback and correction
 
-- Lint (including JSX accessibility), all **174 tests across25 files**, and TypeScript/Vite build pass. Twelve HTML documents build, including `dist/checker-shadow/index.html`; nine Home cards and ten nav links remain. Checker-shadow and Kanizsa have noindex and no current nav marker. Ponzo remains listed and calibrated. No dependencies or workflow changes.
-- An original25-tile affine board is partitioned into23 context polygons and two persistent congruent target polygons. Both targets use one exact **#707070** constant with opaque flat fills, no strokes or target shading. A is outside the shadow radius1; B is inside its uniform0.8 core. Tests verify exact vertices, the244/132 translation, partition/parity/bounds and the gradient matrix against the board mapping.
-- Two opaque sRGB radial gradients apply only to contextual tiles; one horizontal linear gradient applies only to the cylinder body. No image, blend mode, filter, blur, animation or shadow overlay. Isolate tiles removes the entire context and its definitions, retaining the same target, surface and label nodes. Tests cover repeated keyboard toggles, restoration, independent size/disclosure, Reset/focus, labels/state and multiple-instance references.
-- Attribution links Bach and Adelson (1993); the latter is distinguished from the1995 checker-shadow image. Bach’s text was rechecked for implementation; a repeat PubMed request returned429, so no new full-paper inspection is claimed. No third-party artwork/code was copied.
+The owner reported that the first version was wrong and supplied a screenshot. Inspection found a label-association defect: the B letter occupied the neighboring dark contextual tile, left of the actual equal-gray target. The large oval shadow also read as detached from its small cylinder. Browser, device, DPR, distance and other viewing conditions were not supplied; this is a rejection of that construction, not completed calibration.
 
-## Chromium engineering observations
+The corrected version centers persistent A/B letters inside the actual target polygons. The two polygon coordinates and shared **#707070** fill are unchanged. A directional capsule shadow starts at the enlarged cylinder’s exact projected ground-circle footprint and extends across the board. Bach’s rendered demonstration was inspected for the scene/label relationship; all new geometry and code are original, with no source artwork copied.
 
-Chrome **155.0.8059.85** in production preview at `/OpticEye/checker-shadow/`:320 and1440 CSSpx, DPR1/1.25/2, every Compact/Medium/Large size, scene/isolation/restoration: **18 cases**. Three additional cases passed at native **200% page zoom** (outer1440, inner712×552, DPR2, CSSzoom1). These are desktop browser checks, not real-phone calibration.
+## Automated engineering
+
+Lint, **175 tests across25 files**, and TypeScript/Vite production build pass. Tests cover the25-cell partition, exact target vertices/translation, shadow core/outside regions, capsule transform and paint order, fully opaque pattern/gradient context, shared projected cylinder footprint/ellipse/tangent geometry, unobstructed targets, centered labels, repeated context-only isolation, independent size/disclosure, Reset/focus and unique instance references. Both annotation and target nodes persist; letter glyphs are distinct from the flat tile fill.
+
+The board has23 contextual tiles with two opaque parity patterns. Radial end caps are painted first; the perpendicular linear-gradient body is last, matching cap/body boundaries. No filter, mask, blur, image, blend or shadow overlay over targets. The radius1.1 footprint remains inside the board. B’s maximum normalized shadow distance is0.76471 (inside0.8 core); A’s minimum exceeds2.239 (outside1). Cylinder top, body and labels fit, and the cylinder does not cover either target.
+
+## Chromium production-preview checks
+
+Chrome **155.0.8059.85**, `/OpticEye/checker-shadow/`,320/1440 CSSpx, DPR1/1.25/2, all three sizes: **18 scene/isolation/restoration cases**, plus three at native **200% zoom** (outer1440, inner712×552, DPR2, CSSzoom1). These are desktop browser engineering checks, not real-phone viewing.
 
 | Viewport | Compact | Medium | Large |
 | --- | --- | --- | --- |
@@ -19,20 +24,16 @@ Chrome **155.0.8059.85** in production preview at `/OpticEye/checker-shadow/`:32
 | 1440 | 240×160 | 540×360 | 720×480 |
 | Native200% | 240×160 | 540×360 | 648×432 |
 
-At every size/scaling combination, inset target-center pixels remain **RGB112,112,112** shown/isolated. Positive controls sample a lit light context tile at **224,224,224** and a shadowed dark context tile at **56,56,56**; both become the unchanged surface **184,184,184** on isolation. Antialiased boundaries are excluded. Target attributes/nodes, labels, surface and document-space frame bounds persist; the restored context matches the original markup. Painted label bounds (including stroke) remain outside targets.
+Two unlettered inset samples in each tile remain **RGB112,112,112** before/after isolation: A at(116,142)/(172,142); B at(360,274)/(416,274). Glyphs and antialiased edges are excluded. Lit/shadow controls are224/56 respectively and become the unchanged surface184 on isolation. Three inset samples across the far cap/body join stay56 when shown and184 when isolated, including fractional DPR. Label painted bounds lie entirely inside the matching target polygon; no letter points at a neighbor.
 
-Direct load/refresh, title/noindex/one h1, labels, keyboard Space/Enter, visible focus, Reset focus/defaults, disclosure independence and source links pass. Screenshots of default scene and isolation were inspected at320/1440 and native200%; no perception is inferred. No page overflow, console/page errors, failed requests or HTTP4xx/5xx. All12 preview documents passed direct loads, refreshes, navigation, styles/assets and discovery/current-marker checks at320/1440 (24 page/viewport cases).
+Target/surface/label nodes and attributes and document-space frame bounds persist. Restoration, keyboard Space/Enter, visible focus, Reset/defaults/focus, disclosure independence, accessible names/states, source links, title/noindex and direct load/refresh pass. Default/revealed screenshots at320/1440 and native200% were inspected for construction, labels and seams; no perceptual strength is inferred. No horizontal overflow, browser/console errors, failed requests or HTTP4xx/5xx.
 
-Evidence outside Git in the task visualization directory: `checker-shadow-preview.json`, `checker-shadow-*.png`, and the all-page report. Firefox/WebKit were not checked. Manual screen-reader testing is outside scope.
+All12 production-preview documents passed direct loads, refreshes, navigation, styles/assets and discovery/current-marker rules at320/1440 (24 cases). Home still has nine cards, nav ten links; checker-shadow and Kanizsa remain noindex/unlisted. Other features/calibration are unchanged.
 
-## Human calibration (CS05)
+Evidence outside Git: `checker-shadow-corrected-preview.json`, corrected scene/isolation screenshots and the all-page report in the task visualization directory. Firefox/WebKit were not checked. Manual screen-reader testing is outside scope.
 
-Pending. Ask two viewers on desktop and real phones whether A and B appear differently shaded with the scene and match after Isolate tiles. Record actual direction/weak responses and supplied viewing conditions. Engineering checks do not establish calibration. Listing requires separate explicit owner approval.
+## Calibration and deployment
 
-All12 development documents also passed direct loads/refreshes/navigation at320/1440 under the root base `/` on a temporary port5173 server, with no errors. Production-preview base remains `/OpticEye/`.
+CS05 remains pending. The corrected construction needs owner/two-viewer desktop and real-phone viewing; listing requires explicit owner approval. Unknown viewing conditions stay unknown.
 
-## Hosted deployment
-
-Commit `ff6145f` deployed successfully through [Pages run39680041541](https://github.com/sergeydus/OpticEye/actions/runs/39680041541). The [direct live page](https://sergeydus.github.io/OpticEye/checker-shadow/) passed Chrome155.0.8059.85 at320/1440 CSSpx, DPR1/1.25/2, every size, shown/isolated/restored (18 cases). Inset target samples remain RGB112,112,112; lit/shadow positive controls, retained nodes/frame, keyboard/focus, Reset/disclosure and source links pass. The page has static noindex and no discovery/current marker. No overflow, browser errors, failed requests or HTTP4xx/5xx. Evidence: `checker-shadow-live.json` and live screenshots outside Git. These remain engineering observations; CS05 is pending.
-
-After checker-shadow deployment, all12 live documents passed direct loads, refreshes, navigation, styles/assets, nine Home cards, ten nav links and listed/current versus unlisted/noindex behavior at320/1440 (24 page/viewport cases); no browser/console errors, failed requests, HTTP4xx/5xx or horizontal overflow.
+History: the first scene was engineered/deployed in `ff6145f` ([run39680041541](https://github.com/sergeydus/OpticEye/actions/runs/39680041541)), then rejected by the owner. Those checks did not establish correct label association or perceptual calibration. This correction retains its target polygons/fills and context-only reveal.
