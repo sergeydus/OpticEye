@@ -1,6 +1,6 @@
 # OpticEye
 
-A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. Home lists the nine public experiments; each illusion has its own static page. Confetti compares identical circles under three stripe colors and includes an oranges/netting example. Munker compares identical green bars under two stripe contexts. Café Wall explores apparent tilt in parallel mortar bands between staggered tile rows. Müller-Lyer compares fixed, equal-length shafts with opposing arrow fins. Kanizsa uses three cutout disks to suggest a triangle without drawing one. Change the context or viewing size, then reveal the unchanged targets. Each experiment owns its state and Reset; Confetti Reset also restores its oranges example.
+A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. Home lists the ten public experiments; each illusion has its own static page. Confetti compares identical circles under three stripe colors and includes an oranges/netting example. Munker compares identical green bars under two stripe contexts. Café Wall explores apparent tilt in parallel mortar bands between staggered tile rows. Müller-Lyer compares fixed, equal-length shafts with opposing arrow fins. Kanizsa uses three cutout disks to suggest a triangle without drawing one. Change the context or viewing size, then reveal the unchanged targets. Each experiment owns its state and Reset; Confetti Reset also restores its oranges example.
 
 ## Development
 
@@ -18,11 +18,11 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all eleven HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/` and `/ponzo/`.
+`build` checks TypeScript and produces all twelve HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/` and `/checker-shadow/`.
 
 ## GitHub Pages
 
-Live URL (after Pages is enabled and the workflow deploys): [https://sergeydus.github.io/OpticEye/](https://sergeydus.github.io/OpticEye/).
+Live site: [https://sergeydus.github.io/OpticEye/](https://sergeydus.github.io/OpticEye/).
 
 The Vite config uses `/OpticEye/` only when `command === 'build'`; `npm run dev` continues at `/`. Brand and navigation links use `import.meta.env.BASE_URL`, and imported assets receive the correct build path. `build.rollupOptions.input` includes Home plus each illusion's HTML document. Vitest keeps its separate configuration. Real files support direct loads and refreshes on GitHub Pages without a router or `404.html` workaround.
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all eleven addresses, including a refresh and navigation between them:
+Check all twelve addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -46,9 +46,9 @@ Check all eleven addresses, including a refresh and navigation between them:
 - [Ebbinghaus](http://localhost:4173/OpticEye/ebbinghaus/)
 - [Hering](http://localhost:4173/OpticEye/hering/)
 - [Ponzo](http://localhost:4173/OpticEye/ponzo/)
-- [Checker-shadow (unlisted, direct URL only)](http://localhost:4173/OpticEye/checker-shadow/)
+- [Checker-shadow](http://localhost:4173/OpticEye/checker-shadow/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the nine listed illusions and marks the current listed page. Unlisted Kanizsa and checker-shadow have no current marker and include static noindex robots directives. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes twelve documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus is listed/deployed and calibrated with both viewers on desktop and real phones.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Every header contains the OpticEye brand and an All illusions link, both pointing to Home using BASE_URL. Only All illusions on Home has aria-current="page". Home lists all ten approved experiments; Kanizsa remains unlisted/noindex and directly reachable. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes twelve documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus is listed/deployed and calibrated with both viewers on desktop and real phones.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner controls this setting and repository visibility; authorized pushes trigger the deployment workflow. The workflow does not automatically enable Pages.
 
@@ -80,7 +80,7 @@ Ponzo uses the same equal140-unit orange bars over two tapered rail faces and26 
 
 Create `<id>/index.html` with its own title/meta description and a relative module script for `<id>/main.tsx`. Follow either existing entry: compose the feature inside `SiteLayout` with `currentPage` set to its ID, then call `mountPage`. Keep feature geometry/state under `src/illusions/<id>/` and write its spec first.
 
-Add one item (folder ID, navigation name, title, description and listed flag) to `src/illusions.ts`. New entries must explicitly use listed:false under the shared specification. After engineering validation, commit/push the page while still unlisted/noindex and verify its Pages run/direct live URL so it can be checked on a real phone. After owner viewing approval, change the flag and remove noindex together. Phone emulation alone does not establish real-phone calibration. Unlisted pages retain their page IDs and Vite HTML inputs. That list supplies discovery and build inputs automatically; no manual build-config or component-registry entry is needed. Verify the new page directly under both the development and production bases.
+Add one item (folder ID, short name, title, description and listed flag) to `src/illusions.ts`. New entries must explicitly use listed:false under the shared specification. After engineering validation, commit/push the page while still unlisted/noindex and verify its Pages run/direct live URL so it can be checked on a real phone. After owner viewing approval, change the flag and remove noindex together. Phone emulation alone does not establish real-phone calibration. Unlisted pages retain their page IDs and Vite HTML inputs. That list supplies Home discovery and build inputs automatically; no manual build-config or component-registry entry is needed. Verify the new page directly under both the development and production bases.
 
 ## Project files
 
@@ -88,7 +88,7 @@ Add one item (folder ID, navigation name, title, description and listed flag) to
 - `confetti/index.html`, `confetti/main.tsx`: standalone Confetti page and entry.
 - `munker/index.html`, `munker/main.tsx`: standalone Munker page and entry.
 - `cafe-wall/index.html`, `cafe-wall/main.tsx`: standalone Café Wall page and entry.
-- `src/illusions.ts`: shared page metadata for home cards, navigation and build inputs.
+- `src/illusions.ts`: shared page metadata for Home cards and build inputs; the header stays independent of the number of entries.
 - `src/components/SiteLayout.tsx`, `SiteHeader.tsx`, `SiteFooter.tsx`: common shell and base-aware navigation.
 - `src/mountPage.tsx`: React mounting and shared Tailwind import.
 - `src/illusions/confetti/`: experience, SVG renderer, pure geometry/metadata, and tests.
@@ -114,4 +114,4 @@ No backend, router, analytics, or UI library is configured. The experience uses 
 
 The additional Ponzo Railway scene bundles `src/assets/ponzo-railway-ai.webp` (232,312bytes, native1264×848), with separate equal yellow bars (#FFD400). Hide image removes only its raster context; Reset Ponzo resets both examples and Reset railway scene affects only the new section. The AI caption remains visible. `src/assets/ponzo-railway-ai.ORIGIN.md` records Gemini, supplied prompts, Google terms and processing; generation date/model and separate negative-field use remain unknown. The original JPEG is preserved locally and ignored by Git.
 
-Checker-shadow is available unlisted at [its direct page](https://sergeydus.github.io/OpticEye/checker-shadow/) for owner viewing. An original shaded checkerboard surrounds two flat #707070 tiles; Isolate tiles removes only that scene, preserving the same target polygons, labels and surface. Image size and Reset use the shared controls. No source artwork, blend modes or filters are used; only the specified context receives gradients. Perceptual calibration is pending. See [its specification](docs/specs/checker-shadow.md) and [validation](docs/checker-shadow-validation.md).
+Checker-shadow is listed at [its direct page](https://sergeydus.github.io/OpticEye/checker-shadow/) with two-viewer desktop and real-phone calibration. An original shaded checkerboard surrounds two flat #707070 tiles; Isolate tiles removes only that scene, preserving the same target polygons, labels and surface. Image size and Reset use the shared controls. No source artwork, blend modes or filters are used; only the specified context receives gradients. Both viewers report A darker than B in the scene and matching after Isolate tiles; unspecified viewing conditions remain unknown. See [its specification](docs/specs/checker-shadow.md) and [validation](docs/checker-shadow-validation.md).

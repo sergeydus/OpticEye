@@ -71,7 +71,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'checker-shadow',
-    listed: false,
+    listed: true,
     name: 'Checker-shadow',
     title: 'Checker-shadow illusion',
     description: 'Compare two equal-gray tiles in a shaded scene, then isolate the same tiles without changing their fills.',

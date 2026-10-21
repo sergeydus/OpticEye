@@ -18,18 +18,18 @@ import { CheckerShadowPage } from '../checker-shadow/main'
 // Exercise the actual entry compositions without their browser root side effect.
 vi.mock('./mountPage', () => ({ mountPage: vi.fn() }))
 
-it('lists only the nine listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
+it('lists only the ten listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
   render(<App />)
   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Explore optical illusions')
   const cards = within(screen.getByRole('list'))
-  expect(cards.getAllByRole('listitem')).toHaveLength(9)
+  expect(cards.getAllByRole('listitem')).toHaveLength(10)
   expect(cards.getByRole('link', { name: 'Confetti illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}confetti/`)
   expect(cards.getByRole('link', { name: 'Munker illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}munker/`)
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
-  expect(cards.queryByRole('link', { name: 'Checker-shadow illusion' })).toBeNull()
+  expect(cards.getByRole('link', { name: 'Checker-shadow illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}checker-shadow/`)
   expect(cards.getByRole('link', { name: 'Ponzo illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}ponzo/`)
   expect(cards.getByRole('link', { name: 'Hering illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}hering/`)
   expect(cards.getByRole('link', { name: 'Ebbinghaus illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}ebbinghaus/`)
@@ -44,35 +44,35 @@ it('lists only the nine listed experiments with descriptions and document links 
   expect(screen.queryByRole('slider')).toBeNull()
 })
 
-it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering', 'ponzo', 'checker-shadow'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s and marks only %s current in the shared navigation', (base, currentPage) => {
+it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering', 'ponzo', 'checker-shadow'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s for the compact header on %s, with a current marker only on Home', (base, currentPage) => {
   render(<SiteHeader base={base} currentPage={currentPage} />)
+  const header = screen.getByRole('banner')
   const navigation = screen.getByRole('navigation', { name: 'Main navigation' })
-  expect(within(navigation).getAllByRole('link')).toHaveLength(10)
-  expect(within(navigation).queryByRole('link', { name: 'Kanizsa' })).toBeNull()
-  expect(within(navigation).queryByRole('link', { name: 'Checker-shadow' })).toBeNull()
-  for (const [name, suffix] of [['Home', ''], ['Confetti', 'confetti/'], ['Munker', 'munker/'], ['Café Wall', 'cafe-wall/'], ['Müller-Lyer', 'muller-lyer/'], ['Scintillating grid', 'scintillating-grid/'], ['Poggendorff', 'poggendorff/'], ['Ebbinghaus', 'ebbinghaus/'], ['Hering', 'hering/'], ['Ponzo', 'ponzo/']]) {
-    const link = within(navigation).getByRole('link', { name })
-    expect(link).toHaveAttribute('href', base + suffix)
-    if (suffix.replace('/', '') === (currentPage === 'home' ? '' : currentPage)) expect(link).toHaveAttribute('aria-current', 'page')
-    else expect(link).not.toHaveAttribute('aria-current')
-  }
-  expect(navigation.querySelectorAll('[aria-current="page"]')).toHaveLength(currentPage === 'kanizsa' || currentPage === 'checker-shadow' ? 0 : 1)
-  expect(screen.getByRole('link', { name: 'OpticEye' })).toHaveAttribute('href', base)
+  expect(within(header).getAllByRole('link')).toHaveLength(2)
+  expect(within(navigation).getAllByRole('link')).toHaveLength(1)
+  const brand = within(header).getByRole('link', { name: 'OpticEye' })
+  const allIllusions = within(navigation).getByRole('link', { name: 'All illusions' })
+  expect(brand).toHaveAttribute('href', base)
+  expect(brand).not.toHaveAttribute('aria-current')
+  expect(allIllusions).toHaveAttribute('href', base)
+  if (currentPage === 'home') expect(allIllusions).toHaveAttribute('aria-current', 'page')
+  else expect(allIllusions).not.toHaveAttribute('aria-current')
+  expect(header.querySelectorAll('[aria-current="page"]')).toHaveLength(currentPage === 'home' ? 1 : 0)
 })
 
 it.each([
-  { Page: CheckerShadowPage, title: 'Checker-shadow illusion', image: 'Checker-shadow illusion', current: 'Checker-shadow', absent: 'Confetti illusion' },
-  { Page: ConfettiPage, title: 'Confetti illusion', image: 'Confetti color illusion', current: 'Confetti', absent: 'Munker illusion' },
-  { Page: MunkerPage, title: 'Munker illusion', image: 'Munker color illusion', current: 'Munker', absent: 'Confetti illusion' },
-  { Page: KanizsaPage, title: 'Kanizsa triangle', image: 'Kanizsa triangle', current: 'Kanizsa', absent: 'Confetti illusion' },
-  { Page: ScintillatingGridPage, title: 'Scintillating grid', image: 'Scintillating grid', current: 'Scintillating grid', absent: 'Confetti illusion' },
-  { Page: PonzoPage, title: 'Ponzo illusion', image: 'Ponzo illusion', current: 'Ponzo', absent: 'Confetti illusion' },
-  { Page: HeringPage, title: 'Hering illusion', image: 'Hering illusion', current: 'Hering', absent: 'Confetti illusion' },
-  { Page: EbbinghausPage, title: 'Ebbinghaus illusion', image: 'Ebbinghaus illusion', current: 'Ebbinghaus', absent: 'Confetti illusion' },
-  { Page: PoggendorffPage, title: 'Poggendorff illusion', image: 'Poggendorff illusion', current: 'Poggendorff', absent: 'Confetti illusion' },
-  { Page: MullerLyerPage, title: 'Müller-Lyer illusion', image: 'Müller-Lyer illusion', current: 'Müller-Lyer', absent: 'Confetti illusion' },
-  { Page: CafeWallPage, title: 'Café Wall illusion', image: 'Café Wall illusion', current: 'Café Wall', absent: 'Confetti illusion' },
-])('mounts only $title at its real HTML entry composition', ({ Page, title, image, current, absent }) => {
+  { Page: CheckerShadowPage, title: 'Checker-shadow illusion', image: 'Checker-shadow illusion', absent: 'Confetti illusion' },
+  { Page: ConfettiPage, title: 'Confetti illusion', image: 'Confetti color illusion', absent: 'Munker illusion' },
+  { Page: MunkerPage, title: 'Munker illusion', image: 'Munker color illusion', absent: 'Confetti illusion' },
+  { Page: KanizsaPage, title: 'Kanizsa triangle', image: 'Kanizsa triangle', absent: 'Confetti illusion' },
+  { Page: ScintillatingGridPage, title: 'Scintillating grid', image: 'Scintillating grid', absent: 'Confetti illusion' },
+  { Page: PonzoPage, title: 'Ponzo illusion', image: 'Ponzo illusion', absent: 'Confetti illusion' },
+  { Page: HeringPage, title: 'Hering illusion', image: 'Hering illusion', absent: 'Confetti illusion' },
+  { Page: EbbinghausPage, title: 'Ebbinghaus illusion', image: 'Ebbinghaus illusion', absent: 'Confetti illusion' },
+  { Page: PoggendorffPage, title: 'Poggendorff illusion', image: 'Poggendorff illusion', absent: 'Confetti illusion' },
+  { Page: MullerLyerPage, title: 'Müller-Lyer illusion', image: 'Müller-Lyer illusion', absent: 'Confetti illusion' },
+  { Page: CafeWallPage, title: 'Café Wall illusion', image: 'Café Wall illusion', absent: 'Confetti illusion' },
+])('mounts only $title at its real HTML entry composition', ({ Page, title, image, absent }) => {
   render(<Page />)
   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title)
@@ -80,12 +80,14 @@ it.each([
   expect(screen.getAllByRole('article')).toHaveLength(1)
   expect(screen.queryByRole('article', { name: absent })).toBeNull()
   expect(screen.getByRole('img', { name: image })).toBeVisible()
+  const header = screen.getByRole('banner')
   const navigation = screen.getByRole('navigation', { name: 'Main navigation' })
-  expect(within(navigation).getAllByRole('link')).toHaveLength(10)
-  const activeLink = navigation.querySelector('[aria-current="page"]')
-  if (current === 'Kanizsa' || current === 'Checker-shadow') expect(activeLink).toBeNull()
-  else expect(activeLink).toHaveTextContent(current)
-  expect(screen.getByRole('banner')).toBeVisible()
+  expect(within(header).getAllByRole('link')).toHaveLength(2)
+  expect(within(navigation).getAllByRole('link')).toHaveLength(1)
+  expect(within(header).getByRole('link', { name: 'OpticEye' })).toHaveAttribute('href', import.meta.env.BASE_URL)
+  expect(within(navigation).getByRole('link', { name: 'All illusions' })).toHaveAttribute('href', import.meta.env.BASE_URL)
+  expect(header.querySelector('[aria-current]')).toBeNull()
+  expect(header).toBeVisible()
   expect(screen.getByRole('contentinfo')).toBeVisible()
   expect(screen.queryByRole('navigation', { name: 'Illusions' })).toBeNull()
 })

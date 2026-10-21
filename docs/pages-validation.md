@@ -2,7 +2,15 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current structure (21 October 2026): ten documents, seven listed Home cards and eight header links. Kanizsa stays unlisted/noindex, calibration not pursued. Ebbinghaus listing/deployment is approved; both viewers confirmed its default effect/reveal on desktop and real phones, completing calibration. Hering is implemented/deployed unlisted/noindex with calibration pending for real-phone viewing. Earlier checkpoints are historical.
+Historical structure (21 October 2026): ten documents, seven listed Home cards and eight header links. Kanizsa stays unlisted/noindex, calibration not pursued. Ebbinghaus listing/deployment is approved; both viewers confirmed its default effect/reveal on desktop and real phones, completing calibration. Hering is implemented/deployed unlisted/noindex with calibration pending for real-phone viewing. Earlier checkpoints are historical.
+
+## Current structure — 22 October 2026
+
+Checker-shadow now has explicit owner listing approval and completed two-viewer desktop/real-phone calibration. Home lists ten illusions; Kanizsa remains unlisted/noindex, and all twelve documents still build. Every header has exactly two links, OpticEye and All illusions, both to Home using BASE_URL. The Main navigation landmark contains only All illusions, marked aria-current only on Home. This replaces historical per-illusion nav counts below.
+
+Specs/AGENTS were updated before code. Lint, all175 tests across25 files and TypeScript/Vite build pass. No geometry, dependencies, routing or workflow changes. Chrome155.0.8059.85 production preview passed all12 documents at320/1440 CSSpx (24 direct-load/refresh cases), plus20 navigation cases through All illusions, Home cards and the brand. Titles/descriptions, styles/assets, ten listed cards including checker-shadow, onlyKanizsa noindex, exactlytwo header Home links, Home-only current marker, ≥44px link targets and visible keyboard focus all pass. No overflow, console/page errors, failed requests or HTTP4xx/5xx.
+
+Native200% zoom also passes on Home, checker-shadow and Kanizsa. Checker-shadow default/isolation/Reset retains the exact target nodes/attributes/bounds and #707070 fills. Home320 and checker1440 screenshots were inspected; the compact header fits. Evidence outside Git: compact-nav-preview.json and compact-nav-preview-*.png in the task visualization directory.
 
 ## Hering engineering checkpoint
 
@@ -78,3 +86,5 @@ Ponzo is owner-approved listed, with the calibrated railway scene first and unch
 All12 development documents also passed direct loads/refreshes/navigation at320/1440 under the root base `/` on a temporary port5173 server, with no errors. Production-preview base remains `/OpticEye/`.
 
 After checker-shadow deployment, all12 live documents passed direct loads, refreshes, navigation, styles/assets, nine Home cards, ten nav links and listed/current versus unlisted/noindex behavior at320/1440 (24 page/viewport cases); no browser/console errors, failed requests, HTTP4xx/5xx or horizontal overflow.
+
+The same12 development routes passed at320/1440 under `/` (24 direct-load/refresh and20 navigation cases, no errors). The temporary port5173 server was stopped. Native200% preview metrics: outer1440, inner712×552, DPR2, CSSzoom1. At320, header link bounds were brand116.03×44 and All illusions71.97×44 CSSpx. Evidence: compact-nav-dev.json and compact-nav-preview.json outside Git.
