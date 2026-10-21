@@ -20,8 +20,8 @@ const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visi
 export default function PonzoRailwayExample({ visible, viewingWidth, status, onToggle, onViewingWidthChange, onReset, explanationTarget, onShowExplanation }: Props) {
   const id = useId()
   return (
-    <section aria-labelledby={`${id}-heading`} className="mt-10 border-t border-slate-300 pt-8 sm:mt-14">
-      <p className="font-mono text-xs tracking-widest text-teal-800 uppercase">03 / Another perspective</p>
+    <section aria-labelledby={`${id}-heading`} className="mt-8">
+      <p className="font-mono text-xs tracking-widest text-teal-800 uppercase">01 / Railway perspective</p>
       <h2 id={`${id}-heading`} className="mt-3 text-2xl font-semibold tracking-tight">Railway scene</h2>
       <p id={`${id}-instructions`} className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">Which yellow bar looks longer here? Compare them over the receding track, then hide the image.</p>
       <div className="mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,720px)_minmax(240px,1fr)] lg:gap-10">
@@ -48,7 +48,7 @@ export default function PonzoRailwayExample({ visible, viewingWidth, status, onT
           <ViewingSizeControl id={`${id}-size`} label="Railway image size" value={normalizeViewingWidth(viewingWidth)} choices={VIEWING_SIZES} onChange={onViewingWidthChange} />
           <output aria-live="polite" aria-atomic="true" className="mt-5 block min-h-12 text-sm leading-relaxed text-teal-900">{status}</output>
           <p className="mt-5 text-sm leading-relaxed text-slate-600">Perspective and texture provide depth cues. The effect can vary with viewer, display and image size. This generated scene is another experiment to compare with the drawing.</p>
-          <a href={`#${explanationTarget}`} onClick={onShowExplanation} className={`mt-3 inline-flex min-h-11 items-center text-sm text-teal-800 underline underline-offset-4 ${focus}`}>Back to the Ponzo explanation</a>
+          <a href={`#${explanationTarget}`} onClick={onShowExplanation} className={`mt-3 inline-flex min-h-11 items-center text-sm text-teal-800 underline underline-offset-4 ${focus}`}>Read the Ponzo explanation</a>
         </div>
       </div>
     </section>

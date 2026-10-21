@@ -64,7 +64,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'ponzo',
-    listed: false,
+    listed: true,
     name: 'Ponzo',
     title: 'Ponzo illusion',
     description: 'Compare equal bars between converging rails, then hide the perspective context without changing either bar.',

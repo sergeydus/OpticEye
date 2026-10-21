@@ -38,12 +38,22 @@ export default function Ponzo() {
       <div className="mb-8 sm:mb-10">
         <p className="mb-4 font-mono text-xs tracking-widest text-teal-800 uppercase">Experiment 010 / Length & perspective</p>
         <h1 id={`${id}-heading`} className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">{PONZO.title}</h1>
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{PONZO.instructions}</p>
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">Can the surrounding scene change how long a bar looks?</p>
       </div>
+      <PonzoRailwayExample
+        visible={railwayVisible} viewingWidth={railwayWidth} status={railwayStatus}
+        onToggle={() => { setRailwayVisible(!railwayVisible); setRailwayStatus(railwayVisible ? RAILWAY_PROOF : 'AI-generated railway image shown.') }}
+        onViewingWidthChange={(width) => setRailwayWidth(normalizeViewingWidth(width))}
+        onReset={() => { setRailwayVisible(true); setRailwayWidth(DEFAULT_VIEWING_WIDTH); setRailwayStatus('Railway scene reset.') }}
+        explanationTarget={`${id}-explanation`} onShowExplanation={() => setExplanationOpen(true)}
+      />
+      <section aria-labelledby={`${id}-drawing`} className="mt-10 border-t border-slate-300 pt-8 sm:mt-14">
+        <p className="font-mono text-xs tracking-widest text-teal-800 uppercase">02 / Drawn perspective</p>
+        <h2 id={`${id}-drawing`} className="mt-3 mb-6 text-2xl font-semibold tracking-tight">Line drawing</h2>
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,720px)_minmax(240px,1fr)] lg:gap-10">
         <div className="min-w-0">
           <div className="mb-3 flex items-center justify-between gap-3 font-mono text-xs text-slate-600">
-            <span>01 / Observe</span><span>{railsVisible ? 'Rails visible' : 'Rails hidden'}</span>
+            <span>Observe</span><span>{railsVisible ? 'Rails visible' : 'Rails hidden'}</span>
           </div>
           <div data-ponzo-viewing-frame className="mx-auto w-full" style={{ maxWidth: viewingWidth }}>
             <div className="overflow-hidden outline outline-slate-300"><PonzoStimulus topGap={topGap} railsVisible={railsVisible} /></div>
@@ -55,7 +65,7 @@ export default function Ponzo() {
           <p className="forced-colors-note mt-3 text-sm">System color overrides may change this demonstration.</p>
         </div>
         <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
-          <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
+          <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">Explore</h2>
           <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Remove the rails and cross-ties to compare the orange bars.</p>
           <button type="button" aria-pressed={!railsVisible} aria-describedby={`${id}-reveal-help`} onClick={toggleRails} className={`min-h-12 w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>Hide rails</button>
           <button type="button" onClick={reset} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Reset Ponzo</button>
@@ -71,6 +81,7 @@ export default function Ponzo() {
           <output aria-live="polite" aria-atomic="true" className="mt-5 block min-h-12 text-sm leading-relaxed text-teal-900">{status}</output>
         </section>
       </div>
+      </section>
       <section className="mt-10 border-t border-slate-300 sm:mt-14">
         <h2><button id={`${id}-explanation-toggle`} type="button" aria-expanded={explanationOpen} aria-controls={`${id}-explanation`} onClick={() => setExplanationOpen(!explanationOpen)} className={`flex min-h-16 w-full items-center justify-between gap-4 py-5 text-left text-lg font-medium ${focus}`}>
           Why it happens<span aria-hidden="true" className="font-mono text-xl text-slate-600">{explanationOpen ? '−' : '+'}</span>
@@ -83,13 +94,7 @@ export default function Ponzo() {
           </ul>
         </div>
       </section>
-      <PonzoRailwayExample
-        visible={railwayVisible} viewingWidth={railwayWidth} status={railwayStatus}
-        onToggle={() => { setRailwayVisible(!railwayVisible); setRailwayStatus(railwayVisible ? RAILWAY_PROOF : 'AI-generated railway image shown.') }}
-        onViewingWidthChange={(width) => setRailwayWidth(normalizeViewingWidth(width))}
-        onReset={() => { setRailwayVisible(true); setRailwayWidth(DEFAULT_VIEWING_WIDTH); setRailwayStatus('Railway scene reset.') }}
-        explanationTarget={`${id}-explanation`} onShowExplanation={() => setExplanationOpen(true)}
-      />
+
     </article>
   )
 }

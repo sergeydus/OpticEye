@@ -86,7 +86,7 @@ describe('additional railway scene', () => {
     fireEvent.change(screen.getByRole('slider'), { target: { value: '24' } })
     await user.click(screen.getByRole('button', { name: 'Hide rails' }))
     await user.click(screen.getByRole('button', { name: 'Hide image' }))
-    await user.click(screen.getByRole('link', { name: 'Back to the Ponzo explanation' }))
+    await user.click(screen.getByRole('link', { name: 'Read the Ponzo explanation' }))
     expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'true')
     expect(svg().querySelector('image')).toBeNull()
     const local = screen.getByRole('button', { name: 'Reset railway scene' })
