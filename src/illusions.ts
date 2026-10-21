@@ -57,7 +57,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'hering',
-    listed: false,
+    listed: true,
     name: 'Hering',
     title: 'Hering illusion',
     description: 'Straight parallel lines can appear bowed across a radial background. Hide the rays to compare their actual geometry.',

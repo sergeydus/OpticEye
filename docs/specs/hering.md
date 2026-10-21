@@ -1,8 +1,8 @@
 # Hering specification
 
-Status: **implemented; perceptual calibration pending**. Version 1.3, 21 October 2026. Fourth in implementation order. ID/folder: `hering`; title/h1: “Hering illusion”; HTML title: “Hering illusion | OpticEye”. Description: “Straight parallel lines can appear bowed across a radial background. Hide the rays to compare their actual geometry.”
+Status: **implemented and calibrated on desktop and mobile**. Version 1.4, 21 October 2026. Fourth in implementation order. ID/folder: `hering`; title/h1: “Hering illusion”; HTML title: “Hering illusion | OpticEye”. Description: “Straight parallel lines can appear bowed across a radial background. Hide the rays to compare their actual geometry.”
 
-Inherit shared page setup, initial unlisted/noindex state, Reset, accessibility, normalization, engineering checks and two-viewer calibration from [implementation.md](implementation.md). This is a static original radial-fan construction, not Bach's combined Hering/Zöllner artwork or a motion variant.
+Inherit shared page setup, owner-approved listed state, Reset, accessibility, normalization, engineering checks and two-viewer calibration from [implementation.md](implementation.md). This is a static original radial-fan construction, not Bach's combined Hering/Zöllner artwork or a motion variant.
 
 ## 1. Source and attribution
 
@@ -60,7 +60,7 @@ If a tested default is weak, revise the spec before moving the fan center or tar
 | HE01 | Two exact 360-unit vertical targets at x320/400 with common stroke, constant 80-unit separation and no transforms. Default N60 has the documented crossings/angles. All four supported N values produce N unique directions, opposite pairs, exact cardinals and correctly intersected endpoints within stroke-safe bounds. Normalization never emits non-finite geometry. |
 | HE02 | Ray group is behind targets. Repeated Hide rays retains target DOM nodes/attributes, surface, viewBox and displayed bounds; only the N context lines disappear. No curved targets, replacement guides, filters or animation. |
 | HE03 | Ray count modifies only fan geometry; hidden changes preserve visibility. Size/disclosure/Reset follow shared behavior and restore N60/shown/Medium/closed. SVG/copy distinguishes objective straightness from perceived bowing. |
-| HE04 | Shared engineering/page/tests checklist passes with an unlisted/noindex direct page; include all counts, image sizes and specified DPR checks. Record actual results in docs/hering-validation.md, preserving existing feature records. |
+| HE04 | Shared engineering/page/tests checklist passes with a listed page, no noindex tag and current navigation marker; include all counts, image sizes and specified DPR checks. Record actual results in docs/hering-validation.md, preserving existing feature records. |
 | HE05 | Calibration only: two viewers on desktop/mobile compare default red lines with rays present/absent and report perceived bowing/straightness, including weak or absent responses. Follow shared size-scoped status and separate owner listing approval. |
 
-HE01–HE04 pass for this revision; see [actual validation](../hering-validation.md). HE05 remains pending and defines calibration. The original implementation was deployed unlisted/noindex. On 21 October 2026 the owner approved trying 80-unit separation and 60 rays and requested community-example research. Keep it unlisted pending further viewing and owner listing approval; publish the validated revision under the shared unlisted-preview workflow.
+HE01–HE05 complete; see [actual validation](../hering-validation.md). The owner reports that both viewers on desktop and real phones see the red lines bowed with rays and straight without. Browser, DPR, distance, zoom and exact count/image settings were not supplied. Owner listing/deployment approval is explicit. The80-unit/60-ray revision is the current construction; earlier weak-effect feedback remains history.

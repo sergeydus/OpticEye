@@ -1,6 +1,6 @@
 # Hering validation
 
-21 October 2026. **Implemented; perceptual calibration pending.** HE01–HE04 pass. Hering remains **listed:false/noindex**, with no current navigation marker. The owner authorizes committing/pushing it while unlisted for real-phone viewing through the direct URL before deciding whether to list. Ebbinghaus deployment/live checks passed before implementation began.
+21 October 2026. **Implemented and calibrated on desktop and mobile. HE01–HE05 complete.** The owner approves listing/deployment: listed:true, no noindex tag, and Hering marked current in its navigation. Earlier unlisted browser results below describe the trial before this approval.
 
 ## Engineering
 
@@ -27,10 +27,14 @@ Evidence outside Git in the task visualization directory: `hering-browser-check.
 
 ## Human viewing (HE05)
 
-**Owner feedback: effect is too subtle.** Reported21 October2026; device, browser, zoom, selected count/size and viewing distance were not supplied. This is a weak-effect observation, not a calibration pass. No second-viewer report is available; desktop/mobile calibration remains pending. See [strengthening research](hering-research.md) for primary sources, community reports and the baseline geometry audit. The owner then approved trying separation80/default60 rays; fresh human viewing of that revision is pending. Record further perceived bowing/straightness and weak/absent responses with supplied conditions only. Phone emulation does not establish real-phone calibration. Owner listing approval remains separate, and Hering stays unlisted.
+**HE05 complete on desktop and real phones.** The owner reports viewer1 and viewer2 both confirmed: the red lines look bowed with rays and straight without. No browser, DPR, distance, zoom, exact image size or ray-count details were supplied; none are inferred from engineering checks. The owner explicitly approves listing. Earlier feedback found the200-unit/36-ray baseline weak; after the80-unit/60-ray revision the owner reported a much stronger effect, then supplied this two-viewer confirmation.
 
 ## Deployment and short history
 
 - Baseline: separation200/default36 rays, deployed unlisted at85ec35b; [Pages run39587386335](https://github.com/sergeydus/OpticEye/actions/runs/39587386335) and live checks passed. The owner subsequently found it too subtle; conditions were unspecified.
 - Revised trial,21 October2026: spec updated first, then target separation80/default60 rays, with all other geometry/colors/reveal behavior unchanged. Lint,144 tests/build and the production-preview matrix above were rerun and passed. Default shown/hidden screenshots at320/1440/DPR1 and native200% were inspected, plus Compact60 rays at DPR1.25. The dark convergence cluster and thin antialiased rays remain visible; screenshots do not establish stronger perception. Seven listed cards/eight navigation links and ten build pages remain unchanged.
-- Revised hosted deployment: commit9bb76a5; [Pages run39590205245](https://github.com/sergeydus/OpticEye/actions/runs/39590205245) succeeded. Chrome155 live checks passed for all ten pages at320/1440,DPR1, direct loads/refreshes, styles/images, listed nav/brand links, Hering noindex/no active marker, default60 rays, hidden updates, unchanged targets and Reset60. A separate live coordinate check confirmed x320/400 and y60–420. No overflow, console/page errors, failed requests or HTTP4xx/5xx. Evidence: pages-hering-live.json and hering-live-*.png outside Git. Direct viewing URL: https://sergeydus.github.io/OpticEye/hering/. Hering remains unlisted/noindex; owner listing approval and two-viewer calibration remain separate.
+- Revised hosted deployment: commit9bb76a5; [Pages run39590205245](https://github.com/sergeydus/OpticEye/actions/runs/39590205245) succeeded. Chrome155 live checks passed for all ten pages at320/1440,DPR1, direct loads/refreshes, styles/images, listed nav/brand links, Hering noindex/no active marker, default60 rays, hidden updates, unchanged targets and Reset60. A separate live coordinate check confirmed x320/400 and y60–420. No overflow, console/page errors, failed requests or HTTP4xx/5xx. Evidence: pages-hering-live.json and hering-live-*.png outside Git. Direct viewing URL: https://sergeydus.github.io/OpticEye/hering/. This trial was unlisted/noindex; the owner has now confirmed calibration and approved listing.
+
+## Owner-approved listing checks
+
+21 October2026: lint,144 tests and build passed after listing. All ten production-preview pages passed direct loads/refreshes/navigation at320/1440,DPR1, with eight Home cards/nine header links. Hering has no noindex tag and has its own current marker; Kanizsa stays unlisted/noindex. Hering reveal/reset, loaded styles/assets and no overflow/errors/HTTP4xx–5xx passed. Hosted listing deployment is recorded with the next feature validation after it completes.
