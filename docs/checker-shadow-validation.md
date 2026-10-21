@@ -30,3 +30,9 @@ Evidence outside Git in the task visualization directory: `checker-shadow-previe
 Pending. Ask two viewers on desktop and real phones whether A and B appear differently shaded with the scene and match after Isolate tiles. Record actual direction/weak responses and supplied viewing conditions. Engineering checks do not establish calibration. Listing requires separate explicit owner approval.
 
 All12 development documents also passed direct loads/refreshes/navigation at320/1440 under the root base `/` on a temporary port5173 server, with no errors. Production-preview base remains `/OpticEye/`.
+
+## Hosted deployment
+
+Commit `ff6145f` deployed successfully through [Pages run39680041541](https://github.com/sergeydus/OpticEye/actions/runs/39680041541). The [direct live page](https://sergeydus.github.io/OpticEye/checker-shadow/) passed Chrome155.0.8059.85 at320/1440 CSSpx, DPR1/1.25/2, every size, shown/isolated/restored (18 cases). Inset target samples remain RGB112,112,112; lit/shadow positive controls, retained nodes/frame, keyboard/focus, Reset/disclosure and source links pass. The page has static noindex and no discovery/current marker. No overflow, browser errors, failed requests or HTTP4xx/5xx. Evidence: `checker-shadow-live.json` and live screenshots outside Git. These remain engineering observations; CS05 is pending.
+
+After checker-shadow deployment, all12 live documents passed direct loads, refreshes, navigation, styles/assets, nine Home cards, ten nav links and listed/current versus unlisted/noindex behavior at320/1440 (24 page/viewport cases); no browser/console errors, failed requests, HTTP4xx/5xx or horizontal overflow.

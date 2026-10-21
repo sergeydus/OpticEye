@@ -76,3 +76,5 @@ The Pages workflow already deploys all of `dist/` and is unchanged. The Munker c
 Ponzo is owner-approved listed, with the calibrated railway scene first and unchanged drawing second. Checker-shadow adds the twelfth document unlisted/noindex; Home has nine cards and every header has ten links. Kanizsa stays unlisted. All12 production-preview documents passed direct loads/refreshes/navigation/assets/styles and current-marker/noindex checks at320/1440 CSSpx, with no overflow, browser errors or HTTP4xx/5xx. The checker-shadow pixel/size/DPR/zoom matrix is recorded in [its validation](checker-shadow-validation.md).
 
 All12 development documents also passed direct loads/refreshes/navigation at320/1440 under the root base `/` on a temporary port5173 server, with no errors. Production-preview base remains `/OpticEye/`.
+
+After checker-shadow deployment, all12 live documents passed direct loads, refreshes, navigation, styles/assets, nine Home cards, ten nav links and listed/current versus unlisted/noindex behavior at320/1440 (24 page/viewport cases); no browser/console errors, failed requests, HTTP4xx/5xx or horizontal overflow.
