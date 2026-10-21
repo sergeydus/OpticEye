@@ -1,12 +1,12 @@
 # Poggendorff validation
 
-21 October 2026. **Repeated-strip revision implemented; perceptual calibration pending.** PG01–PG04 pass. Remains **listed:false/noindex**, with direct local access and no current nav marker. No listing or push is authorized. Existing illusions/calibration are unchanged.
+21 October 2026. **Implemented and calibrated on desktop and mobile.** PG01–PG05 complete. The owner approves **listed:true**, removal of noindex and deployment; its nav link now receives the current-page marker. Existing illusions/calibration are unchanged.
 
 ## Engineering
 
 - Lint/accessibility lint, **119 tests across16 files**, and TypeScript/Vite build pass. Nine feature tests now cover the revised construction: all **136** angle/width combinations, shared straight-line equation/vertical pitch, exact frame-boundary intersections, finite coordinates, parallelism, stroke bounds and deterministic geometry. Default70° has31 complete diagonals;45° has15 and80° has57. Eight yellow strips repeat every80 drawing units, range0–64/step4/default40. Zero-width strips paint nothing and preserve all diagonals and the independent Hide strips state.
 - Tests verify paint order, exact black/white/yellow palette and repeated reveal retaining **every line DOM node and attribute** plus the white surface. Only the strip group disappears. Width changes preserve all line geometry; angle explicitly changes orientation/clipping/count while hidden. Size/disclosure independence, Reset70°/40/shown/Medium/closed, focus, source links, isolated instances, unique references and normalization pass.
-- Eight HTML outputs remain, including `dist/poggendorff/index.html`. Home has five cards and header navigation six links; Kanizsa/Poggendorff are unlisted/noindex. No dependency, router, animation, assets or workflow changes.
+- Eight HTML outputs remain, including `dist/poggendorff/index.html`. After listing, Home has six cards and header navigation seven links; only Kanizsa is unlisted/noindex. No dependency, router, animation, assets or workflow changes.
 
 ## Chromium production preview
 
@@ -27,8 +27,12 @@ Evidence outside Git in the task visualization directory: `poggendorff-v21-brows
 
 Final zero-width status wording was checked after rebuilding at320/1440,DPR1: hide/restore leaves width0 and every line unchanged, describes zero rather than claiming visible strips, and Reset restores40. The full49-case matrix preceded this wording-only change.
 
+## Listing verification
+
+After owner approval, lint,119 tests/16 files and build pass. Chrome155 checked all eight preview pages directly/after refresh at320/1440,DPR1: six cards, seven nav links, Poggendorff current marker, no noindex, retained-line reveal/Reset, styles/images and no overflow/errors/404s. Report: `pages-poggendorff-listed.json` outside Git.
+
 ## Human viewing (PG05) and short history
 
 - **Initial single-line version:** owner reported the effect was much less noticeable than Bach's demonstration, then explicitly selected the repeated yellow-strip example on its right. Device, browser, zoom, DPR and viewing distance were not supplied. Record this as weak feedback, not a pass.
-- **Current repeated-strip revision:** **0 of2 viewers reported; desktop/mobile pending.** Compare apparent misalignment at default70°/width40 with straightness after Hide strips. Record supplied conditions and weak/absent/opposite responses without inferring them from screenshots. Owner listing approval remains separate.
-- Initial local implementation checkpoint: `2c17ebd`. The grid's successful [Pages run39510721006](https://github.com/sergeydus/OpticEye/actions/runs/39510721006) deployed20d2c86 before Poggendorff. Neither Poggendorff version is included in that deployment.
+- **Current repeated-strip revision, 21 October 2026:** viewer1 and viewer2 both confirmed on **desktop and real phones**: segments look misaligned with yellow strips and straight without. **PG05 complete on desktop/mobile.** Owner separately approves listing and deployment. Browser, DPR, viewing distance, page zoom, exact controls and image-size selections were not supplied; none is inferred.
+- Initial local implementation checkpoint: `2c17ebd`. The grid's successful [Pages run39510721006](https://github.com/sergeydus/OpticEye/actions/runs/39510721006) deployed20d2c86 before Poggendorff. That earlier deployment does not include Poggendorff. The current listing/deployment checkpoint follows it; deployment result will be recorded after verification.

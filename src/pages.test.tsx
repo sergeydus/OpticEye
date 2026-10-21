@@ -14,18 +14,18 @@ import { PoggendorffPage } from '../poggendorff/main'
 // Exercise the actual entry compositions without their browser root side effect.
 vi.mock('./mountPage', () => ({ mountPage: vi.fn() }))
 
-it('lists only the five listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
+it('lists only the six listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
   render(<App />)
   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Explore optical illusions')
   const cards = within(screen.getByRole('list'))
-  expect(cards.getAllByRole('listitem')).toHaveLength(5)
+  expect(cards.getAllByRole('listitem')).toHaveLength(6)
   expect(cards.getByRole('link', { name: 'Confetti illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}confetti/`)
   expect(cards.getByRole('link', { name: 'Munker illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}munker/`)
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
-  expect(cards.queryByRole('link', { name: 'Poggendorff illusion' })).toBeNull()
+  expect(cards.getByRole('link', { name: 'Poggendorff illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}poggendorff/`)
   expect(cards.getByRole('link', { name: 'Scintillating grid' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}scintillating-grid/`)
   expect(cards.queryByText(/Aligned cutout disks/)).toBeNull()
   expect(cards.getByText(/Arrow fins can change/)).toBeVisible()
@@ -39,16 +39,15 @@ it('lists only the five listed experiments with descriptions and document links 
 it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s and marks only %s current in the shared navigation', (base, currentPage) => {
   render(<SiteHeader base={base} currentPage={currentPage} />)
   const navigation = screen.getByRole('navigation', { name: 'Main navigation' })
-  expect(within(navigation).getAllByRole('link')).toHaveLength(6)
+  expect(within(navigation).getAllByRole('link')).toHaveLength(7)
   expect(within(navigation).queryByRole('link', { name: 'Kanizsa' })).toBeNull()
-  expect(within(navigation).queryByRole('link', { name: 'Poggendorff' })).toBeNull()
-  for (const [name, suffix] of [['Home', ''], ['Confetti', 'confetti/'], ['Munker', 'munker/'], ['Café Wall', 'cafe-wall/'], ['Müller-Lyer', 'muller-lyer/'], ['Scintillating grid', 'scintillating-grid/']]) {
+  for (const [name, suffix] of [['Home', ''], ['Confetti', 'confetti/'], ['Munker', 'munker/'], ['Café Wall', 'cafe-wall/'], ['Müller-Lyer', 'muller-lyer/'], ['Scintillating grid', 'scintillating-grid/'], ['Poggendorff', 'poggendorff/']]) {
     const link = within(navigation).getByRole('link', { name })
     expect(link).toHaveAttribute('href', base + suffix)
     if (suffix.replace('/', '') === (currentPage === 'home' ? '' : currentPage)) expect(link).toHaveAttribute('aria-current', 'page')
     else expect(link).not.toHaveAttribute('aria-current')
   }
-  expect(navigation.querySelectorAll('[aria-current="page"]')).toHaveLength(currentPage === 'kanizsa' || currentPage === 'poggendorff' ? 0 : 1)
+  expect(navigation.querySelectorAll('[aria-current="page"]')).toHaveLength(currentPage === 'kanizsa' ? 0 : 1)
   expect(screen.getByRole('link', { name: 'OpticEye' })).toHaveAttribute('href', base)
 })
 
@@ -69,9 +68,9 @@ it.each([
   expect(screen.queryByRole('article', { name: absent })).toBeNull()
   expect(screen.getByRole('img', { name: image })).toBeVisible()
   const navigation = screen.getByRole('navigation', { name: 'Main navigation' })
-  expect(within(navigation).getAllByRole('link')).toHaveLength(6)
+  expect(within(navigation).getAllByRole('link')).toHaveLength(7)
   const activeLink = navigation.querySelector('[aria-current="page"]')
-  if (current === 'Kanizsa' || current === 'Poggendorff') expect(activeLink).toBeNull()
+  if (current === 'Kanizsa') expect(activeLink).toBeNull()
   else expect(activeLink).toHaveTextContent(current)
   expect(screen.getByRole('banner')).toBeVisible()
   expect(screen.getByRole('contentinfo')).toBeVisible()
