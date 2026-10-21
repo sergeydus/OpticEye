@@ -48,6 +48,13 @@ export const ILLUSIONS = [
     title: 'Poggendorff illusion',
     description: 'Parallel diagonals can appear misaligned behind yellow strips. Hide the strips to expose the same continuous lines.',
   },
+  {
+    id: 'ebbinghaus',
+    listed: false,
+    name: 'Ebbinghaus',
+    title: 'Ebbinghaus illusion',
+    description: 'Equal center circles meet different surrounding circles. Hide the surrounds to compare their actual sizes.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

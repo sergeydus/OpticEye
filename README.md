@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all eight HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/` and `/poggendorff/`.
+`build` checks TypeScript and produces all nine HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/` and `/ebbinghaus/`.
 
 ## GitHub Pages
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all eight addresses, including a refresh and navigation between them:
+Check all nine addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -43,8 +43,9 @@ Check all eight addresses, including a refresh and navigation between them:
 - [Kanizsa (unlisted, direct URL only)](http://localhost:4173/OpticEye/kanizsa/)
 - [Scintillating grid](http://localhost:4173/OpticEye/scintillating-grid/)
 - [Poggendorff](http://localhost:4173/OpticEye/poggendorff/)
+- [Ebbinghaus (unlisted, local viewing)](http://localhost:4173/OpticEye/ebbinghaus/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the six listed illusions and marks the current listed page. Unlisted Kanizsa has no current marker and includes a static noindex robots directive. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes eight documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers and owner approval to list/deploy.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the six listed illusions and marks the current listed page. Unlisted Kanizsa and local Ebbinghaus have no current marker and include static noindex robots directives. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes nine documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus remains local/unlisted for owner viewing.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner handles this setting, repository visibility, and pushing. The workflow does not automatically enable Pages.
 
@@ -63,6 +64,8 @@ Kanizsa is implemented with three 60° cutout disks, a Cutout rotation range 0�
 Scintillating grid uses a static 9×9 arrangement of white disks over gray lines on black. Grid spacing (56–80, default72) and disk diameter (14–22, default18) are drawing-unit controls; Hide grid removes only the gray lines. Reset restores the shown grid, defaults and Medium540. It is listed and calibrated: two viewers confirmed the default effect and Hide grid comparison on desktop and real phones. See [its specification](docs/specs/scintillating-grid.md) and [validation](docs/scintillating-grid-validation.md).
 
 Poggendorff draws complete parallel diagonals beneath eight opaque yellow strips. Line angle45–80° (default70) changes orientation and frame clipping; strip width0–64 (default40; zero paints no yellow) affects only context. Hide strips uncovers the same lines, and Reset restores defaults/Medium540. The owner requested this repeated arrangement after finding the initial single-line version weak. Both viewers confirmed misalignment with strips and straightness without on desktop and real phones; it is calibrated and owner-approved for listing/deployment; see [its spec](docs/specs/poggendorff.md) and [validation](docs/poggendorff-validation.md).
+
+Ebbinghaus uses two identical orange circles (radius28) with six large blue neighbors on the left and eight small neighbors on the right. Large surround radius32–44 (default40) and gap20–36 (default20) affect only the left context; the right radius10/gap8 remain fixed. Hide surrounds preserves both targets. Reset restores defaults and Medium540. It is unlisted/noindex with calibration pending; see [its specification](docs/specs/ebbinghaus.md) and [validation](docs/ebbinghaus-validation.md). This local feature is not pushed.
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
 

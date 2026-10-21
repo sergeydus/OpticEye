@@ -2,11 +2,15 @@
 
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
-Current structure (21 October 2026): eight documents, six listed Home cards and seven header links (Home plus six listed illusions). Kanizsa remains unlisted/noindex, calibration not pursued. Poggendorff is now calibrated on desktop and real phones and owner-approved for listing/deployment. Ebbinghaus is authorized after successful Poggendorff deployment/live verification, local/unlisted only. Earlier checkpoints below are historical.
+Current structure (21 October 2026): nine local documents, six listed Home cards and seven header links (Home plus six listed illusions). Kanizsa remains unlisted/noindex, calibration not pursued. Poggendorff is now calibrated on desktop and real phones and owner-approved for listing/deployment. Poggendorff deployment/live verification passed. Ebbinghaus is now implemented locally/unlisted with calibration pending, not pushed. Earlier checkpoints below are historical.
+
+## Ebbinghaus checkpoint: 21 October 2026
+
+Lint,131 tests/18 files and nine-page build pass. Chrome155.0.8059.85 checked all nine production-preview direct URLs/refreshes at320/1440,DPR1: six cards, seven base-aware nav links, correct listed current markers, Ebbinghaus/Kanizsa noindex and no active marker, loaded styles/images, no overflow/errors/404s. Listed/brand navigation stays under /OpticEye/. Ebbinghaus passed all sizes/defaults/extreme controls, retained-target reveal/Reset, DPR1/1.25/2, fine-clearance checks and actual200% page zoom; see [validation](ebbinghaus-validation.md). Dev /ebbinghaus/ works at root base; its temporary dev process was stopped. Ebbinghaus remains a local-only unlisted commit; deployed Poggendorff remains unchanged.
 
 ## Poggendorff listing checkpoint: 21 October 2026
 
-Lint,119 tests/16 files and eight-page build pass. Chrome155.0.8059.85 checked all eight direct URLs/refreshes at320/1440,DPR1: six Home cards, seven base-aware nav links, Poggendorff current marker and no noindex, Kanizsa unchanged/unlisted. Listed navigation/brand stayed under /OpticEye/, styles/images rendered, no overflow/errors/404s. Poggendorff's31 diagonals/eight strips, unchanged-line reveal and Reset passed. Narrow listing screenshot inspected. Push/deployment is owner-authorized; its result will be recorded after completion.
+Lint,119 tests/16 files and eight-page build pass. Chrome155.0.8059.85 checked all eight direct URLs/refreshes at320/1440,DPR1: six Home cards, seven base-aware nav links, Poggendorff current marker and no noindex, Kanizsa unchanged/unlisted. Listed navigation/brand stayed under /OpticEye/, styles/images rendered, no overflow/errors/404s. Poggendorff's31 diagonals/eight strips, unchanged-line reveal and Reset passed. Narrow listing screenshot inspected. Commit3e186f7 was pushed. [Pages run39582321188](https://github.com/sergeydus/OpticEye/actions/runs/39582321188) succeeded; all eight live direct URLs/refreshes and listed/brand navigation passed the same320/1440,DPR1 checks, including Poggendorff reveal/Reset, with no errors/404s.
 
 ## Poggendorff repeated-strip revision: 21 October 2026
 

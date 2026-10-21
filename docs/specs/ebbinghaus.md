@@ -1,6 +1,6 @@
 # Ebbinghaus specification
 
-Status: **revised per owner review; awaiting its implementation turn**. Version 1.1, 21 October 2026. Third in implementation order. ID/folder: `ebbinghaus`; title/h1: “Ebbinghaus illusion”; HTML title: “Ebbinghaus illusion | OpticEye”. Description: “Equal center circles meet different surrounding circles. Hide the surrounds to compare their actual sizes.”
+Status: **implemented; perceptual calibration pending**. Version 1.2, 21 October 2026. Third in implementation order. ID/folder: `ebbinghaus`; title/h1: “Ebbinghaus illusion”; HTML title: “Ebbinghaus illusion | OpticEye”. Description: “Equal center circles meet different surrounding circles. Hide the surrounds to compare their actual sizes.”
 
 Use [implementation.md](implementation.md) for page setup, initial unlisted/noindex state, Reset, normalization, accessibility, tests and two-viewer calibration. This version uses fixed equal targets, not a size-matching task. No automatic ring rotation, target-size slider, score, dragging or context exchange.
 
@@ -54,4 +54,4 @@ The smallest allowed gap between neighboring large context disks is only 4 drawi
 | EB04 | Shared engineering checklist passes; include all image sizes, both slider extremes and fine-clearance DPR checks. Unlisted/noindex standalone entry and existing pages work. Record actual results in docs/ebbinghaus-validation.md. |
 | EB05 | Calibration only: two viewers on desktop/mobile compare apparent center sizes at defaults before/after Hide surrounds. Record direction and weak/absent responses as supplied, without assuming a universally larger side; shared listing approval remains separate. |
 
-EB01–EB04 define implemented; EB05 defines calibration. Revised as requested on 21 October 2026; implement only when the owner advances to this feature.
+EB01–EB04 pass; see [actual validation](../ebbinghaus-validation.md). EB05 remains pending and defines calibration. Revised as requested on 21 October 2026; the owner advanced to this feature after successful Poggendorff deployment/live checks. Preserve the approved geometry and keep the implementation unlisted/noindex, committed locally without pushing.
