@@ -62,6 +62,13 @@ export const ILLUSIONS = [
     title: 'Hering illusion',
     description: 'Straight parallel lines can appear bowed across a radial background. Hide the rays to compare their actual geometry.',
   },
+  {
+    id: 'ponzo',
+    listed: false,
+    name: 'Ponzo',
+    title: 'Ponzo illusion',
+    description: 'Compare equal bars between converging rails, then hide the perspective context without changing either bar.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

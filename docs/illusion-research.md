@@ -115,7 +115,7 @@ Sources: [Bach's checker-shadow demonstration](https://michaelbach.de/ot/lum-ade
 
 **Evidence:** equal-length targets within converging contours can appear different in size. Schiffman and Thompson's 1978 abstract reports that target orientation and location relative to those contours affected magnitude. A perspective interpretation is useful context, not a complete proven explanation.
 
-**Proposed construction:** two fixed equal horizontal bars inside original converging rails, optionally with sparse cross-ties. Hide only the rail/tie context. A convergence control may change the rails but never the bars. Keep enough clearance between rails and target endpoints throughout its range.
+**Current construction:** two fixed equal140-unit orange bars inside original converging rails and six cross-ties. Top rail gap88–160/step8/default88 changes only the rails/tie spans; Hide rails preserves both bars. Ponzo is implemented unlisted/noindex for real-phone viewing, with calibration pending. See [spec](specs/ponzo.md) and [validation](ponzo-validation.md).
 
 **Calibration concern:** the context's proximity to the upper and lower bars is part of the construction, not an incidental responsive spacing detail. Uniformly scale the stimulus; do not rearrange its contents for mobile.
 

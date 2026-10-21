@@ -12,6 +12,7 @@ import { ScintillatingGridPage } from '../scintillating-grid/main'
 import { PoggendorffPage } from '../poggendorff/main'
 import { EbbinghausPage } from '../ebbinghaus/main'
 import { HeringPage } from '../hering/main'
+import { PonzoPage } from '../ponzo/main'
 
 // Exercise the actual entry compositions without their browser root side effect.
 vi.mock('./mountPage', () => ({ mountPage: vi.fn() }))
@@ -27,6 +28,7 @@ it('lists only the eight listed experiments with descriptions and document links
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
+  expect(cards.queryByRole('link', { name: 'Ponzo illusion' })).toBeNull()
   expect(cards.getByRole('link', { name: 'Hering illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}hering/`)
   expect(cards.getByRole('link', { name: 'Ebbinghaus illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}ebbinghaus/`)
   expect(cards.getByRole('link', { name: 'Poggendorff illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}poggendorff/`)
@@ -40,18 +42,19 @@ it('lists only the eight listed experiments with descriptions and document links
   expect(screen.queryByRole('slider')).toBeNull()
 })
 
-it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s and marks only %s current in the shared navigation', (base, currentPage) => {
+it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering', 'ponzo'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s and marks only %s current in the shared navigation', (base, currentPage) => {
   render(<SiteHeader base={base} currentPage={currentPage} />)
   const navigation = screen.getByRole('navigation', { name: 'Main navigation' })
   expect(within(navigation).getAllByRole('link')).toHaveLength(9)
   expect(within(navigation).queryByRole('link', { name: 'Kanizsa' })).toBeNull()
+  expect(within(navigation).queryByRole('link', { name: 'Ponzo' })).toBeNull()
   for (const [name, suffix] of [['Home', ''], ['Confetti', 'confetti/'], ['Munker', 'munker/'], ['Café Wall', 'cafe-wall/'], ['Müller-Lyer', 'muller-lyer/'], ['Scintillating grid', 'scintillating-grid/'], ['Poggendorff', 'poggendorff/'], ['Ebbinghaus', 'ebbinghaus/'], ['Hering', 'hering/']]) {
     const link = within(navigation).getByRole('link', { name })
     expect(link).toHaveAttribute('href', base + suffix)
     if (suffix.replace('/', '') === (currentPage === 'home' ? '' : currentPage)) expect(link).toHaveAttribute('aria-current', 'page')
     else expect(link).not.toHaveAttribute('aria-current')
   }
-  expect(navigation.querySelectorAll('[aria-current="page"]')).toHaveLength(currentPage === 'kanizsa' ? 0 : 1)
+  expect(navigation.querySelectorAll('[aria-current="page"]')).toHaveLength(currentPage === 'kanizsa' || currentPage === 'ponzo' ? 0 : 1)
   expect(screen.getByRole('link', { name: 'OpticEye' })).toHaveAttribute('href', base)
 })
 
@@ -60,6 +63,7 @@ it.each([
   { Page: MunkerPage, title: 'Munker illusion', image: 'Munker color illusion', current: 'Munker', absent: 'Confetti illusion' },
   { Page: KanizsaPage, title: 'Kanizsa triangle', image: 'Kanizsa triangle', current: 'Kanizsa', absent: 'Confetti illusion' },
   { Page: ScintillatingGridPage, title: 'Scintillating grid', image: 'Scintillating grid', current: 'Scintillating grid', absent: 'Confetti illusion' },
+  { Page: PonzoPage, title: 'Ponzo illusion', image: 'Ponzo illusion', current: 'Ponzo', absent: 'Confetti illusion' },
   { Page: HeringPage, title: 'Hering illusion', image: 'Hering illusion', current: 'Hering', absent: 'Confetti illusion' },
   { Page: EbbinghausPage, title: 'Ebbinghaus illusion', image: 'Ebbinghaus illusion', current: 'Ebbinghaus', absent: 'Confetti illusion' },
   { Page: PoggendorffPage, title: 'Poggendorff illusion', image: 'Poggendorff illusion', current: 'Poggendorff', absent: 'Confetti illusion' },
@@ -76,7 +80,7 @@ it.each([
   const navigation = screen.getByRole('navigation', { name: 'Main navigation' })
   expect(within(navigation).getAllByRole('link')).toHaveLength(9)
   const activeLink = navigation.querySelector('[aria-current="page"]')
-  if (current === 'Kanizsa') expect(activeLink).toBeNull()
+  if (current === 'Kanizsa' || current === 'Ponzo') expect(activeLink).toBeNull()
   else expect(activeLink).toHaveTextContent(current)
   expect(screen.getByRole('banner')).toBeVisible()
   expect(screen.getByRole('contentinfo')).toBeVisible()

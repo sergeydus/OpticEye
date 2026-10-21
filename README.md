@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all ten HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/` and `/hering/`.
+`build` checks TypeScript and produces all eleven HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/` and `/ponzo/`.
 
 ## GitHub Pages
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all ten addresses, including a refresh and navigation between them:
+Check all eleven addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -45,8 +45,9 @@ Check all ten addresses, including a refresh and navigation between them:
 - [Poggendorff](http://localhost:4173/OpticEye/poggendorff/)
 - [Ebbinghaus](http://localhost:4173/OpticEye/ebbinghaus/)
 - [Hering](http://localhost:4173/OpticEye/hering/)
+- [Ponzo (unlisted, direct URL only)](http://localhost:4173/OpticEye/ponzo/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the eight listed illusions and marks the current listed page. Unlisted Kanizsa has no current marker and includes a static noindex robots directive. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes ten documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus is listed/deployed and calibrated with both viewers on desktop and real phones.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Shared header navigation shows Home plus the eight listed illusions and marks the current listed page. Unlisted Kanizsa and Ponzo have no current marker and include static noindex robots directives. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes eleven documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus is listed/deployed and calibrated with both viewers on desktop and real phones.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner controls this setting and repository visibility; authorized pushes trigger the deployment workflow. The workflow does not automatically enable Pages.
 
@@ -71,6 +72,8 @@ Ebbinghaus uses two identical orange circles (radius28) with six large blue neig
 Hering draws two fixed straight red lines over a dark radial fan. The owner-approved trial uses80-unit target separation and ray count24–60 (step12, default60) changes only the background; Hide rays removes it while keeping the same target nodes and geometry. Reset restores60/shown/Medium540/closed. It is calibrated with both viewers on desktop and real phones, owner-approved for listing at [the direct Hering page](https://sergeydus.github.io/OpticEye/hering/); see [its specification](docs/specs/hering.md) and [validation](docs/hering-validation.md). HE05 is complete; browser/DPR/distance/zoom and exact settings were not supplied for human viewing.
 
 The [page validation record](docs/pages-validation.md) covers direct loads, refreshes, navigation, metadata and asset checks. The existing Pages workflow already uploads the entire `dist/` directory and needs no changes for multiple pages.
+
+Ponzo uses two equal140-unit orange bars inside original converging rails and six cross-ties. Top rail gap88–160 (step8, default88) changes only context; Hide rails preserves both bars. Reset restores88/shown/Medium540/closed. It is published unlisted/noindex for real-phone viewing at [the direct Ponzo page](https://sergeydus.github.io/OpticEye/ponzo/), with perceptual calibration pending; see [its specification](docs/specs/ponzo.md) and [validation](docs/ponzo-validation.md).
 
 ## Adding an illusion page
 

@@ -1,6 +1,6 @@
 # Ponzo specification
 
-Status: **approved; awaiting implementation**. Version 1.1, 21 October 2026. Fifth in implementation order. ID/folder: `ponzo`; title/h1: “Ponzo illusion”; HTML title: “Ponzo illusion | OpticEye”. Description: “Compare equal bars between converging rails, then hide the perspective context without changing either bar.”
+Status: **implemented; perceptual calibration pending**. Version 1.2, 21 October 2026. Fifth in implementation order. ID/folder: `ponzo`; title/h1: “Ponzo illusion”; HTML title: “Ponzo illusion | OpticEye”. Description: “Compare equal bars between converging rails, then hide the perspective context without changing either bar.”
 
 Follow [implementation.md](implementation.md) for the shared page, initial unlisted/noindex state, Reset, normalization, accessibility, tests and two-viewer calibration. First version: original static railway-style drawing. Exclude room photographs, target resizing/matching, quizzes, extra perspective modes and animation.
 
@@ -63,4 +63,4 @@ The last column precedes subtraction of the rail's projected half-stroke; do not
 | PO04 | Shared engineering/page/test requirements pass with unlisted/noindex direct access; cover q extremes, every size and the tight-gap DPR checks. Write actual results in docs/ponzo-validation.md, retaining existing pages/calibration records. |
 | PO05 | Calibration only: two viewers on desktop/mobile compare apparent bar lengths at defaults before/after Hide rails; record direction and weak/absent responses. Shared status/listing rules apply; do not claim perspective guarantees a response. |
 
-PO01–PO04 define implemented; PO05 defines calibration. Approved on 21 October 2026; await the owner's instruction to implement this feature.
+PO01–PO04 pass; see [actual validation](../ponzo-validation.md). PO05 remains pending and defines calibration. Implemented after the approved Hering listing/deployment. The owner authorizes committing/pushing Ponzo unlisted/noindex for real-phone viewing; listing still requires separate approval. Numeric geometry and defaults remain unchanged.

@@ -1,6 +1,6 @@
 # Strengthening Hering: research and geometry audit
 
-21 October 2026. **Research and owner-approved geometry trial.** The owner reports the deployed Hering effect is too subtle. Device, browser, zoom, selected count/size and viewing distance were not specified. The original 200-unit/36-ray construction remains recoverable at commit d0989d7. The owner approved trying 80-unit separation/60 rays; [hering.md](specs/hering.md) now specifies that revision. Hering stays unlisted/noindex and calibration pending.
+21 October 2026. **Research and owner-approved geometry trial.** The owner reports the deployed Hering effect is too subtle. Device, browser, zoom, selected count/size and viewing distance were not specified. The original 200-unit/36-ray construction remains recoverable at commit d0989d7. The owner approved trying 80-unit separation/60 rays; [hering.md](specs/hering.md) now specifies that revision. The trial initially stayed unlisted/noindex. Both viewers subsequently confirmed bowed-with-rays/straight-without on desktop and real phones; HE05 is complete and the owner approved listing. See [current validation](hering-validation.md); the proposals below retain their research context.
 
 ## Findings and limits
 
