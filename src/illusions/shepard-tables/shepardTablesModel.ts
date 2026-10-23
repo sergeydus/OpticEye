@@ -24,6 +24,7 @@ export const VIEWING_SIZES = [
   { label: 'Large', width: 720 },
 ] as const
 export const DEFAULT_VIEWING_WIDTH = 540
+export const COMPARISON_DURATION_MS = 3200
 
 export function normalizeViewingWidth(value: number) {
   return VIEWING_SIZES.some((size) => size.width === value) ? value : DEFAULT_VIEWING_WIDTH
@@ -38,8 +39,31 @@ export function placementTransform({ x, y, angle }: Placement) {
   return `translate(${x},${y})` + (angle === 0 ? '' : ` rotate(${angle * 180 / Math.PI})`)
 }
 
-export function tabletopTransform(id: typeof TABLES[number]['id'], overlaid: boolean) {
-  return placementTransform(TABLES[id === 'right' || overlaid ? 1 : 0].placement)
+export function normalizeComparisonProgress(value: number) {
+  return Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0
+}
+
+export function smoothstep(value: number) {
+  const q = normalizeComparisonProgress(value)
+  return q * q * (3 - 2 * q)
+}
+
+export function comparisonPlacement(progress: number): Placement {
+  const p = normalizeComparisonProgress(progress)
+  if (p === 0) return TABLES[0].placement
+  if (p === 1) return TABLES[1].placement
+  const rotation = smoothstep(2 * p)
+  const translation = smoothstep(2 * p - 1)
+  return { x: 190 + 330 * translation, y: 195 + 25 * translation, angle: RIGHT_ANGLE * rotation }
+}
+
+export function comparisonStage(progress: number) {
+  const p = normalizeComparisonProgress(progress)
+  return p === 1 ? 'Exact fit' : p < 0.5 ? 'Rotate' : 'Slide'
+}
+
+export function tabletopTransform(id: typeof TABLES[number]['id'], progress: number) {
+  return placementTransform(id === 'right' ? TABLES[1].placement : comparisonPlacement(progress))
 }
 
 export function createShepardTablesGeometry() {
@@ -58,9 +82,9 @@ export function createShepardTablesGeometry() {
 export const SHEPARD_TABLES = {
   title: 'Shepard’s tables',
   instructions: 'How do the two tabletop shapes compare?',
-  viewingInstruction: 'Look only at the flat tops, then overlay them to compare their outlines.',
+  viewingInstruction: 'Look only at the flat tops, then follow one as it rotates and slides onto the other. Scrub backward to separate them again.',
   proof: 'The tabletop drawings are the same 2D shape. One was rotated and moved onto the other without resizing.',
-  explanation: 'Depth cues in a flat drawing can change the proportions we infer. The tabletop on the left may look narrower and longer than the one on the right. Both use one shared two-dimensional shape, placed at different angles. Overlay tabletops removes the legs and side faces, then rotates and moves the existing left shape onto the unchanged right one in a single step. It never stretches, mirrors or replaces either shape. This proves congruence of the 2D drawings, not that real three-dimensional tables would have identical dimensions. Interpreting a picture as a scene may contribute to the illusion; it is not a complete settled explanation. The effect varies with viewer, image size and display.',
+  explanation: 'Depth cues in a flat drawing can change the proportions we infer. The tabletop on the left may look narrower and longer than the one on the right. Both use one shared two-dimensional shape, placed at different angles. The comparison removes the legs and side faces, then rotates the existing left shape in place before sliding it onto the unchanged right one. Play and pause the movement, or use Comparison progress to inspect it in either direction. Reduced-motion preferences replace playback with an immediate match/separate action; manual progress remains available. Neither shape is stretched, mirrored or replaced. This proves congruence of the 2D drawings, not that real three-dimensional tables would have identical dimensions. Interpreting a picture as a scene may contribute to the illusion; it is not a complete settled explanation. The effect varies with viewer, image size and display.',
   attribution: 'Original OpticEye drawing of Shepard’s rotated-tables illusion, originated by Roger N. Shepard. See Michael Bach’s demonstration and source references.',
   sources: [
     { title: 'Michael Bach’s rotated-tables demonstration', url: 'https://michaelbach.de/ot/sze-ShepardTables/index.html', citation: 'Demonstration and discussion of image-plane congruence versus inferred real objects. No artwork, code or prose is reused.' },
