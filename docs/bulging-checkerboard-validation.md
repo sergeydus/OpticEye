@@ -17,6 +17,8 @@ The owner explicitly approves listing and retaining the current quadrant corner 
 
 Lint, all185 tests across27 files, and the production build pass. At320/1440 in Chrome156.0.8078.47, all13 production documents pass direct loads/refreshes, source assets and header/current-marker checks (26 page cases);22 listed navigation round trips pass. Home now includes11 cards, including Bulging checkerboard; its noindex tag is absent, while Kanizsa remains unlisted/noindex. There are no browser/console errors, failed requests or404s. Only metadata/discovery and documentation changed; the checkerboard geometry/defaults/reveal are unchanged. Evidence: `bulging-listed-pages-preview.json` outside Git. Hosted listing deployment is verified after this commit/push and reported at handoff.
 
+Listing commit`eb46b2e` deployed successfully in [Pages run40034647573](https://github.com/sergeydus/OpticEye/actions/runs/40034647573). Hosted320/1440 checks confirm the11-card Home, listed checkerboard/no noindex, direct refresh, unchanged196-cell/176-tick construction, reveal/Reset and Home navigation with no failed requests or404s. Evidence: `bulging-listed-hosted.json` outside Git.
+
 ## Initial unlisted engineering checkpoint — 23 October 2026
 
 The following checks describe the original unlisted checkpoint. They are historical engineering evidence; current listing is defined above. Its implementation commit62c4add deployed successfully in [Pages run40021873201](https://github.com/sergeydus/OpticEye/actions/runs/40021873201); hosted checks covered26 direct/refresh page cases and20 listed navigation cases with no errors.

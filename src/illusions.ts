@@ -83,6 +83,13 @@ export const ILLUSIONS = [
     title: 'Bulging checkerboard',
     description: 'A regular checkerboard may appear to bulge. Hide its small corner marks to inspect the unchanged square grid.',
   },
+  {
+    id: 'shepard-tables',
+    listed: false,
+    name: 'Shepard’s tables',
+    title: 'Shepard’s tables',
+    description: 'Compare two table drawings, then overlay their tabletop shapes without stretching them.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

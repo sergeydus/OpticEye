@@ -4,7 +4,7 @@ Updated 24 October 2026. This is a selection backlog, not a build history. Featu
 
 ## Approved implementation queue
 
-The latest pass searched author/research demonstrations and community discussions, including Reddit comments. Six candidates merit original, static implementations. **Owner approved all six specs and their scoped comparison contracts on 23 October 2026.** Implement one at a time: bulging-checkerboard → shepard-tables → jastrow → curvature-blindness → vanishing-dots → skye-grating. After each validated unlisted deployment, stop for owner real-phone viewing before starting the next. Listing remains a separate decision. Bulging checkerboard is [calibrated on desktop and real phones](bulging-checkerboard-validation.md), listed by owner approval with its current corner rule retained. Shepard’s tables is authorized next after confirming this listing deployment; the other five are approved but not implemented. Geometry and defaults are project choices, not claims of an optimal or laboratory-replicated stimulus.
+The latest pass searched author/research demonstrations and community discussions, including Reddit comments. Six candidates merit original, static implementations. **Owner approved all six specs and their scoped comparison contracts on 23 October 2026.** Implement one at a time: bulging-checkerboard → shepard-tables → jastrow → curvature-blindness → vanishing-dots → skye-grating. After each validated unlisted deployment, stop for owner real-phone viewing before starting the next. Listing remains a separate decision. Bulging checkerboard is [calibrated on desktop and real phones](bulging-checkerboard-validation.md), listed by owner approval with its current corner rule retained. Shepard’s tables is now [implemented and engineering-validated](shepard-tables-validation.md), unlisted/noindex with calibration pending. Stop for its owner viewing after deployment before starting Jastrow. The remaining four are approved but not implemented. Geometry and defaults are project choices, not claims of an optimal or laboratory-replicated stimulus.
 
 | Candidate / approved spec | What users compare | Why select it / main risk |
 | --- | --- | --- |
@@ -64,6 +64,7 @@ Listed features have recorded two-viewer desktop and real-phone calibration; con
 | Ponzo railway scene and drawing | [Ponzo](specs/ponzo.md) | [Validation](ponzo-validation.md), [perspective research](ponzo-research.md), [image prompt](ponzo-image-prompt.md) |
 | Checker-shadow | [Checker-shadow](specs/checker-shadow.md) | [Validation](checker-shadow-validation.md) |
 | Bulging checkerboard | [Bulging checkerboard](specs/bulging-checkerboard.md) | [Validation](bulging-checkerboard-validation.md); current corner rule retained |
+| Shepard’s tables, unlisted; calibration pending | [Shepard’s tables](specs/shepard-tables.md) | [Validation](shepard-tables-validation.md) |
 
 All original-source links, asset origins and feature-specific rendering exceptions remain in those contracts. For example, [Gegenfurtner (2024), Perceptual ripening of oranges](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/) supports the everyday netting connection; the original drawing, optional Gemini image, blend approximation and viewing history are documented in Confetti's spec, validation and asset origin notes. Research access does not confer an asset license.
 

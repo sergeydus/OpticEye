@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all thirteen HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/`, `/checker-shadow/` and `/bulging-checkerboard/`.
+`build` checks TypeScript and produces all fourteen HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/`, `/checker-shadow/`, `/bulging-checkerboard/` and `/shepard-tables/`.
 
 ## GitHub Pages
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all thirteen addresses, including a refresh and navigation between them:
+Check all fourteen addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -42,6 +42,7 @@ Check all thirteen addresses, including a refresh and navigation between them:
 - [Müller-Lyer](http://localhost:4173/OpticEye/muller-lyer/)
 - [Kanizsa (unlisted, direct URL only)](http://localhost:4173/OpticEye/kanizsa/)
 - [Bulging checkerboard](http://localhost:4173/OpticEye/bulging-checkerboard/)
+- [Shepard’s tables (unlisted, direct URL only)](http://localhost:4173/OpticEye/shepard-tables/)
 - [Scintillating grid](http://localhost:4173/OpticEye/scintillating-grid/)
 - [Poggendorff](http://localhost:4173/OpticEye/poggendorff/)
 - [Ebbinghaus](http://localhost:4173/OpticEye/ebbinghaus/)
@@ -119,3 +120,6 @@ Checker-shadow is listed at [its direct page](https://sergeydus.github.io/OpticE
 
 
 Bulging checkerboard is the first implementation in the new approved batch, listed at [its direct page](https://sergeydus.github.io/OpticEye/bulging-checkerboard/). Its original 14×14 board remains unchanged while Hide ticks removes 176 opposite-color corner marks. Image size defaults to Medium/540; Reset restores ticks, size and the closed explanation. BC05 is complete with both viewers on desktop and real phones. Viewer 1 reports mixed bulging/pinching and a flat regular grid after Hide ticks; viewer 2 confirms the effect and reveal. The owner approved listing and retained the corner rule; unspecified viewing conditions remain unknown. See [its specification](docs/specs/bulging-checkerboard.md) and [validation](docs/bulging-checkerboard-validation.md).
+
+
+Shepard’s tables is implemented unlisted at [its direct page](https://sergeydus.github.io/OpticEye/shepard-tables/), pending owner viewing. Both tabletop drawings share one path and exact style. Overlay tabletops removes twelve furniture-context pieces and rotates/translates the existing left path onto the unchanged right path without resizing, mirroring or animation. Reset restores both placements, context, Medium540 and the closed explanation. This comparison establishes congruent 2D drawings, not equal real-world furniture. See [its specification](docs/specs/shepard-tables.md) and [validation](docs/shepard-tables-validation.md).
