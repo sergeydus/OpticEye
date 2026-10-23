@@ -1,6 +1,6 @@
 # Bulging checkerboard specification
 
-Status: **approved for implementation; engineering and calibration pending**. Version 1.1, 23 October 2026. ID/folder: `bulging-checkerboard`; title/h1: “Bulging checkerboard”; HTML title: “Bulging checkerboard | OpticEye”. Description: “A regular checkerboard may appear to bulge. Hide its small corner marks to inspect the unchanged square grid.”
+Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.2, 23 October 2026. ID/folder: `bulging-checkerboard`; title/h1: “Bulging checkerboard”; HTML title: “Bulging checkerboard | OpticEye”. Description: “A regular checkerboard may appear to bulge. Hide its small corner marks to inspect the unchanged square grid.”
 
 Use [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, engineering checks and two-viewer calibration. Owner approved this static original construction on 23 October 2026. Implement unlisted/noindex, validate, commit and push for viewing; listing and calibration remain separate. If owner viewing reports a pinch rather than a bulge, update the quadrant corner rule in this spec before swapping it in code.
 
@@ -53,4 +53,4 @@ No antialiasing-based blending or subpixel tick-width minimum is required. Check
 | BC04 | Shared engineering/page checklist passes unlisted/noindex, including default/hidden states at all sizes and DPR1,2,1.25. Record actual browser results in docs/bulging-checkerboard-validation.md; preserve existing pages. |
 | BC05 | Calibration only: two viewers on desktop and real phones report the apparent shape with ticks and whether removing them exposes the regular grid. Record weak/absent or reversed responses and only supplied conditions. Owner listing approval remains separate. |
 
-BC01–BC04 define implementation completion; BC05 defines calibration. All are pending. Approval does not establish successful viewing; stop after deployment for owner real-phone viewing before starting the next illusion.
+BC01–BC04 pass; see [actual engineering results](../bulging-checkerboard-validation.md). BC05 remains pending: no human viewing is recorded for this construction. Keep unlisted/noindex and stop after deployment for owner real-phone viewing before starting Shepard’s tables. No quadrant swap has been made; update this spec before changing it in response to owner viewing.

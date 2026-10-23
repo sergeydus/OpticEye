@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all twelve HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/` and `/checker-shadow/`.
+`build` checks TypeScript and produces all thirteen HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/`, `/checker-shadow/` and `/bulging-checkerboard/`.
 
 ## GitHub Pages
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all twelve addresses, including a refresh and navigation between them:
+Check all thirteen addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -41,6 +41,7 @@ Check all twelve addresses, including a refresh and navigation between them:
 - [Café Wall](http://localhost:4173/OpticEye/cafe-wall/)
 - [Müller-Lyer](http://localhost:4173/OpticEye/muller-lyer/)
 - [Kanizsa (unlisted, direct URL only)](http://localhost:4173/OpticEye/kanizsa/)
+- [Bulging checkerboard (unlisted, direct URL only)](http://localhost:4173/OpticEye/bulging-checkerboard/)
 - [Scintillating grid](http://localhost:4173/OpticEye/scintillating-grid/)
 - [Poggendorff](http://localhost:4173/OpticEye/poggendorff/)
 - [Ebbinghaus](http://localhost:4173/OpticEye/ebbinghaus/)
@@ -115,3 +116,6 @@ No backend, router, analytics, or UI library is configured. The experience uses 
 The additional Ponzo Railway scene bundles `src/assets/ponzo-railway-ai.webp` (232,312bytes, native1264×848), with separate equal yellow bars (#FFD400). Hide image removes only its raster context; Reset Ponzo resets both examples and Reset railway scene affects only the new section. The AI caption remains visible. `src/assets/ponzo-railway-ai.ORIGIN.md` records Gemini, supplied prompts, Google terms and processing; generation date/model and separate negative-field use remain unknown. The original JPEG is preserved locally and ignored by Git.
 
 Checker-shadow is listed at [its direct page](https://sergeydus.github.io/OpticEye/checker-shadow/) with two-viewer desktop and real-phone calibration. An original shaded checkerboard surrounds two flat #707070 tiles; Isolate tiles removes only that scene, preserving the same target polygons, labels and surface. Image size and Reset use the shared controls. No source artwork, blend modes or filters are used; only the specified context receives gradients. Both viewers report A darker than B in the scene and matching after Isolate tiles; unspecified viewing conditions remain unknown. See [its specification](docs/specs/checker-shadow.md) and [validation](docs/checker-shadow-validation.md).
+
+
+Bulging checkerboard is the first implementation in the new approved batch, available unlisted at [its direct page](https://sergeydus.github.io/OpticEye/bulging-checkerboard/). Its original 14×14 board remains unchanged while Hide ticks removes 176 opposite-color corner marks. Image size defaults to Medium/540; Reset restores ticks, size and the closed explanation. Human calibration and listing await owner viewing. See [its specification](docs/specs/bulging-checkerboard.md) and [validation](docs/bulging-checkerboard-validation.md).

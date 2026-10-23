@@ -76,6 +76,13 @@ export const ILLUSIONS = [
     title: 'Checker-shadow illusion',
     description: 'Compare two equal-gray tiles in a shaded scene, then isolate the same tiles without changing their fills.',
   },
+  {
+    id: 'bulging-checkerboard',
+    listed: false,
+    name: 'Bulging checkerboard',
+    title: 'Bulging checkerboard',
+    description: 'A regular checkerboard may appear to bulge. Hide its small corner marks to inspect the unchanged square grid.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

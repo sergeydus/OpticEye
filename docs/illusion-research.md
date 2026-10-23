@@ -4,7 +4,7 @@ Updated 23 October 2026. This is a selection backlog, not a build history. Featu
 
 ## Approved implementation queue
 
-The latest pass searched author/research demonstrations and community discussions, including Reddit comments. Six candidates merit original, static implementations. **Owner approved all six specs and their scoped comparison contracts on 23 October 2026.** Implement one at a time: bulging-checkerboard → shepard-tables → jastrow → curvature-blindness → vanishing-dots → skye-grating. After each validated unlisted deployment, stop for owner real-phone viewing before starting the next. Listing remains a separate decision. Geometry and defaults are project choices, not claims of an optimal or laboratory-replicated stimulus.
+The latest pass searched author/research demonstrations and community discussions, including Reddit comments. Six candidates merit original, static implementations. **Owner approved all six specs and their scoped comparison contracts on 23 October 2026.** Implement one at a time: bulging-checkerboard → shepard-tables → jastrow → curvature-blindness → vanishing-dots → skye-grating. After each validated unlisted deployment, stop for owner real-phone viewing before starting the next. Listing remains a separate decision. Bulging checkerboard has passed engineering validation and is unlisted/noindex; [human calibration remains pending](bulging-checkerboard-validation.md). The other five are approved but not implemented. Geometry and defaults are project choices, not claims of an optimal or laboratory-replicated stimulus.
 
 | Candidate / approved spec | What users compare | Why select it / main risk |
 | --- | --- | --- |
