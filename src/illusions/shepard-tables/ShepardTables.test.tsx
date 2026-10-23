@@ -51,12 +51,19 @@ describe('Shepard’s tables guided comparison', () => {
     const svg = screen.getByRole('img'), pair = tops(svg), local = pair.map(attributes)
     const right = pair[0].outerHTML, surface = svg.querySelector('[data-layer="surface"]')!
     const surfaceData = surface.outerHTML
+    const context = svg.querySelector('[data-layer="context"]')!
+    const contextNodes = [...context.querySelectorAll('[data-leg], [data-face]')]
+    const contextData = context.outerHTML
     for (const p of [25, 50, 75, 100, 75, 50, 0, 100]) {
       scrub(p)
-      expect(svg.querySelector('[data-layer="context"]')).toBeNull()
+      expect(svg.querySelectorAll('[data-leg]')).toHaveLength(8)
+      expect(svg.querySelectorAll('[data-face]')).toHaveLength(4)
       expect(tops(svg).every((node, i) => node === pair[i])).toBe(true)
       expect(pair.map(attributes)).toEqual(local)
       expect(pair[0].outerHTML).toBe(right)
+      expect(svg.querySelector('[data-layer="context"]')).toBe(context)
+      expect(context.outerHTML).toBe(contextData)
+      expect([...context.querySelectorAll('[data-leg], [data-face]')].every((node, i) => node === contextNodes[i])).toBe(true)
       expect(svg.querySelectorAll('path')).toHaveLength(2)
       expect(svg.querySelector('[data-layer="surface"]')).toBe(surface)
       expect(surface.outerHTML).toBe(surfaceData)
@@ -76,7 +83,7 @@ describe('Shepard’s tables guided comparison', () => {
     const play = screen.getByRole('button', { name: 'Play comparison' })
     play.focus(); await user.keyboard(' ')
     expect(play).toHaveAccessibleName('Pause comparison')
-    expect(screen.getByRole('img').querySelector('[data-layer="context"]')).toBeNull()
+    expect(screen.getByRole('img').querySelectorAll('[data-leg]')).toHaveLength(8)
     await user.keyboard('{Enter}')
     expect(play).toHaveAccessibleName('Play comparison')
     scrub(25)
@@ -149,7 +156,8 @@ describe('Shepard’s tables guided comparison', () => {
     expect(screen.getByRole('slider')).toHaveValue('100')
     await user.keyboard(' ')
     expect(pair[1]).toHaveAttribute('transform', 'translate(190,195)')
-    expect(svg.querySelector('[data-layer="context"]')).toBeNull()
+    expect(svg.querySelectorAll('[data-leg]')).toHaveLength(8)
+    expect(svg.querySelectorAll('[data-face]')).toHaveLength(4)
     scrub(50)
     expect(screen.getByRole('slider')).toHaveValue('50')
     expect(requestAnimationFrame).not.toHaveBeenCalled()

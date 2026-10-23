@@ -1,6 +1,6 @@
 # Shepard’s tables specification
 
-Status: **furniture-preserving comparison approved; unlisted/noindex; perceptual calibration pending**. Version 1.4, 24 October 2026. The owner approved section7 and the scoped motion amendment in implementation.md before implementation. ID/folder `shepard-tables`; title/h1 “Shepard’s tables”; HTML title “Shepard’s tables | OpticEye”. Description: “Compare two table drawings, then overlay their tabletop shapes without stretching them.”
+Status: **furniture-preserving comparison implemented; unlisted/noindex; perceptual calibration pending**. Version 1.4, 24 October 2026. The owner approved section7 and the scoped motion amendment in implementation.md before implementation. ID/folder `shepard-tables`; title/h1 “Shepard’s tables”; HTML title “Shepard’s tables | OpticEye”. Description: “Compare two table drawings, then overlay their tabletop shapes without stretching them.”
 
 Use [implementation.md](implementation.md) for page setup, listing, shared controls, Reset, accessibility, engineering checks and two-viewer calibration. Apply its **rigid comparison** contract: the proof concerns congruent **2D tabletop drawings**, not dimensions of real three-dimensional tables. Owner-approved implementation starts `listed:false`/static `noindex`; validate and publish for viewing before separate listing approval.
 
@@ -56,7 +56,7 @@ Diagonal antialiasing and thin outlines differ after rotation even though geomet
 | ST04 | Shared unlisted/noindex page and engineering checklist passes, including every size, initial/intermediate/final/restored and reduced-motion states, DPR checks and200% zoom; record actual results in docs/shepard-tables-validation.md. Preserve existing feature/calibration records. |
 | ST05 | Calibration only: two viewers on desktop and real phones compare apparent tabletop proportions at defaults and their coincident outlines after overlay. Record narrow/long versus broad impressions, weak/absent responses and supplied conditions; listing requires separate owner approval. |
 
-The previous guided comparison passed ST01–ST04; repeat affected checks for persistent furniture before marking this revision implemented. See [actual engineering results](../shepard-tables-validation.md). ST05 is pending: the owner reports that the illusion works, without device or second-viewer details. Keep unlisted/noindex and stop after deployment for owner real-phone viewing before starting Jastrow.
+ST01–ST04 pass for the furniture-preserving guided comparison. See [actual engineering results](../shepard-tables-validation.md). ST05 is pending: the owner reports that the illusion works, without device or second-viewer details. Keep unlisted/noindex and stop after deployment for owner real-phone viewing before starting Jastrow.
 
 
 ## 7. Approved guided comparison

@@ -1,18 +1,18 @@
 # Shepard’s tables validation
 
-24 October 2026, specification 1.3. **Guided comparison implemented; unlisted/noindex; perceptual calibration pending. ST01–ST04 pass; ST05 remains incomplete.**
+24 October 2026, specification 1.4. **Furniture-preserving guided comparison implemented; unlisted/noindex; perceptual calibration pending. ST01–ST04 pass; ST05 remains incomplete.**
 
 ## Human viewing and publication
 
-The owner reports that “the illusion works,” but requested a clearer same-size proof. No device, browser, DPR, zoom, distance, selected size or second-viewer details were supplied. This is one positive owner observation of the earlier static comparison, not completed two-viewer desktop/real-phone calibration. The guided comparison needs owner viewing. Keep unlisted/noindex; listing needs a separate explicit decision. Stop here before Jastrow.
+The owner reports that “the illusion works,” but requested a clearer same-size proof. No device, browser, DPR, zoom, distance, selected size or second-viewer details were supplied. This is one positive owner observation of the earlier static comparison, not completed two-viewer desktop/real-phone calibration. The owner then requested keeping the legs visible because they help the illusion. The revised comparison retains all furniture in its original positions while only the left top moves; this revision needs owner viewing. Keep unlisted/noindex; listing needs a separate explicit decision. Stop here before Jastrow.
 
 ## Engineering
 
 `npm run lint`, **210 tests across 30 files**, and the TypeScript/Vite production build pass. The 22 Shepard tests comprise 7 model, 6 component and 9 controller tests. No dependencies or assets were added.
 
 - **ST01:** the original shared parallelogram/path, golden-brown fill, dark 2-unit mitered stroke and opaque styles remain unchanged. Independent assertions cover corresponding sides, diagonals, area, initial vertices, orthonormality/determinant+1 and bounds.
-- **ST02:** the same two target paths persist in stable right-first/left-last paint order. Only the left rigid placement changes; furniture disappears on comparison entry, including manual scrub back to 0. Rotation finishes at 50%, then translation begins; 100% assigns the exact fixed-right transform string. Local geometry/styles, right target, surface and drawing frame persist. Analytic full-miter sweep bounds and 101 forward/reverse sampled progress values pass. No third copy, scaling, reflection, morph, fade or recoloring.
-- **ST03:** native scrubbing, keyboard controls, elapsed-time 3200ms playback, Pause/resume, endpoint reverse/finish, Back, size-change pause, Reset/focus, disclosure and independent instances pass. Back preserves size/disclosure; Reset restores progress 0, furniture, Medium 540 and closed explanation, including during playback. Tests verify one scheduled frame while playing, none idle/paused/finished/unmounted, cleanup under StrictMode, no auto-resume and stage-only live messages. Reduced motion offers immediate match/separate plus manual scrub.
+- **ST02:** the same two target paths persist in stable right-first/left-last paint order. Only the left rigid placement changes. The same eight leg rectangles and four side faces remain mounted, visible and fixed through playback, scrubbing, reduced-motion matching, Back and Reset. Component/browser assertions verify their node identity and unchanged attributes at intermediate and endpoint progress. Rotation finishes at 50%, then translation begins; 100% assigns the exact fixed-right transform string. Local geometry/styles, right target, surface and drawing frame persist. Analytic full-miter sweep bounds and 101 forward/reverse sampled progress values pass. No third copy, scaling, reflection, morph, fade or recoloring.
+- **ST03:** native scrubbing, keyboard controls, elapsed-time 3200ms playback, Pause/resume, endpoint reverse/finish, Back, size-change pause, Reset/focus, disclosure and independent instances pass. Back preserves size/disclosure; Reset restores progress 0 and the original tabletop placement, Medium 540 and closed explanation, including during playback. Tests verify one scheduled frame while playing, none idle/paused/finished/unmounted, cleanup under StrictMode, no auto-resume and stage-only live messages. Reduced motion offers immediate match/separate plus manual scrub.
 - **ST04:** Chromium checks below pass. All 14 HTML outputs exist. Home retains 11 listed cards; Shepard and Kanizsa remain unlisted/noindex. Existing feature/calibration records are preserved.
 
 ## Chromium checks
@@ -40,3 +40,5 @@ Evidence outside Git: `shepard-guided-pages-preview.json`, `shepard-guided-dev.j
 ## Short history
 
 The static comparison checkpoint `873c5da` passed 196 tests, original-scene pixel checks and its deployment. On 24 October the owner approved the guided comparison and scoped motion exception; specification commit `d92804b` precedes this implementation. The earlier static checks are historical, not substitutes for the new motion checks above.
+
+The owner’s keep-furniture revision was specified in `705b332` before code. The checks above were rerun for this revision, including all14 production/development pages,18 viewport/DPR/size combinations, playback and reduced motion. Original furniture positions stay fixed; moving the left top exposes its supports intentionally, without drawing a replacement top.

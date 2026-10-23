@@ -57,7 +57,7 @@ export default function ShepardTables() {
         </div>
         <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
           <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
-          <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Hide the legs and side faces, then rotate and move the left tabletop onto the right. Neither shape is resized.</p>
+          <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Follow the left tabletop as it rotates and slides onto the right. The legs and side faces stay in place; neither top is resized.</p>
           <button type="button" onClick={() => { comparison.backToTables(); setNotice('Original table drawings restored.') }} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Back to tables</button>
           <button type="button" onClick={reset} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Reset Shepard’s tables</button>
           <ViewingSizeControl id={`${id}-size`} label="Shepard’s tables image size" value={viewingWidth} choices={VIEWING_SIZES} onChange={(width) => { comparison.pause(); setViewingWidth(normalizeViewingWidth(width)) }} />
