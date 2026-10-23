@@ -1,10 +1,10 @@
 # Optical illusion research backlog
 
-Updated 23 October 2026. This is a selection backlog, not a build history. Feature contracts live in [docs/specs](specs/); actual engineering, deployment and viewing results live in the linked validation records below. Ten illusion pages are listed; Kanizsa remains directly accessible but unlisted by owner decision.
+Updated 24 October 2026. This is a selection backlog, not a build history. Feature contracts live in [docs/specs](specs/); actual engineering, deployment and viewing results live in the linked validation records below. Eleven illusion pages are listed; Kanizsa remains directly accessible but unlisted by owner decision.
 
 ## Approved implementation queue
 
-The latest pass searched author/research demonstrations and community discussions, including Reddit comments. Six candidates merit original, static implementations. **Owner approved all six specs and their scoped comparison contracts on 23 October 2026.** Implement one at a time: bulging-checkerboard → shepard-tables → jastrow → curvature-blindness → vanishing-dots → skye-grating. After each validated unlisted deployment, stop for owner real-phone viewing before starting the next. Listing remains a separate decision. Bulging checkerboard has passed engineering validation and is unlisted/noindex; [human calibration remains pending](bulging-checkerboard-validation.md). The other five are approved but not implemented. Geometry and defaults are project choices, not claims of an optimal or laboratory-replicated stimulus.
+The latest pass searched author/research demonstrations and community discussions, including Reddit comments. Six candidates merit original, static implementations. **Owner approved all six specs and their scoped comparison contracts on 23 October 2026.** Implement one at a time: bulging-checkerboard → shepard-tables → jastrow → curvature-blindness → vanishing-dots → skye-grating. After each validated unlisted deployment, stop for owner real-phone viewing before starting the next. Listing remains a separate decision. Bulging checkerboard is [calibrated on desktop and real phones](bulging-checkerboard-validation.md), listed by owner approval with its current corner rule retained. Shepard’s tables is authorized next after confirming this listing deployment; the other five are approved but not implemented. Geometry and defaults are project choices, not claims of an optimal or laboratory-replicated stimulus.
 
 | Candidate / approved spec | What users compare | Why select it / main risk |
 | --- | --- | --- |
@@ -48,7 +48,7 @@ These remain research options, not approved specs. Favor a faithful, compact dem
 
 ## Built features: contracts and records
 
-Main/default demonstrations on all ten listed pages have two-viewer desktop and real-phone calibration. Feature records define the actual scope: optional modes or assets are not automatically covered. Unknown human browser, DPR, viewing distance, zoom or settings remain unknown. Kanizsa's separate owner decision remains unchanged.
+Listed features have recorded two-viewer desktop and real-phone calibration; consult each record for supplied settings and exact scope. Feature records define the actual scope: optional modes or assets are not automatically covered. Unknown human browser, DPR, viewing distance, zoom or settings remain unknown. Kanizsa's separate owner decision remains unchanged.
 
 | Feature | Specification | Actual checks / viewing |
 | --- | --- | --- |
@@ -63,6 +63,7 @@ Main/default demonstrations on all ten listed pages have two-viewer desktop and 
 | Hering | [Hering](specs/hering.md) | [Validation](hering-validation.md), [strengthening research](hering-research.md) |
 | Ponzo railway scene and drawing | [Ponzo](specs/ponzo.md) | [Validation](ponzo-validation.md), [perspective research](ponzo-research.md), [image prompt](ponzo-image-prompt.md) |
 | Checker-shadow | [Checker-shadow](specs/checker-shadow.md) | [Validation](checker-shadow-validation.md) |
+| Bulging checkerboard | [Bulging checkerboard](specs/bulging-checkerboard.md) | [Validation](bulging-checkerboard-validation.md); current corner rule retained |
 
 All original-source links, asset origins and feature-specific rendering exceptions remain in those contracts. For example, [Gegenfurtner (2024), Perceptual ripening of oranges](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297507/) supports the everyday netting connection; the original drawing, optional Gemini image, blend approximation and viewing history are documented in Confetti's spec, validation and asset origin notes. Research access does not confer an asset license.
 

@@ -1,6 +1,6 @@
 # OpticEye
 
-A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. Home lists the ten public experiments; each illusion has its own static page. Confetti compares identical circles under three stripe colors and includes an oranges/netting example. Munker compares identical green bars under two stripe contexts. Café Wall explores apparent tilt in parallel mortar bands between staggered tile rows. Müller-Lyer compares fixed, equal-length shafts with opposing arrow fins. Kanizsa uses three cutout disks to suggest a triangle without drawing one. Change the context or viewing size, then reveal the unchanged targets. Each experiment owns its state and Reset; Confetti Reset also restores its oranges example.
+A React + TypeScript + Vite optical illusion playground, styled with Tailwind CSS. Home lists the eleven public experiments; each illusion has its own static page. Confetti compares identical circles under three stripe colors and includes an oranges/netting example. Munker compares identical green bars under two stripe contexts. Café Wall explores apparent tilt in parallel mortar bands between staggered tile rows. Müller-Lyer compares fixed, equal-length shafts with opposing arrow fins. Kanizsa uses three cutout disks to suggest a triangle without drawing one. Change the context or viewing size, then reveal the unchanged targets. Each experiment owns its state and Reset; Confetti Reset also restores its oranges example.
 
 ## Development
 
@@ -41,7 +41,7 @@ Check all thirteen addresses, including a refresh and navigation between them:
 - [Café Wall](http://localhost:4173/OpticEye/cafe-wall/)
 - [Müller-Lyer](http://localhost:4173/OpticEye/muller-lyer/)
 - [Kanizsa (unlisted, direct URL only)](http://localhost:4173/OpticEye/kanizsa/)
-- [Bulging checkerboard (unlisted, direct URL only)](http://localhost:4173/OpticEye/bulging-checkerboard/)
+- [Bulging checkerboard](http://localhost:4173/OpticEye/bulging-checkerboard/)
 - [Scintillating grid](http://localhost:4173/OpticEye/scintillating-grid/)
 - [Poggendorff](http://localhost:4173/OpticEye/poggendorff/)
 - [Ebbinghaus](http://localhost:4173/OpticEye/ebbinghaus/)
@@ -118,4 +118,4 @@ The additional Ponzo Railway scene bundles `src/assets/ponzo-railway-ai.webp` (2
 Checker-shadow is listed at [its direct page](https://sergeydus.github.io/OpticEye/checker-shadow/) with two-viewer desktop and real-phone calibration. An original shaded checkerboard surrounds two flat #707070 tiles; Isolate tiles removes only that scene, preserving the same target polygons, labels and surface. Image size and Reset use the shared controls. No source artwork, blend modes or filters are used; only the specified context receives gradients. Both viewers report A darker than B in the scene and matching after Isolate tiles; unspecified viewing conditions remain unknown. See [its specification](docs/specs/checker-shadow.md) and [validation](docs/checker-shadow-validation.md).
 
 
-Bulging checkerboard is the first implementation in the new approved batch, available unlisted at [its direct page](https://sergeydus.github.io/OpticEye/bulging-checkerboard/). Its original 14×14 board remains unchanged while Hide ticks removes 176 opposite-color corner marks. Image size defaults to Medium/540; Reset restores ticks, size and the closed explanation. Human calibration and listing await owner viewing. See [its specification](docs/specs/bulging-checkerboard.md) and [validation](docs/bulging-checkerboard-validation.md).
+Bulging checkerboard is the first implementation in the new approved batch, listed at [its direct page](https://sergeydus.github.io/OpticEye/bulging-checkerboard/). Its original 14×14 board remains unchanged while Hide ticks removes 176 opposite-color corner marks. Image size defaults to Medium/540; Reset restores ticks, size and the closed explanation. BC05 is complete with both viewers on desktop and real phones. Viewer 1 reports mixed bulging/pinching and a flat regular grid after Hide ticks; viewer 2 confirms the effect and reveal. The owner approved listing and retained the corner rule; unspecified viewing conditions remain unknown. See [its specification](docs/specs/bulging-checkerboard.md) and [validation](docs/bulging-checkerboard-validation.md).

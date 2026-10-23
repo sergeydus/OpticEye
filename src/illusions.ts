@@ -78,7 +78,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'bulging-checkerboard',
-    listed: false,
+    listed: true,
     name: 'Bulging checkerboard',
     title: 'Bulging checkerboard',
     description: 'A regular checkerboard may appear to bulge. Hide its small corner marks to inspect the unchanged square grid.',

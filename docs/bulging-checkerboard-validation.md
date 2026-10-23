@@ -1,12 +1,25 @@
 # Bulging checkerboard validation
 
-23 October 2026, specification 1.2. **Implemented; unlisted/noindex; perceptual calibration pending. BC01–BC04 pass; BC05 is unperformed.**
+24 October 2026, specification 1.3. **Implemented and calibrated on desktop and real phones; listed by owner approval. BC01–BC05 complete.**
 
-## Human viewing
+## Human viewing and listing — 24 October 2026
 
-No human viewing observation is recorded for this construction. Desktop and real-phone two-viewer calibration remain pending. Browser screenshots and pixel checks below establish construction/layout, not perceived bulging. Listing requires separate explicit owner approval.
+Both viewers confirmed on **desktop and real phone**. The owner reports that the effect works very well.
 
-The owner approved this spec first in the six-feature queue. Stop after its unlisted deployment for owner viewing before implementing Shepard’s tables. If owner feedback reports a pinch rather than a bulge, update the specified quadrant rule before changing code; no swap or claimed calibration has been made.
+- **Viewer 1:** the center appears to bulge and pinch at once (mixed direction), and the grid looks flat and regular after Hide ticks.
+- **Viewer 2:** confirms the effect and reveal.
+
+**BC05 complete.** Browser, DPR, zoom, distance, hardware and selected image sizes/settings were not supplied and remain unknown. No further direction, strength or viewing details are attributed to viewer 2. Engineering browser conditions below are not human-viewing conditions.
+
+The owner explicitly approves listing and retaining the current quadrant corner rule. Set listed:true and remove noindex together; geometry, palette, defaults and reveal remain unchanged. After this deployment succeeds, continue to Shepard’s tables unlisted/noindex and stop for its viewing.
+
+## Listing engineering checkpoint — 24 October 2026
+
+Lint, all185 tests across27 files, and the production build pass. At320/1440 in Chrome156.0.8078.47, all13 production documents pass direct loads/refreshes, source assets and header/current-marker checks (26 page cases);22 listed navigation round trips pass. Home now includes11 cards, including Bulging checkerboard; its noindex tag is absent, while Kanizsa remains unlisted/noindex. There are no browser/console errors, failed requests or404s. Only metadata/discovery and documentation changed; the checkerboard geometry/defaults/reveal are unchanged. Evidence: `bulging-listed-pages-preview.json` outside Git. Hosted listing deployment is verified after this commit/push and reported at handoff.
+
+## Initial unlisted engineering checkpoint — 23 October 2026
+
+The following checks describe the original unlisted checkpoint. They are historical engineering evidence; current listing is defined above. Its implementation commit62c4add deployed successfully in [Pages run40021873201](https://github.com/sergeydus/OpticEye/actions/runs/40021873201); hosted checks covered26 direct/refresh page cases and20 listed navigation cases with no errors.
 
 ## Engineering checks
 

@@ -19,18 +19,18 @@ import { BulgingCheckerboardPage } from '../bulging-checkerboard/main'
 // Exercise the actual entry compositions without their browser root side effect.
 vi.mock('./mountPage', () => ({ mountPage: vi.fn() }))
 
-it('lists only the ten listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
+it('lists only the eleven listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
   render(<App />)
   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Explore optical illusions')
   const cards = within(screen.getByRole('list'))
-  expect(cards.getAllByRole('listitem')).toHaveLength(10)
+  expect(cards.getAllByRole('listitem')).toHaveLength(11)
   expect(cards.getByRole('link', { name: 'Confetti illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}confetti/`)
   expect(cards.getByRole('link', { name: 'Munker illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}munker/`)
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
-  expect(cards.queryByRole('link', { name: 'Bulging checkerboard' })).toBeNull()
+  expect(cards.getByRole('link', { name: 'Bulging checkerboard' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}bulging-checkerboard/`)
   expect(cards.getByRole('link', { name: 'Checker-shadow illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}checker-shadow/`)
   expect(cards.getByRole('link', { name: 'Ponzo illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}ponzo/`)
   expect(cards.getByRole('link', { name: 'Hering illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}hering/`)
