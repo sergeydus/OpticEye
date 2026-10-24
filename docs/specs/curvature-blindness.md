@@ -1,6 +1,6 @@
 # Curvature blindness specification
 
-Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.2, 24 October 2026. ID/folder: `curvature-blindness`; title/h1: “Curvature blindness illusion”; HTML title: “Curvature blindness illusion | OpticEye”. Description: “Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.”
+Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.3, 24 October 2026. ID/folder: `curvature-blindness`; title/h1: “Curvature blindness illusion”; HTML title: “Curvature blindness illusion | OpticEye”. Description: “Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.”
 
 Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, testing and separate two-viewer calibration. The owner reaffirmed implementation/publication approval on 24 October 2026: implement after Jastrow listing deploys, publish unlisted/noindex and stop for viewing. This approved feature uses its narrowly scoped **background-comparison exception**, not a context-removal reveal: only the opaque surface fill intentionally changes. No animation, diagnostic claim, contour recoloring or corner-shaped target.
 
@@ -32,13 +32,15 @@ Geometry bounds including half-stroke are x40…680,y59…421. Adjacent rows tra
 | Choice / label | Default | Range / effect |
 | --- | --- | --- |
 | Compare on white | false | Native toggle; false gray#808080, true white#FFFFFF; changes surface fill only |
-| Curvature image size | Medium/540 | Shared240/540/720 maximum CSS widths |
+| Curvature image size | Compact/240 | Shared240/540/720 maximum CSS widths |
 
 Prompt: **“Do some rows look wavy and others angular?”** Help: “Compare neighboring rows on gray, then try a white background.” The SVG description identifies alternating light/dark smooth contour rows; it must not assert that every viewer sees corners or that every row looks equally smooth after comparison.
 
 Keep the button label **“Compare on white”**, pressed when white is selected. Comparison proof: **“The same smooth geometry is shown on a different background. The line shapes, positions and colors did not change.”** No “Hide corners”, “straighten”, “unmodified surface” or “all pixels stayed identical” claim. The opaque surface intentionally changes; edge antialiasing can therefore change while path attributes/colors remain fixed.
 
-Reset restores gray background, Medium and closed explanation. Size choices change uniform display scale, not curve amplitude or wavelength. Explanation distinguishes geometric congruence from color-switch phase and describes the research mechanism as proposed. No automatic background cycling, flicker, recoloring or animation.
+Reset restores gray background, Compact and closed explanation. Size choices change uniform display scale, not curve amplitude or wavelength. Explanation distinguishes geometric congruence from color-switch phase and describes the research mechanism as proposed. No automatic background cycling, flicker, recoloring or animation.
+
+The owner reports that the effect is weak in the initial view but strong after selecting Compact (24 October 2026). Use Compact/240 on load and Reset as a display-size tuning choice within the existing approved controls; keep Medium and Large available. Do not alter any curve geometry, color, phase or comparison behavior. This is one viewer’s size-dependent observation, not completed two-viewer or real-phone calibration; the white-background result and viewing conditions were not supplied.
 
 ## 4. Responsive and calibration concerns
 
@@ -56,4 +58,4 @@ Do not replace curves with polylines, simplify them per device, or impose a scre
 | CB04 | Shared engineering checklist passes unlisted/noindex; include the smooth-extrema/fractional-DPR cases and record actual results in docs/curvature-blindness-validation.md. Record actual engineering and viewing results separately. |
 | CB05 | Calibration only: two viewers on desktop and real phones report whether neighboring rows appear differently shaped on gray and whether white weakens that difference. Record direction, weak/absent responses and supplied conditions. Listing requires separate explicit owner approval. |
 
-CB01–CB04 pass; see [actual validation](../curvature-blindness-validation.md). CB05 is separate human calibration and has no observations yet. Publish unlisted/noindex in the owner-approved order and stop for viewing; do not begin vanishing dots.
+CB01–CB04 passed the initial implementation; rerun the affected checks for the default-size revision and record [actual validation](../curvature-blindness-validation.md). CB05 has one owner observation (weak initially, strong at Compact); two-viewer/device coverage and the white-background comparison remain unconfirmed. Publish unlisted/noindex in the owner-approved order and stop for viewing; do not begin vanishing dots.

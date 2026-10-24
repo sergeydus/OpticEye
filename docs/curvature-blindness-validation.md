@@ -1,8 +1,8 @@
 # Curvature blindness validation
 
-24 October 2026, specification 1.2. **Implemented; unlisted/noindex; perceptual calibration pending. CB01–CB04 pass; CB05 has no human observations.**
+24 October 2026, specification 1.2. **Implemented; unlisted/noindex; perceptual calibration pending. CB01–CB04 pass; CB05 has one initial owner observation; device coverage and white comparison remain unconfirmed.**
 
-## Engineering
+## Initial engineering (specification 1.2; Medium default)
 
 `npm run lint`, **235 tests across 34 files**, and the TypeScript/Vite build pass. The feature has 4 model and 4 component tests, plus actual-entry/header integration coverage. The approved scope was committed as `7a22488` before implementation. No dependencies, external assets or runtime source-site requests were added.
 
@@ -31,4 +31,6 @@ Evidence outside Git in the task visualization directory: `curvature-preview.jso
 
 ## Human viewing and publication
 
-**CB05 pending:** no human observations supplied. Ask both viewers on desktop and real phones whether neighboring rows look differently shaped on gray, and whether white weakens that difference. Record weak/absent responses and only supplied conditions. Listing needs separate explicit owner approval. Publish this implementation unlisted/noindex, confirm its deployment/direct URL, then stop for viewing before vanishing dots.
+**CB05 pending:** owner/viewer 1 reports the effect was not strong in the initial view, but strong when selecting Compact. Exact initial image size, device class, browser, DPR, zoom and distance were not supplied; no white-background comparison was reported. This establishes neither completed calibration nor real-phone coverage. A second viewer and desktop/real-phone observations of the background comparison are still needed. Listing requires separate explicit owner approval.
+
+Specification 1.3 sets Compact/240 as the load/Reset default in response, keeping all geometry, colors, clips and comparison behavior unchanged. Engineering for that revision is recorded after the checks run. Keep the page unlisted/noindex and stop for viewing before vanishing dots.
