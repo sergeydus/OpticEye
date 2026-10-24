@@ -11,6 +11,7 @@ Build a browser-based optical illusion playground. Users observe an illusion, ch
 - Shared shell and controls live in `src/components/`; feature state, rendering, pure geometry/constants and scientific metadata live under `src/illusions/`. Each document owns independent state; do not persist or share experiment state across pages.
 - All application links use `import.meta.env.BASE_URL`. Keep the build base `/OpticEye/` and development base `/`.
 - Every header contains only the OpticEye brand link and an **All illusions** link, both to Home. Only All illusions gets `aria-current="page"` on Home; illusion pages have no current header marker. Do not add per-illusion header links.
+- Listed illusion pages have Previous / Next document links below their content, following Home's listed order without wrapping. Home and unlisted pages have no such navigation; never expose unlisted entries through it.
 - Keep the small metadata list in `src/illusions.ts`. Explicit `listed` flags control Home cards; every entry supplies build input, including unlisted pages. Header links are independent of this list. Adding an illusion requires its folder/entry and one metadata entry.
 
 ## Specification, viewing and publication

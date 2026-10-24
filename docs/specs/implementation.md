@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: Ebbinghaus implemented/calibrated on desktop and real phones, listed/deployed; Hering implemented/calibrated on desktop and real phones, listed/deployed; Ponzo drawing and AI railway section implemented/calibrated on desktop and real phones, listed by owner approval; checker-shadow implemented/calibrated on desktop and real phones, listed by owner approval; compact Home navigation approved; version 1.71, 24 October 2026. Ebbinghaus deployment/live checks passed; Hering passed engineering, Pages deployment and live checks while unlisted/noindex for real-phone viewing. The owner now authorizes pushing new implemented illusions while unlisted; discovery still requires separate owner approval.
+Status: Ebbinghaus implemented/calibrated on desktop and real phones, listed/deployed; Hering implemented/calibrated on desktop and real phones, listed/deployed; Ponzo drawing and AI railway section implemented/calibrated on desktop and real phones, listed by owner approval; checker-shadow implemented/calibrated on desktop and real phones, listed by owner approval; compact Home navigation approved; version 1.72, 24 October 2026. Ebbinghaus deployment/live checks passed; Hering passed engineering, Pages deployment and live checks while unlisted/noindex for real-phone viewing. The owner now authorizes pushing new implemented illusions while unlisted; discovery still requires separate owner approval.
 
 ## 1. Purpose and scope
 
@@ -36,9 +36,10 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `confetti/index.html`, `confetti/main.tsx` | Confetti document and entry, composing its experience with the shared shell. |
 | `munker/index.html`, `munker/main.tsx` | Munker document and entry, composing its experience with the shared shell. |
 | `cafe-wall/index.html`, `cafe-wall/main.tsx` | Café Wall document and entry, composing its experience with the shared shell. |
-| `src/illusions.ts` | Small typed metadata list (ID/folder, short name, title, description, listed flag); listed entries drive Home cards, all entries drive HTML build inputs. |
+| `src/illusions.ts` | Small typed metadata list (ID/folder, short name, title, description, listed flag); listed entries drive Home cards and Previous / Next order, all entries drive HTML build inputs. |
 | `src/mountPage.tsx` | Shared React StrictMode mounting and Tailwind CSS import. |
 | `src/components/SiteLayout.tsx`, `SiteHeader.tsx`, `SiteFooter.tsx` | Shared page shell with base-aware OpticEye and All illusions links to Home; only Home marks All illusions current. |
+| `src/components/IllusionNavigation.tsx` | Previous / Next links for listed illusion pages, composed once by SiteLayout after page content. |
 | `src/components/ViewingSizeControl.tsx` | Labeled native size select used by the experiments; callers own choices, normalization and state. |
 | `src/illusions/confetti/Confetti.tsx` | Own stripe/size state, explanation, independent orange visibility/size, and the Reset action shared by both demonstrations. |
 | `src/illusions/confetti/ConfettiStimulus.tsx` | Render a deterministic SVG from typed props. |
@@ -145,9 +146,17 @@ The user MUST be able to observe the initial effect before reading the answer. P
 - Adding an illusion requires a new top-level folder with index.html and main.tsx, its original feature code, and one metadata-list entry. Do not add a component registry, dynamic renderer, router or plugin system. Build inputs always include the entry; Home cards include it only when listed; the two header links remain fixed.
 - Reuse the existing shared shell and size select in src/components/. Preserve existing geometry, palettes, labels, defaults, controls and calibration records when adding a page.
 
+### Previous / Next navigation (owner-requested, 24 October 2026)
+
+- Each listed illusion page MUST show a shared navigation landmark labeled "Illusion navigation" after its content and before the footer. Links show "Previous illusion" or "Next illusion" plus the destination's short name, with `rel="prev"` or `rel="next"`.
+- Derive neighbors from the same filtered metadata order as Home. Skip unlisted entries; Home and unlisted direct pages MUST NOT render this navigation. Do not wrap: the first listed page has only Next, and the last only Previous. Omit unavailable links rather than rendering disabled anchors.
+- Use ordinary, BASE_URL-aware document links. Preserve the compact header, stimulus rendering, controls and independent page state. Do not add a router, arrow-key shortcuts, automatic navigation or state persistence.
+- Links MUST have visible keyboard focus, at least 44 CSS px height, and wrapping destination text without horizontal overflow at 320 px or 200% browser zoom. Keep Previous on the left and Next on the right when both are present.
+- Acceptance: test first/last/interior neighbors, skipping unlisted entries, Home/unlisted absence, both `/` and `/OpticEye/` bases and actual page composition. Run shared lint/tests/build and check every built page directly/refreshed at 320/1440, sequential Previous/Next navigation, keyboard links and 200% zoom. Record actual checks in [pages-validation.md](../pages-validation.md); this shell change establishes no new perceptual calibration.
+
 ### Listing and direct pages
 
-- New illusions MUST enter the metadata list with **listed:false**, remain directly reachable/buildable, and switch to **listed:true only after explicit owner viewing approval**. Implementation completion alone does not authorize listing. Fourteen entries are listed, including calibrated curvature blindness; Kanizsa and vanishing dots remain false. Use the filtered list for Home discovery, independently of the fixed header links. Explicit listed flags remain required.
+- New illusions MUST enter the metadata list with **listed:false**, remain directly reachable/buildable, and switch to **listed:true only after explicit owner viewing approval**. Implementation completion alone does not authorize listing. Sixteen entries are listed; only Kanizsa remains false. Use the filtered list for Home discovery and Previous / Next navigation, independently of the fixed header links. Explicit listed flags remain required.
 - **Unlisted deployment workflow (owner decision, 21 October 2026):** after engineering checks pass, commit and push each newly authorized illusion while it still has listed:false/noindex. Watch the Pages workflow and check its direct live URL so the owner can test on real phones before listing. Publishing the direct page does not authorize discovery or establish calibration. List only after explicit owner approval; distinguish real-phone observations from desktop phone emulation. This supersedes earlier feature-specific instructions to keep new pages unpushed. Do not change Kanizsa's owner-directed unlisted/calibration-not-pursued state.
 - Build inputs and valid page IDs MUST continue to use every entry. Verify output count as `1 + all entries`, Home cards as `listed entries`, and the header as exactly two Home links (one in Main navigation), independent of the illusion count. Unlisting changes discovery, not access control.
 - Unlisted illusion documents MUST have static `<meta name="robots" content="noindex">`. When the owner approves listing, update the flag and remove noindex together. All illusion pages, listed or unlisted, have no current header marker because only Home is represented there. Kanizsa stays noindex, with its existing behavior unchanged.
