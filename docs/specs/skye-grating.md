@@ -1,8 +1,8 @@
 # Skye oblique grating specification
 
-Status: **approved for implementation; engineering and calibration pending**. Version 1.1, 23 October 2026. ID/folder: `skye-grating`; title/h1: “Skye oblique grating”; HTML title: “Skye oblique grating | OpticEye”. Description: “Straight parallel bands appear tilted among small checker marks. Hide the marks to inspect the unchanged bands.”
+Status: **approved for implementation; engineering and calibration pending**. Version 1.2, 24 October 2026. ID/folder: `skye-grating`; title/h1: “Skye oblique grating”; HTML title: “Skye oblique grating | OpticEye”. Description: “Straight parallel bands appear tilted among small checker marks. Hide the marks to inspect the unchanged bands.”
 
-Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, engineering checks and separate two-viewer calibration. Owner approved this construction on 23 October 2026; implement and validate unlisted/noindex before publishing for viewing. No animation, blur, decorations, dragging or angle-matching task.
+Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, engineering checks and separate two-viewer calibration. Owner approved this construction on23 October2026 and reaffirmed implementation on24 October2026 after the calibrated Vanishing dots listing deployment. Geometry and controls below are unchanged. Implement and validate unlisted/noindex, commit/push, confirm Pages/direct access, then stop for viewing. No animation, blur, decorations, dragging or angle-matching task.
 
 ## 1. Research and attribution
 
