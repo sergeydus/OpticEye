@@ -1,6 +1,6 @@
 # Vanishing dots validation
 
-24 October2026, specification1.2. **Implemented; unlisted/noindex; perceptual calibration pending. VD01–VD04 pass; VD05 has no human observations.**
+24 October2026, specification1.2. **Implemented; unlisted/noindex; perceptual calibration pending. VD01–VD04 pass; VD05 has one weak-effect owner report.**
 
 ## Engineering
 
@@ -31,4 +31,8 @@ Evidence outside Git in the task visualization directory: `vanishing-preview.jso
 
 ## Human viewing and publication
 
-**VD05 pending:** no human observations supplied. Both viewers on desktop and real phones should report peripheral disappearance or its absence and what changes after Hide lattice. Record weak/absent responses and only supplied conditions. Publish unlisted/noindex, confirm the direct live URL, then stop for owner viewing before Skye. Listing needs separate explicit approval.
+**VD05 pending:** on 24 October 2026 the owner reported “illusion too weak” and suggested image size as a possible cause, then clarified that Bach's example is convincing but “in our example i cant even see the illusion”. Record the current OpticEye response as **absent**, not a calibration pass. Device, selected image size, browser, zoom, DPR, distance and Hide lattice result were not supplied. No second-viewer result is recorded.
+
+The implementation was published unlisted/noindex in successful [Pages run 40108030804](https://github.com/sergeydus/OpticEye/actions/runs/40108030804) from `fd49531`. The [direct live page](https://sergeydus.github.io/OpticEye/vanishing-dots/) remains available for viewing. Listing still needs separate explicit approval; stop before Skye.
+
+[Research after the weak/absent response](vanishing-dots-research.md) identifies the mobile size cap and differences from Bach's authored proportions, surface and field coverage. After the clarification, [spec section6](specs/vanishing-dots.md#6-approved-revision-rationale) records the combined revision approved by the owner on24 October2026. Engineering checks of the revision are pending. This follow-up changes documentation only; no new runtime checks or perceptual success are claimed, and the existing engineering results above describe the unchanged implementation.
