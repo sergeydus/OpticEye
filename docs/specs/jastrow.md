@@ -1,8 +1,8 @@
 # Jastrow illusion specification
 
-Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.2, 24 October 2026. ID/folder `jastrow`; title/h1 “Jastrow illusion”; HTML title “Jastrow illusion | OpticEye”. Description: “Compare two curved bands, then align them without resizing either shape.”
+Status: **implemented and calibrated on desktop and real phones; listed by owner approval**. Version 1.3, 24 October 2026. ID/folder `jastrow`; title/h1 “Jastrow illusion”; HTML title “Jastrow illusion | OpticEye”. Description: “Compare two curved bands, then align them without resizing either shape.”
 
-Use [implementation.md](implementation.md) for page setup, listing, shared controls, Reset, accessibility, engineering checks and two-viewer calibration. This feature uses its **rigid comparison** contract, not an unchanged-position reveal. Owner-approved implementation starts `listed:false` with static `noindex`; validate and publish for viewing before separate listing approval.
+Use [implementation.md](implementation.md) for page setup, listing, shared controls, Reset, accessibility, engineering checks and two-viewer calibration. This feature uses its **rigid comparison** contract, not an unchanged-position reveal. The initial implementation shipped `listed:false` with static `noindex`. On 24 October 2026 the owner separately approved listing after both viewers confirmed the illusion and exact-fit comparison on desktop and real phones; set `listed:true` and remove `noindex` together.
 
 ## 1. Research and attribution
 
@@ -59,4 +59,4 @@ Both paths stay in one SVG at all breakpoints. Inspect antialiasing near radial 
 | JA04 | Shared engineering/page checklist passes for a new unlisted/noindex entry; include initial/intermediate/exact-fit/restored arrangements, every size, gap/DPR checks, reduced motion and200% zoom. Record actual results in docs/jastrow-validation.md; existing pages and their calibration remain unchanged. |
 | JA05 | Calibration only: two viewers on desktop and real phones report whether the initial bands look different in size and coincide after comparison. Record direction, weak/absent responses and only supplied viewing conditions. Listing needs separate explicit owner approval. |
 
-JA01–JA04 define implemented; JA05 separately defines calibrated. JA01–JA04 pass; see [actual validation](../jastrow-validation.md). JA05 has no human observations yet. Implementation is approved in the documented order; stop for owner viewing after each deployment.
+JA01–JA04 define implemented; JA05 separately defines calibrated. JA01–JA04 pass; see [actual validation](../jastrow-validation.md). JA05 is complete: viewers 1 and 2 confirmed on desktop and real phones that the lower band looks larger initially and the slide shows an exact fit. Other human conditions were not supplied. The owner did not perform the manual background-tab pause check; it is not a claimed human result. Listing is approved; after its deployment, implement curvature blindness unlisted in the approved order.

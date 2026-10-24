@@ -1,10 +1,12 @@
 # Jastrow validation
 
-24 October 2026, specification 1.2. **Implemented; unlisted/noindex; perceptual calibration pending. JA01–JA04 pass; JA05 is unperformed.**
+24 October 2026, specification 1.3. **Implemented and calibrated on desktop and real phones; listing approved. JA01–JA05 complete.**
 
 ## Human viewing and publication
 
-No human viewing observations have been supplied for Jastrow. Screenshots establish construction/layout only. Publish the direct page while unlisted for desktop and real-phone viewing, then stop. Listing requires a separate owner decision; do not start the next illusion yet.
+**JA05 complete:** viewers 1 and 2 confirmed on desktop and real phones that the lower band looks larger before comparison and the slide shows an exact fit. Browser, DPR, zoom, distance, selected image size and other conditions were not supplied. Screenshots are engineering evidence only. The owner separately approved listing on 24 October 2026, then curvature blindness after the listing deployment.
+
+The owner clarified that they had not understood/performed the manual background-tab pause check. Leave that check unverified; do not turn the original placeholder into a pass. Existing simulated visibility-event and controller checks below remain engineering evidence.
 
 ## Engineering
 
