@@ -1,10 +1,22 @@
 # Static page validation
 
+## Previous / Next navigation — 24 October 2026 (current)
+
+The sixteen listed illusion pages now share Previous / Next links below their content, in Home order, without wrapping. Home and unlisted Kanizsa omit them; Kanizsa is also skipped between Müller-Lyer and Scintillating grid. All eighteen documents remain built. The header still contains exactly OpticEye and All illusions, with a current marker only on Home. Specifications were committed before implementation.
+
+Lint, **269 tests across 39 files**, and the TypeScript/Vite production build pass. New tests cover both URL bases, every listed page's neighbors and endpoints, skipping hidden entries, absent Home/unlisted navigation, actual page compositions and placement before the footer. No stimulus geometry, defaults, assets, dependencies or deployment workflow changed; existing calibration records are preserved.
+
+Chrome **156.0.8078.47** passed all eighteen documents directly and after refresh at **320 and 1440 CSS px** under both the production-preview `/OpticEye/` base and development `/` base: **36 page/viewport cases and 60 sequential keyboard navigation trips per base**. Every listed page was traversed forward and backward with Enter, verifying the destination, visible focus, minimum 44px link height, correct endpoints and no hidden destination. Styles/images, sixteen Home cards, listing/noindex/header rules and no horizontal overflow pass. There were no console/page errors, failed requests or HTTP 4xx/5xx responses.
+
+Native **200% browser zoom** passed on Home, Confetti, Müller-Lyer, curvature blindness, Skye and Kanizsa (outer width 1440, inner width 712, DPR 2, CSS root zoom 1). Navigation screenshots at 320/1440 and 200% were inspected: names wrap within the cards and links remain separate from the experiment controls. This is engineering validation, not additional human viewing evidence.
+
+Evidence outside Git: `illusion-navigation-preview.json`, `illusion-navigation-dev.json` and matching screenshots in the task visualization directory. Hosted deployment checks are reported separately after pushing.
+
 20 October 2026. The owner requested separate pages after the Munker checkpoint (`c9e9adc`). Specs and AGENTS.md were updated before changing code. No router, fallback 404.html, dependencies or Pages workflow changes were added.
 
 Historical structure (21 October 2026): ten documents, seven listed Home cards and eight header links. Kanizsa stays unlisted/noindex, calibration not pursued. Ebbinghaus listing/deployment is approved; both viewers confirmed its default effect/reveal on desktop and real phones, completing calibration. Hering is implemented/deployed unlisted/noindex with calibration pending for real-phone viewing. Earlier checkpoints are historical.
 
-## Current structure — 22 October 2026
+## Historical structure — 22 October 2026
 
 Checker-shadow now has explicit owner listing approval and completed two-viewer desktop/real-phone calibration. Home lists ten illusions; Kanizsa remains unlisted/noindex, and all twelve documents still build. Every header has exactly two links, OpticEye and All illusions, both to Home using BASE_URL. The Main navigation landmark contains only All illusions, marked aria-current only on Home. This replaces historical per-illusion nav counts below.
 

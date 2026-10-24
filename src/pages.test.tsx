@@ -54,6 +54,7 @@ it('lists only the sixteen listed experiments with descriptions and document lin
   expect(cards.getByText(/Parallel mortar lines/)).toBeVisible()
   expect(screen.queryByRole('article')).toBeNull()
   expect(screen.queryByRole('slider')).toBeNull()
+  expect(screen.queryByRole('navigation', { name: 'Illusion navigation' })).toBeNull()
 })
 
 it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering', 'ponzo', 'checker-shadow', 'bulging-checkerboard', 'shepard-tables', 'jastrow', 'curvature-blindness', 'vanishing-dots', 'skye-grating'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s for the compact header on %s, with a current marker only on Home', (base, currentPage) => {
@@ -108,6 +109,9 @@ it.each([
   expect(header).toBeVisible()
   expect(screen.getByRole('contentinfo')).toBeVisible()
   expect(screen.queryByRole('navigation', { name: 'Illusions' })).toBeNull()
+  const adjacentNavigation = screen.queryByRole('navigation', { name: 'Illusion navigation' })
+  if (Page === KanizsaPage) expect(adjacentNavigation).toBeNull()
+  else expect(adjacentNavigation).toBeVisible()
 })
 
 it('keeps the unlisted Kanizsa entry interactive with its existing defaults and Reset', async () => {
