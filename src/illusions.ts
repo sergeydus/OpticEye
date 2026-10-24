@@ -92,7 +92,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'jastrow',
-    listed: false,
+    listed: true,
     name: 'Jastrow',
     title: 'Jastrow illusion',
     description: 'Compare two curved bands, then align them without resizing either shape.',

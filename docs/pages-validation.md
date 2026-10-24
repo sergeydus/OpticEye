@@ -88,3 +88,7 @@ All12 development documents also passed direct loads/refreshes/navigation at320/
 After checker-shadow deployment, all12 live documents passed direct loads, refreshes, navigation, styles/assets, nine Home cards, ten nav links and listed/current versus unlisted/noindex behavior at320/1440 (24 page/viewport cases); no browser/console errors, failed requests, HTTP4xx/5xx or horizontal overflow.
 
 The same12 development routes passed at320/1440 under `/` (24 direct-load/refresh and20 navigation cases, no errors). The temporary port5173 server was stopped. Native200% preview metrics: outer1440, inner712×552, DPR2, CSSzoom1. At320, header link bounds were brand116.03×44 and All illusions71.97×44 CSSpx. Evidence: compact-nav-dev.json and compact-nav-preview.json outside Git.
+
+## Jastrow listing — 24 October 2026
+
+Lint, 224 tests/32 files and all 15 build outputs pass. Chromium 156.0.8078.47 checks all 15 production documents at 320/1440: 30 direct-load/refresh cases, 26 listed-card navigation trips, Home with 13 cards, Jastrow listed without noindex, and Kanizsa still unlisted/noindex. All 15 development root-base routes also load/refresh. Compact header/current-marker rules, metadata, styles/assets and no overflow/errors/404s pass. Jastrow's DPR/zoom/motion regression details are in [its validation](jastrow-validation.md). Temporary local previews are engineering tools, not real-phone viewing evidence.

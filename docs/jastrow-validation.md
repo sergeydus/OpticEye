@@ -6,7 +6,7 @@
 
 **JA05 complete:** viewers 1 and 2 confirmed on desktop and real phones that the lower band looks larger before comparison and the slide shows an exact fit. Browser, DPR, zoom, distance, selected image size and other conditions were not supplied. Screenshots are engineering evidence only. The owner separately approved listing on 24 October 2026, then curvature blindness after the listing deployment.
 
-The owner clarified that they had not understood/performed the manual background-tab pause check. Leave that check unverified; do not turn the original placeholder into a pass. Existing simulated visibility-event and controller checks below remain engineering evidence.
+The owner subsequently performed the background-tab check and reported that it works correctly. Record the pause as manually confirmed by the owner; browser, device and timing details were not supplied. Simulated visibility-event and controller checks below remain separate engineering evidence.
 
 ## Engineering
 
@@ -38,3 +38,9 @@ All 15 production pages load and refresh at 320/1440 (**30 cases**), 24 listed-c
 Shepard passed fresh 320/1440 checks at all three sizes after extraction of the shared controller/transport: original tabletop paths, furniture only at actual progress 0, exact rotate-then-slide fit, Play/Pause/reverse/Reset, reduced motion and listed/noindex status are preserved. Its two-viewer desktop/real-phone calibration remains complete.
 
 Evidence outside Git: `jastrow-preview.json`, `jastrow-pages-preview.json`, updated `shepard-guided-dev.json`, intermediate/default/fit screenshots, `jastrow-preview-phone740.png` and `jastrow-preview-zoom200.png` in the task visualization directory. Hosted deployment/run and live checks are performed after the implementation push and reported at handoff.
+
+## Listing verification — 24 October 2026
+
+Fresh lint, all 224 tests/32 files and the 15-document production build pass. Chromium 156.0.8078.47 rechecked all 15 production pages at 320/1440 (30 direct-load/refresh cases), 26 listed-card navigation trips and all 15 development routes. Home now has 13 cards including Jastrow; Jastrow has no noindex, while Kanizsa remains unlisted/noindex. Header links, styles/assets and refreshes pass without overflow, console errors, failed requests or 404s.
+
+Jastrow's 18 size/viewport/DPR combinations, keyboard and timed comparison, Back/Reset, initial/dynamic reduced motion, native 200% zoom and two Shepard regression cases pass again. The narrow default screenshot was visually inspected. The owner's separate actual background-tab pause confirmation is recorded above; headless simulation is not relabeled as a genuine tab test. Evidence: `jastrow-listing-preview.json`, `jastrow-listing-preview-320-dpr1-shown.png`, `shepard-guided-dev.json` outside Git. Hosted results follow the push.
