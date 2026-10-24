@@ -5,13 +5,18 @@ import { DOT_RADIUS, DOT_RGB, DOTS, GRID_RGB, GRID_STROKE, LATTICE_LINES, RIM_RA
 export default function VanishingDotsStimulus({ latticeVisible }: { latticeVisible: boolean }) {
   const id = useId()
   return (
-    <svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`} width={VIEWBOX.width} height={VIEWBOX.height} className="block h-auto w-full" role="img" aria-labelledby={`${id}-title`} aria-describedby={`${id}-description`}>
+    <svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`} width={VIEWBOX.width} height={VIEWBOX.height} className="block h-auto w-full" overflow="hidden" role="img" aria-labelledby={`${id}-title`} aria-describedby={`${id}-description`}>
       <title id={`${id}-title`}>Vanishing dots</title>
       <desc id={`${id}-description`}>{latticeVisible
-        ? 'Twelve black dots with white rims at plus-crossings of a gray lattice on white. Some peripheral dots may seem to vanish even though the drawing is static.'
-        : 'The same twelve black dots and white rims remain at their original positions on white. Only the gray lattice is hidden.'}</desc>
+        ? 'Twelve black dots with white rims at plus-crossings of a gray lattice on a light gray surface. Some peripheral dots may seem to vanish even though the drawing is static.'
+        : 'The same twelve black dots and white rims remain at their original positions on the light gray surface. Only the gray lattice is hidden.'}</desc>
+      <defs>
+        <clipPath id={`${id}-lattice-clip`} clipPathUnits="userSpaceOnUse">
+          <rect x="0" y="0" width={VIEWBOX.width} height={VIEWBOX.height} />
+        </clipPath>
+      </defs>
       <rect data-layer="surface" x="0" y="0" width={VIEWBOX.width} height={VIEWBOX.height} fill={SURFACE_FILL} />
-      {latticeVisible && <g data-layer="lattice" fill="none" stroke={GRID_RGB} strokeWidth={GRID_STROKE} strokeLinecap="butt">
+      {latticeVisible && <g data-layer="lattice" clipPath={`url(#${id}-lattice-clip)`} fill="none" stroke={GRID_RGB} strokeWidth={GRID_STROKE} strokeLinecap="butt">
         {LATTICE_LINES.map(({ id: key, kind, ...line }) => <line key={key} data-segment={key} data-kind={kind} {...line} />)}
       </g>}
       <g data-layer="dots">

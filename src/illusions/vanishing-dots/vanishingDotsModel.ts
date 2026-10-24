@@ -1,21 +1,21 @@
-export const VIEWBOX = { width: 720, height: 540 } as const
-export const CELL = 42
-export const GRID_ORIGIN = { x: 24, y: 60 } as const
-export const COLUMNS = 16
+export const VIEWBOX = { width: 784, height: 560 } as const
+export const CELL = 56
+export const GRID_ORIGIN = { x: 0, y: 0 } as const
+export const COLUMNS = 14
 export const ROWS = 10
-export const SURFACE_FILL = '#FFFFFF'
+export const SURFACE_FILL = '#F2F2F2'
 export const GRID_RGB = '#808080'
 export const GRID_STROKE = 8
 export const DOT_RGB = '#000000'
-export const DOT_RADIUS = 4
+export const DOT_RADIUS = 5.5
 export const RIM_RGB = '#FFFFFF'
-export const RIM_RADIUS = 5.75
+export const RIM_RADIUS = 6.75
 export const VIEWING_SIZES = [
-  { label: 'Compact', width: 240 },
-  { label: 'Medium', width: 540 },
-  { label: 'Large', width: 720 },
+  { label: 'Compact', width: 392 },
+  { label: 'Medium', width: 784 },
+  { label: 'Large', width: 1000 },
 ] as const
-export const DEFAULT_VIEWING_WIDTH = 540
+export const DEFAULT_VIEWING_WIDTH = 784
 
 export function normalizeViewingWidth(value: number) {
   return VIEWING_SIZES.some((size) => size.width === value) ? value : DEFAULT_VIEWING_WIDTH
@@ -37,13 +37,13 @@ export const LATTICE_LINES = [
     const x = GRID_ORIGIN.x + CELL * column, y = GRID_ORIGIN.y + CELL * row
     return {
       id: `d-${row}-${column}`, kind: 'diagonal',
-      x1: x, y1: (row + column) % 2 === 0 ? y : y + CELL,
-      x2: x + CELL, y2: (row + column) % 2 === 0 ? y + CELL : y,
+      x1: x, y1: (row + column) % 2 === 1 ? y : y + CELL,
+      x2: x + CELL, y2: (row + column) % 2 === 1 ? y + CELL : y,
     }
   })).flat(),
 ]
 
-export const DOTS = [1, 5, 9].flatMap((row) => [2, 6, 10, 14].map((column) => ({
+export const DOTS = [1, 5, 9].flatMap((row) => [1, 5, 9, 13].map((column) => ({
   id: `${row}-${column}`, column, row,
   cx: GRID_ORIGIN.x + CELL * column, cy: GRID_ORIGIN.y + CELL * row,
 })))
@@ -52,6 +52,7 @@ export const VANISHING_DOTS = {
   title: 'Vanishing dots',
   instructions: 'Look around the pattern. Do some dots seem to vanish?',
   viewingInstruction: 'Let your gaze move comfortably around the pattern. The drawing is completely static, and perception varies.',
+  sizeHelp: 'Compare image sizes. Sizes fit the available width; Medium and Large may look the same on narrow screens. Larger is not necessarily stronger.',
   proof: 'Twelve black dots are drawn in both states. Only the gray lattice was removed.',
   explanation: 'All twelve black dots are present continuously. For some viewers, dots away from where they are looking seem to disappear within the lattice. Hide lattice removes only the gray lines, keeping the same black dots and white rims. This extinction illusion differs from the scintillating grid, where extra dark spots may appear. Its explanation is not settled; do not treat one proposed visual-processing account as a complete mechanism. What you notice can vary with viewer, image size and display. Seeing more or fewer dots is not a measure of visual ability.',
   attribution: 'Original OpticEye lattice for the extinction illusion described by Jacques Ninio and Kent A. Stevens (2000). See Michael Bach’s demonstration.',

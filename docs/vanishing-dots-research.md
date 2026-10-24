@@ -1,6 +1,6 @@
 # Vanishing dots: weak-effect investigation
 
-24 October 2026. Research record; the combined revision in spec section6 is now owner-approved for implementation. The owner reports that the illusion is too weak and suspects image size. Device, selected size, browser, zoom, DPR and viewing distance were not supplied. VD05 remains pending.
+24 October 2026. Research record; the combined revision in spec section6 is now approved, implemented and engineering-validated, with owner viewing pending. The owner reports that the illusion is too weak and suspects image size. Device, selected size, browser, zoom, DPR and viewing distance were not supplied. VD05 remains pending.
 
 ## Findings
 
@@ -28,7 +28,7 @@ Values are CSS/drawing px, not physical measurements. Bach's diameter-12 filled 
 - [Ninio & Stevens (2000), original record](https://pubmed.ncbi.nlm.nih.gov/11220212/), DOI 10.1068/p2985: indexed abstract and excerpts were available, but direct full-PDF retrieval failed. No complete new inspection of that paper is claimed. The later full-text studies above supply the evidence used here.
 - Existing Reddit links in the feature spec contain conflicting size/zoom and absent-effect reports. They are useful calibration concerns, not evidence that one display size is universally stronger.
 
-## Recommended controlled trials — not yet approved for implementation
+## Earlier controlled-trial recommendation — superseded by the combined revision
 
 1. **Size first:** compare the current unchanged construction at 540 and 720 px on a wide desktop; add an expanded in-page viewing mode, aiming for an approximately 800–900 px field where space permits. Move controls below the expanded field and retain an available Hide lattice action. Preserve proportions, the complete pattern and comparison frame. On narrow phones, make the fitted-width limit clear; landscape can offer more width but is not guaranteed to help. Uniform scaling enlarges dots and spacing together, so record it as a whole-image size trial, not isolated eccentricity evidence.
 2. **Rim second, at a fixed field size:** compare model outer radius 5.75 against 5.0, retaining black radius 4, grid, centers and palette. The trial's 1-unit radial rim gives a black-to-rim ratio close to Bach's default (4:1 versus 4.3:1). This is an original, bounded experiment, not a published optimum. At 540 px it is 0.75 CSS px thick; at 288 px, 0.4 px, so fractional-DPR aliasing needs inspection. Each variant must preserve its own exact circles during Hide lattice.
@@ -40,4 +40,4 @@ Replace the feature's implication that shrinking is the preferred adjustment wit
 
 The owner clarified that Bach's example is convincing but OpticEye produces no visible illusion. Reinspection of the complete drawing loops confirms equivalent plus/star topology after a one-cell phase shift, with additional differences beyond size: Bach fills the field to its edges and uses a95%-white surface. Our current field has blank margins and a white surface. No claim is made that any single difference explains the owner's result.
 
-[Specification section6](specs/vanishing-dots.md#6-approved-revision-rationale) records owner approval for an original784×560 edge-to-edge lattice with cells56, gray stroke8, black radius5.5, outer white radius6.75 and surface#F2F2F2, displayed in a full-width content row with Medium784 default. This is a combined reference-informed product trial replacing the earlier size-first recommendation, not a controlled causal experiment. The owner approved implementation on24 October2026. Commit the approved spec before code; the published version remains unchanged until implementation and deployment complete.
+[Specification section6](specs/vanishing-dots.md#6-approved-revision-rationale) records owner approval for an original784×560 edge-to-edge lattice with cells56, gray stroke8, black radius5.5, outer white radius6.75 and surface#F2F2F2, displayed in a full-width content row with Medium784 default. This is a combined reference-informed product trial replacing the earlier size-first recommendation, not a controlled causal experiment. The owner approved implementation on24 October2026. The spec checkpoint is514bd92; the revised construction is implemented and engineering-validated. Deployment and new owner viewing follow; the original absent-effect report remains recorded.

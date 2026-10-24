@@ -1,6 +1,6 @@
 # Vanishing dots specification
 
-Status: **revision approved for implementation; unlisted/noindex; perceptual calibration pending**. Version 1.3, 24 October 2026. ID/folder `vanishing-dots`; title/h1 “Vanishing dots”; HTML title “Vanishing dots | OpticEye”. Description: “Look around a static lattice, then hide its gray lines while retaining the same twelve black dots.”
+Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.3, 24 October 2026. ID/folder `vanishing-dots`; title/h1 “Vanishing dots”; HTML title “Vanishing dots | OpticEye”. Description: “Look around a static lattice, then hide its gray lines while retaining the same twelve black dots.”
 
 Inherit page setup, listed:false/noindex, Reset, labels/keyboard access, size normalization, engineering and two-viewer calibration from [implementation.md](implementation.md). The owner reaffirmed implementation and unlisted publication on24 October2026, after the curvature listing deployment; stop for viewing before Skye. No animation, fixation timer, randomized disappearance, eye tracking or guaranteed visibility count.
 
@@ -49,7 +49,7 @@ Uniform scaleW/784. At W288/392/784/1000, gray stroke widths are approximately *
 | VD04 | Shared engineering/page checks pass unlisted/noindex after approval; include every size/DPR and native200%, defaults/hidden/restored. Record actual results in docs/vanishing-dots-validation.md; preserve existing pages. |
 | VD05 | Calibration only: two viewers on desktop and real phones report peripheral disappearance or its absence, and what changes after Hide lattice. Record weak responses and supplied conditions. Listing requires separate owner approval. |
 
-The original implementation passed VD01–VD04; revision checks are pending. See [actual validation](../vanishing-dots-validation.md). VD05 is separate human calibration: the owner reports no visible illusion in the original OpticEye version while Bach’s is convincing; conditions are unspecified. The page remains unlisted/noindex; stop before Skye, and listing requires a separate owner decision.
+The revised implementation passes VD01–VD04; no human viewing of the revision is recorded yet. See [actual validation](../vanishing-dots-validation.md). VD05 is separate human calibration: the owner reports no visible illusion in the original OpticEye version while Bach’s is convincing; conditions are unspecified. The page remains unlisted/noindex; stop before Skye, and listing requires a separate owner decision.
 
 ## 6. Approved revision rationale
 
