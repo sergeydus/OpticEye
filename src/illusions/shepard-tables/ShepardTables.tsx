@@ -40,7 +40,7 @@ export default function ShepardTables() {
             <span>01 / Observe</span><span>{comparison.active ? stage : 'Tables visible'}</span>
           </div>
           <div data-shepard-viewing-frame className="mx-auto w-full" style={{ maxWidth: viewingWidth }}>
-            <div className="overflow-hidden outline outline-slate-300"><ShepardTablesStimulus comparing={comparison.active} progress={comparison.progress} /></div>
+            <div className="overflow-hidden outline outline-slate-300"><ShepardTablesStimulus progress={comparison.progress} /></div>
             <fieldset className="mt-4 min-w-0">
               <legend className="sr-only">Guided comparison</legend>
           <button type="button" aria-describedby={`${id}-reveal-help`} onClick={comparison.playPause} className={`min-h-12 w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>{playLabel}</button>
@@ -57,7 +57,7 @@ export default function ShepardTables() {
         </div>
         <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
           <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
-          <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Follow the left tabletop as it rotates and slides onto the right. The legs and side faces stay in place; neither top is resized.</p>
+          <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Follow the left tabletop as it rotates and slides onto the right. Legs and side faces appear only at 0% progress. Neither top is resized.</p>
           <button type="button" onClick={() => { comparison.backToTables(); setNotice('Original table drawings restored.') }} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Back to tables</button>
           <button type="button" onClick={reset} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Reset Shepard’s tables</button>
           <ViewingSizeControl id={`${id}-size`} label="Shepard’s tables image size" value={viewingWidth} choices={VIEWING_SIZES} onChange={(width) => { comparison.pause(); setViewingWidth(normalizeViewingWidth(width)) }} />

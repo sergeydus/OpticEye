@@ -3,6 +3,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import ShepardTables from './ShepardTables'
+import ShepardTablesStimulus from './ShepardTablesStimulus'
 
 const proof = 'The tabletop drawings are the same 2D shape. One was rotated and moved onto the other without resizing.'
 const tops = (svg: Element) => [...svg.querySelectorAll('[data-tabletop]')]
@@ -52,18 +53,16 @@ describe('Shepard’s tables guided comparison', () => {
     const right = pair[0].outerHTML, surface = svg.querySelector('[data-layer="surface"]')!
     const surfaceData = surface.outerHTML
     const context = svg.querySelector('[data-layer="context"]')!
-    const contextNodes = [...context.querySelectorAll('[data-leg], [data-face]')]
     const contextData = context.outerHTML
-    for (const p of [25, 50, 75, 100, 75, 50, 0, 100]) {
+    for (const p of [1, 25, 50, 75, 100, 75, 1, 0, 1, 0, 100]) {
       scrub(p)
-      expect(svg.querySelectorAll('[data-leg]')).toHaveLength(8)
-      expect(svg.querySelectorAll('[data-face]')).toHaveLength(4)
+      expect(svg.querySelectorAll('[data-leg]')).toHaveLength(p === 0 ? 8 : 0)
+      expect(svg.querySelectorAll('[data-face]')).toHaveLength(p === 0 ? 4 : 0)
       expect(tops(svg).every((node, i) => node === pair[i])).toBe(true)
       expect(pair.map(attributes)).toEqual(local)
       expect(pair[0].outerHTML).toBe(right)
-      expect(svg.querySelector('[data-layer="context"]')).toBe(context)
-      expect(context.outerHTML).toBe(contextData)
-      expect([...context.querySelectorAll('[data-leg], [data-face]')].every((node, i) => node === contextNodes[i])).toBe(true)
+      if (p === 0) expect(svg.querySelector('[data-layer="context"]')!.outerHTML).toBe(contextData)
+      else expect(svg.querySelector('[data-layer="context"]')).toBeNull()
       expect(svg.querySelectorAll('path')).toHaveLength(2)
       expect(svg.querySelector('[data-layer="surface"]')).toBe(surface)
       expect(surface.outerHTML).toBe(surfaceData)
@@ -75,6 +74,18 @@ describe('Shepard’s tables guided comparison', () => {
     expect(svg).toHaveAccessibleDescription(/outlines now coincide without resizing/)
     expect(screen.getByRole('status')).toHaveTextContent(proof)
     expect(requestAnimationFrame).not.toHaveBeenCalled()
+  })
+
+  it('hides furniture at every positive fractional progress and restores it at exactly zero', () => {
+    const { rerender } = render(<ShepardTablesStimulus progress={0} />)
+    const svg = screen.getByRole('img'), pair = tops(svg)
+    const original = svg.querySelector('[data-layer="context"]')!.outerHTML
+    for (const progress of [0.00001, 0.01, 1, 0, 0.999, 0]) {
+      rerender(<ShepardTablesStimulus progress={progress} />)
+      expect(tops(svg).every((node, i) => node === pair[i])).toBe(true)
+      if (progress === 0) expect(svg.querySelector('[data-layer="context"]')!.outerHTML).toBe(original)
+      else expect(svg.querySelector('[data-layer="context"]')).toBeNull()
+    }
   })
 
   it('supports keyboard Play/Pause and stage-only live status', async () => {
@@ -159,6 +170,7 @@ describe('Shepard’s tables guided comparison', () => {
     expect(svg.querySelectorAll('[data-leg]')).toHaveLength(8)
     expect(svg.querySelectorAll('[data-face]')).toHaveLength(4)
     scrub(50)
+    expect(svg.querySelector('[data-layer="context"]')).toBeNull()
     expect(screen.getByRole('slider')).toHaveValue('50')
     expect(requestAnimationFrame).not.toHaveBeenCalled()
   })
