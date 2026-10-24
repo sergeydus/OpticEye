@@ -16,6 +16,7 @@ import { PonzoPage } from '../ponzo/main'
 import { CheckerShadowPage } from '../checker-shadow/main'
 import { BulgingCheckerboardPage } from '../bulging-checkerboard/main'
 import { ShepardTablesPage } from '../shepard-tables/main'
+import { JastrowPage } from '../jastrow/main'
 
 // Exercise the actual entry compositions without their browser root side effect.
 vi.mock('./mountPage', () => ({ mountPage: vi.fn() }))
@@ -31,6 +32,7 @@ it('lists only the twelve listed experiments with descriptions and document link
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
+  expect(cards.queryByRole('link', { name: 'Jastrow illusion' })).toBeNull()
   expect(cards.getByRole('link', { name: 'Shepard’s tables' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}shepard-tables/`)
   expect(cards.getByRole('link', { name: 'Bulging checkerboard' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}bulging-checkerboard/`)
   expect(cards.getByRole('link', { name: 'Checker-shadow illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}checker-shadow/`)
@@ -48,7 +50,7 @@ it('lists only the twelve listed experiments with descriptions and document link
   expect(screen.queryByRole('slider')).toBeNull()
 })
 
-it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering', 'ponzo', 'checker-shadow', 'bulging-checkerboard', 'shepard-tables'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s for the compact header on %s, with a current marker only on Home', (base, currentPage) => {
+it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering', 'ponzo', 'checker-shadow', 'bulging-checkerboard', 'shepard-tables', 'jastrow'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s for the compact header on %s, with a current marker only on Home', (base, currentPage) => {
   render(<SiteHeader base={base} currentPage={currentPage} />)
   const header = screen.getByRole('banner')
   const navigation = screen.getByRole('navigation', { name: 'Main navigation' })
@@ -65,6 +67,7 @@ it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'c
 })
 
 it.each([
+  { Page: JastrowPage, title: 'Jastrow illusion', image: 'Jastrow illusion', absent: 'Confetti illusion' },
   { Page: ShepardTablesPage, title: 'Shepard’s tables', image: 'Shepard’s tables', absent: 'Confetti illusion' },
   { Page: BulgingCheckerboardPage, title: 'Bulging checkerboard', image: 'Bulging checkerboard', absent: 'Confetti illusion' },
   { Page: CheckerShadowPage, title: 'Checker-shadow illusion', image: 'Checker-shadow illusion', absent: 'Confetti illusion' },

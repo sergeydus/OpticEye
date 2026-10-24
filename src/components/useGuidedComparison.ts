@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { COMPARISON_DURATION_MS, normalizeComparisonProgress } from './shepardTablesModel'
+
+function normalizeComparisonProgress(value: number) {
+  return Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0
+}
 
 type Comparison = { progress: number; active: boolean; playing: boolean; direction: 1 | -1; reducedMotion: boolean }
 
-export default function useShepardComparison() {
+export default function useGuidedComparison(durationMs: number) {
   const [state, setState] = useState<Comparison>(() => ({ progress: 0, active: false, playing: false, direction: 1, reducedMotion: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false }))
   const current = useRef(state)
   const frame = useRef<number | null>(null)
@@ -39,14 +42,14 @@ export default function useShepardComparison() {
     function tick(now: number) {
       frame.current = null
       if (!current.current.playing) return
-      const progress = normalizeComparisonProgress(startProgress + direction * Math.max(0, now - started) / COMPARISON_DURATION_MS)
+      const progress = normalizeComparisonProgress(startProgress + direction * Math.max(0, now - started) / durationMs)
       const finished = direction === 1 ? progress === 1 : progress === 0
       update({ progress, playing: !finished })
       if (!finished) frame.current = requestAnimationFrame(tick)
     }
     frame.current = requestAnimationFrame(tick)
   }
-  function backToTables() {
+  function backToStart() {
     pause()
     update({ progress: 0, active: false, direction: 1 })
   }
@@ -67,5 +70,5 @@ export default function useShepardComparison() {
     }
   }, [])
 
-  return { ...state, pause, scrub, playPause, backToTables }
+  return { ...state, pause, scrub, playPause, backToStart }
 }

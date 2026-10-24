@@ -1,6 +1,6 @@
 # Jastrow illusion specification
 
-Status: **approved for implementation; engineering and calibration pending**. Version 1.2, 24 October 2026. ID/folder `jastrow`; title/h1 “Jastrow illusion”; HTML title “Jastrow illusion | OpticEye”. Description: “Compare two curved bands, then align them without resizing either shape.”
+Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.2, 24 October 2026. ID/folder `jastrow`; title/h1 “Jastrow illusion”; HTML title “Jastrow illusion | OpticEye”. Description: “Compare two curved bands, then align them without resizing either shape.”
 
 Use [implementation.md](implementation.md) for page setup, listing, shared controls, Reset, accessibility, engineering checks and two-viewer calibration. This feature uses its **rigid comparison** contract, not an unchanged-position reveal. Owner-approved implementation starts `listed:false` with static `noindex`; validate and publish for viewing before separate listing approval.
 
@@ -59,4 +59,4 @@ Both paths stay in one SVG at all breakpoints. Inspect antialiasing near radial 
 | JA04 | Shared engineering/page checklist passes for a new unlisted/noindex entry; include initial/intermediate/exact-fit/restored arrangements, every size, gap/DPR checks, reduced motion and200% zoom. Record actual results in docs/jastrow-validation.md; existing pages and their calibration remain unchanged. |
 | JA05 | Calibration only: two viewers on desktop and real phones report whether the initial bands look different in size and coincide after comparison. Record direction, weak/absent responses and only supplied viewing conditions. Listing needs separate explicit owner approval. |
 
-JA01–JA04 define implemented; JA05 separately defines calibrated. All are currently unperformed. Implementation is approved in the documented order; stop for owner viewing after each deployment.
+JA01–JA04 define implemented; JA05 separately defines calibrated. JA01–JA04 pass; see [actual validation](../jastrow-validation.md). JA05 has no human observations yet. Implementation is approved in the documented order; stop for owner viewing after each deployment.

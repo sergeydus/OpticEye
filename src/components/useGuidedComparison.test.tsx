@@ -2,7 +2,9 @@ import { StrictMode } from 'react'
 import type { ReactNode } from 'react'
 import { act, cleanup, renderHook } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import useShepardComparison from './useShepardComparison'
+import useGuidedComparison from './useGuidedComparison'
+
+const useComparison = () => useGuidedComparison(3200)
 
 let clock: number
 let reducedMotion: boolean
@@ -68,9 +70,9 @@ afterEach(() => {
   vi.unstubAllGlobals()
 })
 
-describe('Shepard guided comparison lifecycle', () => {
+describe('Guided comparison lifecycle shared by Shepard and Jastrow', () => {
   it('stays idle on mount and after the StrictMode setup/cleanup cycle, with one preference listener', () => {
-    const { result, unmount } = renderHook(useShepardComparison, { wrapper: StrictWrapper })
+    const { result, unmount } = renderHook(useComparison, { wrapper: StrictWrapper })
     expect(result.current).toMatchObject({ progress: 0, active: false, playing: false, direction: 1, reducedMotion: false })
     expect(requestAnimationFrame).not.toHaveBeenCalled()
     expect(frames.size).toBe(0)
@@ -81,7 +83,7 @@ describe('Shepard guided comparison lifecycle', () => {
   })
 
   it('uses elapsed time with one frame at a time, completes once, then plays backward from the endpoint', () => {
-    const { result } = renderHook(useShepardComparison)
+    const { result } = renderHook(useComparison)
     act(() => result.current.playPause())
     expect(result.current).toMatchObject({ active: true, playing: true, progress: 0, direction: 1 })
     expect(frames.size).toBe(1)
@@ -113,7 +115,7 @@ describe('Shepard guided comparison lifecycle', () => {
   })
 
   it('pauses in place, rebases elapsed time on resume, and preserves backward travel direction', () => {
-    const { result } = renderHook(useShepardComparison)
+    const { result } = renderHook(useComparison)
     act(() => result.current.scrub(0.8))
     act(() => result.current.scrub(0.6))
     expect(result.current.direction).toBe(-1)
@@ -136,7 +138,7 @@ describe('Shepard guided comparison lifecycle', () => {
   })
 
   it('lets scrubbing take ownership, bounds progress, and keeps comparison active when scrubbed back to zero', () => {
-    const { result } = renderHook(useShepardComparison)
+    const { result } = renderHook(useComparison)
     act(() => result.current.playPause())
     stepFrame(1800)
     act(() => result.current.scrub(0.7))
@@ -152,10 +154,10 @@ describe('Shepard guided comparison lifecycle', () => {
   })
 
   it('returns to the initial table scene and cancels playback without scheduling idle work', () => {
-    const { result } = renderHook(useShepardComparison)
+    const { result } = renderHook(useComparison)
     act(() => result.current.playPause())
     stepFrame(1900)
-    act(() => result.current.backToTables())
+    act(() => result.current.backToStart())
     expect(result.current).toMatchObject({ progress: 0, active: false, playing: false, direction: 1 })
     expect(frames.size).toBe(0)
     const requestsAtReturn = vi.mocked(requestAnimationFrame).mock.calls.length
@@ -164,7 +166,7 @@ describe('Shepard guided comparison lifecycle', () => {
   })
 
   it('pauses when hidden, rejects hidden playback, and does not resume automatically on return', () => {
-    const { result } = renderHook(useShepardComparison)
+    const { result } = renderHook(useComparison)
     act(() => result.current.playPause())
     stepFrame(1800)
     changeVisibility(true)
@@ -183,7 +185,7 @@ describe('Shepard guided comparison lifecycle', () => {
 
   it('starts with an immediate reduced-motion match/separate fallback and still allows manual progress', () => {
     reducedMotion = true
-    const { result } = renderHook(useShepardComparison)
+    const { result } = renderHook(useComparison)
     expect(result.current.reducedMotion).toBe(true)
     act(() => result.current.playPause())
     expect(result.current).toMatchObject({ progress: 1, active: true, playing: false })
@@ -196,7 +198,7 @@ describe('Shepard guided comparison lifecycle', () => {
   })
 
   it('cancels timed motion when the preference changes and never auto-resumes when it changes back', () => {
-    const { result } = renderHook(useShepardComparison)
+    const { result } = renderHook(useComparison)
     act(() => result.current.playPause())
     stepFrame(1800)
     changeMotion(true)
@@ -211,7 +213,7 @@ describe('Shepard guided comparison lifecycle', () => {
   })
 
   it('cancels the sole scheduled frame and removes subscriptions when unmounted during playback', () => {
-    const { result, unmount } = renderHook(useShepardComparison, { wrapper: StrictWrapper })
+    const { result, unmount } = renderHook(useComparison, { wrapper: StrictWrapper })
     act(() => result.current.playPause())
     stepFrame(1800)
     expect(frames.size).toBe(1)

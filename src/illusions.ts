@@ -90,6 +90,13 @@ export const ILLUSIONS = [
     title: 'Shepard’s tables',
     description: 'Compare two table drawings, then overlay their tabletop shapes without stretching them.',
   },
+  {
+    id: 'jastrow',
+    listed: false,
+    name: 'Jastrow',
+    title: 'Jastrow illusion',
+    description: 'Compare two curved bands, then align them without resizing either shape.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

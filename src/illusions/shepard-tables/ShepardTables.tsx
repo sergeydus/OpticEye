@@ -1,27 +1,24 @@
 import { useId, useState } from 'react'
 import ViewingSizeControl from '../../components/ViewingSizeControl'
-import { comparisonStage, DEFAULT_VIEWING_WIDTH, normalizeViewingWidth, SHEPARD_TABLES, VIEWING_SIZES } from './shepardTablesModel'
+import { COMPARISON_DURATION_MS, comparisonStage, DEFAULT_VIEWING_WIDTH, normalizeViewingWidth, SHEPARD_TABLES, VIEWING_SIZES } from './shepardTablesModel'
 import ShepardTablesStimulus from './ShepardTablesStimulus'
-import useShepardComparison from './useShepardComparison'
+import useGuidedComparison from '../../components/useGuidedComparison'
+import GuidedComparisonControls from '../../components/GuidedComparisonControls'
 
 const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700'
 
 export default function ShepardTables() {
   const id = useId()
-  const comparison = useShepardComparison()
+  const comparison = useGuidedComparison(COMPARISON_DURATION_MS)
   const [viewingWidth, setViewingWidth] = useState(DEFAULT_VIEWING_WIDTH)
   const [explanationOpen, setExplanationOpen] = useState(false)
   const [notice, setNotice] = useState('')
   const stage = comparisonStage(comparison.progress)
   const status = comparison.active ? stage === 'Exact fit' ? SHEPARD_TABLES.proof : stage === 'Rotate' ? 'Rotate: the left tabletop turns without resizing.' : 'Slide: the left tabletop moves onto the right without resizing.' : notice
-  let playLabel = 'Play comparison'
-  if (comparison.reducedMotion) playLabel = comparison.progress === 1 ? 'Separate tops' : 'Match instantly'
-  else if (comparison.playing) playLabel = 'Pause comparison'
-  else if (comparison.progress === 1 || comparison.direction === -1 && comparison.progress > 0) playLabel = 'Play back'
-  else if (comparison.progress > 0) playLabel = 'Continue comparison'
+
 
   function reset() {
-    comparison.backToTables()
+    comparison.backToStart()
     setViewingWidth(DEFAULT_VIEWING_WIDTH)
     setExplanationOpen(false)
     setNotice('Shepard’s tables reset.')
@@ -41,13 +38,7 @@ export default function ShepardTables() {
           </div>
           <div data-shepard-viewing-frame className="mx-auto w-full" style={{ maxWidth: viewingWidth }}>
             <div className="overflow-hidden outline outline-slate-300"><ShepardTablesStimulus progress={comparison.progress} /></div>
-            <fieldset className="mt-4 min-w-0">
-              <legend className="sr-only">Guided comparison</legend>
-          <button type="button" aria-describedby={`${id}-reveal-help`} onClick={comparison.playPause} className={`min-h-12 w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>{playLabel}</button>
-          {comparison.reducedMotion && <p className="mt-3 text-sm text-slate-600">Reduced motion: match instantly or inspect each step with the slider.</p>}
-          <label htmlFor={`${id}-progress`} className="mt-5 flex justify-between gap-3 text-sm font-medium">Comparison progress<span aria-hidden="true">{Math.round(comparison.progress * 100)}%</span></label>
-          <input id={`${id}-progress`} type="range" min="0" max="100" step="1" value={Math.round(comparison.progress * 100)} aria-valuetext={`${Math.round(comparison.progress * 100)}% — ${comparison.active ? stage : 'Tables visible'}`} aria-describedby={`${id}-reveal-help`} onPointerDown={comparison.pause} onKeyDown={(event) => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].includes(event.key)) comparison.pause() }} onChange={(event) => comparison.scrub(Number(event.currentTarget.value) / 100)} className={`block min-h-11 w-full accent-teal-700 ${focus}`} />
-            </fieldset>
+            <GuidedComparisonControls id={`${id}-progress`} helpId={`${id}-reveal-help`} comparison={comparison} stage={stage} initialLabel="Tables visible" separateLabel="Separate tops" />
             <div className="min-h-32 pt-4" aria-hidden={comparison.progress !== 1}>
               <p hidden={comparison.progress !== 1} className="text-sm font-medium">{SHEPARD_TABLES.proof}</p>
             </div>
@@ -58,7 +49,7 @@ export default function ShepardTables() {
         <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
           <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
           <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Follow the left tabletop as it rotates and slides onto the right. Legs and side faces appear only at 0% progress. Neither top is resized.</p>
-          <button type="button" onClick={() => { comparison.backToTables(); setNotice('Original table drawings restored.') }} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Back to tables</button>
+          <button type="button" onClick={() => { comparison.backToStart(); setNotice('Original table drawings restored.') }} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Back to tables</button>
           <button type="button" onClick={reset} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Reset Shepard’s tables</button>
           <ViewingSizeControl id={`${id}-size`} label="Shepard’s tables image size" value={viewingWidth} choices={VIEWING_SIZES} onChange={(width) => { comparison.pause(); setViewingWidth(normalizeViewingWidth(width)) }} />
           <output aria-live="polite" aria-atomic="true" className="mt-5 block min-h-12 text-sm leading-relaxed text-teal-900">{status}</output>
