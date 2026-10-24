@@ -99,7 +99,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'curvature-blindness',
-    listed: false,
+    listed: true,
     name: 'Curvature blindness',
     title: 'Curvature blindness illusion',
     description: 'Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.',

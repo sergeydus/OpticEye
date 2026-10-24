@@ -1,6 +1,6 @@
 # OpticEye implementation specification
 
-Status: Ebbinghaus implemented/calibrated on desktop and real phones, listed/deployed; Hering implemented/calibrated on desktop and real phones, listed/deployed; Ponzo drawing and AI railway section implemented/calibrated on desktop and real phones, listed by owner approval; checker-shadow implemented/calibrated on desktop and real phones, listed by owner approval; compact Home navigation approved; version 1.66, 24 October 2026. Ebbinghaus deployment/live checks passed; Hering passed engineering, Pages deployment and live checks while unlisted/noindex for real-phone viewing. The owner now authorizes pushing new implemented illusions while unlisted; discovery still requires separate owner approval.
+Status: Ebbinghaus implemented/calibrated on desktop and real phones, listed/deployed; Hering implemented/calibrated on desktop and real phones, listed/deployed; Ponzo drawing and AI railway section implemented/calibrated on desktop and real phones, listed by owner approval; checker-shadow implemented/calibrated on desktop and real phones, listed by owner approval; compact Home navigation approved; version 1.67, 24 October 2026. Ebbinghaus deployment/live checks passed; Hering passed engineering, Pages deployment and live checks while unlisted/noindex for real-phone viewing. The owner now authorizes pushing new implemented illusions while unlisted; discovery still requires separate owner approval.
 
 ## 1. Purpose and scope
 
@@ -98,6 +98,8 @@ Create these files as the implementation needs them; do not add empty abstractio
 | `shepard-tables/index.html`, `shepard-tables/main.tsx`, `src/illusions/shepard-tables/` | Listed calibrated table page, original congruent tabletop paths, fixed furniture context, local guided rigid comparison/progress/Play-Pause/size/disclosure/Reset, pure model and tests. |
 | `curvature-blindness/index.html`, `curvature-blindness/main.tsx`, `src/illusions/curvature-blindness/` | Listed calibrated document: bounded wave-detail presets with shared smooth Hermite paths and congruent rows, background-only comparison, local size/disclosure/Reset and meaningful tests. |
 | `docs/curvature-blindness-validation.md` | Actual construction, background-invariance, DPR/zoom/page checks and separate human viewing, created during implementation. |
+| `vanishing-dots/index.html`, `vanishing-dots/main.tsx`, `src/illusions/vanishing-dots/` | Approved next unlisted/noindex document: deterministic188-segment lattice, twelve persistent black dots and white rims, context-only Hide lattice, local size/disclosure/Reset and tests. |
+| `docs/vanishing-dots-validation.md` | Actual geometry, context-removal, pixel/size/DPR/zoom/page checks and separate human viewing; created during implementation. |
 | `docs/<id>-validation.md` | Created during each approved implementation with actual results, not placeholder passes. |
 | `vite.config.ts` | React/Tailwind, build-only `/OpticEye/` base and build.rollupOptions.input containing Home plus HTML files derived from the illusion list. |
 | `vitest.config.ts` | Independent jsdom test configuration, unaffected by the deployment base. |
