@@ -32,3 +32,7 @@ Evidence outside Git in the task visualization directory: `skye-preview.json`, `
 **SK05 complete by owner report:** viewer1 and viewer2 confirmed on desktop and real phone. The blue bands look tilted/non-parallel with check marks, and straight and parallel after Hide check marks. Browser, DPR, zoom, viewing distance and selected control/image settings were not supplied and remain unspecified. Engineering browser conditions above are not attributed to the viewers.
 
 The owner separately approves listing: set `listed:true` and remove static noindex together. Retain the construction and defaults. Confirm Pages and the live listed page, then mark the research batch complete and stop. Listing checks are recorded separately after the change; the initial implementation checks above remain historical.
+
+## Listing checks
+
+After explicit owner approval, Home exposes16 cards and Skye has no noindex tag. Lint,264 tests across38 files and build pass. Fresh Chromium preview checks pass:18 size/viewport/DPR combinations,36 shown/hidden states, hidden parameter changes, keyboard/focus/Reset, native200%,216 identical blue-interior sample pairs; all18 pages pass36 direct-load/refresh cases and32 listed navigation trips. All18 development routes pass as well. No404s, browser/console/network errors or overflow. The stimulus renderer/model are unchanged. Evidence: `skye-listed-preview.json`, `skye-listed-preview-pixel-proof.json`, `skye-listed-pages-preview.json` and corresponding screenshots. Hosted deployment/live listing checks follow the push.

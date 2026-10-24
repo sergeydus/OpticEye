@@ -113,7 +113,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'skye-grating',
-    listed: false,
+    listed: true,
     name: 'Skye oblique grating',
     title: 'Skye oblique grating',
     description: 'Straight parallel bands appear tilted among small checker marks. Hide the marks to inspect the unchanged bands.',
