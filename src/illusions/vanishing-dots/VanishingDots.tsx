@@ -30,7 +30,7 @@ export default function VanishingDots() {
         <h1 id={`${id}-heading`} className="text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">{VANISHING_DOTS.title}</h1>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{VANISHING_DOTS.instructions}</p>
       </div>
-      <div className="space-y-8">
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,784px)_minmax(240px,1fr)] lg:gap-10">
         <div className="min-w-0">
           <div className="mb-3 flex items-center justify-between gap-3 font-mono text-xs text-slate-600">
             <span>01 / Observe</span><span>{latticeVisible ? 'Lattice visible' : 'Lattice hidden'}</span>
@@ -44,7 +44,7 @@ export default function VanishingDots() {
           <p className="text-sm leading-relaxed text-slate-600">{VANISHING_DOTS.viewingInstruction}</p>
           <p className="forced-colors-note mt-3 text-sm">System color overrides may change this demonstration.</p>
         </div>
-        <section aria-labelledby={`${id}-controls`} className="mx-auto w-full max-w-xl min-w-0 border-t border-slate-300 pt-5">
+        <section aria-labelledby={`${id}-controls`} className="min-w-0 border-t border-slate-300 pt-5 lg:border-t-0 lg:pt-0">
           <h2 id={`${id}-controls`} className="font-mono text-xs text-slate-600">02 / Explore</h2>
           <p id={`${id}-reveal-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Hide the gray lattice to compare the same twelve dots and their white rims.</p>
           <button type="button" aria-pressed={!latticeVisible} aria-describedby={`${id}-reveal-help`} onClick={toggleLattice} className={`min-h-12 w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>Hide lattice</button>

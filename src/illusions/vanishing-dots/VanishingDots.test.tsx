@@ -61,6 +61,7 @@ describe('vanishing dots experience', () => {
     expect(svg.querySelector('path,polyline,polygon,filter,animate,mask,image,linearGradient,[transform]')).toBeNull()
     expect(screen.getByRole('button', { name: 'Hide lattice' })).toHaveAttribute('aria-pressed', 'false')
     expect(screen.getByRole('combobox', { name: 'Vanishing dots image size' })).toHaveValue('784')
+    expect(screen.getByRole('option', { name: 'Large' })).toHaveProperty('selected', true)
     expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'false')
     expect(screen.getByText(proof)).not.toBeVisible()
     expect(screen.queryByRole('slider')).toBeNull()
@@ -115,7 +116,7 @@ describe('vanishing dots experience', () => {
     expect(screen.getByRole('link', { name: /Ninio & Stevens/ })).toHaveAttribute('href', 'https://pubmed.ncbi.nlm.nih.gov/11220212/')
     expect(screen.getByText(/Original OpticEye lattice for the extinction illusion/)).toBeVisible()
     expect(screen.getByText(/not a measure of visual ability/)).toBeVisible()
-    for (const width of ['392', '1000', '784', '392']) {
+    for (const width of ['392', '560', '784', '392']) {
       await user.selectOptions(size, width)
       expect(frame).toHaveStyle({ maxWidth: `${width}px` })
       expect(svg.querySelector('[data-layer="dots"]')!.outerHTML).toBe(targets)
@@ -128,6 +129,7 @@ describe('vanishing dots experience', () => {
     await user.keyboard('{Enter}')
     expect(reset).toHaveFocus()
     expect(size).toHaveValue('784')
+    expect(screen.getByRole('option', { name: 'Large' })).toHaveProperty('selected', true)
     expect(frame).toHaveStyle({ maxWidth: '784px' })
     expect(toggle).toHaveAttribute('aria-pressed', 'false')
     expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'false')

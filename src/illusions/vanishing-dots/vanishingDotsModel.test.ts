@@ -57,15 +57,15 @@ describe('vanishing dots reference-informed lattice', () => {
     expect(Math.min(...distances) - 2 * RIM_RADIUS).toBe(210.5)
   })
 
-  it('keeps the approved uniform proportions and falls back to Medium for obsolete or invalid sizes', () => {
-    expect(VIEWING_SIZES).toEqual([{ label: 'Compact', width: 392 }, { label: 'Medium', width: 784 }, { label: 'Large', width: 1000 }])
+  it('keeps the approved uniform proportions and falls back to Large for obsolete or invalid sizes', () => {
+    expect(VIEWING_SIZES).toEqual([{ label: 'Compact', width: 392 }, { label: 'Medium', width: 560 }, { label: 'Large', width: 784 }])
     expect(DEFAULT_VIEWING_WIDTH).toBe(784)
-    expect([392, 784, 1000, 240, 540, 720, 450, NaN, Infinity, -1].map(normalizeViewingWidth)).toEqual([392, 784, 1000, 784, 784, 784, 784, 784, 784, 784])
-    for (const [i, width] of [288, 392, 784, 1000].entries()) {
+    expect([392, 560, 784, 1000, 240, 540, 720, 450, NaN, Infinity, -1].map(normalizeViewingWidth)).toEqual([392, 560, 784, 784, 784, 784, 784, 784, 784, 784, 784])
+    for (const [i, width] of [288, 392, 560, 784].entries()) {
       const scale = width / VIEWBOX.width
-      expect(GRID_STROKE * scale).toBeCloseTo([2.938775510204082, 4, 8, 10.204081632653061][i], 12)
-      expect(DOT_RADIUS * 2 * scale).toBeCloseTo([4.040816326530612, 5.5, 11, 14.03061224489796][i], 12)
-      expect((RIM_RADIUS - DOT_RADIUS) * scale).toBeCloseTo([0.459183673469388, 0.625, 1.25, 1.594387755102041][i], 12)
+      expect(GRID_STROKE * scale).toBeCloseTo([2.938775510204082, 4, 5.714285714285714, 8][i], 12)
+      expect(DOT_RADIUS * 2 * scale).toBeCloseTo([4.040816326530612, 5.5, 7.857142857142857, 11][i], 12)
+      expect((RIM_RADIUS - DOT_RADIUS) * scale).toBeCloseTo([0.459183673469388, 0.625, 0.892857142857143, 1.25][i], 12)
     }
   })
 })

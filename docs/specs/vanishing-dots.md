@@ -49,7 +49,7 @@ Uniform scaleW/784. At W288/392/560/784, gray stroke widths are approximately **
 | VD04 | Shared engineering/page checks pass unlisted/noindex after approval; include every size/DPR and native200%, defaults/hidden/restored. Record actual results in docs/vanishing-dots-validation.md; preserve existing pages. |
 | VD05 | Calibration only: two viewers on desktop and real phones report peripheral disappearance or its absence, and what changes after Hide lattice. Record weak responses and supplied conditions. Listing requires separate owner approval. |
 
-The drawing revision passed VD01–VD04; engineering checks for this approved sidebar adjustment are pending. See [actual validation](../vanishing-dots-validation.md). VD05 is separate human calibration: the owner reports improvement in the revision after no visible illusion in the original version. Viewing conditions, comparison result and second-viewer/device coverage remain unspecified. Preserve the784 default width, now labeled Large; the page remains unlisted/noindex. Stop before Skye, and listing requires a separate owner decision.
+The sidebar implementation passes VD01–VD04, preserving the successful default image dimensions. See [actual validation](../vanishing-dots-validation.md). VD05 is separate human calibration: the owner reports improvement in the revision after no visible illusion in the original version. Viewing conditions, comparison result and second-viewer/device coverage remain unspecified. Preserve the784 default width, now labeled Large; the page remains unlisted/noindex. Stop before Skye, and listing requires a separate owner decision.
 
 ## 6. Approved revision rationale
 

@@ -12,8 +12,8 @@ export const RIM_RGB = '#FFFFFF'
 export const RIM_RADIUS = 6.75
 export const VIEWING_SIZES = [
   { label: 'Compact', width: 392 },
-  { label: 'Medium', width: 784 },
-  { label: 'Large', width: 1000 },
+  { label: 'Medium', width: 560 },
+  { label: 'Large', width: 784 },
 ] as const
 export const DEFAULT_VIEWING_WIDTH = 784
 
