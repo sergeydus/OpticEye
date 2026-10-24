@@ -1,8 +1,8 @@
 # Curvature blindness specification
 
-Status: **approved for implementation; engineering and calibration pending**. Version 1.1, 23 October 2026. ID/folder: `curvature-blindness`; title/h1: “Curvature blindness illusion”; HTML title: “Curvature blindness illusion | OpticEye”. Description: “Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.”
+Status: **approved for implementation; engineering and calibration pending**. Version 1.2, 24 October 2026. ID/folder: `curvature-blindness`; title/h1: “Curvature blindness illusion”; HTML title: “Curvature blindness illusion | OpticEye”. Description: “Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.”
 
-Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, testing and separate two-viewer calibration. This approved feature uses its narrowly scoped **background-comparison exception**, not a context-removal reveal: only the opaque surface fill intentionally changes. No animation, diagnostic claim, contour recoloring or corner-shaped target.
+Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, testing and separate two-viewer calibration. The owner reaffirmed implementation/publication approval on 24 October 2026: implement after Jastrow listing deploys, publish unlisted/noindex and stop for viewing. This approved feature uses its narrowly scoped **background-comparison exception**, not a context-removal reveal: only the opaque surface fill intentionally changes. No animation, diagnostic claim, contour recoloring or corner-shaped target.
 
 ## 1. Research and attribution
 
