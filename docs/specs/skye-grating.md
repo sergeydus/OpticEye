@@ -1,6 +1,6 @@
 # Skye oblique grating specification
 
-Status: **approved for implementation; engineering and calibration pending**. Version 1.2, 24 October 2026. ID/folder: `skye-grating`; title/h1: “Skye oblique grating”; HTML title: “Skye oblique grating | OpticEye”. Description: “Straight parallel bands appear tilted among small checker marks. Hide the marks to inspect the unchanged bands.”
+Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.2, 24 October 2026. ID/folder: `skye-grating`; title/h1: “Skye oblique grating”; HTML title: “Skye oblique grating | OpticEye”. Description: “Straight parallel bands appear tilted among small checker marks. Hide the marks to inspect the unchanged bands.”
 
 Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, engineering checks and separate two-viewer calibration. Owner approved this construction on23 October2026 and reaffirmed implementation on24 October2026 after the calibrated Vanishing dots listing deployment. Geometry and controls below are unchanged. Implement and validate unlisted/noindex, commit/push, confirm Pages/direct access, then stop for viewing. No animation, blur, decorations, dragging or angle-matching task.
 
@@ -58,3 +58,5 @@ Do not add a device-pixel minimum, responsive mark count, blur or contrast filte
 | SK05 | Calibration only: two viewers on desktop and real phones report apparent band parallelism/tilt before and after Hide check marks at defaults; record weak/absent responses and supplied conditions. Listing requires separate explicit owner approval. |
 
 SK01–SK04 define engineering completion; SK05 is separate human calibration. Implementation is owner-approved in the documented order; stop for owner viewing after each deployment.
+
+SK01–SK04 pass; see [actual validation](../skye-grating-validation.md). SK05 has no human observations yet. Publish unlisted/noindex and stop for owner viewing; listing needs separate explicit approval.

@@ -19,6 +19,7 @@ import { ShepardTablesPage } from '../shepard-tables/main'
 import { JastrowPage } from '../jastrow/main'
 import { CurvatureBlindnessPage } from '../curvature-blindness/main'
 import { VanishingDotsPage } from '../vanishing-dots/main'
+import { SkyeGratingPage } from '../skye-grating/main'
 
 // Exercise the actual entry compositions without their browser root side effect.
 vi.mock('./mountPage', () => ({ mountPage: vi.fn() }))
@@ -34,6 +35,7 @@ it('lists only the fifteen listed experiments with descriptions and document lin
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
+  expect(cards.queryByRole('link', { name: 'Skye oblique grating' })).toBeNull()
   expect(cards.getByRole('link', { name: 'Vanishing dots' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}vanishing-dots/`)
   expect(cards.getByRole('link', { name: 'Curvature blindness illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}curvature-blindness/`)
   expect(cards.getByRole('link', { name: 'Jastrow illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}jastrow/`)
@@ -54,7 +56,7 @@ it('lists only the fifteen listed experiments with descriptions and document lin
   expect(screen.queryByRole('slider')).toBeNull()
 })
 
-it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering', 'ponzo', 'checker-shadow', 'bulging-checkerboard', 'shepard-tables', 'jastrow', 'curvature-blindness', 'vanishing-dots'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s for the compact header on %s, with a current marker only on Home', (base, currentPage) => {
+it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'cafe-wall', 'muller-lyer', 'kanizsa', 'scintillating-grid', 'poggendorff', 'ebbinghaus', 'hering', 'ponzo', 'checker-shadow', 'bulging-checkerboard', 'shepard-tables', 'jastrow', 'curvature-blindness', 'vanishing-dots', 'skye-grating'] as const).map((currentPage) => [base, currentPage] as const)))('uses base %s for the compact header on %s, with a current marker only on Home', (base, currentPage) => {
   render(<SiteHeader base={base} currentPage={currentPage} />)
   const header = screen.getByRole('banner')
   const navigation = screen.getByRole('navigation', { name: 'Main navigation' })
@@ -71,6 +73,7 @@ it.each(['/', '/OpticEye/'].flatMap((base) => (['home', 'confetti', 'munker', 'c
 })
 
 it.each([
+  { Page: SkyeGratingPage, title: 'Skye oblique grating', image: 'Skye oblique grating', absent: 'Confetti illusion' },
   { Page: VanishingDotsPage, title: 'Vanishing dots', image: 'Vanishing dots', absent: 'Confetti illusion' },
   { Page: CurvatureBlindnessPage, title: 'Curvature blindness illusion', image: 'Curvature blindness illusion', absent: 'Confetti illusion' },
   { Page: JastrowPage, title: 'Jastrow illusion', image: 'Jastrow illusion', absent: 'Confetti illusion' },
