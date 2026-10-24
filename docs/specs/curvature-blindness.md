@@ -1,6 +1,6 @@
 # Curvature blindness specification
 
-Status: **approved for implementation; engineering and calibration pending**. Version 1.2, 24 October 2026. ID/folder: `curvature-blindness`; title/h1: “Curvature blindness illusion”; HTML title: “Curvature blindness illusion | OpticEye”. Description: “Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.”
+Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.2, 24 October 2026. ID/folder: `curvature-blindness`; title/h1: “Curvature blindness illusion”; HTML title: “Curvature blindness illusion | OpticEye”. Description: “Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.”
 
 Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, testing and separate two-viewer calibration. The owner reaffirmed implementation/publication approval on 24 October 2026: implement after Jastrow listing deploys, publish unlisted/noindex and stop for viewing. This approved feature uses its narrowly scoped **background-comparison exception**, not a context-removal reveal: only the opaque surface fill intentionally changes. No animation, diagnostic claim, contour recoloring or corner-shaped target.
 
@@ -56,4 +56,4 @@ Do not replace curves with polylines, simplify them per device, or impose a scre
 | CB04 | Shared engineering checklist passes unlisted/noindex; include the smooth-extrema/fractional-DPR cases and record actual results in docs/curvature-blindness-validation.md. Record actual engineering and viewing results separately. |
 | CB05 | Calibration only: two viewers on desktop and real phones report whether neighboring rows appear differently shaped on gray and whether white weakens that difference. Record direction, weak/absent responses and supplied conditions. Listing requires separate explicit owner approval. |
 
-CB01–CB04 define engineering completion; CB05 is separate human calibration. Implementation is owner-approved in the documented order; stop for owner viewing after each deployment.
+CB01–CB04 pass; see [actual validation](../curvature-blindness-validation.md). CB05 is separate human calibration and has no observations yet. Publish unlisted/noindex in the owner-approved order and stop for viewing; do not begin vanishing dots.

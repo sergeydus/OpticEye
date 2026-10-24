@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all fifteen HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/`, `/checker-shadow/`, `/bulging-checkerboard/`, `/shepard-tables/` and `/jastrow/`.
+`build` checks TypeScript and produces all sixteen HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/`, `/checker-shadow/`, `/bulging-checkerboard/`, `/shepard-tables/`, `/jastrow/` and `/curvature-blindness/`.
 
 ## GitHub Pages
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all fifteen addresses, including a refresh and navigation between them:
+Check all sixteen addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -44,6 +44,7 @@ Check all fifteen addresses, including a refresh and navigation between them:
 - [Bulging checkerboard](http://localhost:4173/OpticEye/bulging-checkerboard/)
 - [Shepard’s tables](http://localhost:4173/OpticEye/shepard-tables/)
 - [Jastrow](http://localhost:4173/OpticEye/jastrow/)
+- [Curvature blindness (unlisted, direct URL only)](http://localhost:4173/OpticEye/curvature-blindness/)
 - [Scintillating grid](http://localhost:4173/OpticEye/scintillating-grid/)
 - [Poggendorff](http://localhost:4173/OpticEye/poggendorff/)
 - [Ebbinghaus](http://localhost:4173/OpticEye/ebbinghaus/)
@@ -51,7 +52,7 @@ Check all fifteen addresses, including a refresh and navigation between them:
 - [Ponzo](http://localhost:4173/OpticEye/ponzo/)
 - [Checker-shadow](http://localhost:4173/OpticEye/checker-shadow/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Every header contains the OpticEye brand and an All illusions link, both pointing to Home using BASE_URL. Only All illusions on Home has aria-current="page". Home lists all thirteen approved experiments; Kanizsa remains unlisted/noindex and directly reachable. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes fifteen documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus is listed/deployed and calibrated with both viewers on desktop and real phones.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Every header contains the OpticEye brand and an All illusions link, both pointing to Home using BASE_URL. Only All illusions on Home has aria-current="page". Home lists all thirteen approved experiments; Kanizsa and curvature blindness remain unlisted/noindex and directly reachable. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes sixteen documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus is listed/deployed and calibrated with both viewers on desktop and real phones.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner controls this setting and repository visibility; authorized pushes trigger the deployment workflow. The workflow does not automatically enable Pages.
 
@@ -126,3 +127,5 @@ Bulging checkerboard is the first implementation in the new approved batch, list
 Shepard’s tables is implemented and calibrated on desktop and real phones, with listing approved at [its page](https://sergeydus.github.io/OpticEye/shepard-tables/). Both viewers report different-looking tabletops before comparison and an exact rotate-then-slide fit; unspecified viewing conditions remain unknown. Both tabletop drawings share one path and exact style. The twelve furniture-context pieces appear only at exactly0% comparison progress and disappear at positive progress (1–100% on the slider). Play rotates the existing left top in place, then slides it onto the unchanged right top without resizing or mirroring. Returning to0% restores the original furniture. Pause or scrub Comparison progress to follow the shape in either direction. Back to tables restores the scene while retaining size and explanation choices. Reduced motion offers immediate match/separate and manual progress instead of timed playback. Reset restores both placements, context, Medium540 and the closed explanation. This comparison establishes congruent 2D drawings, not equal real-world furniture. See [its specification](docs/specs/shepard-tables.md) and [validation](docs/shepard-tables-validation.md).
 
 Jastrow is implemented and calibrated on desktop and real phones, listed by owner approval at [its page](https://sergeydus.github.io/OpticEye/jastrow/). Both viewers report the lower band as larger before comparison and an exact slide fit; unspecified conditions remain unknown. Two identical circular-arc bands share one path and fill. The progress slider and Play/Pause slide only the lower band onto the fixed upper band, without rotation or resizing. Back to bands preserves size/disclosure; Reset Jastrow restores all local defaults. Reduced motion offers immediate match/separate and manual progress. Its controller/transport are shared with Shepard using independent per-instance state. See [the spec](docs/specs/jastrow.md) and [actual validation](docs/jastrow-validation.md).
+
+Curvature blindness is implemented unlisted at [its direct page](https://sergeydus.github.io/OpticEye/curvature-blindness/), awaiting owner viewing. Eight rows reference one smooth Hermite curve; neighboring rows differ only in their color-switch phase. Compare on white changes only the background, retaining every curve node, path, clip, transform and stroke color. Reset restores gray, Medium540 and the closed explanation. This is an intentional background comparison; antialiased edge pixels can change. See [the spec](docs/specs/curvature-blindness.md) and [actual validation](docs/curvature-blindness-validation.md).

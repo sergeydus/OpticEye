@@ -97,6 +97,13 @@ export const ILLUSIONS = [
     title: 'Jastrow illusion',
     description: 'Compare two curved bands, then align them without resizing either shape.',
   },
+  {
+    id: 'curvature-blindness',
+    listed: false,
+    name: 'Curvature blindness',
+    title: 'Curvature blindness illusion',
+    description: 'Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.
