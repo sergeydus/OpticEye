@@ -104,6 +104,13 @@ export const ILLUSIONS = [
     title: 'Curvature blindness illusion',
     description: 'Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.',
   },
+  {
+    id: 'vanishing-dots',
+    listed: false,
+    name: 'Vanishing dots',
+    title: 'Vanishing dots',
+    description: 'Look around a static lattice, then hide its gray lines while retaining the same twelve black dots.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

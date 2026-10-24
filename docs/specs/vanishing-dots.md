@@ -1,6 +1,6 @@
 # Vanishing dots specification
 
-Status: **approved for implementation; engineering and calibration pending**. Version 1.2, 24 October 2026. ID/folder `vanishing-dots`; title/h1 “Vanishing dots”; HTML title “Vanishing dots | OpticEye”. Description: “Look around a static lattice, then hide its gray lines while retaining the same twelve black dots.”
+Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.2, 24 October 2026. ID/folder `vanishing-dots`; title/h1 “Vanishing dots”; HTML title “Vanishing dots | OpticEye”. Description: “Look around a static lattice, then hide its gray lines while retaining the same twelve black dots.”
 
 Inherit page setup, listed:false/noindex, Reset, labels/keyboard access, size normalization, engineering and two-viewer calibration from [implementation.md](implementation.md). The owner reaffirmed implementation and unlisted publication on24 October2026, after the curvature listing deployment; stop for viewing before Skye. No animation, fixation timer, randomized disappearance, eye tracking or guaranteed visibility count.
 
@@ -45,4 +45,4 @@ Uniform scaleW/720. At W240/288/540/720, grid width and black-dot diameter are *
 | VD04 | Shared engineering/page checks pass unlisted/noindex after approval; include every size/DPR and native200%, defaults/hidden/restored. Record actual results in docs/vanishing-dots-validation.md; preserve existing pages. |
 | VD05 | Calibration only: two viewers on desktop and real phones report peripheral disappearance or its absence, and what changes after Hide lattice. Record weak responses and supplied conditions. Listing requires separate owner approval. |
 
-VD01–VD04 define implementation; VD05 defines calibration. All are pending. Implementation and unlisted deployment are approved in the documented order; listing still requires a separate owner decision.
+VD01–VD04 pass; see [actual validation](../vanishing-dots-validation.md). VD05 is separate human calibration and has no observations yet. Publish unlisted/noindex in the approved order and stop for owner viewing before Skye; listing still requires a separate owner decision.
