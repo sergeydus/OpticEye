@@ -1,6 +1,6 @@
 # Shepard’s tables specification
 
-Status: **implemented and calibrated on desktop and real phones; owner-approved for listing**. Version 1.6, 24 October 2026. The owner approved section7 and the scoped motion amendment in implementation.md before implementation. ID/folder `shepard-tables`; title/h1 “Shepard’s tables”; HTML title “Shepard’s tables | OpticEye”. Description: “Compare two table drawings, then overlay their tabletop shapes without stretching them.”
+Status: **implemented and calibrated on desktop and real phones; listed by owner approval**. Version 1.6, 24 October 2026. The owner approved section7 and the scoped motion amendment in implementation.md before implementation. ID/folder `shepard-tables`; title/h1 “Shepard’s tables”; HTML title “Shepard’s tables | OpticEye”. Description: “Compare two table drawings, then overlay their tabletop shapes without stretching them.”
 
 Use [implementation.md](implementation.md) for page setup, listing, shared controls, Reset, accessibility, engineering checks and two-viewer calibration. Apply its **rigid comparison** contract: the proof concerns congruent **2D tabletop drawings**, not dimensions of real three-dimensional tables. Owner-approved implementation starts `listed:false`/static `noindex`; validate and publish for viewing before separate listing approval.
 

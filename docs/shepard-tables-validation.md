@@ -1,6 +1,6 @@
 # Shepard’s tables validation
 
-24 October 2026, specification 1.6. **Implemented and calibrated on desktop and real phones. ST01–ST05 complete; owner-approved for listing.**
+24 October 2026, specification 1.6. **Implemented and calibrated on desktop and real phones. ST01–ST05 complete; listed by owner approval.**
 
 ## Human viewing and publication
 
@@ -42,3 +42,7 @@ Evidence outside Git: `shepard-guided-pages-preview.json`, `shepard-guided-dev.j
 The static comparison checkpoint `873c5da` passed 196 tests, original-scene pixel checks and its deployment. On 24 October the owner approved the guided comparison and scoped motion exception; specification commit `d92804b` precedes this implementation. The earlier static checks are historical, not substitutes for the new motion checks above.
 
 The always-visible furniture version8dcfbe5 (spec705b332) was superseded by the owner’s zero-progress rule, specified in a78399d before code. All checks above were rerun for this revision, including14 production/development pages,18 viewport/DPR/size combinations, playback, return-to-zero and reduced motion.
+
+## Calibration and listing publication
+
+Owner report: both viewers confirmed on desktop and real phone; different apparent tabletop shapes before comparison and an exact rotate-then-slide fit. ST05 is complete. Lint,211 tests and build pass for listing. All14 production pages load/refresh at320/1440 (28 cases),24 listed navigation trips pass, and all14 development root URLs work. Home has12 cards, Shepard is listed without noindex, Kanizsa stays unlisted/noindex. No overflow, failed assets, console errors or404s were observed. Hosted deployment is checked after the listing push.

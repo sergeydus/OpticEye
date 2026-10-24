@@ -85,7 +85,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'shepard-tables',
-    listed: false,
+    listed: true,
     name: 'Shepard’s tables',
     title: 'Shepard’s tables',
     description: 'Compare two table drawings, then overlay their tabletop shapes without stretching them.',
