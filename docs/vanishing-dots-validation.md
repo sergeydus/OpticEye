@@ -29,7 +29,7 @@ Every preview document passed direct load/refresh at320/1440 (**34 cases**) and2
 
 ## Human viewing and publication
 
-**VD05 pending:** the owner first reported a weak effect, then clarified that Bach's example is convincing but “in our example i cant even see the illusion”. This **absent** response concerns the original version. Device, selected size, browser, zoom, DPR, distance and Hide lattice result were not supplied. There is no second-viewer result and no human viewing of the revision yet.
+**VD05 pending:** the owner first reported a weak effect, then clarified that Bach's example is convincing but “in our example i cant even see the illusion”. This **absent** response concerns the original version. After viewing the deployed revision, the owner reported “NOW THATS BETTER!!”, a positive report of improvement. Device, selected size, browser, zoom, DPR, distance and Hide lattice result were not supplied for this report. No second-viewer result is recorded; desktop/real-phone calibration coverage is not established.
 
 The owner approved the combined reference-informed revision on24 October2026. [Research](vanishing-dots-research.md) records the construction differences and limits of inference. Engineering screenshots do not establish a stronger perceptual effect. Keep unlisted/noindex, confirm the revised [direct live page](https://sergeydus.github.io/OpticEye/vanishing-dots/) after deployment and stop for owner viewing before Skye. Listing requires separate explicit approval.
 

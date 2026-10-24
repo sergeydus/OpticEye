@@ -1,6 +1,6 @@
 # Vanishing dots: weak-effect investigation
 
-24 October 2026. Research record; the combined revision in spec section6 is now approved, implemented and engineering-validated, with owner viewing pending. The owner reports that the illusion is too weak and suspects image size. Device, selected size, browser, zoom, DPR and viewing distance were not supplied. VD05 remains pending.
+24 October 2026. Research record; the combined revision in spec section6 is approved, implemented and engineering-validated. The owner reported no visible effect in the original version and has now reported improvement in the deployed revision. Viewing conditions were not supplied, and two-viewer/device calibration remains pending under VD05. See [actual viewing notes](vanishing-dots-validation.md#human-viewing-and-publication).
 
 ## Findings
 
