@@ -23,18 +23,18 @@ import { VanishingDotsPage } from '../vanishing-dots/main'
 // Exercise the actual entry compositions without their browser root side effect.
 vi.mock('./mountPage', () => ({ mountPage: vi.fn() }))
 
-it('lists only the fourteen listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
+it('lists only the fifteen listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
   render(<App />)
   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Explore optical illusions')
   const cards = within(screen.getByRole('list'))
-  expect(cards.getAllByRole('listitem')).toHaveLength(14)
+  expect(cards.getAllByRole('listitem')).toHaveLength(15)
   expect(cards.getByRole('link', { name: 'Confetti illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}confetti/`)
   expect(cards.getByRole('link', { name: 'Munker illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}munker/`)
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
-  expect(cards.queryByRole('link', { name: 'Vanishing dots' })).toBeNull()
+  expect(cards.getByRole('link', { name: 'Vanishing dots' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}vanishing-dots/`)
   expect(cards.getByRole('link', { name: 'Curvature blindness illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}curvature-blindness/`)
   expect(cards.getByRole('link', { name: 'Jastrow illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}jastrow/`)
   expect(cards.getByRole('link', { name: 'Shepard’s tables' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}shepard-tables/`)

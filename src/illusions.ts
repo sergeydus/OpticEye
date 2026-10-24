@@ -106,7 +106,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'vanishing-dots',
-    listed: false,
+    listed: true,
     name: 'Vanishing dots',
     title: 'Vanishing dots',
     description: 'Look around a static lattice, then hide its gray lines while retaining the same twelve black dots.',

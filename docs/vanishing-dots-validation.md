@@ -9,7 +9,7 @@
 - **VD01:**166 gray segments (15 verticals,11 horizontals,140 alternating diagonals), exact784×560 field and grid56/stroke8. Instance-unique user-space clipping limits only lattice paint to the surface. Twelve centers are x56/280/504/728 × y56/280/504, all plus-crossings; tests verify parity, exact radii/palette,224 minimum spacing and clearance from diagonals/frame. The surface is#F2F2F2; persistent rims are white/radius6.75 and centers black/radius5.5.
 - **VD02:** repeated keyboard Hide lattice removes only context. Every circle, surface, clip definition, viewBox and frame remains unchanged. Actual Chromium shown/hidden screenshots were sampled at all12 inset black centers for all18 viewport/DPR/size combinations: **216 black-center pairs remain RGB(0,0,0)**. A clear surface sample in each pair remainsRGB(242,242,242). Screenshot dimensions can round fractional bounds (for example,288×207 at a288×205.703 CSS frame); samples map into the actual raster. Antialiased rim/edge pixels are excluded; no whole-image pixel identity is claimed.
 - **VD03:** desktop sidebar/mobile stack,392/560/784 maximum sizes, neutral fitted-width help, comparison/disclosure independence, unique IDs, keyboard state/labels, Reset defaults/focus and independent instances pass. Reset restores shown/Large784/closed explanation. No fading, motion, timers, guaranteed visibility count or vision-test claim.
-- **VD04:** browser/page checks below pass. Home retains14 listed cards, all17 HTML outputs remain built, and Vanishing dots/Kanizsa remain unlisted/noindex. Header links stay base-aware, with the Home-only current marker.
+- **VD04:** browser/page checks below pass. The listing checks confirm15 Home cards,17 HTML outputs and no noindex tag on Vanishing dots. Kanizsa remains unlisted/noindex. Header links stay base-aware, with the Home-only current marker.
 
 ## Chromium checks
 
@@ -31,7 +31,7 @@ Every preview document passed direct load/refresh at320/1440 (**34 cases**) and2
 
 **VD05 complete:** the owner reports that viewer1 and viewer2 both confirmed on desktop and real phone: while looking around the pattern some black dots seem to vanish; after Hide lattice all twelve dots stay visible. Browser, DPR, zoom, viewing distance and selected image size were not supplied and remain unspecified. No engineering browser conditions are attributed to either viewer.
 
-The owner separately approves listing: `listed:true`, no `noindex`. Retain the successful construction and784px default labeled Large. Confirm Pages and the listed live page, then implement Skye unlisted/noindex for viewing. Listing engineering checks below will be updated after the change; the prior sidebar checks are recorded above.
+The owner separately approves listing: `listed:true`, no `noindex`. Retain the successful construction and784px default labeled Large. Confirm Pages and the listed live page, then implement Skye unlisted/noindex for viewing. Listing lint/build and253 tests pass. Fresh preview checks passed:34 direct-load/refresh cases,30 listed navigation trips and18 Vanishing dots viewport/DPR/size combinations, plus native200%, with no404s/errors/overflow. Evidence: `vanishing-listed-pages-preview.json`, `vanishing-listed-preview.json` and corresponding pixel proof/screenshots. Hosted deployment is confirmed after the push.
 
 ## Short history
 
