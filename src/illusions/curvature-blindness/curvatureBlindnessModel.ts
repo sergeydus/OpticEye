@@ -15,7 +15,7 @@ export const WAVE_DETAILS = [
   { id: 'fine', label: 'Fine', cycles: 18 },
 ] as const
 export type WaveDetail = (typeof WAVE_DETAILS)[number]['id']
-export const DEFAULT_WAVE_DETAIL: WaveDetail = 'fine'
+export const DEFAULT_WAVE_DETAIL: WaveDetail = 'smaller'
 
 export function normalizeViewingWidth(value: number) {
   return VIEWING_SIZES.some((size) => size.width === value) ? value : DEFAULT_VIEWING_WIDTH

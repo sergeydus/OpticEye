@@ -1,6 +1,6 @@
 # Curvature blindness validation
 
-24 October 2026, specification1.4. **Implemented; unlisted/noindex; owner prefers Medium/Smaller; further calibration pending. CB01–CB04 pass; CB05 remains incomplete.**
+24 October 2026, specification1.5. **Implemented; unlisted/noindex; owner prefers Medium/Smaller; further calibration pending. CB01–CB04 pass; CB05 remains incomplete.**
 
 ## Human viewing and publication
 
@@ -10,7 +10,7 @@ Keep the trial unlisted/noindex. Publish for viewing and stop before vanishing d
 
 ## Current construction and engineering
 
-Specification1.4 was committed as `b4b6671` before implementation. Defaults are **Medium540, Fine detail, gray surface, closed explanation**. Reset restores all four and retains focus. Original and Smaller remain available in Wave detail; image size is independent. Choosing a detail intentionally changes geometry/counts; Compare on white retains the selected pattern and changes only its surface fill.
+Specification1.4 was committed as `b4b6671` before implementation. Current defaults are **Medium540, Smaller detail, gray surface, closed explanation**. Reset restores all four and retains focus. Original and Fine remain available in Wave detail; image size is independent. Choosing a detail intentionally changes geometry/counts; Compare on white retains the selected pattern and changes only its surface fill.
 
 `npm run lint`, **243 tests across34 files**, and TypeScript/Vite build pass. Feature coverage:11 model tests and5 component tests, plus entry/header integration. No dependency, third-party asset or runtime source-site request was added.
 
@@ -42,4 +42,6 @@ All16 preview documents pass direct loads/refreshes at320/1440 (**32 cases**),26
 
 ## Smaller default decision — 24 October 2026
 
-Specification1.5 sets Smaller on load/Reset and keeps Medium540. It changes no profile geometry, palette, comparison or listing behavior. Default assertions and verification are updated with the implementation. The Medium/Fine implementation `dc4fa6b` previously deployed successfully in [run40095486263](https://github.com/sergeydus/OpticEye/actions/runs/40095486263); live320/1440 checks confirmed all three detail choices, background-only comparison, Reset, unlisted/noindex and no errors.
+Specification1.5 sets Smaller on load/Reset and keeps Medium540. It changes no profile geometry, palette, comparison or listing behavior. The approved spec was committed as `b8002d8` before code. Existing tests assert Smaller on load/Reset,12 default rows,24 painted uses,48 cubics, stroke4 and fallback normalization. All profile geometry remains unchanged. The Medium/Fine implementation `dc4fa6b` previously deployed successfully in [run40095486263](https://github.com/sergeydus/OpticEye/actions/runs/40095486263); live320/1440 checks confirmed all three detail choices, background-only comparison, Reset, unlisted/noindex and no errors.
+
+Fresh lint,243 tests/34 files and the16-document build pass. Chromium156.0.8078.47 repeats all54 detail/size/viewport/DPR combinations and108 background states, plus native200% zoom, keyboard/focus, parameter independence and Reset. The page opens/resets to Medium/Smaller;320/1440 default and fractional-DPR white screenshots were visually inspected. All16 preview documents pass32 direct-load/refresh cases and26 listed-card navigation trips; all16 development routes load/refresh. No overflow/errors/404s; Home still has13 cards and this page remains unlisted/noindex. Evidence outside Git: `curvature-smaller-preview.json`, `curvature-smaller-pages-preview.json`, `shepard-guided-dev.json` and matching screenshots. Hosted update is confirmed after the push and reported at handoff.

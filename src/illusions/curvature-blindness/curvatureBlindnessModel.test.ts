@@ -109,8 +109,8 @@ it('matches the former Compact feature dimensions at Medium without shrinking th
   expect(fine.rows.length).toBeGreaterThan(original.rows.length)
 })
 
-it('normalizes unsupported choices to Medium and Fine, keeping the bounded alternatives available', () => {
+it('normalizes unsupported choices to Medium and Smaller, keeping the bounded alternatives available', () => {
   expect([240, 540, 720, 450, -1, NaN, Infinity].map(normalizeViewingWidth)).toEqual([240, 540, 720, 540, 540, 540, 540])
-  expect(DEFAULT_WAVE_DETAIL).toBe('fine')
-  expect(['original', 'smaller', 'fine', '', 'unknown'].map(normalizeWaveDetail)).toEqual(['original', 'smaller', 'fine', 'fine', 'fine'])
+  expect(DEFAULT_WAVE_DETAIL).toBe('smaller')
+  expect(['original', 'smaller', 'fine', '', 'unknown'].map(normalizeWaveDetail)).toEqual(['original', 'smaller', 'fine', 'smaller', 'smaller'])
 })
