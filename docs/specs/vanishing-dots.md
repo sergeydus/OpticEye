@@ -1,8 +1,8 @@
 # Vanishing dots specification
 
-Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.4, 24 October 2026. ID/folder `vanishing-dots`; title/h1 “Vanishing dots”; HTML title “Vanishing dots | OpticEye”. Description: “Look around a static lattice, then hide its gray lines while retaining the same twelve black dots.”
+Status: **implemented and calibrated on desktop and real phones; listing approved**. Version 1.5, 24 October 2026. ID/folder `vanishing-dots`; title/h1 “Vanishing dots”; HTML title “Vanishing dots | OpticEye”. Description: “Look around a static lattice, then hide its gray lines while retaining the same twelve black dots.”
 
-Inherit page setup, listed:false/noindex, Reset, labels/keyboard access, size normalization, engineering and two-viewer calibration from [implementation.md](implementation.md). The owner reaffirmed implementation and unlisted publication on24 October2026, after the curvature listing deployment; stop for viewing before Skye. No animation, fixation timer, randomized disappearance, eye tracking or guaranteed visibility count.
+Inherit page setup, Reset, labels/keyboard access, size normalization, engineering and two-viewer calibration from [implementation.md](implementation.md). The owner reaffirmed implementation and unlisted publication on24 October2026, after the curvature listing deployment. The owner now approves listing and Skye implementation after deployment confirmation. No animation, fixation timer, randomized disappearance, eye tracking or guaranteed visibility count.
 
 ## 1. Evidence and attribution
 
@@ -46,10 +46,10 @@ Uniform scaleW/784. At W288/392/560/784, gray stroke widths are approximately **
 | VD01 | Exactly166 clipped gray segments, deterministic cell parity and12 unique specified centers. Verify plus-crossing placement/no diagonal through a dot,24 persistent rim/dot circles, exact radii/palette, separation, diagonal clearance and context clip bounds. |
 | VD02 | Repeated keyboard Hide lattice removes only grid context; retain circle/surface nodes, coordinates, fills/radii/viewBox and frame. Pixel-sample inset black centers before/after; white rims remain unchanged nodes, with edge antialiasing excluded. No scripted fading/motion. |
 | VD03 | Desktop sidebar/mobile stack,392/560/784 maximum sizes and Large784 default, neutral fitted-width help, disclosure, unique IDs, Reset/focus, accessible names/state and limited proof follow shared rules. The description distinguishes actual twelve dots from a variable percept, with attribution and no vision-test claims. |
-| VD04 | Shared engineering/page checks pass unlisted/noindex after approval; include every size/DPR and native200%, defaults/hidden/restored. Record actual results in docs/vanishing-dots-validation.md; preserve existing pages. |
+| VD04 | Shared engineering/page checks pass with listed:true and no noindex tag, per owner approval; include every size/DPR and native200%, defaults/hidden/restored. Record actual results in docs/vanishing-dots-validation.md; preserve existing pages. |
 | VD05 | Calibration only: two viewers on desktop and real phones report peripheral disappearance or its absence, and what changes after Hide lattice. Record weak responses and supplied conditions. Listing requires separate owner approval. |
 
-The sidebar implementation passes VD01–VD04, preserving the successful default image dimensions. See [actual validation](../vanishing-dots-validation.md). VD05 is separate human calibration: the owner reports improvement in the revision after no visible illusion in the original version. Viewing conditions, comparison result and second-viewer/device coverage remain unspecified. Preserve the784 default width, now labeled Large; the page remains unlisted/noindex. Stop before Skye, and listing requires a separate owner decision.
+VD01–VD04 pass for the sidebar implementation. **VD05 complete:** viewer1 and viewer2 confirmed on desktop and real phone that some black dots seem to vanish while looking around, and all twelve remain visible after Hide lattice. Browser, DPR, zoom, viewing distance and selected image size were not supplied. See [actual validation](../vanishing-dots-validation.md). The owner explicitly approves `listed:true` and removal of `noindex`, retaining the current construction/defaults. Confirm the listing deployment, then implement Skye unlisted/noindex and stop for its viewing.
 
 ## 6. Approved revision rationale
 
@@ -67,3 +67,7 @@ This is a combined product revision, so any improvement would not identify which
 - Preserve comparison/disclosure state independence, keyboard access, Reset focus and instance isolation. Update VD03's layout/choices/default-label assertions and re-run VD04, including the desktop sidebar at1440, stacked320, DPR1/1.25/2 and native200%. Record that the784 default is preserved; do not infer calibration for the newly named smaller choices.
 
 Sections3–5 now incorporate this approved adjustment. Commit this amendment before code, then validate and publish unlisted for viewing. No listing decision is implied.
+
+## 8. Calibration and listing approval
+
+On24 October2026 the owner supplied the two-viewer desktop/real-phone observations above, marked VD05 complete and separately approved listing. Earlier weak/absent observations remain history of the original construction; do not overwrite them or infer extra viewing conditions.

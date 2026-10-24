@@ -1,6 +1,6 @@
 # Vanishing dots validation
 
-24 October 2026, specification1.4. **Implemented; unlisted/noindex; perceptual calibration pending. VD01–VD04 pass for the revision; VD05 remains incomplete.** The drawing spec was committed as `514bd92`; the approved sidebar amendment was committed as `9a956c7` before its implementation.
+24 October 2026, specification1.5. **Implemented and calibrated on desktop and real phones; listing approved. VD01–VD05 complete.** The drawing spec was committed as `514bd92`; the approved sidebar amendment was committed as `9a956c7` before its implementation.
 
 ## Engineering
 
@@ -29,12 +29,14 @@ Every preview document passed direct load/refresh at320/1440 (**34 cases**) and2
 
 ## Human viewing and publication
 
-**VD05 pending:** the owner first reported a weak effect, then clarified that Bach's example is convincing but “in our example i cant even see the illusion”. This **absent** response concerns the original version. After viewing the deployed revision, the owner reported “NOW THATS BETTER!!”, a positive report of improvement. Device, selected size, browser, zoom, DPR, distance and Hide lattice result were not supplied for this report. No second-viewer result is recorded; desktop/real-phone calibration coverage is not established.
+**VD05 complete:** the owner reports that viewer1 and viewer2 both confirmed on desktop and real phone: while looking around the pattern some black dots seem to vanish; after Hide lattice all twelve dots stay visible. Browser, DPR, zoom, viewing distance and selected image size were not supplied and remain unspecified. No engineering browser conditions are attributed to either viewer.
 
-The owner approved the combined reference-informed revision and later the sidebar mockup on24 October2026. The current default numeric width remains784, now labeled Large; no new perceptual observation of the sidebar version is claimed. [Research](vanishing-dots-research.md) records the construction differences and limits of inference. Engineering screenshots do not establish a stronger perceptual effect. Keep unlisted/noindex, confirm the revised [direct live page](https://sergeydus.github.io/OpticEye/vanishing-dots/) after deployment and stop for owner viewing before Skye. Listing requires separate explicit approval.
+The owner separately approves listing: `listed:true`, no `noindex`. Retain the successful construction and784px default labeled Large. Confirm Pages and the listed live page, then implement Skye unlisted/noindex for viewing. Listing engineering checks below will be updated after the change; the prior sidebar checks are recorded above.
 
 ## Short history
 
 The original720×540 inset field/default540 passed engineering and deployed from`fd49531` in [Pages run40108030804](https://github.com/sergeydus/OpticEye/actions/runs/40108030804). The owner reported no visible effect. Revision1.3 changes the full-field layout, dot/rim/grid proportions and surface together; any improved response cannot identify a single causal parameter.
 
 The positively viewed revision deployed from`8458971` in [Pages run40112819943](https://github.com/sergeydus/OpticEye/actions/runs/40112819943), with live320/1440 DPR checks and all-page navigation passing. The sidebar update preserves that construction and default display size, removes the1000px option and supplies560px Medium. It remains unlisted/noindex.
+
+The owner initially reported no visible effect in the original version, then reported “NOW THATS BETTER!!” after the drawing revision. That earlier partial report did not establish device coverage; the later explicit two-viewer report above completes calibration.

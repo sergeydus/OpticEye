@@ -1,6 +1,6 @@
 # Vanishing dots: weak-effect investigation
 
-24 October 2026. Research record; the combined revision in spec section6 is approved, implemented and engineering-validated. The owner reported no visible effect in the original version and has now reported improvement in the deployed revision. Viewing conditions were not supplied, and two-viewer/device calibration remains pending under VD05. See [actual viewing notes](vanishing-dots-validation.md#human-viewing-and-publication).
+24 October 2026. Research record; the combined revision in spec section6 is approved, implemented and engineering-validated. The owner reported no visible effect in the original version and has now reported improvement in the deployed revision. Subsequently both viewers confirmed disappearance/reveal on desktop and real phones, completing VD05; browser, DPR, zoom, distance and selected size remain unspecified. See [actual viewing notes](vanishing-dots-validation.md#human-viewing-and-publication).
 
 ## Findings
 
