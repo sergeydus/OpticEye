@@ -1,6 +1,6 @@
 import { useId, useState } from 'react'
 import ViewingSizeControl from '../../components/ViewingSizeControl'
-import { CURVATURE_BLINDNESS, DEFAULT_VIEWING_WIDTH, normalizeViewingWidth, VIEWING_SIZES } from './curvatureBlindnessModel'
+import { CURVATURE_BLINDNESS, DEFAULT_VIEWING_WIDTH, DEFAULT_WAVE_DETAIL, normalizeViewingWidth, normalizeWaveDetail, VIEWING_SIZES, WAVE_DETAILS, type WaveDetail } from './curvatureBlindnessModel'
 import CurvatureBlindnessStimulus from './CurvatureBlindnessStimulus'
 
 const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700'
@@ -9,6 +9,7 @@ export default function CurvatureBlindness() {
   const id = useId()
   const [whiteBackground, setWhiteBackground] = useState(false)
   const [viewingWidth, setViewingWidth] = useState(DEFAULT_VIEWING_WIDTH)
+  const [waveDetail, setWaveDetail] = useState<WaveDetail>(DEFAULT_WAVE_DETAIL)
   const [explanationOpen, setExplanationOpen] = useState(false)
   const [status, setStatus] = useState('')
 
@@ -19,6 +20,7 @@ export default function CurvatureBlindness() {
   function reset() {
     setWhiteBackground(false)
     setViewingWidth(DEFAULT_VIEWING_WIDTH)
+    setWaveDetail(DEFAULT_WAVE_DETAIL)
     setExplanationOpen(false)
     setStatus('Curvature blindness reset.')
   }
@@ -36,7 +38,7 @@ export default function CurvatureBlindness() {
             <span>01 / Observe</span><span>{whiteBackground ? 'White background' : 'Gray background'}</span>
           </div>
           <div data-curvature-viewing-frame className="mx-auto w-full" style={{ maxWidth: viewingWidth }}>
-            <div className="overflow-hidden outline outline-slate-300"><CurvatureBlindnessStimulus whiteBackground={whiteBackground} /></div>
+            <div className="overflow-hidden outline outline-slate-300"><CurvatureBlindnessStimulus whiteBackground={whiteBackground} waveDetail={waveDetail} /></div>
             <div className="min-h-32 pt-4" aria-hidden={!whiteBackground}>
               <p hidden={!whiteBackground} className="text-sm font-medium">{CURVATURE_BLINDNESS.proof}</p>
             </div>
@@ -49,6 +51,13 @@ export default function CurvatureBlindness() {
           <p id={`${id}-compare-help`} className="mt-5 mb-4 text-sm leading-relaxed text-slate-700">Change only the background to compare the apparent shapes of the same smooth curves.</p>
           <button type="button" aria-pressed={whiteBackground} aria-describedby={`${id}-compare-help`} onClick={toggleBackground} className={`min-h-12 w-full rounded-md bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700 ${focus}`}>Compare on white</button>
           <button type="button" onClick={reset} className={`mt-2 min-h-11 w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium hover:bg-white ${focus}`}>Reset curvature blindness</button>
+          <div className="mt-6">
+            <label htmlFor={`${id}-detail`} className="text-sm font-medium">Wave detail</label>
+            <select id={`${id}-detail`} value={waveDetail} onChange={(event) => { setWaveDetail(normalizeWaveDetail(event.currentTarget.value)); setStatus('Wave detail changed; both backgrounds use the selected smooth pattern.') }} aria-describedby={`${id}-detail-help`} className={`mt-3 min-h-11 w-full rounded-md border border-slate-400 bg-transparent px-3 py-2 text-sm ${focus}`}>
+              {WAVE_DETAILS.map(({ id: value, label }) => <option key={value} value={value}>{label}</option>)}
+            </select>
+            <p id={`${id}-detail-help`} className="mt-3 text-xs leading-relaxed text-slate-600">Changes wave size and row count. Compare on white keeps the selected pattern unchanged. Fine waves can soften at small image sizes.</p>
+          </div>
           <ViewingSizeControl id={`${id}-size`} label="Curvature image size" value={viewingWidth} choices={VIEWING_SIZES} onChange={(width) => setViewingWidth(normalizeViewingWidth(width))} />
           <output aria-live="polite" aria-atomic="true" className="mt-5 block min-h-12 text-sm leading-relaxed text-teal-900">{status}</output>
         </section>
