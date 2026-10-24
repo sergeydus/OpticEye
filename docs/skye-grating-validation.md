@@ -1,6 +1,6 @@
 # Skye grating validation
 
-24 October2026, specification1.2. **Implemented; unlisted/noindex; perceptual calibration pending. SK01–SK04 pass; SK05 has no human observations.** The unchanged approved geometry was committed in`a46f7ed` and reaffirmed in`aaa1aa2` before code. Vanishing dots listing/deployment was confirmed first.
+24 October2026, specification1.3. **Implemented and calibrated on desktop and real phones; listing approved. SK01–SK05 complete.** The unchanged approved geometry was committed in`a46f7ed` and reaffirmed in`aaa1aa2` before code. Vanishing dots listing/deployment was confirmed first.
 
 ## Engineering
 
@@ -29,6 +29,6 @@ Evidence outside Git in the task visualization directory: `skye-preview.json`, `
 
 ## Human viewing and publication
 
-**SK05 pending:** no human observations are recorded. Both viewers on desktop and real phones should report apparent band tilt/parallelism before comparison and after Hide check marks, including weak/absent responses and supplied conditions only. Do not infer perception from engineering screenshots or community reactions to other artwork.
+**SK05 complete by owner report:** viewer1 and viewer2 confirmed on desktop and real phone. The blue bands look tilted/non-parallel with check marks, and straight and parallel after Hide check marks. Browser, DPR, zoom, viewing distance and selected control/image settings were not supplied and remain unspecified. Engineering browser conditions above are not attributed to the viewers.
 
-The owner approved implementation and unlisted publication, not listing. Keep `listed:false` and static noindex, confirm the direct hosted page after push and stop for owner viewing.
+The owner separately approves listing: set `listed:true` and remove static noindex together. Retain the construction and defaults. Confirm Pages and the live listed page, then mark the research batch complete and stop. Listing checks are recorded separately after the change; the initial implementation checks above remain historical.

@@ -1,8 +1,8 @@
 # Skye oblique grating specification
 
-Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.2, 24 October 2026. ID/folder: `skye-grating`; title/h1: “Skye oblique grating”; HTML title: “Skye oblique grating | OpticEye”. Description: “Straight parallel bands appear tilted among small checker marks. Hide the marks to inspect the unchanged bands.”
+Status: **implemented and calibrated on desktop and real phones; listing approved**. Version 1.3, 24 October 2026. ID/folder: `skye-grating`; title/h1: “Skye oblique grating”; HTML title: “Skye oblique grating | OpticEye”. Description: “Straight parallel bands appear tilted among small checker marks. Hide the marks to inspect the unchanged bands.”
 
-Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, engineering checks and separate two-viewer calibration. Owner approved this construction on23 October2026 and reaffirmed implementation on24 October2026 after the calibrated Vanishing dots listing deployment. Geometry and controls below are unchanged. Implement and validate unlisted/noindex, commit/push, confirm Pages/direct access, then stop for viewing. No animation, blur, decorations, dragging or angle-matching task.
+Inherit [implementation.md](implementation.md) for page setup, Reset, normalization, accessibility, engineering checks and separate two-viewer calibration. Owner approved this construction on23 October2026 and reaffirmed implementation on24 October2026 after the calibrated Vanishing dots listing deployment. Geometry and controls below are unchanged. The initially unlisted implementation is now calibrated with both viewers on desktop and real phones; the owner separately approves listing. Retain the geometry and controls, set listed:true and remove noindex together. No animation, blur, decorations, dragging or angle-matching task.
 
 ## 1. Research and attribution
 
@@ -54,9 +54,9 @@ Do not add a device-pixel minimum, responsive mark count, blur or contrast filte
 | SK01 | Four exact persistent blue rectangles, seven gray columns, fixed pale plot/surface and104 checker centers. Verify all416 quadrant polygons, four default polarity examples, parity under reverse on/off, all four d settings, disjoint bounds and no transformed target geometry. |
 | SK02 | Repeated Hide check marks removes/restores only context; blue target nodes/attributes, columns, surface and frame persist. Hidden d/reverse updates and restoration are correct. No replacement target drawing or full-pixel-identity claim. |
 | SK03 | Controls, size, disclosure, instance IDs, keyboard/focus and Reset follow the shared contract. No decorations, motion, blend modes or filtering. Attribution and tentative explanation are present. |
-| SK04 | Shared engineering checklist passes unlisted/noindex; include the fine-quadrant DPR cases and record actual results in docs/skye-grating-validation.md. Record actual engineering results only; approval is not a calibration pass. |
+| SK04 | Shared engineering checklist passes listed:true with no noindex tag, per owner approval; include the fine-quadrant DPR cases and record actual results in docs/skye-grating-validation.md. Record actual engineering results only; approval is not a calibration pass. |
 | SK05 | Calibration only: two viewers on desktop and real phones report apparent band parallelism/tilt before and after Hide check marks at defaults; record weak/absent responses and supplied conditions. Listing requires separate explicit owner approval. |
 
-SK01–SK04 define engineering completion; SK05 is separate human calibration. Implementation is owner-approved in the documented order; stop for owner viewing after each deployment.
+SK01–SK04 define engineering completion; SK05 is separate human calibration. Implementation and listing are owner-approved; no further implementation is authorized by this completed batch.
 
-SK01–SK04 pass; see [actual validation](../skye-grating-validation.md). SK05 has no human observations yet. Publish unlisted/noindex and stop for owner viewing; listing needs separate explicit approval.
+SK01–SK04 pass; see [actual validation](../skye-grating-validation.md). **SK05 complete by owner report:** viewer1 and viewer2 confirmed on desktop and real phone that the blue bands look tilted/non-parallel with check marks, and straight and parallel after Hide check marks. Browser, DPR, zoom, viewing distance and selected control/image settings were not supplied. The owner separately approves listing. Confirm the listed deployment/live page, mark the research batch complete and stop.
