@@ -1,12 +1,12 @@
 # Curvature blindness validation
 
-24 October 2026, specification1.5. **Implemented; unlisted/noindex; owner prefers Medium/Smaller; further calibration pending. CB01–CB04 pass; CB05 remains incomplete.**
+24 October 2026, specification1.6. **Implemented and calibrated on desktop and real phones; listing approved. CB01–CB05 complete.**
 
 ## Human viewing and publication
 
-Owner/viewer1 reported that the initial effect was not strong, but became strong after selecting Compact. They then clarified that Compact is too small and requested a Medium frame with smaller wave features and settings to try. Exact initial size, device class, browser, DPR, zoom and distance were not supplied. No white-background result or second-viewer report was supplied. Do not infer real-phone coverage or success of the new patterns. The owner subsequently called the denser Medium trial “much better” and explicitly requested Smaller as the default. No specific profile/white-background result or device conditions were added to that observation. Listing still requires separate explicit approval.
+**CB05 complete:** viewers1 and2 confirmed on desktop and real phones: on gray, some rows look angular/zigzag and others wavy; on white the difference weakens and the rows look smoothly wavy. Browser, DPR, zoom, distance and selected image size/detail were not supplied. Do not attach engineering-browser conditions to this report.
 
-Keep the trial unlisted/noindex. Publish for viewing and stop before vanishing dots. The three detail choices are candidates to compare, not a claim that any is perceptually optimal.
+The owner separately approved listing on24 October2026. Change listed:true and remove noindex together; after confirming the listing deployment, implement vanishing dots unlisted/noindex and stop for viewing. Earlier owner feedback was weak at larger initial waves, strong at Compact, followed by a request for a larger frame with smaller waves; the denser trial was called much better and Smaller was selected as the default. These earlier reports do not add unspecified conditions to the completed calibration above.
 
 ## Current construction and engineering
 
