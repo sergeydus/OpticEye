@@ -1,10 +1,10 @@
 # Curvature blindness validation
 
-24 October 2026, specification1.4. **Implemented; unlisted/noindex; current Medium/Fine trial awaits owner viewing. CB01–CB04 pass; CB05 remains incomplete.**
+24 October 2026, specification1.4. **Implemented; unlisted/noindex; owner prefers Medium/Smaller; further calibration pending. CB01–CB04 pass; CB05 remains incomplete.**
 
 ## Human viewing and publication
 
-Owner/viewer1 reported that the initial effect was not strong, but became strong after selecting Compact. They then clarified that Compact is too small and requested a Medium frame with smaller wave features and settings to try. Exact initial size, device class, browser, DPR, zoom and distance were not supplied. No white-background result or second-viewer report was supplied. Do not infer real-phone coverage or success of the new patterns. Listing still requires separate explicit approval.
+Owner/viewer1 reported that the initial effect was not strong, but became strong after selecting Compact. They then clarified that Compact is too small and requested a Medium frame with smaller wave features and settings to try. Exact initial size, device class, browser, DPR, zoom and distance were not supplied. No white-background result or second-viewer report was supplied. Do not infer real-phone coverage or success of the new patterns. The owner subsequently called the denser Medium trial “much better” and explicitly requested Smaller as the default. No specific profile/white-background result or device conditions were added to that observation. Listing still requires separate explicit approval.
 
 Keep the trial unlisted/noindex. Publish for viewing and stop before vanishing dots. The three detail choices are candidates to compare, not a claim that any is perceptually optimal.
 
@@ -39,3 +39,7 @@ All16 preview documents pass direct loads/refreshes at320/1440 (**32 cases**),26
 
 - Initial Medium/eight-row implementation `741a0a8` passed235 tests and deployed in [run40093524371](https://github.com/sergeydus/OpticEye/actions/runs/40093524371). All16 live pages and36 feature/background states passed engineering checks. Owner later reported a stronger effect at Compact.
 - The Compact default revision `f1d92e1` passed235 tests, local DPR/zoom/page checks and [deployment40094584776](https://github.com/sergeydus/OpticEye/actions/runs/40094584776). Live320/1440 loads/refreshes/comparison/Reset confirmed240×160, unlisted/noindex and no errors. The owner rejected the small frame size, prompting the current Medium/detail trial. No earlier perception report calibrates the new default.
+
+## Smaller default decision — 24 October 2026
+
+Specification1.5 sets Smaller on load/Reset and keeps Medium540. It changes no profile geometry, palette, comparison or listing behavior. Default assertions and verification are updated with the implementation. The Medium/Fine implementation `dc4fa6b` previously deployed successfully in [run40095486263](https://github.com/sergeydus/OpticEye/actions/runs/40095486263); live320/1440 checks confirmed all three detail choices, background-only comparison, Reset, unlisted/noindex and no errors.

@@ -1,6 +1,6 @@
 # Curvature blindness specification
 
-Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.4, 24 October 2026. ID/folder: `curvature-blindness`; title/h1: “Curvature blindness illusion”; HTML title: “Curvature blindness illusion | OpticEye”. Description: “Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.”
+Status: **implemented; unlisted/noindex; perceptual calibration pending**. Version 1.5, 24 October 2026. ID/folder: `curvature-blindness`; title/h1: “Curvature blindness illusion”; HTML title: “Curvature blindness illusion | OpticEye”. Description: “Congruent smooth curves may look angular when their contrast changes. Compare them on a different background without changing the curves.”
 
 Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Reset, normalization, accessibility, testing and separate two-viewer calibration. The owner reaffirmed implementation/publication approval on 24 October 2026: implement after Jastrow listing deploys, publish unlisted/noindex and stop for viewing. This approved feature uses its narrowly scoped **background-comparison exception**, not a context-removal reveal: only the opaque surface fill intentionally changes. No animation, diagnostic claim, contour recoloring or corner-shaped target.
 
@@ -18,8 +18,8 @@ SVG viewBox **0 0 720 480**. The owner requests a Medium-sized frame with smalle
 | Detail | Scale s | Cycles / rows N | Amplitude A | Wavelength λ | Stroke | Row pitch |
 | --- | --- | --- | --- | --- | --- | --- |
 | Original | 1 | 8 | 10 | 80 | 6 | 48 |
-| Smaller | 2/3 | 12 | 20/3 | 160/3 | 4 | 32 |
-| Fine (default) | 4/9 | 18 | 40/9 | 320/9 | 8/3 | 64/3 |
+| Smaller (default) | 2/3 | 12 | 20/3 | 160/3 | 4 | 32 |
+| Fine | 4/9 | 18 | 40/9 | 320/9 | 8/3 | 64/3 |
 
 All profiles preserve the same normalized shape, stroke proportions, exact palette and color-switch phases. Curves span x40…680. Row origins are `yr=240+(r−(N−1)/2)*48s`, r0…N−1. Thus the Original placement remains72…408, Smaller64…416, Fine176/3…1264/3. More copies fill the larger frame; no individual row is distorted. No triangle waves, random noise or independently tuned row curvature.
 
@@ -39,15 +39,15 @@ Including half-stroke, x bounds remain40…680 and y bounds are `[48+11s,432−1
 | --- | --- | --- |
 | Compare on white | false | Native toggle; false gray#808080, true white#FFFFFF; changes surface fill only |
 | Curvature image size | Medium/540 | Shared240/540/720 maximum CSS widths |
-| Wave detail | Fine | Original / Smaller / Fine; changes the pattern dimensions and row/cycle counts only |
+| Wave detail | Smaller | Original / Smaller / Fine; changes the pattern dimensions and row/cycle counts only |
 
 Prompt: **“Do some rows look wavy and others angular?”** Help: “Compare neighboring rows on gray, then try a white background.” The SVG description identifies alternating light/dark smooth contour rows; it must not assert that every viewer sees corners or that every row looks equally smooth after comparison.
 
 Keep the button label **“Compare on white”**, pressed when white is selected. Comparison proof: **“The same smooth geometry is shown on a different background. The line shapes, positions and colors did not change.”** No “Hide corners”, “straighten”, “unmodified surface” or “all pixels stayed identical” claim. The opaque surface intentionally changes; edge antialiasing can therefore change while path attributes/colors remain fixed.
 
-Reset restores gray background, Medium, Fine detail and closed explanation. Size choices uniformly scale the selected pattern. Wave detail changes geometry according to section2; label its help “Changes wave size and row count. Compare on white keeps the selected pattern unchanged.” Size, detail, comparison and disclosure remain independent; changing detail does not reset a selected white background. Explanation distinguishes geometric congruence from color-switch phase and describes the research mechanism as proposed. No automatic background cycling, flicker, recoloring or animation.
+Reset restores gray background, Medium, Smaller detail and closed explanation. Size choices uniformly scale the selected pattern. Wave detail changes geometry according to section2; label its help “Changes wave size and row count. Compare on white keeps the selected pattern unchanged.” Size, detail, comparison and disclosure remain independent; changing detail does not reset a selected white background. Explanation distinguishes geometric congruence from color-switch phase and describes the research mechanism as proposed. No automatic background cycling, flicker, recoloring or animation.
 
-The owner reports a weak initial effect and a strong Compact effect, but finds the Compact image too small. The 24 October request explicitly authorizes trying smaller waves in Medium and further viewing. Restore Medium on load/Reset; default to Fine detail, with Original and Smaller available for direct comparison. This is a tuning hypothesis: at Medium the Fine wave dimensions match the former Original pattern at Compact, but over a larger area with more rows/cycles. No new perceptual success or completed calibration is claimed.
+The owner reports a weak initial effect and a strong Compact effect, but finds the Compact image too small. The 24 October request explicitly authorizes trying smaller waves in Medium and further viewing. Restore Medium on load/Reset; default to Smaller detail by the owner’s follow-up request, with Original and Fine available for direct comparison. This is a tuning hypothesis: at Medium the Fine wave dimensions match the former Original pattern at Compact, but over a larger area with more rows/cycles. The owner subsequently described the revised trial as “much better” and explicitly chose Smaller as the default on 24 October 2026. No specific device conditions, white-background result or second-viewer report were supplied; completed calibration is not claimed.
 
 ## 4. Responsive and calibration concerns
 
@@ -63,8 +63,8 @@ Inspect all profiles/sizes, both backgrounds, DPR1/2/1.25,320/1440 widths and na
 | --- | --- |
 | CB01 | Each of the three bounded profiles has one shared master path (32/48/72 cubics) that has exact period/amplitude/extrema, matching endpoint derivatives and the documented approximation bound; its row translations and painted instances are congruent within the profile. Verify both transition-phase interval sets, finite bounds, counts and the22s inter-row envelope clearance. No actual geometric corner or polyline. |
 | CB02 | Repeated Compare on white changes only the same surface rectangle’s fill. Every curve node, path reference, transform, clip intervals, stroke fill/width and displayed frame persist. Recompute no contour geometry; do not claim invariant raster antialiasing against a changed surface. |
-| CB03 | Size/detail controls, persistent comparison/disclosure, independent instances, keyboard/focus and Reset to Medium/Fine follow shared rules; copy distinguishes shapes, color phase and intentional background change, with source attribution and no diagnosis or guaranteed percept. |
+| CB03 | Size/detail controls, persistent comparison/disclosure, independent instances, keyboard/focus and Reset to Medium/Smaller follow shared rules; copy distinguishes shapes, color phase and intentional background change, with source attribution and no diagnosis or guaranteed percept. |
 | CB04 | Shared engineering checklist passes unlisted/noindex; include the smooth-extrema/fractional-DPR cases and record actual results in docs/curvature-blindness-validation.md. Record actual engineering and viewing results separately. |
 | CB05 | Calibration only: two viewers on desktop and real phones report whether neighboring rows appear differently shaped on gray and whether white weakens that difference. Record direction, weak/absent responses and supplied conditions. Listing requires separate explicit owner approval. |
 
-CB01–CB04 pass for the Medium/Fine trial and all detail choices; see [actual validation](../curvature-blindness-validation.md). CB05 has one owner observation (weak initially, strong at Compact); two-viewer/device coverage and the white-background comparison remain unconfirmed. Publish unlisted/noindex in the owner-approved order and stop for viewing; do not begin vanishing dots.
+CB01–CB04 passed the Medium/Fine trial; verify the Smaller-default revision and retain coverage of all detail choices; see [actual validation](../curvature-blindness-validation.md). CB05 has one owner observation (weak initially, strong at Compact); two-viewer/device coverage and the white-background comparison remain unconfirmed. Publish unlisted/noindex in the owner-approved order and stop for viewing; do not begin vanishing dots.
