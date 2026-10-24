@@ -1,6 +1,6 @@
 # Curvature blindness validation
 
-24 October 2026, specification 1.2. **Implemented; unlisted/noindex; perceptual calibration pending. CB01–CB04 pass; CB05 has one initial owner observation; device coverage and white comparison remain unconfirmed.**
+24 October 2026, specification 1.3. **Implemented; unlisted/noindex; perceptual calibration pending. CB01–CB04 pass; CB05 has one initial owner observation; device coverage and white comparison remain unconfirmed.**
 
 ## Initial engineering (specification 1.2; Medium default)
 
@@ -27,10 +27,18 @@ Native **200% browser zoom** used outer1440, inner712×552, DPR2, CSS zoom1; all
 
 All16 production documents pass direct loads and refreshes at320/1440 (**32 cases**) and26 listed-card navigation round trips. All16 development root-base routes also load/refresh. Correct titles/descriptions, styles/assets, noindex/listing/header behavior and no overflow, browser/console errors, failed requests or404s pass. Existing listed features retain their calibration and owner decisions.
 
-Evidence outside Git in the task visualization directory: `curvature-preview.json`, `curvature-pages-preview.json`, `shepard-guided-dev.json`, size/background/DPR screenshots, `curvature-preview-touch320.png` and `curvature-preview-zoom200.png`. Hosted deployment is checked after the implementation push and reported at handoff.
+Evidence outside Git in the task visualization directory: `curvature-preview.json`, `curvature-pages-preview.json`, `shepard-guided-dev.json`, size/background/DPR screenshots, `curvature-preview-touch320.png` and `curvature-preview-zoom200.png`. The initial implementation `741a0a8` deployed successfully in [Pages run 40093524371](https://github.com/sergeydus/OpticEye/actions/runs/40093524371); all16 live pages and the36 feature/background states passed without errors or404s.
 
 ## Human viewing and publication
 
 **CB05 pending:** owner/viewer 1 reports the effect was not strong in the initial view, but strong when selecting Compact. Exact initial image size, device class, browser, DPR, zoom and distance were not supplied; no white-background comparison was reported. This establishes neither completed calibration nor real-phone coverage. A second viewer and desktop/real-phone observations of the background comparison are still needed. Listing requires separate explicit owner approval.
 
-Specification 1.3 sets Compact/240 as the load/Reset default in response, keeping all geometry, colors, clips and comparison behavior unchanged. Engineering for that revision is recorded after the checks run. Keep the page unlisted/noindex and stop for viewing before vanishing dots.
+Specification 1.3 sets Compact/240 as the load/Reset default in response, keeping all geometry, colors, clips and comparison behavior unchanged. Engineering for that revision is recorded below. Keep the page unlisted/noindex and stop for viewing before vanishing dots.
+
+## Compact default verification — 24 October 2026
+
+Specification1.3 was committed as `40635ab` before code. Only the default viewing width changes (540→240); both load and Reset now select Compact. Unsupported size inputs also fall back to240. All curve/path/clip/color/comparison code is unchanged. Existing tests now assert the new load/Reset/instance defaults and still exercise larger choices before Reset.
+
+Fresh lint,235 tests/34 files and the16-document build pass. Chromium156.0.8078.47 passes the18 viewport/DPR/size combinations and36 gray/white states again, including every-size background-only invariance and Reset/focus. Compact/default is240×160 at320/1440 and native200% zoom; Medium/Large remain available with the prior dimensions. Native zoom conditions are outer1440, inner712×552, DPR2 and CSSzoom1. The320 touch-emulation case passes. Narrow/desktop Compact defaults, fractional-DPR white curves and native-zoom screenshots were visually inspected; no overflow or geometry substitution was introduced.
+
+All16 preview documents pass direct loads/refreshes at320/1440 (32 cases),26 listed-card navigation trips pass, and all16 development root-base routes load/refresh. Home still has13 cards; curvature blindness remains unlisted/noindex. No browser/console errors, failed requests or404s. These engineering conditions are not attributed to the owner's observation. Evidence: `curvature-compact-preview.json`, `curvature-compact-pages-preview.json`, `shepard-guided-dev.json` and matching screenshots outside Git. Hosted update is verified after the push and reported at handoff.

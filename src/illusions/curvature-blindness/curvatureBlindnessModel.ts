@@ -12,7 +12,7 @@ export const VIEWING_SIZES = [
   { label: 'Medium', width: 540 },
   { label: 'Large', width: 720 },
 ] as const
-export const DEFAULT_VIEWING_WIDTH = 540
+export const DEFAULT_VIEWING_WIDTH = 240
 
 export function normalizeViewingWidth(value: number) {
   return VIEWING_SIZES.some((size) => size.width === value) ? value : DEFAULT_VIEWING_WIDTH

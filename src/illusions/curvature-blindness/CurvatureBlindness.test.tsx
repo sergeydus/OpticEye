@@ -37,7 +37,7 @@ describe('curvature blindness experience', () => {
     expect(svg.querySelector('polygon,polyline,line,filter,animate,mask,image,linearGradient')).toBeNull()
     expect(screen.queryByRole('slider')).toBeNull()
     expect(screen.getByRole('button', { name: 'Compare on white' })).toHaveAttribute('aria-pressed', 'false')
-    expect(screen.getByRole('combobox', { name: 'Curvature image size' })).toHaveValue('540')
+    expect(screen.getByRole('combobox', { name: 'Curvature image size' })).toHaveValue('240')
     expect(screen.getByText(proof)).not.toBeVisible()
     expect(screen.getByRole('button', { name: 'Why it happens' })).toHaveAttribute('aria-expanded', 'false')
   })
@@ -72,7 +72,7 @@ describe('curvature blindness experience', () => {
     expect(screen.getByRole('link', { name: 'Kohske Takahashi — Curvature Blindness Illusion (2017)' })).toHaveAttribute('href', 'https://journals.sagepub.com/doi/10.1177/2041669517742178')
     expect(screen.getByText(/Original OpticEye drawing after/)).toBeVisible()
     expect(screen.getByText(/not a diagnostic test/)).toBeVisible()
-    for (const width of ['240', '720', '540', '240']) {
+    for (const width of ['540', '240', '540', '720']) {
       await user.selectOptions(size, width)
       expect(container.querySelector('[data-curvature-viewing-frame]')).toHaveStyle({ maxWidth: `${width}px` })
       expect(svg.querySelector('defs')!.outerHTML).toBe(geometry)
@@ -84,7 +84,7 @@ describe('curvature blindness experience', () => {
     reset.focus()
     await user.keyboard('{Enter}')
     expect(reset).toHaveFocus()
-    expect(size).toHaveValue('540')
+    expect(size).toHaveValue('240')
     expect(toggle).toHaveAttribute('aria-pressed', 'false')
     expect(disclosure).toHaveAttribute('aria-expanded', 'false')
     expect(svg.querySelector('[data-layer="surface"]')).toHaveAttribute('fill', '#808080')
@@ -108,9 +108,9 @@ describe('curvature blindness experience', () => {
       }
     }
     await user.click(within(first).getByRole('button', { name: 'Compare on white' }))
-    await user.selectOptions(within(first).getByRole('combobox'), '240')
+    await user.selectOptions(within(first).getByRole('combobox'), '720')
     expect(second.querySelector('[data-layer="surface"]')).toHaveAttribute('fill', '#808080')
     expect(within(second).getByRole('button', { name: 'Compare on white' })).toHaveAttribute('aria-pressed', 'false')
-    expect(within(second).getByRole('combobox')).toHaveValue('540')
+    expect(within(second).getByRole('combobox')).toHaveValue('240')
   })
 })

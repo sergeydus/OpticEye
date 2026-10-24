@@ -83,7 +83,7 @@ describe('curvature blindness smooth geometry', () => {
   })
 
   it('preserves the specified scale relationships and bounds unsupported sizes', () => {
-    expect([240, 540, 720, 450, -1, NaN, Infinity].map(normalizeViewingWidth)).toEqual([240, 540, 720, 540, 540, 540, 540])
+    expect([240, 540, 720, 450, -1, NaN, Infinity].map(normalizeViewingWidth)).toEqual([240, 540, 720, 240, 240, 240, 240])
     const expected = [[26.6666666667, 3.3333333333, 2], [32, 4, 2.4], [60, 7.5, 4.5], [80, 10, 6]]
     for (const [i, width] of [240, 288, 540, 720].entries()) {
       for (const [j, value] of [80, 10, STROKE_WIDTH].entries()) expect(value * width / 720).toBeCloseTo(expected[i][j], 9)
