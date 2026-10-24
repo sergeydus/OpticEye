@@ -1,6 +1,6 @@
 # Jastrow illusion specification
 
-Status: **approved for implementation; engineering and calibration pending**. Version 1.1, 23 October 2026. ID/folder `jastrow`; title/h1 “Jastrow illusion”; HTML title “Jastrow illusion | OpticEye”. Description: “Compare two curved bands, then align them without resizing either shape.”
+Status: **approved for implementation; engineering and calibration pending**. Version 1.2, 24 October 2026. ID/folder `jastrow`; title/h1 “Jastrow illusion”; HTML title “Jastrow illusion | OpticEye”. Description: “Compare two curved bands, then align them without resizing either shape.”
 
 Use [implementation.md](implementation.md) for page setup, listing, shared controls, Reset, accessibility, engineering checks and two-viewer calibration. This feature uses its **rigid comparison** contract, not an unchanged-position reveal. Owner-approved implementation starts `listed:false` with static `noindex`; validate and publish for viewing before separate listing approval.
 
@@ -23,19 +23,25 @@ Upper fill bounds: x≈122.164…507.836, y110…241.470. Lower bounds: x≈173.
 
 Paint surface, upper path, lower path. No guides, labels inside either band, gradients, shadows, opacity effects, filters or blend modes. Both path nodes persist through every comparison/size/disclosure operation. Local path area is `0.5*(R²−r²)*(80*PI/180)≈29042.279` square units; area alone is insufficient proof of congruence.
 
-## 3. Comparison and controls
+## 3. Approved guided comparison and controls
+
+The owner approved replacing the instant toggle with Shepard’s guided-comparison pattern on24 October2026. Follow implementation.md’s scoped motion contract; this feature permits **translation only**, with no rotation or scaling.
 
 | Choice / label | Default | Allowed behavior |
 | --- | --- | --- |
-| Compare bands | Off | Persistent toggle, pressed when aligned; only the lower path’s translation changes |
-| Jastrow image size | Medium/540 | Shared Compact240 / Medium540 / Large720 maximum CSS widths |
-| Reset Jastrow | — | Restores initial transforms, Medium, comparison off and explanation closed |
+| Comparison progress | 0% | Native range0–100%, step1; continuous internal progress p∈[0,1] during playback |
+| Play comparison / Pause comparison | Stopped | Explicit forward/backward playback; pause/resume in the same direction, no loop |
+| Back to bands | — | Stop and restore progress0/initial placement; keep image size/disclosure |
+| Jastrow image size | Medium/540 | Shared Compact240 / Medium540 / Large720 maximum CSS widths; changing size pauses and preserves progress |
+| Reset Jastrow | — | Stop; restore progress0, initial placement, Medium and closed explanation without moving focus |
 
-Prompt: **“Which curved band looks larger?”** Instruction: “Compare the upper and lower bands, then use Compare bands.” Do not announce an expected larger band or their equality before comparison. No slider, drag requirement, exchange animation, timer, automatic swap or separate proof copy.
+Prompt: **“Which curved band looks larger?”** Instruction: “Compare the bands, then follow the lower one as it slides onto the upper one.” Do not announce an expected larger band or equality before comparison. No drag requirement, automatic swap or separate proof copy.
 
-Comparison on sets the lower transform to exactly **translate(315,410)**, superimposing it on the unchanged upper path. Both existing nodes, local `d`, fill, opacity, surface, viewBox and displayed frame remain; only the lower translation changes. The visible single silhouette is the exact overlap of two paths, not a replacement drawing. Toggling off restores the original lower translation. Do not scale, skew, morph, recolor, fade or add a comparison outline.
+Let E(p)=p²(3−2p). The upper transform remains **translate(315,410)**. The existing lower path uses **translate(315+80*s*(1−E(p)),410+124*(1−E(p)))**. Return the exact initial lower-transform string at0 and the exact upper-transform string at1. Its diagonal displacement is up and left, (−51.423008775,−124), with no rotate/scale/skew/reflection/morph. Paint upper first, moving lower last from initial mount. Both nodes, local d/fill/opacity, white surface, viewBox and frame persist. The final silhouette is two superimposed paths, not a replacement drawing. All intermediate fill bounds lie inside the union of initial bounds by convex translation.
 
-Revealed proof: **“Both bands have the same shape and size. The lower band was moved onto the upper one without resizing.”** Reserve proof/status space outside the SVG. Initially describe two offset curved bands; aligned description says the same two paths now overlap. Comparison remains independent of size and explanation; Reset retains focus. Explain that placement can affect perceived size and that the response varies with viewer/display.
+A full traversal takes **3200ms**, based on elapsed time and one bounded requestAnimationFrame loop. At endpoints Play goes toward the other endpoint; finish never loops. Manual scrubbing pauses, supports both directions and preserves exact endpoints. Use shared lifecycle rules: no idle/background/unmount frames, hidden-tab/preference-change pause and no auto-resume. Under reduced motion, replace playback with **Match instantly / Separate bands**, retaining manual scrub; no timed movement. Reuse the actual shared controller/transport with Shepard, keeping independent state and feature-specific geometry. Keep Play/progress immediately below the drawing for phone viewing.
+
+Stage text outside the drawing is **Slide** while comparing and **Exact fit** only at1. Announce stage/endpoint changes, not each frame. Endpoint proof: **“Both bands have the same shape and size. The lower band was moved onto the upper one without resizing.”** Reserve proof space outside the SVG. Initial description identifies two offset bands; comparison describes intentional movement. No recoloring, opacity effect, outline or extra guide. Explanation and viewing size remain independent. Explain that placement can affect perceived size, a possible nearby-edge account is not settled, and responses vary with viewer/display.
 
 ## 4. Responsive concerns
 
@@ -48,9 +54,9 @@ Both paths stay in one SVG at all breakpoints. Inspect antialiasing near radial 
 | ID | Specific required result |
 | --- | --- |
 | JA01 | Both nodes share exact local path/fill/radii/angle and unit scale. Independently verify circular arcs, endpoints, equal path area and the stated bounds/positive separation; no context or photograph can covertly resize a band. |
-| JA02 | Repeated comparison retains both target nodes and all local shape/style attributes. Only the lower translation switches between the two specified values; aligned path coordinates coincide exactly. Upper transform, surface and displayed bounds stay fixed. No replacement target, animation, opacity trick or outline. |
-| JA03 | Size, disclosure and keyboard comparison are independent. Reset restores the exact offset arrangement and all shared defaults, keeps focus and clears comparison proof. Two instances have unique descriptions and independent state; initial copy gives no answer. |
-| JA04 | Shared engineering/page checklist passes for a new unlisted/noindex entry; include both arrangements, every size, gap/DPR checks and200% zoom. Record actual results in docs/jastrow-validation.md; existing pages and their calibration remain unchanged. |
+| JA02 | Repeated comparison retains both target nodes and all local shape/style attributes. Only the lower translation follows section3’s bounded eased trajectory; verify intermediate placements and exact endpoint coincidence. Upper transform, surface and displayed bounds stay fixed. No replacement target, rotation/scaling, automatic movement, opacity trick or outline. |
+| JA03 | Guided playback/Pause/resume/reverse, keyboard scrubbing, Back, reduced-motion fallback, cleanup, size and disclosure follow section3 and the shared contract. Reset restores the exact offset arrangement and all shared defaults, keeps focus and clears comparison proof. Two instances have unique descriptions and independent state; initial copy gives no answer. |
+| JA04 | Shared engineering/page checklist passes for a new unlisted/noindex entry; include initial/intermediate/exact-fit/restored arrangements, every size, gap/DPR checks, reduced motion and200% zoom. Record actual results in docs/jastrow-validation.md; existing pages and their calibration remain unchanged. |
 | JA05 | Calibration only: two viewers on desktop and real phones report whether the initial bands look different in size and coincide after comparison. Record direction, weak/absent responses and only supplied viewing conditions. Listing needs separate explicit owner approval. |
 
 JA01–JA04 define implemented; JA05 separately defines calibrated. All are currently unperformed. Implementation is approved in the documented order; stop for owner viewing after each deployment.

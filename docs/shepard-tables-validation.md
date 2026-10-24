@@ -46,3 +46,5 @@ The always-visible furniture version8dcfbe5 (spec705b332) was superseded by the 
 ## Calibration and listing publication
 
 Owner report: both viewers confirmed on desktop and real phone; different apparent tabletop shapes before comparison and an exact rotate-then-slide fit. ST05 is complete. Lint,211 tests and build pass for listing. All14 production pages load/refresh at320/1440 (28 cases),24 listed navigation trips pass, and all14 development root URLs work. Home has12 cards, Shepard is listed without noindex, Kanizsa stays unlisted/noindex. No overflow, failed assets, console errors or404s were observed. Hosted deployment is checked after the listing push.
+
+Listing deployment [40088729494](https://github.com/sergeydus/OpticEye/actions/runs/40088729494) succeeded for1f0ac58. Live checks at320/1440 passed all14 documents and24 listed navigation trips:12 cards, Shepard without noindex, correct base-aware headers, working comparison and no failed requests/404s.
