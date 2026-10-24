@@ -1,6 +1,6 @@
 # Shepard’s tables specification
 
-Status: **zero-progress furniture rule implemented; unlisted/noindex; perceptual calibration pending**. Version 1.5, 24 October 2026. The owner approved section7 and the scoped motion amendment in implementation.md before implementation. ID/folder `shepard-tables`; title/h1 “Shepard’s tables”; HTML title “Shepard’s tables | OpticEye”. Description: “Compare two table drawings, then overlay their tabletop shapes without stretching them.”
+Status: **implemented and calibrated on desktop and real phones; owner-approved for listing**. Version 1.6, 24 October 2026. The owner approved section7 and the scoped motion amendment in implementation.md before implementation. ID/folder `shepard-tables`; title/h1 “Shepard’s tables”; HTML title “Shepard’s tables | OpticEye”. Description: “Compare two table drawings, then overlay their tabletop shapes without stretching them.”
 
 Use [implementation.md](implementation.md) for page setup, listing, shared controls, Reset, accessibility, engineering checks and two-viewer calibration. Apply its **rigid comparison** contract: the proof concerns congruent **2D tabletop drawings**, not dimensions of real three-dimensional tables. Owner-approved implementation starts `listed:false`/static `noindex`; validate and publish for viewing before separate listing approval.
 
@@ -56,7 +56,7 @@ Diagonal antialiasing and thin outlines differ after rotation even though geomet
 | ST04 | Shared unlisted/noindex page and engineering checklist passes, including every size, initial/intermediate/final/restored and reduced-motion states, DPR checks and200% zoom; record actual results in docs/shepard-tables-validation.md. Preserve existing feature/calibration records. |
 | ST05 | Calibration only: two viewers on desktop and real phones compare apparent tabletop proportions at defaults and their coincident outlines after overlay. Record narrow/long versus broad impressions, weak/absent responses and supplied conditions; listing requires separate owner approval. |
 
-ST01–ST04 pass for the zero-progress furniture visibility revision. See [actual engineering results](../shepard-tables-validation.md). ST05 is pending: the owner reports that the illusion works, without device or second-viewer details. Keep unlisted/noindex and stop after deployment for owner real-phone viewing before starting Jastrow.
+ST01–ST04 pass for the zero-progress furniture visibility revision. See [actual engineering results](../shepard-tables-validation.md). ST05 is complete: viewer1 and viewer2 confirmed on desktop and real phone that the tabletops look different before comparison and the rotate-then-slide comparison shows an exact fit. Other conditions were not supplied. The owner approves listing and authorizes Jastrow after the listing deployment succeeds.
 
 
 ## 7. Approved guided comparison
@@ -74,4 +74,4 @@ The complete2-unit mitered outline stays within the existing720×480 frame: rota
 
 **Required verification:** extend ST02–ST04 to check intermediate proper rigid transforms, exact endpoints, persistent node/style identity and fixed right target, all-progress frame containment, stable paint order, reversible scrub and final fit. Add playback/Pause/resume/reverse/finish, no idle frame work, hidden-tab pause, reduced-motion/keyboard fallback, source-independent Reset and instance isolation tests. Repeat all feature/page browser checks, including320/1440, DPR1/1.25/2 and200% zoom. Keep human viewing separate.
 
-An isolated interaction sketch informed this design; it is not production validation. Record actual implementation checks separately. Keep the page unlisted/noindex and stop for owner viewing after deployment.
+An isolated interaction sketch informed this design; it is not production validation. Record actual implementation checks separately. The owner has now approved listing: set listed:true and remove noindex together. Preserve the calibrated construction, including furniture only at progress0.

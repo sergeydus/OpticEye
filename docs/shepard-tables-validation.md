@@ -1,10 +1,10 @@
 # Shepard’s tables validation
 
-24 October 2026, specification 1.5. **Zero-progress furniture visibility implemented; unlisted/noindex; perceptual calibration pending. ST01–ST04 pass; ST05 remains incomplete.**
+24 October 2026, specification 1.6. **Implemented and calibrated on desktop and real phones. ST01–ST05 complete; owner-approved for listing.**
 
 ## Human viewing and publication
 
-The owner reports that “the illusion works,” but requested a clearer same-size proof. No device, browser, DPR, zoom, distance, selected size or second-viewer details were supplied. This is one positive owner observation of the earlier static comparison, not completed two-viewer desktop/real-phone calibration. The owner then requested keeping the legs visible because they help the illusion. After viewing that version, the owner requested one reversal: furniture only at0%, hidden at1–100%. The current revision follows actual progress, including fractional playback, and still needs owner viewing; no additional calibration conditions were provided. Keep unlisted/noindex; listing needs a separate explicit decision. Stop here before Jastrow.
+Viewer1 and viewer2 both confirmed on desktop and real phone: the tabletops look different before comparison, and the rotate-then-slide comparison shows an exact fit. **ST05 complete.** Browser, DPR, zoom, distance and selected image-size details were not supplied; none are inferred from engineering checks. The owner explicitly approves listing and authorizes Jastrow next after deployment confirmation.
 
 ## Engineering
 
@@ -13,7 +13,7 @@ The owner reports that “the illusion works,” but requested a clearer same-si
 - **ST01:** the original shared parallelogram/path, golden-brown fill, dark 2-unit mitered stroke and opaque styles remain unchanged. Independent assertions cover corresponding sides, diagonals, area, initial vertices, orthonormality/determinant+1 and bounds.
 - **ST02:** the same two target paths persist in stable right-first/left-last paint order. Only the left rigid placement changes. Eight leg rectangles and four side faces appear only at actual progress0 and are absent at any positive progress. Returning to0 through scrubbing, reverse playback, reduced-motion separate, Back or Reset restores the original furniture geometry/attributes. Both target nodes persist through visibility changes; fixed-right placement, shared local shape/style and surface remain unchanged. Rotation finishes at 50%, then translation begins; 100% assigns the exact fixed-right transform string. Local geometry/styles, right target, surface and drawing frame persist. Analytic full-miter sweep bounds and 101 forward/reverse sampled progress values pass. No third copy, scaling, reflection, morph, fade or recoloring.
 - **ST03:** native scrubbing, keyboard controls, elapsed-time 3200ms playback, Pause/resume, endpoint reverse/finish, Back, size-change pause, Reset/focus, disclosure and independent instances pass. Back preserves size/disclosure; Reset restores progress 0 and the original tabletop placement, Medium 540 and closed explanation, including during playback. Tests verify one scheduled frame while playing, none idle/paused/finished/unmounted, cleanup under StrictMode, no auto-resume and stage-only live messages. Reduced motion offers immediate match/separate plus manual scrub.
-- **ST04:** Chromium checks below pass. All 14 HTML outputs exist. Home retains 11 listed cards; Shepard and Kanizsa remain unlisted/noindex. Existing feature/calibration records are preserved.
+- **ST04:** Chromium checks below pass. All 14 HTML outputs exist. Listing approval raises Home to12 listed cards; Shepard becomes listed without noindex, while Kanizsa remains unlisted/noindex. Listing changes are validated separately below. Existing feature/calibration records are preserved.
 
 ## Chromium checks
 
