@@ -120,7 +120,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'rotating-snakes',
-    listed: false,
+    listed: true,
     name: 'Rotating snakes',
     title: 'Rotating snakes',
     description: 'A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.',

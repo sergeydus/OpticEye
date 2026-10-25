@@ -1,6 +1,6 @@
 # Rotating snakes validation
 
-25 October 2026. **V2 implemented; perceptual calibration pending; unlisted/noindex; not owner-approved for listing.** The owner accepted the final prototype construction with “good enough!”. The [approved spec](specs/rotating-snakes.md) was committed before code as `5c29e21`. Acceptance is separate from successful default/comparison observations by two viewers on desktop and real phones.
+26 October 2026. **V2 implemented and calibrated on desktop and real phones; listed by owner approval.** The owner accepted the final prototype construction with “good enough!”. The [approved spec](specs/rotating-snakes.md) was committed before code as `5c29e21`. Both viewers have now supplied successful default/comparison observations on desktop and real phones.
 
 ## Current engineering results
 
@@ -12,7 +12,7 @@
 | RS02 | Pass. Keyboard comparison preserves every sector/oval/ground/surface node and every non-fill attribute, including fixed SVG rotations and document-space frame bounds. Only intermediate oval fills become#808080; all black/white fills persist. Palette/reversal choices are retained and restored. No pixel-histogram or luminance-identity claim. |
 | RS03 | Pass. Cycle/palette/reversal/size/disclosure independence, Reset/defaults/focus, unique IDs and independent instances are tested. The comfort note remains visible; descriptions reflect Gray mode. No application timers/RAF or stimulus animation, filter, opacity/blending effect or idle geometry mutation. Static SVG ellipse orientations are allowed and verified radial. |
 | RS04 | Local pass. Lint/tests/build and the browser/route matrix below passed. The unlisted deployment and hosted checks occur after this implementation commit; report their actual outcome in the task handoff rather than claiming a hosted pass in this pre-publication record. |
-| RS05 | **Pending.** Owner accepted the construction after iterative review, but no two-viewer default/comparison report or device coverage was supplied for v2. Browser/DPR/zoom/distance of human observations remain unknown. Screenshots and phone emulation do not establish calibration. No listing approval was given. |
+| RS05 | **Complete.** Viewer 1 and viewer 2 confirmed on desktop and real phones: wheels appear to rotate when looking around the pattern; the symmetric pattern stopped the motion. Browser, DPR, zoom and viewing distance were not supplied. Owner separately approved listing. |
 
 ## Browser checks
 
@@ -40,6 +40,12 @@ Evidence outside Git in the task visualization directory: `snakes-v2-preview.jso
 
 - V1: initial implementation `9c12487` [deployed successfully](https://github.com/sergeydus/OpticEye/actions/runs/40225349030). Its285-test engineering results were valid for that coarse four-wheel drawing. The owner reported it weak relative to Bach; those results do not establish v2 calibration.
 - Prototype review: the first curved proposal was better but still weak. The owner directed rounded-color correction, inward orientation and gap refinements; at fixed count black/white gaps traded off. The final fourteen-cycle version retained oval sizes while tightening both gaps and was accepted with “good enough!”. [Research](rotating-snakes-research.md) records sources and construction choices. No human device/browser/DPR/zoom/distance conditions were supplied.
-- V2: engineering is complete locally. Publish unlisted after committing, watch Pages and check the direct live URL. Actual deployment/live confirmation is reported in the task handoff after publication. Then stop for owner viewing before Fraser.
+- V2: the refined unlisted construction deployed successfully; the subsequent two-viewer report establishes RS05. Owner separately approved listing.
 
-For RS05, ask both viewers on desktop and real phones whether the default wheels appear to turn and what changes with Use symmetric pattern; record weak/absent responses and only supplied conditions. Listing remains a separate explicit owner decision.
+The v2 unlisted deployment [passed](https://github.com/sergeydus/OpticEye/actions/runs/40236716246) and its live checks passed before this human report. Current listing validation is recorded below after checks; prior engineering counts above describe the unlisted baseline.
+
+## Listing checks — 26 October 2026
+
+Lint, all286 tests/41 files, and build passed. Home now has17 cards; Kanizsa alone remains unlisted among the18 current illusion entries. All19 documents passed direct load/refresh at320/1440 in production preview and development, plus34 Home-card/return navigation trips per base. Rotating snakes has no noindex and has Previous navigation to Skye. Chrome156.0.8078.47 default/comparison/adjusted/Reset checks passed at320/1440 and native200% (inner712×552, DPR2). Primitive identity, fixed attributes, raster colors and Reset focus passed; no request/console errors or overflow. The listing page capture was visually inspected. Existing full DPR1/1.25/2 geometry checks above remain applicable because this change does not alter the drawing.
+
+Evidence: `snakes-listed.json`, `snakes-listed-pages.json`, `snakes-listed-dev.json` and matching captures outside Git. Hosted listing confirmation follows this commit and is reported in the handoff.
