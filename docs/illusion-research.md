@@ -1,6 +1,14 @@
 # Optical illusion research backlog
 
-Updated 24 October 2026. This is a selection backlog, not a build history. Feature contracts live in [docs/specs](specs/); actual engineering, deployment and viewing results live in the linked validation records below. Sixteen illusion pages are owner-approved for listing; Kanizsa remains directly accessible but unlisted by owner decision.
+Updated 25 October 2026. This is a selection backlog, not a build history. Feature contracts live in [docs/specs](specs/); actual engineering, deployment and viewing results live in the linked validation records below. Sixteen illusion pages are owner-approved for listing; Kanizsa remains directly accessible but unlisted by owner decision.
+
+## Additional candidates — 25 October 2026
+
+The [new research review](additional-illusion-research.md) recommends **Coffer → Fraser false spiral → scintillating starburst → neon color spreading → rotating snakes → shape from shading**, followed by **Asahi glare** and **Oppel–Kundt filled space**. This is an editorial selection order based on variety, comparison design and available evidence; it is not a measured strength ranking or implementation approval. Fraser and rotating snakes are promoted from the deferred list for owner consideration; their rendering/comparison requirements still need a spec.
+
+The review links authoritative demonstrations and primary papers, separates search-indexed Reddit reactions from scientific evidence, records access limits, and describes honest comparisons and phone risks. Expanding hole, Lilac Chaser, static Troxler fading, Sander parallelogram and corrugated plaid remain later research options with specific scope or overlap concerns.
+
+**Owner-approved next batch (25 October2026):** [Fraser](specs/fraser-spiral.md), [starburst](specs/scintillating-starburst.md), [neon spreading](specs/neon-color-spreading.md), [rotating snakes](specs/rotating-snakes.md), [Asahi](specs/asahi-glare.md) and [Oppel–Kundt](specs/oppel-kundt.md). The owner explicitly excluded Coffer and shape from shading and confirmed that the five later candidates are outside this spec request. All six specs and three scoped contracts are approved. Build rotating snakes first, then Fraser, Asahi, neon spreading, starburst and Oppel–Kundt, one at a time; each is checked/pushed/deployed unlisted, then paused for owner viewing before the next. Listing still needs separate approval. Existing completed work and calibration decisions below are unchanged.
 
 ## Completed approved batch
 
@@ -35,7 +43,7 @@ These remain research options, not approved specs. Favor a faithful, compact dem
 
 | Candidate | Reason to defer / next requirement | Sources |
 | --- | --- | --- |
-| Fraser false spiral | Strong apparent spiral reports, but needs a carefully specified original texture whose main bands are truly closed circles. A careless redraw can contain an actual spiral. | [Bach](https://michaelbach.de/ot/ang-fraser/), [community discussion](https://www.reddit.com/r/opticalillusions/comments/1orfa1n/when_your_brain_says_its_a_spiral_but_then/) |
+| Fraser false spiral | Promoted to the new research shortlist, not approved. Needs a carefully specified original texture with truly closed circular reference paths; a careless redraw can contain an actual spiral. | [New review](additional-illusion-research.md), [Bach](https://michaelbach.de/ot/ang-fraser/), [community discussion](https://www.reddit.com/r/opticalillusions/comments/1orfa1n/when_your_brain_says_its_a_spiral_but_then/) |
 | Zöllner | Straight lines with oblique hatches fit context-only reveal; lower novelty beside Skye, Poggendorff and Hering. A later spec should justify hatch angle/spacing. | [Kitaoka’s examples](https://www.psy.ritsumei.ac.jp/akitaoka/zollnere.html), [community discussion](https://www.reddit.com/r/opticalillusions/comments/1m2ln6d/) |
 | White’s lightness illusion | Established and inexpensive, but closely related to existing Munker. Consider a clearly attributed grayscale mode there before a separate page. | [Bach](https://michaelbach.de/ot/lum-white/), [White’s author history](https://www.sainsburywellcome.org/web/sites/default/files/2018-11/aic_colour_journal-min.pdf) |
 | Cornsweet | Needs a separate edge-gradient context exception and precise constant-interior targets. Do not claim whole shaded panels are identical. | [Bach](https://michaelbach.de/ot/lum-cobc/), [Purves et al. abstract](https://pubmed.ncbi.nlm.nih.gov/10493754/), [mixed community reports](https://www.reddit.com/r/opticalillusions/comments/1hjau9y/both_blocks_are_the_same_color_gray_hold_your/) |
@@ -43,7 +51,7 @@ These remain research options, not approved specs. Favor a faithful, compact dem
 | Pinna–Brelstaff | A static pattern can appear to rotate with viewer movement, but the viewing method and fine texture need separate calibration. Do not silently animate zoom to fake the result. | [Bach](https://michaelbach.de/ot/mot-PinnaBrelstaff/) |
 | Simultaneous brightness contrast | Simple equal patches on light/dark panels; useful but less varied alongside existing lightness pages. Prefer uniform panels before a gradient variant. | [Adelson (1993) abstract](https://pubmed.ncbi.nlm.nih.gov/8266102/), [Bach’s related induction demo](https://michaelbach.de/ot/lum-inducedBrightness/index.html) |
 | Necker cube | Ambiguous depth has no unique orientation or equality to reveal. Needs an interpretation-cue comparison that does not promise a timed perceptual flip. | [Bach](https://michaelbach.de/ot/sze-Necker/index.html) |
-| Peripheral drift / rotating snakes | Promising variety from a completely static luminance sequence. Needs original ring geometry, display/gaze calibration and a clearly labeled pattern-changing comparison. | [Bach’s luminance-control demo](https://michaelbach.de/ot/mot-snakesLum/index.html); linked full research papers not read in this pass |
+| Peripheral drift / rotating snakes | Promoted to the new research shortlist, not approved. Needs original static ring geometry, display/gaze calibration and a clearly labeled pattern-changing comparison. | [New review](additional-illusion-research.md), [Bach’s luminance-control demo](https://michaelbach.de/ot/mot-snakesLum/index.html); linked full research papers not read in this pass |
 | Stepping feet | Actual motion requires an approved extension: user Start/Pause/Reset, elapsed-time trajectories, hidden-tab pause and reduced-motion behavior. Not covered by this static batch. | [Bach](https://michaelbach.de/ot/mot-feetLin/index.html), [Kitaoka & Anstis (2021) review abstract](https://journalofillusion.net/index.php/joi/article/view/5612) |
 
 ## Built features: contracts and records
