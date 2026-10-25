@@ -1,6 +1,6 @@
 # Rotating snakes specification
 
-Status: **refined construction approved for implementation; perceptual calibration pending; unlisted/noindex**. Version 2.0, 25 October 2026. ID/folder: `rotating-snakes`; title/h1: “Rotating snakes”; HTML title: “Rotating snakes | OpticEye”. Description: “A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.”
+Status: **refined construction implemented; perceptual calibration pending; unlisted/noindex**. Version 2.0, 25 October 2026. ID/folder: `rotating-snakes`; title/h1: “Rotating snakes”; HTML title: “Rotating snakes | OpticEye”. Description: “A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.”
 
 Inherit [implementation.md](implementation.md) for shared page, listing, interaction, accessibility, validation and calibration rules. The owner accepted the final standalone prototype with “good enough!” on25 October2026 after iterative geometry review. This approves its construction, not listing or two-viewer calibration. This contract replaces the earlier three-band wedges and the unapproved exploratory proposals. [Research](../rotating-snakes-research.md) and [validation](../rotating-snakes-validation.md) preserve the evidence and viewing limits. Commit this specification before application changes; deploy the checked revision unlisted, then stop before Fraser.
 
