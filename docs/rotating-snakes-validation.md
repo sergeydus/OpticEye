@@ -2,7 +2,7 @@
 
 26 October 2026. **V2 implemented and calibrated on desktop and real phones; listed by owner approval.** The owner accepted the final prototype construction with “good enough!”. The [approved spec](specs/rotating-snakes.md) was committed before code as `5c29e21`. Both viewers have now supplied successful default/comparison observations on desktop and real phones.
 
-## Current engineering results
+## V2 construction checks — before listing (25 October)
 
 `npm run lint`, **286 tests across41 files**, and `npm run build` pass on the final application source. All19 HTML documents build. Home retains16 listed cards; Kanizsa and Rotating snakes remain directly built but unlisted/noindex. The two-link header is unchanged; unlisted pages have no Previous / Next navigation or current-page header marker.
 
@@ -11,7 +11,7 @@
 | RS01 | Pass. Both12/14-cycle presets verify fourteen ordered overlapping wheels, eighteen contiguous annuli, sector closure/shared points, phase, explicit sequences, radial ellipse containment and positive white/black gaps. Default has7,056 sectors +7,056 ovals;12 cycles has6,048 of each. Oval dimensions stay identical across counts. Unsupported/non-finite presets fall back to14/Color/Large800. |
 | RS02 | Pass. Keyboard comparison preserves every sector/oval/ground/surface node and every non-fill attribute, including fixed SVG rotations and document-space frame bounds. Only intermediate oval fills become#808080; all black/white fills persist. Palette/reversal choices are retained and restored. No pixel-histogram or luminance-identity claim. |
 | RS03 | Pass. Cycle/palette/reversal/size/disclosure independence, Reset/defaults/focus, unique IDs and independent instances are tested. The comfort note remains visible; descriptions reflect Gray mode. No application timers/RAF or stimulus animation, filter, opacity/blending effect or idle geometry mutation. Static SVG ellipse orientations are allowed and verified radial. |
-| RS04 | Local pass. Lint/tests/build and the browser/route matrix below passed. The unlisted deployment and hosted checks occur after this implementation commit; report their actual outcome in the task handoff rather than claiming a hosted pass in this pre-publication record. |
+| RS04 | Pass. The construction matrix below passed locally; the refined unlisted deployment/live checks then passed. The26 October listing checks below also pass, with hosted listing confirmed by [run40244757021](https://github.com/sergeydus/OpticEye/actions/runs/40244757021) and live320/1440 Home/comparison/Reset checks. |
 | RS05 | **Complete.** Viewer 1 and viewer 2 confirmed on desktop and real phones: wheels appear to rotate when looking around the pattern; the symmetric pattern stopped the motion. Browser, DPR, zoom and viewing distance were not supplied. Owner separately approved listing. |
 
 ## Browser checks
@@ -48,4 +48,4 @@ The v2 unlisted deployment [passed](https://github.com/sergeydus/OpticEye/action
 
 Lint, all286 tests/41 files, and build passed. Home now has17 cards; Kanizsa alone remains unlisted among the18 current illusion entries. All19 documents passed direct load/refresh at320/1440 in production preview and development, plus34 Home-card/return navigation trips per base. Rotating snakes has no noindex and has Previous navigation to Skye. Chrome156.0.8078.47 default/comparison/adjusted/Reset checks passed at320/1440 and native200% (inner712×552, DPR2). Primitive identity, fixed attributes, raster colors and Reset focus passed; no request/console errors or overflow. The listing page capture was visually inspected. Existing full DPR1/1.25/2 geometry checks above remain applicable because this change does not alter the drawing.
 
-Evidence: `snakes-listed.json`, `snakes-listed-pages.json`, `snakes-listed-dev.json` and matching captures outside Git. Hosted listing confirmation follows this commit and is reported in the handoff.
+Evidence: `snakes-listed.json`, `snakes-listed-pages.json`, `snakes-listed-dev.json` and matching captures outside Git. Hosted listing confirmation passed in run40244757021, with17 live Home cards, no snakes noindex, Previous to Skye, base-aware header, working comparison/Reset and no request errors at320/1440.

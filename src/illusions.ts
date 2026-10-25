@@ -125,6 +125,13 @@ export const ILLUSIONS = [
     title: 'Rotating snakes',
     description: 'A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.',
   },
+  {
+    id: 'fraser-spiral',
+    listed: false,
+    name: 'Fraser false spiral',
+    title: 'Fraser false spiral',
+    description: 'Concentric circular bands can look like a spiral. Remove the cord pattern to inspect their geometry.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

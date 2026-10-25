@@ -1,6 +1,6 @@
 # Fraser false spiral specification
 
-Status: **approved for implementation; engineering and perceptual calibration pending**. Version 1.0, 25 October 2026. ID/folder: `fraser-spiral`; title/h1: “Fraser false spiral”; HTML title: “Fraser false spiral | OpticEye”. Description: “Concentric circular bands can look like a spiral. Remove the cord pattern to inspect their geometry.”
+Status: **implemented; perceptual calibration pending; unlisted/noindex for owner viewing**. Version 1.1, 26 October 2026. ID/folder: `fraser-spiral`; title/h1: “Fraser false spiral”; HTML title: “Fraser false spiral | OpticEye”. Description: “Concentric circular bands can look like a spiral. Remove the cord pattern to inspect their geometry.”
 
 Inherit [implementation.md](implementation.md) for page setup, unlisted/noindex publication, Previous / Next discovery policy, normalization, Reset, accessibility, tests and two-viewer calibration. This is an original geometric variation, not a tracing or a claim to reproduce Fraser's historical plate exactly. All numeric defaults below are project choices pending viewing.
 
@@ -46,4 +46,4 @@ At displayed W240/288/540/720, the smallest band width is **1.87/2.25/4.22/5.62 
 | FS04 | Shared engineering checks pass initially unlisted/noindex, including fine-pattern DPR cases. Record actual results in `docs/fraser-spiral-validation.md` during implementation, not now. |
 | FS05 | Separate calibration: two viewers on desktop and real phones report the perceived organization before comparison and circular bands afterward, including weak/absent responses. Listing requires separate approval. |
 
-FS01–FS04 define implemented; FS05 defines calibration. Owner approved this spec on25 October2026 with the0–70° tilt range; no engineering/calibration milestone has passed yet.
+FS01–FS04 define implemented; FS05 defines calibration. Owner approved this spec on25 October2026 with the0–70° tilt range; FS01–FS04 now pass; actual checks are in [validation](../fraser-spiral-validation.md). FS05 remains pending; there are no human viewing observations yet. Keep unlisted/noindex, confirm deployment and stop for owner viewing before Asahi.

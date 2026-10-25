@@ -20,6 +20,7 @@ import { JastrowPage } from '../jastrow/main'
 import { CurvatureBlindnessPage } from '../curvature-blindness/main'
 import { VanishingDotsPage } from '../vanishing-dots/main'
 import { SkyeGratingPage } from '../skye-grating/main'
+import { FraserSpiralPage } from '../fraser-spiral/main'
 import { RotatingSnakesPage } from '../rotating-snakes/main'
 import { ILLUSIONS } from './illusions'
 
@@ -37,6 +38,7 @@ it('lists only the seventeen listed experiments with descriptions and document l
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
+  expect(cards.queryByRole('link', { name: 'Fraser false spiral' })).toBeNull()
   expect(cards.getByRole('link', { name: 'Rotating snakes' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}rotating-snakes/`)
   expect(cards.getByRole('link', { name: 'Skye oblique grating' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}skye-grating/`)
   expect(cards.getByRole('link', { name: 'Vanishing dots' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}vanishing-dots/`)
@@ -77,6 +79,7 @@ it.each(['/', '/OpticEye/'].flatMap((base) => (['home', ...ILLUSIONS.map(({ id }
 })
 
 it.each([
+  { Page: FraserSpiralPage, title: 'Fraser false spiral', image: 'Fraser false spiral', absent: 'Rotating snakes' },
   { Page: RotatingSnakesPage, title: 'Rotating snakes', image: 'Rotating snakes', absent: 'Confetti illusion' },
   { Page: SkyeGratingPage, title: 'Skye oblique grating', image: 'Skye oblique grating', absent: 'Confetti illusion' },
   { Page: VanishingDotsPage, title: 'Vanishing dots', image: 'Vanishing dots', absent: 'Confetti illusion' },
@@ -114,7 +117,7 @@ it.each([
   expect(screen.getByRole('contentinfo')).toBeVisible()
   expect(screen.queryByRole('navigation', { name: 'Illusions' })).toBeNull()
   const adjacentNavigation = screen.queryByRole('navigation', { name: 'Illusion navigation' })
-  if (Page === KanizsaPage) expect(adjacentNavigation).toBeNull()
+  if (Page === KanizsaPage || Page === FraserSpiralPage) expect(adjacentNavigation).toBeNull()
   else expect(adjacentNavigation).toBeVisible()
 })
 
