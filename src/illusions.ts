@@ -118,6 +118,13 @@ export const ILLUSIONS = [
     title: 'Skye oblique grating',
     description: 'Straight parallel bands appear tilted among small checker marks. Hide the marks to inspect the unchanged bands.',
   },
+  {
+    id: 'rotating-snakes',
+    listed: false,
+    name: 'Rotating snakes',
+    title: 'Rotating snakes',
+    description: 'A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

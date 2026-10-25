@@ -1,6 +1,6 @@
 # Rotating snakes specification
 
-Status: **approved for implementation; engineering and perceptual calibration pending**. Version 1.0, 25 October 2026. ID/folder: `rotating-snakes`; title/h1: “Rotating snakes”; HTML title: “Rotating snakes | OpticEye”. Description: “A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.”
+Status: **implemented; perceptual calibration pending; unlisted/noindex**. Version 1.1, 25 October 2026. ID/folder: `rotating-snakes`; title/h1: “Rotating snakes”; HTML title: “Rotating snakes | OpticEye”. Description: “A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.”
 
 Inherit [implementation.md](implementation.md) for shared page/discovery, controls, Reset, accessibility, engineering and human calibration. The approved pattern-comparison exception there applies only to the declared segment fills. This is a static original peripheral-drift variation; the name does not authorize motion, playback or a speed control.
 
@@ -48,3 +48,5 @@ At W240/288/540/720, a wheel diameter288 becomes **96/115.2/216/288 CSS px**. At
 | RS05 | Separate two-viewer desktop/real-phone calibration records apparent motion or nonresponse and symmetric-mode observations. Do not infer direction, stress or physiology. Listing approval is separate. |
 
 RS01–RS04 define implemented; RS05 defines calibration. Owner approved this spec, the pattern-comparison exception and the visible comfort note on25 October2026. Implement first, push unlisted/noindex after checks, confirm deployment and stop for owner viewing.
+
+RS01–RS04 pass locally; see [actual validation](../rotating-snakes-validation.md). RS05 remains pending owner/two-viewer observations. Publish the unlisted implementation, confirm deployment/direct access and stop before Fraser.
