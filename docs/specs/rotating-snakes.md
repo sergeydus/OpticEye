@@ -1,52 +1,63 @@
 # Rotating snakes specification
 
-Status: **implemented; perceptual calibration pending; unlisted/noindex**. Version 1.1, 25 October 2026. ID/folder: `rotating-snakes`; title/h1: “Rotating snakes”; HTML title: “Rotating snakes | OpticEye”. Description: “A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.”
+Status: **refined construction approved for implementation; perceptual calibration pending; unlisted/noindex**. Version 2.0, 25 October 2026. ID/folder: `rotating-snakes`; title/h1: “Rotating snakes”; HTML title: “Rotating snakes | OpticEye”. Description: “A stationary luminance pattern can appear to rotate. Compare it with a symmetric pattern without moving any shapes.”
 
-Inherit [implementation.md](implementation.md) for shared page/discovery, controls, Reset, accessibility, engineering and human calibration. The approved pattern-comparison exception there applies only to the declared segment fills. This is a static original peripheral-drift variation; the name does not authorize motion, playback or a speed control.
+Inherit [implementation.md](implementation.md) for shared page, listing, interaction, accessibility, validation and calibration rules. The owner accepted the final standalone prototype with “good enough!” on25 October2026 after iterative geometry review. This approves its construction, not listing or two-viewer calibration. This contract replaces the earlier three-band wedges and the unapproved exploratory proposals. [Research](../rotating-snakes-research.md) and [validation](../rotating-snakes-validation.md) preserve the evidence and viewing limits. Commit this specification before application changes; deploy the checked revision unlisted, then stop before Fraser.
 
 ## 1. Sources and attribution
 
-- [Bach's demonstration](https://michaelbach.de/ot/mot-snakes/) and [luminance-control variant](https://michaelbach.de/ot/mot-snakesLum/), explanatory text read: asymmetric luminance sequences can evoke apparent motion, with individual variation and sensitivity to viewing behavior. Credit Akiyoshi Kitaoka and Kitaoka & Ashida (2003).
-- Conway et al. (2005), [Neural Basis for a Powerful Static Motion Illusion](https://www.psy.ritsumei.ac.jp/akitaoka/ConwayJN2005.pdf), indexed primary-text excerpts inspected, not a complete-paper review. The black/dark/white/light order informs the design. A later [2020 model](https://pmc.ncbi.nlm.nih.gov/articles/PMC7585899/) and Bach discuss accounts, not a single universally established mechanism. Our sRGB palette is not calibrated luminance; no stress, fatigue, age or diagnostic claims.
+- [Bach’s demonstration](https://michaelbach.de/ot/mot-snakes/) was rendered and visually inspected; it credits Akiyoshi Kitaoka. Its rounded blue/yellow elements informed the comparison. No source artwork, paths or code are copied or traced; this fourteen-wheel composition and geometry are original.
+- Kitaoka & Ashida (2003), [Phenomenal characteristics of the peripheral drift illusion](https://www.psy.ritsumei.ac.jp/~akitaoka/PDrift.pdf), full two-page paper read: curved/fragmented edges can enhance drift relative to long edges. This supports the design principle, not these exact parameters.
+- Atala-Gérard & Bach (2017), [quantitative luminance study](https://journals.sagepub.com/doi/10.1177/2041669517691779), full text read: intermediate luminance affects strength/direction. Calculated sRGB luminance is not a measured viewer display or a laboratory replication. The [2020 model](https://pmc.ncbi.nlm.nih.gov/articles/PMC7585899/) and other accounts are proposals, not one settled explanation.
 
-## 2. Exact original construction
+## 2. Field, wheels and rings
 
-SVG viewBox **0 0 720 720**, opaque surface **#808080**. Four wheel centers are `C_ab=(190+340a,190+340b)`, a,b∈{0,1}. Each wheel has three annular bands with inner/outer radii `(32,64)`, `(72,104)`, `(112,144)`, indexed j0…2; the holes and8-unit gaps expose the surface. No decorative borders, center dots or outlines.
+SVG viewBox **0 0 720 720**, opaque **#FFFFFF** surface. Four staggered rows r0…3 contain4 wheels on even rows and3 on odd rows. Wheel k has center `C=(108+168k+84*(r%2),108+168r)`, radius108 and direction `d=(−1)^(r+k)`. Paint rows then columns in ascending order. Each wheel’s opaque white ground circle precedes its own bands, so later wheels cleanly occlude earlier ones. Overlap is intentional; global bounds are0…720. No border, center dot, raster image or clipping mask is part of the pattern.
 
-For cycle count c, each band has `N=4c` equal annular-sector paths with `a_k=−π/2+(j%2)*π/N+2πk/N`. Path k goes outer-start → clockwise outer arc to a_(k+1) → inner-end → counterclockwise inner arc to a_k → close. Use exact circular arcs/shared endpoints, no stroke, opacity or gaps between sectors. Keys `(a,b,j,k)` persist through comparisons.
+Every wheel has **18 contiguous annuli**, j0…17 from outside inward: `outer=108*0.8^j`, `inner=outer*0.8`. Use explicit constants for count, ratio and radius. Center hole radius≈1.9456. Define `R=(inner+outer)/2`, radial semiaxis `h=(outer−inner)/2`, and tangential semiaxis `t=1.30*R*sin(π/(4*12))`. The width reference12 is fixed: changing actual cycle count does not shrink the ovals. All colored oval long axes point toward their own wheel center; no exploratory tilt remains.
 
-Default asymmetric palette by index is **[#000000,#0000FF,#FFFFFF,#FFFF00]**; optional Gray is **[#000000,#666666,#FFFFFF,#CCCCCC]**. Let `d=(−1)^(a+b)` and negate d when Reverse sequence is selected. Normal fill index is `((d*k)%4+4)%4`. Neighbor wheels therefore have reversed sequences; all geometry remains fixed. These palettes follow the dark/intermediate/white/intermediate principle, without claiming particular monitor luminance percentages or a guaranteed perceived direction.
+## 3. Exact sector/oval construction and colors
 
-Symmetric comparison instead uses **[#000000,#808080,#FFFFFF,#808080]** with the same index rule for all bands. Black/white segments stay black/white, and the two intermediate segment classes intentionally become matching gray. This changes fills and image statistics, not just context; do not call it an unchanged-color reveal or an equal-luminance control. Stable nodes, all paths, surface and frame remain identical.
+Actual cycles c are **12 or14**, default14. Each band has2c background-sector paths followed by2c colored ellipses. Let `Δ=π/c`, `phase=−π/2+(j%2)*π/(2c)`, and radial ellipse silhouette span `σ=2*atan(t/sqrt(R²−h²))`. With fixed white-gap fraction **g0.85**, define `P=σ+g*(Δ−σ)`, `δ=(Δ−P)/2`, and `θ_m=phase+m*Δ+(m even?δ:−δ)`.
 
-At c12 the figure has576 sectors; allowed c8/12/16 gives384/576/768. Wheel extents are46…334 or386…674 per axis, separated by52 units. Ring bands do not touch; all shapes fit without clips. No gradients, blur, CSS rotation, timers, animation loops, gaze tracking or time-based geometry.
+Sector m goes outer-start at θ_m → clockwise outer arc to θ_(m+1) → inner-end → counterclockwise inner arc to θ_m → close. Reuse the same boundary point objects, including closure. Even sectors are white **#FFFFFF**, odd sectors black **#000000**. These fills never change with palette, reversal or comparison.
 
-## 3. Controls and comparison
+Ellipse m is centered at `C+R*(cosθ_m,sinθ_m)`, with `rx=h`, `ry=t` and fixed SVG `rotate(θ_m in degrees, ellipseCx, ellipseCy)`. Even m uses blue **#0066FF** and odd m yellow-green **#D2D200** for positive direction; swap these classes for negative direction. Reverse sequence negates d, changing only oval fills. The cyclic sequence is black → blue → white → yellow. Gray substitutes **#666666 / #CCCCCC** for the two intermediate colors. All geometry is independent of palette, reversal and comparison.
 
-| Choice / label | Default | Range / effect |
+The blue/yellow constants were sampled from Bach’s displayed reference, not measured as monitor luminance. The exact wheel packing, oval formulas, ring phase and spacing are project choices accepted after prototype review, not published optima.
+
+For each band require `h>t`, `σ<Δ`, and `σ<P<2Δ−σ`: ellipses fit their annuli and neither white nor black neighbors overlap. White/black free angular gaps are `g*(Δ−σ)` / `(2−g)*(Δ−σ)`. At c14 the field contains **7,056 sectors +7,056 ellipses**, plus14 ground circles and the surface; c12 has6,048 of each. Stable keys include wheel/band/primitive/index. Static SVG orientations are allowed geometry; no animated rotation, CSS transforms, opacity, gradients, strokes, filters, blending, timers or motion.
+
+## 4. Comparison and controls
+
+**Use symmetric pattern** changes only the blue/yellow or gray intermediate oval fills to **#808080**. Keep every existing sector/ellipse/ground/surface node, all geometry and orientations, black/white fills and displayed frame. This intentionally changes colors and image statistics; it is not context removal, an equal-luminance control or an identical-pixel reveal. Do not promise that all perceived motion/shimmering disappears.
+
+| Control | Default | Choices / behavior |
 | --- | --- | --- |
-| Cycles per ring | 12 | Select8/12/16; changes sector count, not radii/centers |
+| Cycles per ring | 14 | 12/14; changes count/positions, not oval dimensions |
 | Pattern palette | Color | Color/Gray constants above |
-| Reverse sequence | false | Reverses asymmetric fill order, never shape positions |
-| Use symmetric pattern | false | Stable toggle, pressed in the explicit gray comparison |
-| Snakes image size | Large/720 | Shared240/540/720 maximum widths |
+| Reverse sequence | false | Only swaps intermediate oval classes |
+| Use symmetric pattern | false | Persistent explicit color comparison |
+| Snakes image size | Large/800 | Compact240, Medium540, Large800; uniform scaling |
 
-Prompt: **“As you look between the wheels, do any seem to turn?”** Mention that steady fixation can change the effect, without requiring staring or rapid gaze movements. Near the stimulus, keep the short visible comfort note **“If the pattern feels uncomfortable, look away.”** in both states. It makes no health or diagnostic claim. Proof in symmetric mode: **“The two intermediate segment colors now match. No shapes moved; the pattern is static in both states.”** Do not promise the comparison stops every perceived motion. Retain palette/reversal selections while symmetric; they take effect again on return. Count/size changes leave symmetric mode selected. Reset restores c12/Color/reverse off/asymmetric/Large and closed explanation.
+Use the existing wide-figure/sidebar layout with an800px figure maximum, matching the accepted full-width review. No prototype shape/layout/gap/tilt/ring selectors, baseline panel, magnifier or generic editor ships. Retain palette/reversal selections while symmetric; changes take effect on return. Count/size controls preserve comparison state. Reset restores14/Color/reverse off/asymmetric/Large800 and closed explanation, retaining focus. Unsupported/non-finite controls fall back to documented defaults; precompute only the bounded allowed geometries.
 
-## 4. Responsive concerns
+Prompt: **“As you look between the wheels, do any seem to turn?”** Retain visible **“If the pattern feels uncomfortable, look away.”** in both states. Explain that viewing behavior/display/size affect responses, without requiring staring or rapid eye movements. Proof: **“The two intermediate oval colors now match. No shapes moved; the pattern is static in both states.”** Distinguish geometry controls from comparison invariants; make no stress, fatigue, health, diagnostic or guaranteed-direction claim.
 
-At W240/288/540/720, a wheel diameter288 becomes **96/115.2/216/288 CSS px**. At the most detailed c16, the shortest inner-edge sector arc isπ drawing units, or **1.05/1.26/2.36/3.14px**; its two blue/yellow boundaries can soften. Do not add pixel snapping, filters or actual motion to strengthen it. Inspect both palettes and symmetric mode at default and c16/Compact at DPR1,1.25,2, plus shared320/1440 and native200%. Phone field size may reduce the effect despite correct geometry.
+## 5. Responsive and performance concerns
 
-## 5. Acceptance criteria
+At W240/288/540/800 a wheel diameter216 becomes72/86.4/162/240 CSS px. The innermost oval’s tangential diameter≈0.3722 drawing units becomes≈0.124/0.149/0.279/0.414px; center details can soften/merge. Do not snap, floor, blur, recolor, hide inner bands or silently replace the pattern. Inspect default, c12, Gray/reversal, symmetric and Compact at DPR1/1.25/2,320/1440 viewports and native200% zoom. Engineering screenshots do not establish perceived rotation or real-phone calibration.
+
+The maximum pattern has14,112 sector/oval primitives. Keep geometry generation pure and bounded, reuse precomputed data and stable keys, and check interaction responsiveness. Do not add a canvas renderer, dependency or memoization without measured need. Comparison must preserve existing nodes and be static between explicit interactions.
+
+## 6. Acceptance criteria
 
 | ID | Required result |
 | --- | --- |
-| RS01 | Verify4 fixed wheels,3 bands each,4c paths per band, exact annular closure/extents, phase, indexed direction and explicit fills across every count/palette/reversal choice. Symmetric mode has equal intermediate fills and normalization is bounded. |
-| RS02 | Toggle preserves the same sector nodes, path/position/style attributes except declared fills, surface and displayed frame. It does not rotate, replace, resize or animate shapes. Correctly restore retained choices; do not claim pixel/color-histogram identity. |
-| RS03 | Controls, hidden changes, Reset/focus, size, disclosure, descriptions, the visible comfort note and independent instances follow shared rules. No RAF/timers/transition/animation even after interaction or idle waiting. |
-| RS04 | Shared engineering and fine-sector DPR checks pass unlisted/noindex; record actual checks in `docs/rotating-snakes-validation.md` during implementation. |
-| RS05 | Separate two-viewer desktop/real-phone calibration records apparent motion or nonresponse and symmetric-mode observations. Do not infer direction, stress or physiology. Listing approval is separate. |
+| RS01 | Both cycle presets:14 ordered overlapping wheel groups/grounds,18 contiguous rings,2c sectors then2c radial ellipses per ring; exact centers/radii/closure, phase, indexed fills, bounds, positive angular gaps and containment. Counts and selected cycle-independent oval sizes match this contract. |
+| RS02 | Comparison preserves every primitive node and every non-fill attribute, black/white sector/ground/surface fills and displayed frame; only oval fills become gray. Retained palette/reversal restore correctly. No image-statistics or luminance-identity claim. |
+| RS03 | Controls, normalization, persistent comparison/disclosure independence, all local Reset defaults/focus, descriptions, comfort note and instance isolation pass. No timer/RAF, transition, animation or idle stimulus mutation; declared fixed SVG ellipse rotations are allowed. |
+| RS04 | Lint/tests/build,320/1440 default/comparison/adjusted/Reset, native200%, DPR1/1.25/2, production/development route/nav/assets/no404 checks pass with unlisted/noindex preserved. Record actual checks and any limitations. |
+| RS05 | Separate two-viewer desktop/real-phone observations of this revised default and comparison; include weak/absent responses and only supplied conditions. Prototype acceptance alone is not calibration. Listing requires separate owner approval. |
 
-RS01–RS04 define implemented; RS05 defines calibration. Owner approved this spec, the pattern-comparison exception and the visible comfort note on25 October2026. Implement first, push unlisted/noindex after checks, confirm deployment and stop for owner viewing.
-
-RS01–RS04 pass locally; see [actual validation](../rotating-snakes-validation.md). RS05 remains pending owner/two-viewer observations. Publish the unlisted implementation, confirm deployment/direct access and stop before Fraser.
+RS01–RS04 define implemented; RS05 defines calibrated. Existing feature/calibration/listing decisions remain unchanged. Stop for owner viewing after the unlisted revision deploys; do not start Fraser yet.
