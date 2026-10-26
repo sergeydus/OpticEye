@@ -141,7 +141,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'neon-color-spreading',
-    listed: false,
+    listed: true,
     name: 'Neon color spreading',
     title: 'Neon color spreading',
     description: 'Color can seem to spread between colored spokes. Hide the black outer rays to compare the unchanged gaps.',

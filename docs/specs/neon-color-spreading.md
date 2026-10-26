@@ -1,6 +1,6 @@
 # Neon color spreading specification
 
-Status: **implemented; perceptual calibration pending; unlisted/noindex for owner viewing**. Version 1.2, 26 October 2026. ID/folder: `neon-color-spreading`; title/h1: “Neon color spreading”; HTML title: “Neon color spreading | OpticEye”. Description: “Color can seem to spread between colored spokes. Hide the black outer rays to compare the unchanged gaps.”
+Status: **implemented and calibrated on desktop and real phones; listed by owner approval**. Version 1.3, 26 October 2026. ID/folder: `neon-color-spreading`; title/h1: “Neon color spreading”; HTML title: “Neon color spreading | OpticEye”. Description: “Color can seem to spread between colored spokes. Hide the black outer rays to compare the unchanged gaps.”
 
 Inherit [implementation.md](implementation.md) for page/discovery, Reset, normalization, accessibility, testing and calibration. No new rendering exception is required: all actual marks are opaque solid-color straight lines. Values below are original project choices, not measured optimal viewing parameters.
 
@@ -44,6 +44,6 @@ At W240/288/540/720, default width8 is **2.67/3.2/6/8 CSS px** and colored radiu
 | NC04 | Shared engineering checks plus relevant gap/DPR cases pass unlisted/noindex. Record actual checks in `docs/neon-color-spreading-validation.md` during implementation. |
 | NC05 | Separate two-viewer desktop/real-phone calibration records any apparent spreading in white gaps at defaults and its change when rays are hidden; record weak/absent responses honestly. Listing approval is separate. |
 
-NC01–NC04 define implemented; NC05 defines calibration. Owner approved implementation on25 October2026; NC01–NC04 now pass; actual checks are recorded in [validation](../neon-color-spreading-validation.md). NC05 remains pending with no human observations yet. Confirm the unlisted deployment, then stop for owner viewing before scintillating starburst.
+NC01–NC04 define implemented; NC05 defines calibration. Owner approved implementation on25 October2026; NC01–NC04 now pass; actual checks are recorded in [validation](../neon-color-spreading-validation.md). NC05 is complete: viewer 1 and viewer 2 confirmed on desktop and real phones that color appears to spread into the white gaps between colored spokes and weakens or disappears after Hide outer rays. Browser, DPR, zoom and distance were not supplied. Owner separately approved listing; confirm its deployment, then implement scintillating starburst unlisted.
 
-Owner amendment — 26 October 2026: Red is the default on load, Reset and invalid-color fallback. Green and Blue remain available; geometry, comparison and unlisted status are unchanged.
+Owner amendment — 26 October 2026: Red is the default on load, Reset and invalid-color fallback. Green and Blue remain available; geometry and comparison are unchanged.

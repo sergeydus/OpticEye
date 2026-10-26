@@ -29,18 +29,18 @@ import { ILLUSIONS } from './illusions'
 // Exercise the actual entry compositions without their browser root side effect.
 vi.mock('./mountPage', () => ({ mountPage: vi.fn() }))
 
-it('lists only the nineteen listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
+it('lists only the twenty listed experiments with descriptions and document links on Home, without mounting stimuli', () => {
   render(<App />)
   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Explore optical illusions')
   const cards = within(screen.getByRole('list'))
-  expect(cards.getAllByRole('listitem')).toHaveLength(19)
+  expect(cards.getAllByRole('listitem')).toHaveLength(20)
   expect(cards.getByRole('link', { name: 'Confetti illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}confetti/`)
   expect(cards.getByRole('link', { name: 'Munker illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}munker/`)
   expect(cards.getByRole('link', { name: 'Café Wall illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}cafe-wall/`)
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
-  expect(cards.queryByRole('link', { name: 'Neon color spreading' })).toBeNull()
+  expect(cards.getByRole('link', { name: 'Neon color spreading' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}neon-color-spreading/`)
   expect(cards.getByRole('link', { name: 'Asahi glare' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}asahi-glare/`)
   expect(cards.getByRole('link', { name: 'Fraser false spiral' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}fraser-spiral/`)
   expect(cards.getByRole('link', { name: 'Rotating snakes' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}rotating-snakes/`)
@@ -123,7 +123,7 @@ it.each([
   expect(screen.getByRole('contentinfo')).toBeVisible()
   expect(screen.queryByRole('navigation', { name: 'Illusions' })).toBeNull()
   const adjacentNavigation = screen.queryByRole('navigation', { name: 'Illusion navigation' })
-  if (Page === KanizsaPage || Page === NeonColorSpreadingPage) expect(adjacentNavigation).toBeNull()
+  if (Page === KanizsaPage) expect(adjacentNavigation).toBeNull()
   else expect(adjacentNavigation).toBeVisible()
 })
 
