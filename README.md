@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-`build` checks TypeScript and produces all twenty-one HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/`, `/checker-shadow/`, `/bulging-checkerboard/`, `/shepard-tables/`, `/jastrow/`, `/curvature-blindness/`, `/vanishing-dots/`, `/skye-grating/`, `/rotating-snakes/`, `/fraser-spiral/` and `/asahi-glare/`.
+`build` checks TypeScript and produces all twenty-two HTML pages in `dist/`. `preview` serves the production build locally. Development URLs are `/`, `/confetti/`, `/munker/`, `/cafe-wall/`, `/muller-lyer/`, `/kanizsa/`, `/scintillating-grid/`, `/poggendorff/`, `/ebbinghaus/`, `/hering/`, `/ponzo/`, `/checker-shadow/`, `/bulging-checkerboard/`, `/shepard-tables/`, `/jastrow/`, `/curvature-blindness/`, `/vanishing-dots/`, `/skye-grating/`, `/rotating-snakes/`, `/fraser-spiral/`, `/asahi-glare/` and `/neon-color-spreading/`.
 
 ## GitHub Pages
 
@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Check all twenty-one addresses, including a refresh and navigation between them:
+Check all twenty-two addresses, including a refresh and navigation between them:
 
 - [Home](http://localhost:4173/OpticEye/)
 - [Confetti and oranges](http://localhost:4173/OpticEye/confetti/)
@@ -56,8 +56,9 @@ Check all twenty-one addresses, including a refresh and navigation between them:
 - [Rotating snakes](http://localhost:4173/OpticEye/rotating-snakes/)
 - [Fraser false spiral](http://localhost:4173/OpticEye/fraser-spiral/)
 - [Asahi glare](http://localhost:4173/OpticEye/asahi-glare/)
+- [Neon color spreading (unlisted, direct URL only)](http://localhost:4173/OpticEye/neon-color-spreading/)
 
-The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Every header contains the OpticEye brand and an All illusions link, both pointing to Home using BASE_URL. Only All illusions on Home has aria-current="page". Listed illusion pages also have Previous / Next links below the experiment, in Home order, skipping unlisted pages and stopping at either end. Home and unlisted pages have no Previous / Next links. Home lists all nineteen approved experiments; Kanizsa remains unlisted/noindex and directly reachable. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes twenty-one documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus is listed/deployed and calibrated with both viewers on desktop and real phones.
+The preview script passes `--base /OpticEye/` explicitly because preview uses Vite's `serve` command; this does not change the development base. Each document has its own title/description and one h1. Every header contains the OpticEye brand and an All illusions link, both pointing to Home using BASE_URL. Only All illusions on Home has aria-current="page". Listed illusion pages also have Previous / Next links below the experiment, in Home order, skipping unlisted pages and stopping at either end. Home and unlisted pages have no Previous / Next links. Home lists all nineteen approved experiments; Kanizsa and neon color spreading remain unlisted/noindex and directly reachable. Navigation loads a separate document; no settings are shared or persisted across pages, and refresh restores local defaults. The first four illusions are deployed and calibrated; the grid is also calibrated with two viewers on desktop and real phones, with listing/deployment approved. Kanizsa is unlisted by owner decision because the effect was judged too weak; calibration is not pursued. The local build includes twenty-two documents. The listed grid is deployed alongside the existing experiments; Poggendorff is calibrated on desktop and real phones with two viewers, listed and deployed. Ebbinghaus is listed/deployed and calibrated with both viewers on desktop and real phones.
 
 In repository **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. The owner controls this setting and repository visibility; authorized pushes trigger the deployment workflow. The workflow does not automatically enable Pages.
 
@@ -144,3 +145,5 @@ Rotating snakes is implemented, calibrated on desktop and real phones, and liste
 Fraser false spiral is implemented, calibrated on desktop and real phones, and listed by owner approval: [direct page](https://sergeydus.github.io/OpticEye/fraser-spiral/). Eight concentric circular bands sit beneath an original cord/checker texture. Show circular bands removes only that context, uncovering the same circles. Cord tilt spans0–70° in5° steps; Reverse twist changes the inducing texture. Reset restores30°, reversal off, context shown, Medium540 and closed explanation. Both viewers report a spiral at defaults and concentric circles after Show circular bands; FS05 is complete. See the [specification](docs/specs/fraser-spiral.md) and [validation](docs/fraser-spiral-validation.md).
 
 Asahi glare is implemented, calibrated on desktop and real phones, and listed by owner approval: [direct page](https://sergeydus.github.io/OpticEye/asahi-glare/). Eight opaque gradient-filled petals surround a fixed white target on the same white surface. Hide petals removes only the petals; the target and background remain unchanged. Reset restores opening radius64, petal half-angle18°, petals shown, Medium540 and closed explanation. Both viewers report a brighter-looking white opening, then matching white after Hide petals; AS05 is complete. See the [specification](docs/specs/asahi-glare.md) and [validation](docs/asahi-glare-validation.md).
+
+Neon color spreading is implemented and unlisted for owner viewing: [direct page](https://sergeydus.github.io/OpticEye/neon-color-spreading/). Sixteen colored spokes align with black outer rays. Hide outer rays removes only the black context; colored strokes and white gaps remain unchanged at fixed controls. Reset restores colored radius96, width8, gap0, Green, rays shown, Medium540 and closed explanation. Engineering checks pass; two-viewer calibration is pending. See the [specification](docs/specs/neon-color-spreading.md) and [validation](docs/neon-color-spreading-validation.md).

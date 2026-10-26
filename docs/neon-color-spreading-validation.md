@@ -1,0 +1,39 @@
+# Neon color spreading validation
+
+26 October 2026. **Implemented; perceptual calibration pending; unlisted/noindex for owner viewing.** The approved specification was committed before implementation in `1e3c0c3`. Original static SVG uses only a white surface and solid straight strokes; no copied artwork, remote assets or new rendering exception.
+
+## Engineering results
+
+`npm run lint`, **315 tests across47 files**, and `npm run build` pass. All22 HTML documents build: Home plus21 illusion pages,19 listed. Kanizsa and neon remain directly reachable but absent from discovery; the compact two-link header is preserved.
+
+| Criterion | Actual result |
+| --- | --- |
+| NC01 | Pass. All196 radius/width/gap combinations in all3 palettes (588 cases) verify16 colored/16 black lines, angles/collinearity, exact shared endpoint objects at gap0, selected gap distance, constant outer radius278, width, palette and conservative frame bounds. Independent point-to-segment distances verify every protected sample stays clear of all stroke footprints; minimum analytical clearance is54·sin(π/16)−6≈4.534877 units (the spec rounds this to4.535). Range/step/nonfinite/palette/size normalization passes. |
+| NC02 | Pass. Repeated keyboard comparison removes only16 black rays and preserves colored nodes/attributes, surface and frame at fixed controls. Hidden edits remain hidden and restore selected geometry. White-gap raster samples remain opaque white; no colored disk, veil, gradient, mask, filter or motion is drawn. |
+| NC03 | Pass. Gap changes leave colored attributes fixed; palette choices change only colored stroke colors. Explicit radius/width controls intentionally change their declared geometry, including while hidden. All controls/sizes, disclosure/sources, Reset/defaults/focus, unique referenced IDs and instance independence pass. All lines use butt caps. |
+| NC04 | Local pass. Full checks and browser/page matrix below pass. Hosted deployment/direct-page confirmation follows this commit and is reported in the handoff. |
+| NC05 | Pending. No human neon viewing report has been supplied. Browser captures and phone emulation do not establish perceptual spreading, calibration or listing approval. |
+
+## Browser and fine-gap checks
+
+Chrome **156.0.8078.47**, production preview `/OpticEye/`:
+
+| Viewport | DPR | Default SVG | Verified states |
+| --- | --- | --- | --- |
+| 320×1100 CSS px | 1,1.25,2 | 288×288 CSS px | Default R96/h8/g0/Green, repeated comparison, gap2, R72/h12/Compact with gap0/2, all palettes, R120/h6, hidden edits, all sizes, disclosure, keyboard and Reset |
+| 1440×1100 CSS px | 1,1.25,2 | 540×540 CSS px | Same states; Compact240 and Large720 scale uniformly |
+| Native200%, outer1440 / inner712×552 | 2; root CSS zoom1 | 540×540 CSS px | Same states under reduced-motion preference; stimulus remains static |
+
+Default, comparison, adjusted and Compact/small-gap captures were recorded at each DPR. Desktop default/full page, phone comparison, fractional/high-DPR Compact gap2 and native200% captures were visually inspected. Small nonzero gaps can soften or rasterize unevenly; no pixel snapping, stroke floors, blur or responsive pattern replacement is applied. Firefox/WebKit were not run and are not claimed as passes.
+
+An independent diagnostic canvas rasterized the SVG; the application itself uses SVG only. All16 protected samples P(0.75R,a_k+π/16), plus outer (32,32)/(688,688), are `[255,255,255,255]` in default, comparison, selected palettes and extreme configurations. The interior colored-stroke sample matches Green`[0,160,80,255]`, Blue`[32,95,224,255]` and Red`[213,43,63,255]`; the black-ray sample becomes white when hidden. These are rendered RGB checks, not monitor photometry or proof of perception. Antialiased stroke boundaries are not claimed to be pure colors or unchanged full-image pixels.
+
+All checked buttons/selects/ranges are at least44 CSS px high, Reset retains keyboard focus, and there are no page overflows, browser/console errors, failed requests or HTTP4xx/5xx. All22 production-preview and development-root documents pass direct-load/refresh at320/1440: **44 page/viewport cases and38 Home-card/return trips per base**. Metadata/styles/assets, one h1, header/current-marker and listing/noindex checks pass. Home has19 cards; neon has no Previous/Next links.
+
+## Publication and next viewing
+
+Asahi listing [run40249723813](https://github.com/sergeydus/OpticEye/actions/runs/40249723813) succeeded; its live320/1440 Home/comparison/Reset checks passed before neon implementation. Its supplied two-viewer calibration remains complete and separate.
+
+Evidence outside Git in the task visualization directory: `neon-preview.json`, `neon-pages-preview.json`, `neon-pages-dev.json` and matching captures, including native200% via CDP. Scratch scripts, profiles and build output remain ignored.
+
+Publish neon unlisted, confirm Pages/direct access and stop. For NC05, two viewers should describe any apparent spreading in the white gaps at defaults, and what changes with Hide outer rays, on desktop and real phones. Record weak/absent responses and only supplied conditions. Scintillating starburst has not been started.

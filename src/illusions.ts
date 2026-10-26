@@ -139,6 +139,13 @@ export const ILLUSIONS = [
     title: 'Asahi glare',
     description: 'A white opening can seem to glow among shaded petals. Hide the petals to compare the same white surface.',
   },
+  {
+    id: 'neon-color-spreading',
+    listed: false,
+    name: 'Neon color spreading',
+    title: 'Neon color spreading',
+    description: 'Color can seem to spread between colored spokes. Hide the black outer rays to compare the unchanged gaps.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

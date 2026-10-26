@@ -116,3 +116,7 @@ Rotating snakes is calibrated/listed; its [listing deploy](https://github.com/se
 ## Asahi addition — 26 October 2026
 
 Fraser is calibrated/listed; its [listing deploy](https://github.com/sergeydus/OpticEye/actions/runs/40248351060) and live320/1440 Home/comparison/Reset checks passed. Asahi adds the21st HTML document unlisted/noindex, keeping18 Home cards. Lint,305 tests/45 files and build pass. Chrome156.0.8078.47 checked all21 production and development documents at320/1440:42 direct-load/refresh cases and36 Home-card/return trips per base. Metadata, compact header/current markers, styles/assets, noindex/discovery, no overflow/errors/404s pass. Asahi’s context-gradient/target/pixel/DPR/native200% checks are in [its validation](asahi-glare-validation.md); human calibration is pending.
+
+## Neon addition — 26 October 2026
+
+Asahi is calibrated/listed; its [listing deploy](https://github.com/sergeydus/OpticEye/actions/runs/40249723813) and live320/1440 Home/comparison/Reset checks passed. Neon adds the22nd HTML document unlisted/noindex, retaining19 Home cards. Lint,315 tests/47 files and build pass. Chrome156.0.8078.47 checked all22 preview and development documents at320/1440:44 direct-load/refresh cases and38 Home-card/return trips per base. Titles/descriptions, styles/assets, compact header/current marker, listing/noindex and no overflow/errors/404s pass. Neon’s invariant, white-gap/palette, fine-gap/DPR and native200% results are in [its validation](neon-color-spreading-validation.md); human calibration remains pending.
