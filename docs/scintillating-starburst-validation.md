@@ -1,6 +1,6 @@
 # Scintillating starburst validation
 
-26 October 2026. **Implemented; perceptual calibration pending; unlisted/noindex for owner viewing.** The approved construction and inducer-comparison contract were committed in `1e3c0c3` before implementation. This original static SVG uses no source artwork, new dependency, luminous ray primitive or animation.
+26 October 2026. **Implemented and calibrated on desktop and real phones; effect weak; listed by owner approval.** The approved construction and inducer-comparison contract were committed in `1e3c0c3` before implementation. This original static SVG uses no source artwork, new dependency, luminous ray primitive or animation.
 
 `npm run lint`, `npm run test -- --maxWorkers=2` (**324 tests/49 files**) and `npm run build` pass. Worker concurrency was bounded; the full suite ran. All23 HTML documents build: Home plus22 illusion pages,20 listed. Kanizsa and starburst remain directly reachable but absent from discovery and Previous/Next navigation.
 
@@ -10,7 +10,7 @@
 | SB02 | Pass. Keyboard comparison removes exactly2m rotated polygons and preserves the same2m unrotated nodes/attributes, white surface and frame. Restoring uses current controls, including edits made while hidden. Proof names only this inducing-geometry operation. |
 | SB03 | Pass. Count/width/size controls, disclosure/source, keyboard operation, Reset/defaults/focus, referenced unique IDs and independent instances pass. SVG contains one surface rect and unfilled opaque black heptagons only; no ray shapes, filters, gradients, blending, opacity summation, transforms, transitions or animation. |
 | SB04 | Local pass. Production/development routes and feature browser matrix below pass. Hosted deployment/direct-page confirmation follows this commit and is reported in the handoff. |
-| SB05 | **Pending.** No starburst human observations supplied. Two viewers on desktop and real phones must report whether rays are noticed and how the comparison changes perception, including weak/absent responses. Listing requires a separate owner decision. |
+| SB05 | **Complete — effect weak.** Viewer 1 and viewer 2 confirmed on desktop and real phones: faint bright rays are noticeable but the effect is weak; hiding the crossing polygons weakens it further. Settings, browser, zoom, DPR and distance were not supplied. The owner separately chose “List it anyway” after clarification. |
 
 ## Browser checks
 
@@ -30,4 +30,8 @@ Evidence outside Git in the task visualization directory: `starburst-preview.jso
 
 ## Publication context
 
-Neon NC05 is complete with the exact supplied desktop/real-phone observations. Its listing [deployment40344533571](https://github.com/sergeydus/OpticEye/actions/runs/40344533571) succeeded; live320/1440 Home/listing, Red-default/comparison/Reset, base-aware header and no-error/404 checks passed before starburst publication. Stop after publishing starburst unlisted for owner viewing; Oppel–Kundt has not been started.
+Neon NC05 is complete with the exact supplied desktop/real-phone observations. Its listing [deployment40344533571](https://github.com/sergeydus/OpticEye/actions/runs/40344533571) succeeded; live320/1440 Home/listing, Red-default/comparison/Reset, base-aware header and no-error/404 checks passed before starburst publication. The original starburst [deployment40346602433](https://github.com/sergeydus/OpticEye/actions/runs/40346602433) succeeded from f490737; live320/1440 direct-load/refresh, controls/comparison/Reset, noindex, styles/assets and no-error/404 checks passed. The later owner report completes SB05 with “effect weak”; it does not imply strong perception.
+
+## Calibration / listing — 26 October 2026
+
+SB05 is complete with the supplied “effect weak” report above. Owner explicitly chose listing after clarification; no stimulus geometry or defaults changed. Lint,324 tests/49 files and build pass. All23 production-preview and development documents pass direct load/refresh at320/1440:46 page/viewport cases and42 Home-card/return trips per base,21 Home cards, correct metadata/styles/assets/header/noindex and no overflow/errors/404s. Starburst has no noindex and Previous to neon; neon has Next to starburst. Default/comparison/adjusted/Reset checks pass at320/1440,DPR1/1.25/2 and native200% (inner712×552,DPR2,root CSS zoom1). Listed phone/desktop page captures were visually inspected. Evidence outside Git: starburst-listing.json, starburst-listing-pages.json, starburst-listing-dev.json and captures. Hosted listing confirmation follows this commit and is reported in the handoff.

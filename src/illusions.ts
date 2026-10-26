@@ -148,7 +148,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'scintillating-starburst',
-    listed: false,
+    listed: true,
     name: 'Scintillating starburst',
     title: 'Scintillating starburst',
     description: 'Static crossing polygons can suggest bright rays. Hide the crossing polygons to compare the inducing pattern.',
