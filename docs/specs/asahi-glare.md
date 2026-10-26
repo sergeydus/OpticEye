@@ -1,6 +1,6 @@
 # Asahi glare specification
 
-Status: **approved for implementation; engineering and perceptual calibration pending**. Version 1.0, 25 October 2026. ID/folder: `asahi-glare`; title/h1: “Asahi glare”; HTML title: “Asahi glare | OpticEye”. Description: “A white opening can seem to glow among shaded petals. Hide the petals to compare the same white surface.”
+Status: **implemented; perceptual calibration pending; unlisted/noindex for owner viewing**. Version 1.1, 26 October 2026. ID/folder: `asahi-glare`; title/h1: “Asahi glare”; HTML title: “Asahi glare | OpticEye”. Description: “A white opening can seem to glow among shaded petals. Hide the petals to compare the same white surface.”
 
 Inherit [implementation.md](implementation.md) for shared page/discovery, Reset, normalization, accessibility, engineering and calibration. Only the approved Asahi context-gradient exception permits the specified opaque SVG gradient. This is an original geometric variation, not copied Kitaoka artwork or a physical light simulation.
 
@@ -44,4 +44,4 @@ At W240/288/540/720, the default opening diameter128 becomes **42.67/51.2/96/128
 | AS04 | Shared engineering and gradient/DPR checks pass initially unlisted/noindex; record actual results in `docs/asahi-glare-validation.md` during implementation. |
 | AS05 | Separate two-viewer desktop/real-phone calibration records apparent central glare or nonresponse and comparison with the uncovered white surface. Listing approval is separate. |
 
-AS01–AS04 define implemented; AS05 defines calibration. Owner approved implementation and the scoped context-gradient exception on25 October2026; no checks or viewing passes are claimed yet.
+AS01–AS04 define implemented; AS05 defines calibration. Owner approved implementation and the scoped context-gradient exception on25 October2026; AS01–AS04 now pass; actual engineering checks are in [validation](../asahi-glare-validation.md). AS05 is pending with no human observations yet. Confirm the unlisted deployment, then stop for owner viewing before neon color spreading.

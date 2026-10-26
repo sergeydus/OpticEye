@@ -132,6 +132,13 @@ export const ILLUSIONS = [
     title: 'Fraser false spiral',
     description: 'Concentric circular bands can look like a spiral. Remove the cord pattern to inspect their geometry.',
   },
+  {
+    id: 'asahi-glare',
+    listed: false,
+    name: 'Asahi glare',
+    title: 'Asahi glare',
+    description: 'A white opening can seem to glow among shaded petals. Hide the petals to compare the same white surface.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.
