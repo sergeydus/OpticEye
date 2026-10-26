@@ -127,7 +127,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'fraser-spiral',
-    listed: false,
+    listed: true,
     name: 'Fraser false spiral',
     title: 'Fraser false spiral',
     description: 'Concentric circular bands can look like a spiral. Remove the cord pattern to inspect their geometry.',

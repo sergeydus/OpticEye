@@ -1,8 +1,8 @@
 # Fraser false spiral validation
 
-26 October 2026. **Implemented; perceptual calibration pending; unlisted/noindex for owner viewing.** The approved specification was committed in the previous batch before this implementation. This is original deterministic SVG geometry; no source artwork/code is copied and no runtime source requests are made.
+26 October 2026. **Implemented and calibrated on desktop and real phones; listed by owner approval.** The approved specification was committed in the previous batch before this implementation. This is original deterministic SVG geometry; no source artwork/code is copied and no runtime source requests are made.
 
-## Engineering results
+## Original implementation checks — before listing
 
 `npm run lint`, **295 tests across43 files**, and `npm run build` pass. All20 HTML documents build: Home plus19 illusion pages,17 listed. Kanizsa and Fraser remain directly reachable but absent from Home and Previous/Next. The two-link header and existing calibrated stimuli are preserved.
 
@@ -12,7 +12,7 @@
 | FS02 | Pass. Repeated keyboard comparison removes only the two context groups. Existing circle/surface nodes and every attribute persist, including radii, centers, stroke widths, styles and frame bounds. Hidden tilt/reversal/size edits remain hidden; restoration uses current settings. Copy explicitly says previously covered pixels become visible, rather than claiming an identical visible image. |
 | FS03 | Pass. Defaults/range, reversal, sizes, independent disclosure, source links, description IDs, instance isolation and all Reset settings/focus pass. No spiral path, tracer, filter, blending, animation or idle mutation. All visible buttons/selects/range controls are at least44 CSS px high. |
 | FS04 | Local pass. Full checks and browser/page matrix below pass. Hosted deployment/direct-page confirmation follows this commit and is reported in the task handoff. |
-| FS05 | Pending. No human observations for Fraser have been supplied. Screenshots and phone emulation do not establish perceptual calibration; no listing approval is implied. |
+| FS05 | **Complete.** Viewer 1 and viewer 2 confirmed on desktop and real phones: the bands look like a spiral at defaults; Show circular bands reveals concentric circles. Browser, DPR, zoom and distance were not supplied. Owner separately approved listing. |
 
 ## Browser and display checks
 
@@ -34,4 +34,8 @@ Evidence outside Git in the task visualization directory: `fraser-preview.json`,
 
 Rotating snakes listing deployed successfully in [run40244757021](https://github.com/sergeydus/OpticEye/actions/runs/40244757021); its live320/1440 Home/listing/comparison/Reset checks passed before Fraser implementation. Its two-viewer calibration remains complete and separate.
 
-Publish Fraser unlisted, confirm Pages and its direct live page, then stop. For FS05, two viewers should describe circles versus spiral before comparison and circular bands afterward on desktop and real phones; record weak/absent effects and only supplied viewing conditions. Asahi has not been started.
+The original unlisted [deployment](https://github.com/sergeydus/OpticEye/actions/runs/40245398793) and live320/1440 controls/comparison/Reset checks passed before this viewing report. Listing checks are recorded below.
+
+## Listing checks — 26 October 2026
+
+Lint,295 tests/43 files and build pass. All20 preview and development documents pass direct-load/refresh at320/1440:40 page/viewport cases and36 Home-card/return trips per base. Home has18 cards; Fraser has no noindex and Previous to Rotating snakes. The unchanged drawing passes default/comparison/adjusted/Reset at320/1440, DPR1/1.25/2 and native200% (inner712×552, DPR2, root CSS zoom1). Target identity/attributes, frame, focus and static rendering pass without overflow, request or browser errors. The listing capture was visually inspected. Evidence outside Git: `fraser-listing.json`, `fraser-listing-pages.json`, `fraser-listing-dev.json` and captures. Hosted listing confirmation follows this commit and is reported in the task handoff.
