@@ -153,6 +153,13 @@ export const ILLUSIONS = [
     title: 'Scintillating starburst',
     description: 'Static crossing polygons can suggest bright rays. Hide the crossing polygons to compare the inducing pattern.',
   },
+  {
+    id: 'oppel-kundt',
+    listed: false,
+    name: 'Oppel–Kundt illusion',
+    title: 'Oppel–Kundt illusion',
+    description: 'An interval with dividers can look longer than an equal empty interval. Hide the dividers to compare their fixed endpoints.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.

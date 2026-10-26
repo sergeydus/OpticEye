@@ -1,6 +1,6 @@
 # Oppel–Kundt filled-space specification
 
-Status: **approved for implementation; engineering and perceptual calibration pending**. Version 1.0, 25 October 2026. ID/folder: `oppel-kundt`; title/h1: “Oppel–Kundt illusion”; HTML title: “Oppel–Kundt illusion | OpticEye”. Description: “An interval with dividers can look longer than an equal empty interval. Hide the dividers to compare their fixed endpoints.”
+Status: **implemented; perceptual calibration pending; unlisted/noindex for owner viewing**. Version 1.1, 26 October 2026. ID/folder: `oppel-kundt`; title/h1: “Oppel–Kundt illusion”; HTML title: “Oppel–Kundt illusion | OpticEye”. Description: “An interval with dividers can look longer than an equal empty interval. Hide the dividers to compare their fixed endpoints.”
 
 Inherit [implementation.md](implementation.md) for page/discovery, Reset, normalization, accessibility, tests and two-viewer calibration. No new rendering exception or moving comparison is needed. This is a visual interval demonstration, not the auditory timing experiment discussed in its source.
 
@@ -44,4 +44,4 @@ At W240/288/540/720, each interval is **80/96/180/240 CSS px**, stroke width **2
 | OK04 | Shared engineering and dense-divider DPR checks pass initially unlisted/noindex; record actual results in `docs/oppel-kundt-validation.md` during implementation. |
 | OK05 | Separate two-viewer desktop/real-phone calibration records the apparent interval widths at defaults and after comparison, including weak/absent responses. Owner listing approval is separate. |
 
-OK01–OK04 define implemented; OK05 defines calibration. Owner approved implementation on25 October2026; neither milestone has passed yet.
+OK01–OK04 define implemented and pass the recorded local engineering checks; see [actual validation](../oppel-kundt-validation.md). OK05 defines calibration and remains pending. Owner approved implementation on25 October2026, committed in `1e3c0c3` before code. Publish unlisted for owner viewing, then stop. No rendering exception or stimulus geometry change was needed.

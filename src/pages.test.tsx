@@ -21,6 +21,7 @@ import { CurvatureBlindnessPage } from '../curvature-blindness/main'
 import { VanishingDotsPage } from '../vanishing-dots/main'
 import { SkyeGratingPage } from '../skye-grating/main'
 import { ScintillatingStarburstPage } from '../scintillating-starburst/main'
+import { OppelKundtPage } from '../oppel-kundt/main'
 import { NeonColorSpreadingPage } from '../neon-color-spreading/main'
 import { AsahiGlarePage } from '../asahi-glare/main'
 import { FraserSpiralPage } from '../fraser-spiral/main'
@@ -42,6 +43,7 @@ it('lists only the twenty-one listed experiments with descriptions and document 
   expect(cards.getByRole('link', { name: 'Müller-Lyer illusion' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}muller-lyer/`)
   expect(cards.queryByRole('link', { name: 'Kanizsa triangle' })).toBeNull()
   expect(cards.getByRole('link', { name: 'Scintillating starburst' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}scintillating-starburst/`)
+  expect(cards.queryByRole('link', { name: 'Oppel–Kundt illusion' })).toBeNull()
   expect(cards.getByRole('link', { name: 'Neon color spreading' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}neon-color-spreading/`)
   expect(cards.getByRole('link', { name: 'Asahi glare' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}asahi-glare/`)
   expect(cards.getByRole('link', { name: 'Fraser false spiral' })).toHaveAttribute('href', `${import.meta.env.BASE_URL}fraser-spiral/`)
@@ -85,6 +87,7 @@ it.each(['/', '/OpticEye/'].flatMap((base) => (['home', ...ILLUSIONS.map(({ id }
 })
 
 it.each([
+  { Page: OppelKundtPage, title: 'Oppel–Kundt illusion', image: 'Oppel–Kundt illusion', absent: 'Scintillating starburst' },
   { Page: ScintillatingStarburstPage, title: 'Scintillating starburst', image: 'Scintillating starburst', absent: 'Neon color spreading' },
   { Page: NeonColorSpreadingPage, title: 'Neon color spreading', image: 'Neon color spreading', absent: 'Asahi glare' },
   { Page: AsahiGlarePage, title: 'Asahi glare', image: 'Asahi glare', absent: 'Fraser false spiral' },
@@ -126,7 +129,7 @@ it.each([
   expect(screen.getByRole('contentinfo')).toBeVisible()
   expect(screen.queryByRole('navigation', { name: 'Illusions' })).toBeNull()
   const adjacentNavigation = screen.queryByRole('navigation', { name: 'Illusion navigation' })
-  if (Page === KanizsaPage) expect(adjacentNavigation).toBeNull()
+  if (Page === KanizsaPage || Page === OppelKundtPage) expect(adjacentNavigation).toBeNull()
   else expect(adjacentNavigation).toBeVisible()
 })
 
