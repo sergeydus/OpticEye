@@ -10,7 +10,7 @@ export const INDUCER_GAP = { min: 0, max: 12, step: 2 } as const
 export const DEFAULT_COLORED_RADIUS = 96
 export const DEFAULT_SPOKE_WIDTH = 8
 export const DEFAULT_INDUCER_GAP = 0
-export const DEFAULT_COLOR = 'green'
+export const DEFAULT_COLOR = 'red'
 export const SPOKE_COLORS = [
   { label: 'Green', value: 'green', stroke: '#00A050' },
   { label: 'Blue', value: 'blue', stroke: '#205FE0' },

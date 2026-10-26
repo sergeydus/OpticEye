@@ -1,8 +1,8 @@
 # Neon color spreading validation
 
-26 October 2026. **Implemented; perceptual calibration pending; unlisted/noindex for owner viewing.** The approved specification was committed before implementation in `1e3c0c3`. Original static SVG uses only a white surface and solid straight strokes; no copied artwork, remote assets or new rendering exception.
+26 October 2026. **Implemented; perceptual calibration pending; unlisted/noindex for owner viewing.** The approved specification was committed before implementation in `1e3c0c3`. The current default is Red by owner request; the original Green-default matrix below is retained as history. Original static SVG uses only a white surface and solid straight strokes; no copied artwork, remote assets or new rendering exception.
 
-## Engineering results
+## Original implementation checks — Green default
 
 `npm run lint`, **315 tests across47 files**, and `npm run build` pass. All22 HTML documents build: Home plus21 illusion pages,19 listed. Kanizsa and neon remain directly reachable but absent from discovery; the compact two-link header is preserved.
 
@@ -14,7 +14,7 @@
 | NC04 | Local pass. Full checks and browser/page matrix below pass. Hosted deployment/direct-page confirmation follows this commit and is reported in the handoff. |
 | NC05 | Pending. No human neon viewing report has been supplied. Browser captures and phone emulation do not establish perceptual spreading, calibration or listing approval. |
 
-## Browser and fine-gap checks
+## Original browser and fine-gap checks — Green default
 
 Chrome **156.0.8078.47**, production preview `/OpticEye/`:
 
@@ -36,4 +36,10 @@ Asahi listing [run40249723813](https://github.com/sergeydus/OpticEye/actions/run
 
 Evidence outside Git in the task visualization directory: `neon-preview.json`, `neon-pages-preview.json`, `neon-pages-dev.json` and matching captures, including native200% via CDP. Scratch scripts, profiles and build output remain ignored.
 
-Publish neon unlisted, confirm Pages/direct access and stop. For NC05, two viewers should describe any apparent spreading in the white gaps at defaults, and what changes with Hide outer rays, on desktop and real phones. Record weak/absent responses and only supplied conditions. Scintillating starburst has not been started.
+The original unlisted [deployment](https://github.com/sergeydus/OpticEye/actions/runs/40250528811) and live320/1440 checks passed. The Red-default revision below keeps neon unlisted/noindex. For NC05, two viewers should describe any apparent spreading in the white gaps at defaults, and what changes with Hide outer rays, on desktop and real phones. Record weak/absent responses and only supplied conditions. Scintillating starburst has not been started.
+
+## Red default — 26 October 2026
+
+Owner requested Red as the default, recorded before implementation in specification commit `fa91769`. Load, Reset and invalid-color fallback now use Red (`#D52B3F`); Green and Blue remain available. This request is a default preference, not a two-viewer calibration report; NC05 remains pending.
+
+Lint,315 tests/47 files and build pass. Existing regressions verify actual default red strokes, Reset from a different color and independent instance/default fallback behavior. Chrome156.0.8078.47 checks pass at320/1440, DPR1/1.25/2 and native200% (inner712×552, DPR2, root CSS zoom1), including default/comparison/adjusted/Reset, white-gap preservation, focus and static rendering. The default stroke interior samples `[213,43,63,255]`; all18 protected/outer samples stay opaque white. Default-page capture visually inspected. Evidence outside Git: `neon-red-preview.json` and captures. All22 production-preview and development-root documents passed direct load/refresh at320/1440:44 page/viewport cases and38 Home-card/return trips per base, with19 listed cards, correct metadata/noindex/styles/assets, no overflow/errors/404s. Evidence: `neon-red-pages-preview.json` and `neon-red-pages-dev.json`. Hosted revision confirmation follows this commit and is reported in the handoff.
