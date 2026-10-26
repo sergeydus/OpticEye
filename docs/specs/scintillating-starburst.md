@@ -1,6 +1,6 @@
 # Scintillating starburst specification
 
-Status: **approved for implementation; engineering and perceptual calibration pending**. Version 1.0, 25 October 2026. ID/folder: `scintillating-starburst`; title/h1: “Scintillating starburst”; HTML title: “Scintillating starburst | OpticEye”. Description: “Static crossing polygons can suggest bright rays. Hide the crossing polygons to compare the inducing pattern.”
+Status: **implemented; perceptual calibration pending; unlisted/noindex for owner viewing**. Version 1.1, 26 October 2026. ID/folder: `scintillating-starburst`; title/h1: “Scintillating starburst”; HTML title: “Scintillating starburst | OpticEye”. Description: “Static crossing polygons can suggest bright rays. Hide the crossing polygons to compare the inducing pattern.”
 
 Inherit [implementation.md](implementation.md) for shared page, discovery, Reset, normalization, accessibility, checks and calibration. The approved starburst comparison there is scoped to this feature. This has no pair of equal-value targets; no luminous ray shape is rendered. Geometry below is an original SVG construction requiring human viewing.
 
@@ -44,4 +44,4 @@ Default stroke at W240/288/540/720 is **1/1.2/2.25/3 CSS px**; h2/Compact is0.67
 | SB04 | Shared engineering/DPR checks pass unlisted/noindex; record actual results in `docs/scintillating-starburst-validation.md` during implementation. |
 | SB05 | Separate two-viewer desktop/real-phone calibration records whether rays are noticed and how the comparison changes the percept, including weak/absent responses. Listing approval stays separate. |
 
-SB01–SB04 define implemented; SB05 defines calibration. Owner approved this spec and its inducer-comparison contract on25 October2026; all implementation/viewing checks remain pending.
+SB01–SB04 define implemented and pass the recorded local engineering checks; see [actual validation](../scintillating-starburst-validation.md). SB05 defines calibration and remains pending. Owner approved this spec and its inducer-comparison contract on25 October2026, committed in `1e3c0c3` before implementation. Publish unlisted for owner viewing, then stop before Oppel–Kundt. Engineering screenshots do not establish perception or authorize listing.

@@ -146,6 +146,13 @@ export const ILLUSIONS = [
     title: 'Neon color spreading',
     description: 'Color can seem to spread between colored spokes. Hide the black outer rays to compare the unchanged gaps.',
   },
+  {
+    id: 'scintillating-starburst',
+    listed: false,
+    name: 'Scintillating starburst',
+    title: 'Scintillating starburst',
+    description: 'Static crossing polygons can suggest bright rays. Hide the crossing polygons to compare the inducing pattern.',
+  },
 ] as const
 
 // Only an explicit false hides discovery; build inputs continue to use ILLUSIONS.
