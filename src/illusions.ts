@@ -134,7 +134,7 @@ export const ILLUSIONS = [
   },
   {
     id: 'asahi-glare',
-    listed: false,
+    listed: true,
     name: 'Asahi glare',
     title: 'Asahi glare',
     description: 'A white opening can seem to glow among shaded petals. Hide the petals to compare the same white surface.',

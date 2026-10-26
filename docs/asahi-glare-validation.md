@@ -1,8 +1,8 @@
 # Asahi glare validation
 
-26 October 2026. **Implemented; perceptual calibration pending; unlisted/noindex for owner viewing.** The approved feature specification and scoped gradient contract were committed before implementation in `1e3c0c3`. This is original SVG geometry, not copied source artwork or a physical light simulation.
+26 October 2026. **Implemented and calibrated on desktop and real phones; listed by owner approval.** The approved feature specification and scoped gradient contract were committed before implementation in `1e3c0c3`. This is original SVG geometry, not copied source artwork or a physical light simulation.
 
-## Engineering results
+## Original implementation checks — before listing
 
 `npm run lint`, **305 tests across45 files**, and `npm run build` pass. All21 HTML documents build: Home plus20 illusion pages,18 listed. Asahi and Kanizsa are directly reachable but absent from discovery. Existing calibrated figures and their owner decisions are preserved.
 
@@ -12,7 +12,7 @@
 | AS02 | Pass. Repeated keyboard comparison removes only8 petal paths. Target, surface and gradient definition nodes/attributes persist; frame bounds stay fixed. Hidden edits stay hidden and restore selected geometry. Only petal paths reference the gradient. Independent raster samples of protected center/outer interiors remain `[255,255,255,255]` before and after comparison and at parameter extremes. |
 | AS03 | Pass. Opening/width/size controls, independent disclosure, source links, Reset/defaults/focus and instance isolation pass. Gradient IDs are unique and each instance’s petals reference its own definition. No stimulus timer, animation, filter, glow, blur, opacity/blend effect or idle mutation. Copy distinguishes appearance from emitted light and makes no claim about an individual’s pupil. |
 | AS04 | Local pass. Full checks and browser/page matrix below pass. Hosted deployment/direct-page confirmation follows the implementation commit and is reported in the task handoff. |
-| AS05 | Pending. No human Asahi viewing report has been supplied. Browser screenshots and phone emulation do not establish calibration or listing approval. |
+| AS05 | **Complete.** Viewer 1 and viewer 2 confirmed on desktop and real phones: the white opening looks brighter than the white outside; after Hide petals the center and background look the same white. Browser, DPR, zoom and distance were not supplied. Owner separately approved listing. |
 
 ## Browser and gradient checks
 
@@ -36,4 +36,8 @@ Fraser’s listing [deployment](https://github.com/sergeydus/OpticEye/actions/ru
 
 Evidence outside Git in the task visualization directory: `asahi-preview.json`, `asahi-pages-preview.json`, `asahi-pages-dev.json` and matching captures, including native200% via CDP. Browser profiles, scratch scripts and build output remain ignored.
 
-Publish Asahi unlisted, confirm Pages/direct access and stop. For AS05, two viewers should compare the apparent brightness/glare of the white center with the outer white on desktop and real phones, then use Hide petals. Record weak/absent responses and only supplied conditions. Neon color spreading has not been started.
+The original unlisted [deployment](https://github.com/sergeydus/OpticEye/actions/runs/40249006728) and live320/1440 controls/white-pixel/comparison/Reset checks passed before this viewing report. Current listing checks are recorded below.
+
+## Listing checks — 26 October 2026
+
+Lint,305 tests/45 files and build pass. All21 production-preview and development documents pass direct-load/refresh at320/1440:42 page/viewport cases and38 Home-card/return trips per base. Home has19 cards; Asahi has no noindex and Previous to Fraser. The unchanged stimulus passes default/comparison/adjusted/Reset at320/1440, DPR1/1.25/2 and native200% (inner712×552, DPR2, root CSS zoom1), including target identity, white pixel samples, Reset focus and static rendering. No overflow, request/browser errors or HTTP4xx/5xx. Listing capture visually inspected. Evidence outside Git: `asahi-listing.json`, `asahi-listing-pages.json`, `asahi-listing-dev.json` and captures. Hosted listing confirmation follows this commit and is reported in the handoff.
